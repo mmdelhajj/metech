@@ -1,0 +1,63 @@
+workflows:
+  android-release:
+    name: Android Release
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+    environment:
+      groups:
+        - android_credentials
+      flutter: 3.29.3
+      java: 21
+    scripts:
+      - name: Set up key.properties
+        script: |
+          echo "storePassword=$CM_KEYSTORE_PASSWORD" > $CM_BUILD_DIR/android/key.properties
+          echo "keyPassword=$CM_KEY_PASSWORD" >> $CM_BUILD_DIR/android/key.properties
+          echo "keyAlias=$CM_KEY_ALIAS" >> $CM_BUILD_DIR/android/key.properties
+          echo "storeFile=$CM_BUILD_DIR/android/app/key.jks" >> $CM_BUILD_DIR/android/key.properties
+      - name: Get Flutter packages
+        script: flutter pub get
+      - name: Build APK
+        script: flutter build apk --release
+      - name: Build App Bundle
+        script: flutter build appbundle --release
+    artifacts:
+      - build/**/outputs/**/*.apk
+      - build/**/outputs/**/*.aab
+    publishing:
+      google_play:
+        credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
+        track: internal
+        submit_as_draft: true
+
+  ios-release:
+    name: iOS Release
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+    integrations:
+      app_store_connect: MeTech App Store
+    environment:
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.metech.store
+      flutter: 3.29.3
+      vars:
+        BUNDLE_ID: com.metech.store
+        APP_STORE_APPLE_ID: ""
+    scripts:
+      - name: Set up code signing settings on Xcode project
+        script: xcode-project use-profiles
+      - name: Get Flutter packages
+        script: flutter pub get
+      - name: Install CocoaPods dependencies
+        script: |
+          cd ios && pod install
+      - name: Build IPA
+        script: flutter build ipa --release --export-options-plist=/Users/builder/export_options.plist
+    artifacts:
+      - build/ios/ipa/*.ipa
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
+        submit_to_app_store: false

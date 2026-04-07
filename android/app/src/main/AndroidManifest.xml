@@ -43,9 +43,9 @@
                 <data android:scheme="https" />
                 <data android:scheme="http" />
 
-                <data android:host="demo.activeitzone.com" />
+                <data android:host="metech.com.lb" />
 
-                <data android:pathPrefix="/envato/app/ecommerce" />
+                <data android:pathPrefix="/" />
             </intent-filter>
 
             <intent-filter>
