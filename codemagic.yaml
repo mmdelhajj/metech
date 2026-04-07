@@ -6,7 +6,7 @@ workflows:
     environment:
       groups:
         - android_credentials
-      flutter: 3.29.3
+      flutter: 3.41.6
       java: 21
     scripts:
       - name: Set up key.properties
@@ -39,7 +39,7 @@ workflows:
       ios_signing:
         distribution_type: app_store
         bundle_identifier: com.metech.store
-      flutter: 3.29.3
+      flutter: 3.41.6
     scripts:
       - name: Set up code signing settings on Xcode project
         script: xcode-project use-profiles
