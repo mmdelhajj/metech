@@ -34,9 +34,13 @@ workflows:
       xcode: latest
       cocoapods: default
     scripts:
+      - name: Set up keychain
+        script: keychain initialize
       - name: Fetch signing files
         script: |
           app-store-connect fetch-signing-files com.metech.store             --type IOS_APP_STORE             --create             --certificate-key=@env:CERTIFICATE_PRIVATE_KEY
+      - name: Add certificates to keychain
+        script: keychain add-certificates
       - name: Use profiles
         script: xcode-project use-profiles
       - name: Get Flutter packages
@@ -44,15 +48,9 @@ workflows:
       - name: Install CocoaPods dependencies
         script: cd ios && pod install
       - name: Build IPA
-        script: |
-          flutter build ipa --release --export-options-plist=/Users/builder/export_options.plist
-      - name: Find IPA
-        script: |
-          find . -name '*.ipa' 2>/dev/null
-          find /Users/builder -name '*.ipa' 2>/dev/null || true
+        script: flutter build ipa --release --export-options-plist=/Users/builder/export_options.plist
     artifacts:
       - build/ios/ipa/*.ipa
-      - /tmp/xcodebuild_logs/*.log
     publishing:
       app_store_connect:
         auth: integration
