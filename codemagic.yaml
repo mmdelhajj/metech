@@ -7,14 +7,6 @@ workflows:
       flutter: 3.41.6
       java: 21
     scripts:
-      - name: Set up key.properties
-        script: |
-          cat > $CM_BUILD_DIR/android/key.properties << EOF
-          storePassword=123456
-          keyPassword=123456
-          keyAlias=key
-          storeFile=$CM_BUILD_DIR/android/app/key.jks
-          EOF
       - name: Get Flutter packages
         script: flutter pub get
       - name: Build APK
@@ -46,8 +38,7 @@ workflows:
       - name: Get Flutter packages
         script: flutter pub get
       - name: Install CocoaPods dependencies
-        script: |
-          cd ios && pod install
+        script: cd ios && pod install
       - name: Build IPA
         script: flutter build ipa --release --export-options-plist=/Users/builder/export_options.plist
     artifacts:
