@@ -31,18 +31,24 @@ workflows:
       ios_signing:
         distribution_type: app_store
         bundle_identifier: com.metech.store
+      vars:
+        XCODE_WORKSPACE: ios/Runner.xcworkspace
+        XCODE_SCHEME: Runner
       flutter: 3.41.6
+      xcode: latest
+      cocoapods: default
     scripts:
-      - name: Set up code signing settings on Xcode project
-        script: xcode-project use-profiles
       - name: Get Flutter packages
         script: flutter pub get
       - name: Install CocoaPods dependencies
         script: cd ios && pod install
+      - name: Set up code signing settings on Xcode project
+        script: xcode-project use-profiles
       - name: Build IPA
         script: flutter build ipa --release --export-options-plist=/Users/builder/export_options.plist
     artifacts:
       - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
     publishing:
       app_store_connect:
         auth: integration
