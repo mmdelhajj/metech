@@ -61,7 +61,7 @@ import 'single_banner/photo_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  try { await Firebase.initializeApp(); } catch (e) { print("Firebase init failed: $e"); }
   await StoreBox.init();
   await FlutterDownloader.initialize(debug: true, ignoreSsl: true);
   SystemChrome.setPreferredOrientations([
@@ -261,7 +261,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     Future.microtask(() async {
-      await Firebase.initializeApp();
+      try { await Firebase.initializeApp(); } catch (e) { print("Firebase init failed: $e"); }
       if (OtherConfig.USE_PUSH_NOTIFICATION) {
         PushNotificationService().initialise();
       }
