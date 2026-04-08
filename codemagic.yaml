@@ -46,13 +46,13 @@ workflows:
       - name: Build IPA
         script: |
           flutter build ipa --release --export-options-plist=/Users/builder/export_options.plist
-          echo === Listing build output ===
-          find build/ios -name *.ipa 2>/dev/null || true
-          ls -la build/ios/ipa/ 2>/dev/null || true
+      - name: Find IPA
+        script: |
+          find . -name '*.ipa' 2>/dev/null
+          find /Users/builder -name '*.ipa' 2>/dev/null || true
     artifacts:
       - build/ios/ipa/*.ipa
-      - build/**/ipa/*.ipa
-      - **/*.ipa
+      - /tmp/xcodebuild_logs/*.log
     publishing:
       app_store_connect:
         auth: integration
