@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.activeitzone.ecommerceapplesignup</string>
+	<string>com.metech.store</string>
 	<key>PROJECT_ID</key>
 	<string>testproject-43</string>
 	<key>STORAGE_BUCKET</key>
