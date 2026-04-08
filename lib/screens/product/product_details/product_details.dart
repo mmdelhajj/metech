@@ -402,6 +402,7 @@ class _ProductDetailsState extends State<ProductDetails>
     loading();
     // login check
     if (!guest_checkout_status.$ && is_logged_in.$ == false) {
+      Navigator.of(loadingcontext).pop();
       context.go("/users/login");
       return;
     }
