@@ -399,13 +399,13 @@ class _ProductDetailsState extends State<ProductDetails>
     required BuildContext context,
     SnackBar? snackbar,
   }) async {
-    loading();
-    // login check
+    // login check first, before showing loading dialog
     if (!guest_checkout_status.$ && is_logged_in.$ == false) {
-      Navigator.of(loadingcontext).pop();
       context.go("/users/login");
       return;
     }
+
+    loading();
 
     final cartAddResponse = await CartRepository().getCartAddResponse(
       _productDetails!.id,
