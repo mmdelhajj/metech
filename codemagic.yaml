@@ -44,10 +44,15 @@ workflows:
       - name: Install CocoaPods dependencies
         script: cd ios && pod install
       - name: Build IPA
-        script: flutter build ipa --release --export-options-plist=/Users/builder/export_options.plist
+        script: |
+          flutter build ipa --release --export-options-plist=/Users/builder/export_options.plist
+          echo === Listing build output ===
+          find build/ios -name *.ipa 2>/dev/null || true
+          ls -la build/ios/ipa/ 2>/dev/null || true
     artifacts:
       - build/ios/ipa/*.ipa
-      - /tmp/xcodebuild_logs/*.log
+      - build/**/ipa/*.ipa
+      - **/*.ipa
     publishing:
       app_store_connect:
         auth: integration
