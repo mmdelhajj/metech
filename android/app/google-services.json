@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "693085482006",
-    "project_id": "activeecommerce-46c57",
-    "storage_bucket": "activeecommerce-46c57.firebasestorage.app"
+    "project_number": "796792942112",
+    "project_id": "metech-62330",
+    "storage_bucket": "metech-62330.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:693085482006:android:f3bc268da177642c615937",
+        "mobilesdk_app_id": "1:796792942112:android:84d15f7331926c469ad645",
         "android_client_info": {
           "package_name": "com.metech.store"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyB59PXmZntxH7eRbgAnhJIZ5fOAz8bB4TY"
+          "current_key": "AIzaSyCN6z4ptrFrKmhiOoSooT0fg2psG4jTACg"
         }
       ],
       "services": {

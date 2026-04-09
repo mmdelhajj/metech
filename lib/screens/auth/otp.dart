@@ -1,17 +1,22 @@
-import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/input_decorations.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
-import 'package:active_ecommerce_cms_demo_app/helpers/auth_helper.dart';
-import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
-import 'package:active_ecommerce_cms_demo_app/helpers/system_config.dart';
-import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
-import 'package:active_ecommerce_cms_demo_app/repositories/auth_repository.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:active_ecommerce_cms_demo_app/l10n/app_localizations.dart';
-import 'package:go_router/go_router.dart';
+import "package:active_ecommerce_cms_demo_app/custom/btn.dart";
+import "package:active_ecommerce_cms_demo_app/custom/input_decorations.dart";
+import "package:active_ecommerce_cms_demo_app/custom/toast_component.dart";
+import "package:active_ecommerce_cms_demo_app/helpers/auth_helper.dart";
+import "package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart";
+import "package:active_ecommerce_cms_demo_app/helpers/system_config.dart";
+import "package:active_ecommerce_cms_demo_app/my_theme.dart";
+import "package:active_ecommerce_cms_demo_app/repositories/auth_repository.dart";
+import "package:firebase_auth/firebase_auth.dart" as firebase_auth;
+import "package:flutter/material.dart";
+import "package:flutter/services.dart";
+import "package:active_ecommerce_cms_demo_app/l10n/app_localizations.dart";
+import "package:go_router/go_router.dart";
+import "package:http/http.dart" as http;
+import "package:active_ecommerce_cms_demo_app/app_config.dart";
+import "package:active_ecommerce_cms_demo_app/helpers/main_helpers.dart";
+import "dart:convert";
 
-import '../../main.dart';
+import "../../main.dart";
 
 class Otp extends StatefulWidget {
   final String? title;
@@ -22,9 +27,14 @@ class Otp extends StatefulWidget {
 }
 
 class _OtpState extends State<Otp> {
-  //controllers
   final TextEditingController _verificationCodeController =
       TextEditingController();
+
+  String? _verificationId;
+  int? _resendToken;
+  bool _codeSent = false;
+  bool _isVerifying = false;
+  bool _isSendingCode = false;
 
   @override
   void initState() {
@@ -33,6 +43,7 @@ class _OtpState extends State<Otp> {
       overlays: [SystemUiOverlay.bottom],
     );
     super.initState();
+    _sendFirebaseOTP();
   }
 
   @override
@@ -44,40 +55,163 @@ class _OtpState extends State<Otp> {
     super.dispose();
   }
 
-  onTapResend() async {
-    var resendCodeResponse = await AuthRepository().getResendCodeResponse();
+  void _sendFirebaseOTP() async {
+    String phone = user_phone.$ ?? "";
+    if (phone.isEmpty) {
+      ToastComponent.showDialog("Phone number not available");
+      return;
+    }
 
-    if (resendCodeResponse.result == false) {
-      ToastComponent.showDialog(resendCodeResponse.message!);
-    } else {
-      ToastComponent.showDialog(resendCodeResponse.message!);
+    // Ensure phone has + prefix
+    if (!phone.startsWith("+")) {
+      phone = "+$phone";
+    }
+
+    setState(() {
+      _isSendingCode = true;
+    });
+
+    try {
+      await firebase_auth.FirebaseAuth.instance.verifyPhoneNumber(
+        phoneNumber: phone,
+        forceResendingToken: _resendToken,
+        timeout: const Duration(seconds: 60),
+        verificationCompleted:
+            (firebase_auth.PhoneAuthCredential credential) async {
+          // Auto-verification (Android only - auto reads SMS)
+          _verificationCodeController.text = credential.smsCode ?? "";
+          _verifyWithFirebase(credential);
+        },
+        verificationFailed: (firebase_auth.FirebaseAuthException e) {
+          setState(() {
+            _isSendingCode = false;
+          });
+          String msg = "Verification failed";
+          if (e.code == "invalid-phone-number") {
+            msg = "Invalid phone number format";
+          } else if (e.code == "too-many-requests") {
+            msg = "Too many requests. Please try again later";
+          } else {
+            msg = e.message ?? "Verification failed";
+          }
+          ToastComponent.showDialog(msg);
+        },
+        codeSent: (String verificationId, int? resendToken) {
+          setState(() {
+            _verificationId = verificationId;
+            _resendToken = resendToken;
+            _codeSent = true;
+            _isSendingCode = false;
+          });
+          ToastComponent.showDialog("Verification code sent!");
+        },
+        codeAutoRetrievalTimeout: (String verificationId) {
+          if (mounted) {
+            setState(() {
+              _verificationId = verificationId;
+            });
+          }
+        },
+      );
+    } catch (e) {
+      setState(() {
+        _isSendingCode = false;
+      });
+      ToastComponent.showDialog("Error sending code: $e");
     }
   }
 
-  onPressConfirm() async {
-    var code = _verificationCodeController.text.toString();
+  void _verifyWithFirebase(firebase_auth.PhoneAuthCredential credential) async {
+    setState(() {
+      _isVerifying = true;
+    });
 
-    if (code == "") {
+    try {
+      await firebase_auth.FirebaseAuth.instance.signInWithCredential(credential);
+
+      // Firebase verified successfully - now tell our server
+      await _confirmOnServer();
+    } on firebase_auth.FirebaseAuthException catch (e) {
+      setState(() {
+        _isVerifying = false;
+      });
+      if (e.code == "invalid-verification-code") {
+        ToastComponent.showDialog("Invalid verification code");
+      } else {
+        ToastComponent.showDialog(e.message ?? "Verification failed");
+      }
+    } catch (e) {
+      setState(() {
+        _isVerifying = false;
+      });
+      ToastComponent.showDialog("Error: $e");
+    }
+  }
+
+  Future<void> _confirmOnServer() async {
+    try {
+      String url = "${AppConfig.BASE_URL}/auth/confirm_firebase_phone";
+      final response = await http.post(
+        Uri.parse(url),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer ${access_token.$}",
+          "App-Language": app_language.$!,
+          ...?commonHeader,
+        },
+        body: jsonEncode({}),
+      );
+
+      final data = jsonDecode(response.body);
+
+      if (data["result"] == true) {
+        ToastComponent.showDialog(data["message"] ?? "Account verified!");
+        if (SystemConfig.systemUser != null) {
+          SystemConfig.systemUser!.emailVerified = true;
+        }
+        // Sign out of Firebase Auth (we only use it for phone verification)
+        await firebase_auth.FirebaseAuth.instance.signOut();
+        if (mounted) {
+          context.go("/");
+        }
+      } else {
+        setState(() {
+          _isVerifying = false;
+        });
+        ToastComponent.showDialog(data["message"] ?? "Server verification failed");
+      }
+    } catch (e) {
+      setState(() {
+        _isVerifying = false;
+      });
+      ToastComponent.showDialog("Server error: $e");
+    }
+  }
+
+  void onPressConfirm() {
+    var code = _verificationCodeController.text.toString().trim();
+
+    if (code.isEmpty) {
       ToastComponent.showDialog(
         AppLocalizations.of(context)!.enter_verification_code,
       );
       return;
     }
 
-    var confirmCodeResponse = await AuthRepository().getConfirmCodeResponse(
-      code,
-    );
-    if (!mounted) return;
-
-    if (!(confirmCodeResponse.result)) {
-      ToastComponent.showDialog(confirmCodeResponse.message);
-    } else {
-      ToastComponent.showDialog(confirmCodeResponse.message);
-      if (SystemConfig.systemUser != null) {
-        SystemConfig.systemUser!.emailVerified = true;
-      }
-      context.go("/");
+    if (_verificationId == null) {
+      ToastComponent.showDialog("Please wait for code to be sent");
+      return;
     }
+
+    final credential = firebase_auth.PhoneAuthProvider.credential(
+      verificationId: _verificationId!,
+      smsCode: code,
+    );
+    _verifyWithFirebase(credential);
+  }
+
+  void onTapResend() {
+    _sendFirebaseOTP();
   }
 
   @override
@@ -119,10 +253,38 @@ class _OtpState extends State<Otp> {
                         width: 75,
                         height: 75,
                         child: Image.asset(
-                          'assets/login_registration_form_logo.png',
+                          "assets/login_registration_form_logo.png",
                         ),
                       ),
                     ),
+                    if (_isSendingCode)
+                      Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Column(
+                          children: [
+                            CircularProgressIndicator(
+                              color: MyTheme.accent_color,
+                            ),
+                            SizedBox(height: 10),
+                            Text("Sending verification code...",
+                                style: TextStyle(color: MyTheme.font_grey)),
+                          ],
+                        ),
+                      ),
+                    if (_isVerifying)
+                      Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Column(
+                          children: [
+                            CircularProgressIndicator(
+                              color: MyTheme.accent_color,
+                            ),
+                            SizedBox(height: 10),
+                            Text("Verifying...",
+                                style: TextStyle(color: MyTheme.font_grey)),
+                          ],
+                        ),
+                      ),
                     SizedBox(
                       width: screenWidth * (3 / 4),
                       child: Column(
@@ -138,9 +300,10 @@ class _OtpState extends State<Otp> {
                                   child: TextField(
                                     controller: _verificationCodeController,
                                     autofocus: false,
+                                    keyboardType: TextInputType.number,
                                     decoration:
                                         InputDecorations.buildInputDecoration_1(
-                                          hintText: "A X B 4 J H",
+                                          hintText: "Enter 6-digit code",
                                         ),
                                   ),
                                 ),
@@ -202,7 +365,6 @@ class _OtpState extends State<Otp> {
                         ),
                       ),
                     ),
-                    // SizedBox(height: 15,),
                     Padding(
                       padding: const EdgeInsets.only(top: 40),
                       child: InkWell(
@@ -232,9 +394,11 @@ class _OtpState extends State<Otp> {
 
   onTapLogout(context) {
     try {
+      firebase_auth.FirebaseAuth.instance.signOut();
       AuthHelper().clearUserData();
       routes.push("/");
-      // ignore: empty_catches
-    } catch (e) {}
+    } catch (e) {
+      // ignore
+    }
   }
 }
