@@ -279,15 +279,16 @@ WebView Page resource error:
       return;
     }
 
-    var signupResponse = await AuthRepository().getSignupResponse(
-      name,
-      _registerBy == 'email' ? email : _phone,
-      password,
-      passwordConfirm,
-      _registerBy,
-      googleRecaptchaKey,
-    );
-    Loading.close();
+    try {
+      var signupResponse = await AuthRepository().getSignupResponse(
+        name,
+        _registerBy == 'email' ? email : _phone,
+        password,
+        passwordConfirm,
+        _registerBy,
+        googleRecaptchaKey,
+      );
+      Loading.close();
 
     if (signupResponse.result == false) {
       var message = "";
@@ -347,6 +348,9 @@ WebView Page resource error:
           ),
         );
       }
+    } catch (e) {
+      Loading.close();
+      ToastComponent.showDialog(Error: $e);
     }
   }
 
