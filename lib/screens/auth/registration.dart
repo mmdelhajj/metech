@@ -348,9 +348,10 @@ WebView Page resource error:
           ),
         );
       }
+    }
     } catch (e) {
       Loading.close();
-      ToastComponent.showDialog(Error: $e);
+      ToastComponent.showDialog("Error: $e");
     }
   }
 
