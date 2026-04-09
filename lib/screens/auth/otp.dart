@@ -58,7 +58,13 @@ class _OtpState extends State<Otp> {
 
   void _sendFirebaseOTP() async {
     // Ensure Firebase is initialized
-    try { await Firebase.initializeApp(); } catch (_) {}
+    try {
+      if (Firebase.apps.isEmpty) {
+        await Firebase.initializeApp();
+      }
+    } catch (e) {
+      print("Firebase init error in OTP: $e");
+    }
 
     String phone = user_phone.$ ?? "";
     if (phone.isEmpty) {
