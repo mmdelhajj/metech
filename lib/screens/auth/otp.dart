@@ -8,6 +8,7 @@ import "package:active_ecommerce_cms_demo_app/my_theme.dart";
 import "package:active_ecommerce_cms_demo_app/repositories/auth_repository.dart";
 import "package:firebase_auth/firebase_auth.dart" as firebase_auth;
 import "package:firebase_core/firebase_core.dart";
+import "package:active_ecommerce_cms_demo_app/firebase_options.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:active_ecommerce_cms_demo_app/l10n/app_localizations.dart";
@@ -60,7 +61,7 @@ class _OtpState extends State<Otp> {
     // Ensure Firebase is initialized
     try {
       if (Firebase.apps.isEmpty) {
-        await Firebase.initializeApp();
+        await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
       }
     } catch (e) {
       print("Firebase init error in OTP: $e");

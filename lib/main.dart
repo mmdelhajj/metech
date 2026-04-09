@@ -9,6 +9,7 @@ import 'package:active_ecommerce_cms_demo_app/providers/todays_deal_provider.dar
 import 'package:active_ecommerce_cms_demo_app/screens/auth/login.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/filter.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
@@ -63,7 +64,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   try {
     if (Firebase.apps.isEmpty) {
-      await Firebase.initializeApp();
+      await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
     }
   } catch (e) { print("Firebase init failed: $e"); }
   await StoreBox.init();
@@ -267,7 +268,7 @@ class _MyAppState extends State<MyApp> {
     Future.microtask(() async {
       try {
     if (Firebase.apps.isEmpty) {
-      await Firebase.initializeApp();
+      await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
     }
   } catch (e) { print("Firebase init failed: $e"); }
       if (OtherConfig.USE_PUSH_NOTIFICATION) {
