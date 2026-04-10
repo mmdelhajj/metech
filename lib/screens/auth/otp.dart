@@ -86,14 +86,9 @@ class _OtpState extends State<Otp> {
               _isSendingCode = false;
             });
           }
-          String msg = "Verification failed";
-          if (e.code == "invalid-phone-number") {
-            msg = "Invalid phone number format";
-          } else if (e.code == "too-many-requests") {
-            msg = "Too many requests. Please try again later";
-          } else {
-            msg = e.message ?? "Verification failed";
-          }
+          // Show full error details for debugging
+          String msg = "[${e.code}] ${e.message ?? 'Verification failed'}";
+          print("FIREBASE_OTP_ERROR code=${e.code} message=${e.message} plugin=${e.plugin} stack=${e.stackTrace}");
           ToastComponent.showDialog(msg);
         },
         codeSent: (String verificationId, int? resendToken) {
