@@ -86,10 +86,10 @@ class _OtpState extends State<Otp> {
               _isSendingCode = false;
             });
           }
-          // Show full error details for debugging
-          String msg = "[${e.code}] ${e.message ?? 'Verification failed'}";
-          print("FIREBASE_OTP_ERROR code=${e.code} message=${e.message} plugin=${e.plugin} stack=${e.stackTrace}");
-          ToastComponent.showDialog(msg);
+          _showErrorDialog(
+            "Firebase Verification Failed",
+            "CODE: ${e.code}\n\nMESSAGE: ${e.message}\n\nPLUGIN: ${e.plugin}\n\nTENANT: ${e.tenantId}",
+          );
         },
         codeSent: (String verificationId, int? resendToken) {
           if (mounted) {
@@ -110,14 +110,41 @@ class _OtpState extends State<Otp> {
           }
         },
       );
-    } catch (e) {
+    } catch (e, stackTrace) {
       if (mounted) {
         setState(() {
           _isSendingCode = false;
         });
       }
-      ToastComponent.showDialog("Error: $e");
+      String type = e.runtimeType.toString();
+      String details = e.toString();
+      if (e is firebase_auth.FirebaseAuthException) {
+        details = "CODE: ${e.code}\n\nMESSAGE: ${e.message}\n\nPLUGIN: ${e.plugin}";
+      }
+      _showErrorDialog(
+        "Exception caught ($type)",
+        "$details\n\nSTACK:\n${stackTrace.toString().substring(0, stackTrace.toString().length > 500 ? 500 : stackTrace.toString().length)}",
+      );
     }
+  }
+
+  void _showErrorDialog(String title, String body) {
+    if (!mounted) return;
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(title, style: TextStyle(fontSize: 16)),
+        content: SingleChildScrollView(
+          child: SelectableText(body, style: TextStyle(fontSize: 12)),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(),
+            child: Text("OK"),
+          ),
+        ],
+      ),
+    );
   }
 
   void _verifyWithFirebase(firebase_auth.PhoneAuthCredential credential) async {
