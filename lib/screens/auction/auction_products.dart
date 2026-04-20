@@ -120,7 +120,7 @@ class _AuctionProductsState extends State<AuctionProducts> {
       scrolledUnderElevation: 0.0,
       backgroundColor: MyTheme.mainColor,
       centerTitle: false,
-      leading: UsefulElements.backButton(context),
+      automaticallyImplyLeading: false,
       title: Padding(
         padding: const EdgeInsets.only(right: 37),
         child: Row(
