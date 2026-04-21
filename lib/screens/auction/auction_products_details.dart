@@ -478,6 +478,21 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
     );
   }
 
+  _showDebugError(String error) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text("DEBUG ERROR", style: TextStyle(color: Colors.red, fontSize: 16)),
+        content: SingleChildScrollView(
+          child: SelectableText(error, style: TextStyle(fontSize: 12)),
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(ctx), child: Text("OK")),
+        ],
+      ),
+    );
+  }
+
   loading() {
     showDialog(
       context: context,
@@ -538,9 +553,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
       Navigator.of(loadingcontext).pop();
 
       if (conversationCreateResponse.result == false) {
-        ToastComponent.showDialog(
-          AppLocalizations.of(context)!.could_not_create_conversation,
-        );
+        _showDebugError("API returned result=false\nShop: ${conversationCreateResponse.shopName}\nMsg: ${conversationCreateResponse.message}");
         return;
       }
 
@@ -563,12 +576,10 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
       ).then((value) {
         onPopped(value);
       });
-    } catch (e) {
+    } catch (e, stack) {
       if (mounted) {
         Navigator.of(loadingcontext).pop();
-        ToastComponent.showDialog(
-          AppLocalizations.of(context)!.could_not_create_conversation,
-        );
+        _showDebugError("CATCH ERROR:\n$e\n\nSTACK:\n${stack.toString().split('\n').take(10).join('\n')}");
       }
     }
   }

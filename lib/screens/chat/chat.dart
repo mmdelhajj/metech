@@ -69,9 +69,24 @@ class _ChatState extends State<Chat> {
       setState(() {});
 
       fetchNewMessage();
-    } catch (e) {
+    } catch (e, stack) {
       _isInitial = false;
-      if (mounted) setState(() {});
+      if (mounted) {
+        setState(() {});
+        showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+            title: Text("CHAT DEBUG ERROR", style: TextStyle(color: Colors.red, fontSize: 14)),
+            content: SingleChildScrollView(
+              child: SelectableText(
+                "ConversationId: ${widget.conversationId}\n\nError: $e\n\nStack:\n${stack.toString().split('\n').take(8).join('\n')}",
+                style: TextStyle(fontSize: 11),
+              ),
+            ),
+            actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: Text("OK"))],
+          ),
+        );
+      }
     }
   }
 
