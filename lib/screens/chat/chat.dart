@@ -55,17 +55,24 @@ class _ChatState extends State<Chat> {
   }
 
   fetchData() async {
-    var messageResponse = await ChatRepository().getMessageResponse(
-      conversationId: widget.conversationId,
-      page: _page,
-    );
-    _list.addAll(messageResponse.data);
-    _isInitial = false;
-    _showLoadingContainer = false;
-    _lastId = _list[0].id;
-    setState(() {});
+    try {
+      var messageResponse = await ChatRepository().getMessageResponse(
+        conversationId: widget.conversationId,
+        page: _page,
+      );
+      _list.addAll(messageResponse.data);
+      _isInitial = false;
+      _showLoadingContainer = false;
+      if (_list.isNotEmpty) {
+        _lastId = _list[0].id;
+      }
+      setState(() {});
 
-    fetchNewMessage();
+      fetchNewMessage();
+    } catch (e) {
+      _isInitial = false;
+      if (mounted) setState(() {});
+    }
   }
 
   reset() {
@@ -96,13 +103,19 @@ class _ChatState extends State<Chat> {
     _chatTextController.clear();
 
     if (chatText != "") {
-      var messageResponse = await ChatRepository().getInserMessageResponse(
-        conversationId: widget.conversationId,
-        message: chatText,
-      );
-      _list = [messageResponse.data, _list].expand((x) => x).toList();
-      _lastId = _list[0].id;
-      setState(() {});
+      try {
+        var messageResponse = await ChatRepository().getInserMessageResponse(
+          conversationId: widget.conversationId,
+          message: chatText,
+        );
+        _list = [messageResponse.data, _list].expand((x) => x).toList();
+        if (_list.isNotEmpty) {
+          _lastId = _list[0].id;
+        }
+        setState(() {});
+      } catch (e) {
+        // ignore send errors
+      }
     }
   }
 
@@ -115,16 +128,22 @@ class _ChatState extends State<Chat> {
   }
 
   getNewMessage() async {
-    var messageResponse = await ChatRepository().getNewMessageResponse(
-      conversationId: widget.conversationId,
-      lastMessageId: _lastId,
-    );
+    try {
+      var messageResponse = await ChatRepository().getNewMessageResponse(
+        conversationId: widget.conversationId,
+        lastMessageId: _lastId,
+      );
 
-    _list = [messageResponse.data, _list].expand((x) => x).toList(); //prepend
-    _lastId = _list[0].id;
+      _list = [messageResponse.data, _list].expand((x) => x).toList(); //prepend
+      if (_list.isNotEmpty) {
+        _lastId = _list[0].id;
+      }
 
-    if (mounted) {
-      setState(() {});
+      if (mounted) {
+        setState(() {});
+      }
+    } catch (e) {
+      // silently ignore polling errors
     }
   }
 
