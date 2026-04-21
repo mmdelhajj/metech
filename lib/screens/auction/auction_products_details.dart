@@ -507,7 +507,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
       showLoginWarning();
       return;
     }
-    loading();
+
     var title = sellerChatTitleController.text.toString();
     var message = sellerChatMessageController.text.toString();
 
@@ -518,42 +518,53 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
       return;
     }
 
-    var conversationCreateResponse = await ChatRepository()
-        .getCreateConversationResponse(
-          productId: _auctionproductDetails.id,
-          title: title,
-          message: message,
-        );
-    if (!mounted) return;
+    loading();
 
-    Navigator.of(loadingcontext).pop();
-
-    if (conversationCreateResponse.result == false) {
-      ToastComponent.showDialog(
-        AppLocalizations.of(context)!.could_not_create_conversation,
-      );
-      return;
-    }
-
-    sellerChatTitleController.clear();
-    sellerChatMessageController.clear();
-    setState(() {});
-
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) {
-          return Chat(
-            conversationId: conversationCreateResponse.conversation_id,
-            messengerName: conversationCreateResponse.shop_name,
-            messengerTitle: conversationCreateResponse.title,
-            messengerImage: conversationCreateResponse.shop_logo,
+    try {
+      var conversationCreateResponse = await ChatRepository()
+          .getCreateConversationResponse(
+            productId: _auctionproductDetails.id,
+            title: title,
+            message: message,
           );
-        },
-      ),
-    ).then((value) {
-      onPopped(value);
-    });
+      if (!mounted) return;
+
+      Navigator.of(loadingcontext).pop();
+
+      if (conversationCreateResponse.result == false) {
+        ToastComponent.showDialog(
+          AppLocalizations.of(context)!.could_not_create_conversation,
+        );
+        return;
+      }
+
+      sellerChatTitleController.clear();
+      sellerChatMessageController.clear();
+      setState(() {});
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return Chat(
+              conversationId: conversationCreateResponse.conversation_id,
+              messengerName: conversationCreateResponse.shop_name,
+              messengerTitle: conversationCreateResponse.title,
+              messengerImage: conversationCreateResponse.shop_logo,
+            );
+          },
+        ),
+      ).then((value) {
+        onPopped(value);
+      });
+    } catch (e) {
+      if (mounted) {
+        Navigator.of(loadingcontext).pop();
+        ToastComponent.showDialog(
+          AppLocalizations.of(context)!.could_not_create_conversation,
+        );
+      }
+    }
   }
 
   @override
