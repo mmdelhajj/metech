@@ -457,7 +457,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                       side: BorderSide(color: MyTheme.light_grey, width: 1.0),
                     ),
                     child: Text(
-                      "SEND v34",
+                      AppLocalizations.of(context)!.send_all_capital,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,
@@ -478,24 +478,12 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
     );
   }
 
-  _showDebugError(String error) {
-    showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text("DEBUG ERROR", style: TextStyle(color: Colors.red, fontSize: 16)),
-        content: SingleChildScrollView(
-          child: SelectableText(error, style: TextStyle(fontSize: 12)),
-        ),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: Text("OK")),
-        ],
-      ),
-    );
-  }
+  bool _isSending = false;
 
   loading() {
     showDialog(
       context: context,
+      barrierDismissible: false,
       builder: (context) {
         loadingcontext = context;
         return AlertDialog(
@@ -539,6 +527,9 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
       return;
     }
 
+    if (_isSending) return;
+    _isSending = true;
+
     loading();
 
     try {
@@ -548,53 +539,45 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
             title: title,
             message: message,
           );
-      if (!mounted) return;
 
-      Navigator.of(loadingcontext).pop();
+      // Close loading dialog safely
+      if (mounted && Navigator.canPop(context)) {
+        Navigator.of(context).pop();
+      }
+
+      if (!mounted) { _isSending = false; return; }
 
       if (conversationCreateResponse.result == false) {
-        _showDebugError("STEP 1 FAIL: API returned result=false\nMsg: ${conversationCreateResponse.message}");
+        _isSending = false;
+        ToastComponent.showDialog(
+          AppLocalizations.of(context)!.could_not_create_conversation,
+        );
         return;
       }
 
-      // DEBUG: Show what the API returned before navigating
-      _showDebugError(
-        "STEP 2 OK - API Success!\n\n"
-        "result: ${conversationCreateResponse.result}\n"
-        "conversation_id: ${conversationCreateResponse.conversationId}\n"
-        "shop_name: ${conversationCreateResponse.shopName}\n"
-        "title: ${conversationCreateResponse.title}\n"
-        "shop_logo: ${conversationCreateResponse.shopLogo}\n\n"
-        "Tap OK to open chat screen..."
-      );
-
-      // Wait for user to dismiss debug dialog, then navigate
-      await Future.delayed(Duration(milliseconds: 500));
-
       sellerChatTitleController.clear();
       sellerChatMessageController.clear();
-      setState(() {});
 
-      if (!mounted) return;
+      _isSending = false;
+
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) {
-            return Chat(
-              conversationId: conversationCreateResponse.conversation_id,
-              messengerName: conversationCreateResponse.shop_name,
-              messengerTitle: conversationCreateResponse.title,
-              messengerImage: conversationCreateResponse.shop_logo,
-            );
-          },
+          builder: (_) => Chat(
+            conversationId: conversationCreateResponse.conversation_id,
+            messengerName: conversationCreateResponse.shop_name,
+            messengerTitle: conversationCreateResponse.title,
+            messengerImage: conversationCreateResponse.shop_logo,
+          ),
         ),
       ).then((value) {
         onPopped(value);
       });
-    } catch (e, stack) {
+    } catch (e) {
+      _isSending = false;
       if (mounted) {
-        try { Navigator.of(loadingcontext).pop(); } catch (_) {}
-        _showDebugError("CATCH ERROR:\n$e\n\nSTACK:\n${stack.toString().split('\n').take(10).join('\n')}");
+        if (Navigator.canPop(context)) Navigator.of(context).pop();
+        ToastComponent.showDialog("Error: $e");
       }
     }
   }
