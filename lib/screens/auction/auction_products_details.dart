@@ -511,9 +511,15 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
     var title = sellerChatTitleController.text.toString();
     var message = sellerChatMessageController.text.toString();
 
-    if (title == "" || message == "") {
+    if (title == "") {
       ToastComponent.showDialog(
         AppLocalizations.of(context)!.title_or_message_empty_warning,
+      );
+      return;
+    }
+    if (message == "") {
+      ToastComponent.showDialog(
+        "Please enter a message",
       );
       return;
     }
@@ -1359,37 +1365,42 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
             width: 200,
             child: CountdownTimer(
               controller: countDownTimercontroller,
-              endTime:
-                  DateTime.now().day +
-                  (1000 * _auctionproductDetails.auctionEndDate as int),
+              endTime: _auctionproductDetails.auctionEndDate * 1000,
               widgetBuilder: (_, CurrentRemainingTime? time) {
-                List auctionEndTimeList = [];
-                auctionEndTimeList.addAll([
-                  time!.days,
-                  time.hours,
-                  time.min,
-                  time.sec,
-                ]);
+                if (time == null) {
+                  return Text(
+                    "Auction Ended",
+                    style: TextStyle(color: Colors.red, fontSize: 12, fontWeight: FontWeight.bold),
+                  );
+                }
+
+                List<String> auctionEndTimeList = [
+                  '${time.days ?? 0}'.padLeft(2, '0'),
+                  '${time.hours ?? 0}'.padLeft(2, '0'),
+                  '${time.min ?? 0}'.padLeft(2, '0'),
+                  '${time.sec ?? 0}'.padLeft(2, '0'),
+                ];
+
+                List<String> labels = ['D', 'H', 'M', 'S'];
 
                 return ListView.separated(
                   scrollDirection: Axis.horizontal,
                   itemCount: auctionEndTimeList.length,
                   separatorBuilder: (BuildContext context, int index) =>
                       const Padding(
-                        padding: EdgeInsets.all(6.0),
-                        child: Text(":"),
+                        padding: EdgeInsets.all(4.0),
+                        child: Text(":", style: TextStyle(fontWeight: FontWeight.bold)),
                       ),
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
-                      padding: EdgeInsets.all(6),
-
+                      padding: EdgeInsets.symmetric(horizontal: 6, vertical: 4),
                       decoration: BoxDecoration(
                         color: MyTheme.accent_color,
-                        borderRadius: BorderRadius.circular(3.0),
+                        borderRadius: BorderRadius.circular(4.0),
                       ),
                       child: Text(
-                        '${auctionEndTimeList[index] ?? 00}',
-                        style: TextStyle(color: Colors.white, fontSize: 12),
+                        '${auctionEndTimeList[index]}${labels[index]}',
+                        style: TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w600),
                       ),
                     );
                   },

@@ -862,9 +862,15 @@ class _ProductDetailsState extends State<ProductDetails>
     var title = sellerChatTitleController.text.toString();
     var message = sellerChatMessageController.text.toString();
 
-    if (title == "" || message == "") {
+    if (title == "") {
       ToastComponent.showDialog(
         AppLocalizations.of(context)!.title_or_message_empty_warning,
+      );
+      return;
+    }
+    if (message == "") {
+      ToastComponent.showDialog(
+        "Please enter a message",
       );
       return;
     }
