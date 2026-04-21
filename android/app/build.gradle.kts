@@ -26,7 +26,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.activeitzone.activeecommercecmsdemoapp"
+        applicationId = "com.metech.store"
         minSdk = flutter.minSdkVersion
         targetSdk = 36
         versionCode = flutter.versionCode
