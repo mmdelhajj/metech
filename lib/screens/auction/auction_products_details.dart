@@ -553,14 +553,29 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
       Navigator.of(loadingcontext).pop();
 
       if (conversationCreateResponse.result == false) {
-        _showDebugError("API returned result=false\nShop: ${conversationCreateResponse.shopName}\nMsg: ${conversationCreateResponse.message}");
+        _showDebugError("STEP 1 FAIL: API returned result=false\nMsg: ${conversationCreateResponse.message}");
         return;
       }
+
+      // DEBUG: Show what the API returned before navigating
+      _showDebugError(
+        "STEP 2 OK - API Success!\n\n"
+        "result: ${conversationCreateResponse.result}\n"
+        "conversation_id: ${conversationCreateResponse.conversationId}\n"
+        "shop_name: ${conversationCreateResponse.shopName}\n"
+        "title: ${conversationCreateResponse.title}\n"
+        "shop_logo: ${conversationCreateResponse.shopLogo}\n\n"
+        "Tap OK to open chat screen..."
+      );
+
+      // Wait for user to dismiss debug dialog, then navigate
+      await Future.delayed(Duration(milliseconds: 500));
 
       sellerChatTitleController.clear();
       sellerChatMessageController.clear();
       setState(() {});
 
+      if (!mounted) return;
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -578,7 +593,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
       });
     } catch (e, stack) {
       if (mounted) {
-        Navigator.of(loadingcontext).pop();
+        try { Navigator.of(loadingcontext).pop(); } catch (_) {}
         _showDebugError("CATCH ERROR:\n$e\n\nSTACK:\n${stack.toString().split('\n').take(10).join('\n')}");
       }
     }

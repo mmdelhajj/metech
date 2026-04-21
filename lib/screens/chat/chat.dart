@@ -175,6 +175,20 @@ class _ChatState extends State<Chat> {
           children: [
             !_isInitial ? conversations() : chatShimmer(),
             typeSmsSection(),
+            // DEBUG BANNER
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                color: Colors.red,
+                padding: EdgeInsets.all(4),
+                child: Text(
+                  "DEBUG: Chat loaded | convId=${widget.conversationId} | msgs=${_list.length} | initial=$_isInitial",
+                  style: TextStyle(color: Colors.white, fontSize: 10),
+                ),
+              ),
+            ),
           ],
         ),
       ),
