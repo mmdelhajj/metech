@@ -457,7 +457,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                       side: BorderSide(color: MyTheme.light_grey, width: 1.0),
                     ),
                     child: Text(
-                      AppLocalizations.of(context)!.send_all_capital,
+                      "SEND v34",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,
