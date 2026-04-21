@@ -298,6 +298,7 @@ class _OrderDetailsState extends State<OrderDetails> {
               },
             ),
 
+            // Go To Cart Button (Only show if at least one item succeeded)
             if (response.successMsgs != null &&
                 response.successMsgs!.isNotEmpty)
               ElevatedButton(
@@ -788,16 +789,10 @@ class _OrderDetailsState extends State<OrderDetails> {
                 SliverList(
                   delegate: SliverChildListDelegate([
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 18),
+                      padding: .symmetric(horizontal: 18),
                       child: buildCancleOrPaymentButton(),
                     ),
-
-                    Container(height: 40),
-                    SizedBox(
-                      height: MediaQuery.of(context).viewPadding.bottom > 0
-                          ? MediaQuery.of(context).viewPadding.bottom
-                          : 20,
-                    ),
+                    SizedBox(height: 40),
                   ]),
                 ),
               ],
@@ -808,33 +803,88 @@ class _OrderDetailsState extends State<OrderDetails> {
     );
   }
 
+  // buildBottomSection() {
+  //   bool isGst = false;
+
+  //   if (_orderedItemList.isNotEmpty &&
+  //       _orderedItemList[0].gst_applicable == 1) {
+  //     isGst = true;
+  //   } else if (gst_addon_installed.$ == true) {
+  //     isGst = true;
+  //   }
+
+  //   String taxValueToShow = _orderDetails?.tax ?? "0";
+
+  //   if (_orderDetails?.gst_amount != null &&
+  //       _orderDetails!.gst_amount!.isNotEmpty &&
+  //       !_orderDetails!.gst_amount!.contains("0.00")) {
+  //     taxValueToShow = _orderDetails!.gst_amount!;
+  //   }
+
+  //   return Expanded(
+  //     child: _orderDetails != null
+  //         ? Column(
+  //       crossAxisAlignment: CrossAxisAlignment.stretch,
+  //       children: [
+  //         _priceRow(
+  //           context,
+  //           label: AppLocalizations.of(context)!.sub_total_all_capital,
+  //           value: convertPrice(_orderDetails!.subtotal!),
+  //         ),
+
+  //         _priceRow(
+  //           context,
+  //           label: isGst
+  //               ? "GST"
+  //               : AppLocalizations.of(context)!.tax_all_capital,
+  //           value:  convertPrice(taxValueToShow)
+  //         ),
+
+  //         _priceRow(
+  //           context,
+  //           label: AppLocalizations.of(
+  //             context,
+  //           )!.shipping_cost_all_capital,
+  //           value: convertPrice(_orderDetails!.shipping_cost!),
+  //         ),
+
+  //         _priceRow(
+  //           context,
+  //           label: AppLocalizations.of(context)!.discount_all_capital,
+  //           value: convertPrice(_orderDetails!.coupon_discount!),
+  //         ),
+
+  //         const Divider(),
+
+  //         _priceRow(
+  //           context,
+  //           label: AppLocalizations.of(context)!.grand_total_all_capital,
+  //           value: convertPrice(_orderDetails!.grand_total!),
+  //           valueColor: MyTheme.accent_color,
+  //         ),
+  //       ],
+  //     )
+  //         : ShimmerHelper().buildBasicShimmer(height: 100.0),
+  //   );
+  // }
   buildBottomSection() {
     bool isGst = false;
 
+    // ✅ ONLY order data based decision (addon ignore)
     if (_orderedItemList.isNotEmpty &&
         _orderedItemList[0].gst_applicable == 1) {
       isGst = true;
-    } else if (gst_addon_installed.$ == true) {
-      isGst = true;
-    }
-    var taxValueToShow = convertPrice(_orderDetails?.tax ?? "0");
-    if (_orderDetails?.gst_amount != null &&
-        _orderDetails!.gst_amount!.isNotEmpty &&
-        _orderDetails!.gst_amount != convertPrice("0")) {
-      taxValueToShow = _orderDetails!.gst_amount!;
     }
 
-    double discountValue = 0.0;
-    try {
-      if (_orderDetails != null && _orderDetails!.coupon_discount != null) {
-        String cleanDiscount = _orderDetails!.coupon_discount!.replaceAll(
-          RegExp(r'[^0-9.]'),
-          '',
-        );
-        discountValue = double.tryParse(cleanDiscount) ?? 0.0;
-      }
-    } catch (e) {
-      discountValue = 0.0;
+    // ✅ Default tax
+    String taxValueToShow = _orderDetails?.tax ?? "0";
+
+    // ✅ Only override when GST is actually applicable
+    if (isGst &&
+        _orderDetails?.gst_amount != null &&
+        _orderDetails!.gst_amount!.isNotEmpty &&
+        !_orderDetails!.gst_amount!.contains("0.00")) {
+      taxValueToShow = _orderDetails!.gst_amount!;
     }
 
     return Expanded(
@@ -847,6 +897,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                   label: AppLocalizations.of(context)!.sub_total_all_capital,
                   value: convertPrice(_orderDetails!.subtotal!),
                 ),
+
                 _priceRow(
                   context,
                   label: isGst
@@ -854,6 +905,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                       : AppLocalizations.of(context)!.tax_all_capital,
                   value: convertPrice(taxValueToShow),
                 ),
+
                 _priceRow(
                   context,
                   label: AppLocalizations.of(
@@ -862,12 +914,11 @@ class _OrderDetailsState extends State<OrderDetails> {
                   value: convertPrice(_orderDetails!.shipping_cost!),
                 ),
 
-                if (discountValue > 0)
-                  _priceRow(
-                    context,
-                    label: AppLocalizations.of(context)!.discount_all_capital,
-                    value: convertPrice(_orderDetails!.coupon_discount!),
-                  ),
+                _priceRow(
+                  context,
+                  label: AppLocalizations.of(context)!.discount_all_capital,
+                  value: convertPrice(_orderDetails!.coupon_discount!),
+                ),
 
                 const Divider(),
 
@@ -1058,7 +1109,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                           (_orderDetails!.delivery_status == "on_the_way" ||
                               _orderDetails!.delivery_status == "picked_up" ||
                               _orderDetails!.delivery_status == "on_delivery")
-                          ? Colors.green
+                          ? Colors.amber
                           : Colors.transparent,
                       width: 2,
                     ),
@@ -1111,7 +1162,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     shape: BoxShape.circle,
                     border: Border.all(
                       color: _orderDetails!.delivery_status == "delivered"
-                          ? Colors.green
+                          ? Colors.purple
                           : Colors.transparent,
                       width: 2,
                     ),
@@ -1138,7 +1189,9 @@ class _OrderDetailsState extends State<OrderDetails> {
       padding: const EdgeInsets.symmetric(horizontal: 30.0),
       child: Row(
         children: [
-          //  Reorder Button
+          // ----------------------------------------
+          // ১. Reorder Button
+          // ----------------------------------------
           Expanded(
             child: Btn.basic(
               padding: EdgeInsets.zero,
@@ -1168,7 +1221,9 @@ class _OrderDetailsState extends State<OrderDetails> {
 
           const SizedBox(width: 15),
 
-          // Invoice Button
+          // ----------------------------------------
+          // ২. Invoice Button
+          // ----------------------------------------
           Expanded(
             child: Btn.basic(
               padding: EdgeInsets.zero,
@@ -1269,7 +1324,9 @@ class _OrderDetailsState extends State<OrderDetails> {
                       headingText('Seller Address'),
                       const SizedBox(height: 2),
                       Text(_orderDetails!.seller_address!, style: addressStyle),
-                      const SizedBox(height: 5),
+                      const SizedBox(
+                        height: 5,
+                      ), // Gap between address and GSTIN
 
                       if (_orderDetails!.gstin != null &&
                           _orderDetails!.gstin!.trim().isNotEmpty &&
@@ -1291,6 +1348,8 @@ class _OrderDetailsState extends State<OrderDetails> {
                   ),
                 ),
 
+                //  const Spacer(flex: 1),
+
                 // Right Column: Delivery Status and Payment Status
                 Expanded(
                   flex: 5,
@@ -1306,7 +1365,7 @@ class _OrderDetailsState extends State<OrderDetails> {
 
                       const SizedBox(height: 8),
 
-                      // Payment Status
+                      // Payment Status moved here below Delivery Status
                       headingText(
                         AppLocalizations.of(context)!.payment_status_ucf,
                       ),
@@ -1382,7 +1441,7 @@ class _OrderDetailsState extends State<OrderDetails> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  //  LEFT SIDE: Shipping Info -----
+                  // ----- LEFT SIDE: Shipping Info -----
                   Expanded(
                     child: _orderDetails!.shipping_address != null
                         ? Column(
@@ -1448,7 +1507,7 @@ class _OrderDetailsState extends State<OrderDetails> {
 
                   const SizedBox(width: 15),
 
-                  // RIGHT SIDE: Billing Info -----
+                  // ----- RIGHT SIDE: Billing Info -----
                   Expanded(
                     child: _orderDetails!.billing_address != null
                         ? Column(
@@ -1568,7 +1627,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     : const SizedBox.shrink(),
               ),
 
-              /// ASK FOR REFUND
+              /// ASK FOR REFUND (priority 1)
               if (item.refund_section && item.refund_button)
                 InkWell(
                   onTap: () {
@@ -1598,7 +1657,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     ],
                   ),
                 )
-              /// REFUND STATUS
+              /// REFUND STATUS (priority 2)
               else if (item.refund_section &&
                   item.refund_label != null &&
                   item.refund_label!.trim().isNotEmpty)
@@ -1668,7 +1727,7 @@ class _OrderDetailsState extends State<OrderDetails> {
     return AppBar(
       scrolledUnderElevation: 0,
       backgroundColor: Colors.white,
-
+      // centerTitle: true,
       leading: Builder(
         builder: (context) => IconButton(
           icon: Icon(CupertinoIcons.arrow_left, color: MyTheme.dark_grey),

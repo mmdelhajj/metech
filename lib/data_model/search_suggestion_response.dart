@@ -1,18 +1,23 @@
-// To parse this JSON data, do
-//
-//     final searchSuggestionResponse = searchSuggestionResponseFromJson(jsonString);
-
 import 'dart:convert';
 
-List<SearchSuggestionResponse> searchSuggestionResponseFromJson(String str) =>
-    List<SearchSuggestionResponse>.from(
-      json.decode(str).map((x) => SearchSuggestionResponse.fromJson(x)),
-    );
+List<SearchSuggestionResponse> searchSuggestionResponseFromJson(String str) {
+  final data = json.decode(str);
+  return List<SearchSuggestionResponse>.from(
+    data.map((x) => SearchSuggestionResponse.fromJson(x)),
+  );
+}
 
-String searchSuggestionResponseToJson(List<SearchSuggestionResponse> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String searchSuggestionResponseToJson(List<SearchSuggestionResponse> data) {
+  return json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+}
 
 class SearchSuggestionResponse {
+  final int? id;
+  final String? query;
+  final int? count;
+  final String? type;
+  final String? typeString;
+
   SearchSuggestionResponse({
     this.id,
     this.query,
@@ -21,26 +26,23 @@ class SearchSuggestionResponse {
     this.typeString,
   });
 
-  int? id;
-  String? query;
-  int? count;
-  String? type;
-  String? typeString;
+  factory SearchSuggestionResponse.fromJson(Map<String, dynamic> json) {
+    return SearchSuggestionResponse(
+      id: json["id"] as int?,
+      query: json["query"] as String?,
+      count: json["count"] as int?,
+      type: json["type"] as String?,
+      typeString: json["type_string"] as String?,
+    );
+  }
 
-  factory SearchSuggestionResponse.fromJson(Map<String, dynamic> json) =>
-      SearchSuggestionResponse(
-        id: json["id"],
-        query: json["query"],
-        count: json["count"],
-        type: json["type"],
-        typeString: json["type_string"],
-      );
-
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "query": query,
-    "count": count,
-    "type": type,
-    "type_string": typeString,
-  };
+  Map<String, dynamic> toJson() {
+    return {
+      "id": id,
+      "query": query,
+      "count": count,
+      "type": type,
+      "type_string": typeString,
+    };
+  }
 }

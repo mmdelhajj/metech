@@ -14,13 +14,14 @@ class BlogListScreen extends StatefulWidget {
 
   @override
   State<BlogListScreen> createState() => _BlogListScreenState();
-
 }
 
 class _BlogListScreenState extends State<BlogListScreen> {
   @override
   void initState() {
-WidgetsBinding.instance.addPostFrameCallback((_)=>Provider.of<BlogProvider>(context,listen: false).fetchBlogs());
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => Provider.of<BlogProvider>(context, listen: false).fetchBlogs(),
+    );
     super.initState();
   }
 
@@ -139,7 +140,6 @@ WidgetsBinding.instance.addPostFrameCallback((_)=>Provider.of<BlogProvider>(cont
     return Consumer<BlogProvider>(
       builder: (context, blogProvider, child) {
         if (blogProvider.isInitialLoading) {
-
           return MasonryGridView.count(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             crossAxisCount: 2,
@@ -147,7 +147,9 @@ WidgetsBinding.instance.addPostFrameCallback((_)=>Provider.of<BlogProvider>(cont
             mainAxisSpacing: 10,
             itemCount: 10,
             itemBuilder: (context, index) {
-              double height = index % 3 == 0 ? 280 : (index % 3 == 1 ? 320 : 260);
+              double height = index % 3 == 0
+                  ? 280
+                  : (index % 3 == 1 ? 320 : 260);
               return ClipRRect(
                 borderRadius: BorderRadius.circular(16.0),
                 child: ShimmerHelper().buildBasicShimmer(
@@ -159,33 +161,32 @@ WidgetsBinding.instance.addPostFrameCallback((_)=>Provider.of<BlogProvider>(cont
           );
         }
 
-
         if (blogProvider.blogs.isEmpty) {
           return RefreshIndicator(
-            onRefresh: ()async{
+            onRefresh: () async {
               await blogProvider.fetchBlogs();
             },
             child: ListView(
               physics: const AlwaysScrollableScrollPhysics(),
-              children:[
+              children: [
                 SizedBox(height: MediaQuery.of(context).size.height * 0.4),
                 Center(
-                child: Text(
-                  "No blogs found",
-                  style: TextStyle(color: Colors.white, fontSize: 16),
+                  child: Text(
+                    "No blogs found",
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  ),
                 ),
-              )],
+              ],
             ),
           );
         }
 
-
         return RefreshIndicator(
-          onRefresh: ()async{
+          onRefresh: () async {
             await blogProvider.fetchBlogs();
           },
           child: MasonryGridView.count(
-            physics:const AlwaysScrollableScrollPhysics(),
+            physics: const AlwaysScrollableScrollPhysics(),
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             crossAxisCount: 2,
             itemCount: blogProvider.blogs.length,
@@ -197,9 +198,8 @@ WidgetsBinding.instance.addPostFrameCallback((_)=>Provider.of<BlogProvider>(cont
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => BlogDetailsScreen(
-                        blog: blogProvider.blogs[index],
-                      ),
+                      builder: (context) =>
+                          BlogDetailsScreen(blog: blogProvider.blogs[index]),
                     ),
                   );
                 },
@@ -222,8 +222,8 @@ WidgetsBinding.instance.addPostFrameCallback((_)=>Provider.of<BlogProvider>(cont
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter,
                                 colors: [
-                                  Colors.white.withOpacity(0.5),
-                                  Colors.black.withOpacity(0.5),
+                                  Colors.white.withValues(alpha: 0.5),
+                                  Colors.black.withValues(alpha: 0.5),
                                 ],
                               ),
                             ),

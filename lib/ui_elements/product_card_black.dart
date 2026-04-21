@@ -84,7 +84,7 @@ class _ProductCardBlackState extends State<ProductCardBlack> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.fromLTRB(16.w, 5.h, 16.w, 0),
+                      padding: EdgeInsets.fromLTRB(0.w, 5.h, 16.w, 0),
                       child: Text(
                         widget.name ?? 'No Name',
                         overflow: TextOverflow.ellipsis,
@@ -94,7 +94,7 @@ class _ProductCardBlackState extends State<ProductCardBlack> {
                     ),
                     if (widget.hasDiscount)
                       Padding(
-                        padding: EdgeInsets.fromLTRB(16.w, 5.h, 16.w, 0),
+                        padding: EdgeInsets.fromLTRB(0.w, 5.h, 16.w, 0),
                         child: Text(
                           SystemConfig.systemCurrency != null
                               ? widget.strokedPrice?.replaceAll(
@@ -117,7 +117,7 @@ class _ProductCardBlackState extends State<ProductCardBlack> {
                     else
                       SizedBox(height: 3.0.h),
                     Padding(
-                      padding: EdgeInsets.fromLTRB(16.w, 0, 16.w, 0.h),
+                      padding: EdgeInsets.fromLTRB(0.w, 0, 16.w, 0.h),
                       child: Text(
                         SystemConfig.systemCurrency != null
                             ? widget.mainPrice?.replaceAll(
@@ -173,12 +173,13 @@ class _ProductCardBlackState extends State<ProductCardBlack> {
               ),
             ],
           ),
+
           Positioned.fill(
             child: Align(
-              alignment: Alignment.topRight,
+              alignment: Alignment.topLeft,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   if (widget.hasDiscount)
                     Container(
@@ -186,7 +187,7 @@ class _ProductCardBlackState extends State<ProductCardBlack> {
                       width: 48.w,
                       margin: EdgeInsets.only(
                         top: 8.h,
-                        right: 8.w,
+                        left: 8.w,
                         bottom: 15.h,
                       ),
                       decoration: BoxDecoration(
@@ -195,7 +196,7 @@ class _ProductCardBlackState extends State<ProductCardBlack> {
                         boxShadow: [
                           BoxShadow(
                             color: const Color(0x14000000),
-                            offset: Offset(-1, 1),
+                            offset: Offset(1, 1), // optional (mirror feel)
                             blurRadius: 1.r,
                           ),
                         ],
@@ -218,16 +219,17 @@ class _ProductCardBlackState extends State<ProductCardBlack> {
                         horizontal: 12.w,
                         vertical: 4.h,
                       ),
+                      margin: EdgeInsets.only(left: 8.w),
                       decoration: BoxDecoration(
                         color: Colors.blueGrey,
                         borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(6.r),
-                          bottomLeft: Radius.circular(6.r),
+                          topLeft: Radius.circular(6.r),
+                          bottomRight: Radius.circular(6.r),
                         ),
                         boxShadow: [
                           BoxShadow(
                             color: const Color(0x14000000),
-                            offset: Offset(-1, 1),
+                            offset: Offset(1, 1),
                             blurRadius: 1.r,
                           ),
                         ],

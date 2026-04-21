@@ -84,7 +84,7 @@ class _LoginState extends State<Login> {
     }
 
     final WebViewController controller =
-    WebViewController.fromPlatformCreationParams(params);
+        WebViewController.fromPlatformCreationParams(params);
 
     controller
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
@@ -108,17 +108,15 @@ class _LoginState extends State<Login> {
             log('WebView loaded: $url');
           },
           onWebResourceError: (error) {
-            ToastComponent.showDialog(
-              "Verification failed,please try again",
-            );
+            ToastComponent.showDialog("Verification failed,please try again");
           },
           onNavigationRequest: (request) {
-            if (request.url == _recaptchaUrl) {
+            if (request.url.contains("google.com") ||
+                request.url.contains("gstatic.com") ||
+                request.url.startsWith(_recaptchaUrl)) {
               return NavigationDecision.navigate;
-            } else {
-              _launchUrl(request.url);
-              return NavigationDecision.prevent;
             }
+            return NavigationDecision.prevent;
           },
         ),
       )
@@ -131,14 +129,6 @@ class _LoginState extends State<Login> {
     }
 
     _controller = controller;
-  }
-
-
-  Future<void> _launchUrl(String url) async {
-    final Uri uri = Uri.parse(url);
-    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
-      log('Could not launch $url');
-    }
   }
 
   fetchCountry() async {

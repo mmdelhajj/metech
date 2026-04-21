@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:active_ecommerce_cms_demo_app/custom/dash_divider.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/address_repository.dart';
@@ -12,7 +14,19 @@ import 'package:active_ecommerce_cms_demo_app/screens/address.dart'
     as address_ui;
 
 class CheckoutPage extends StatefulWidget {
-  const CheckoutPage({super.key});
+  final int? orderId;
+  final dynamic packageId;
+  final double? rechargeAmount;
+  final String paymentType;
+
+  const CheckoutPage({
+    super.key,
+    this.orderId = 0,
+    this.packageId = "0",
+    this.rechargeAmount = 0.0,
+    this.paymentType = "cart_payment",
+  });
+
   @override
   State<CheckoutPage> createState() => _CheckoutPageState();
 }
@@ -128,7 +142,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: .05),
             spreadRadius: 0,
             blurRadius: 5,
             offset: const Offset(0, 2),
@@ -407,7 +421,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             spreadRadius: 0,
             blurRadius: 5,
             offset: const Offset(0, 2),
@@ -452,6 +466,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
               if (stepIndex == 2) {
                 // PAYMENT STEP
                 if (isGuest) {
+                  // ignore: use_build_context_synchronously
                   bool success = await provider.submitGuestAddress(context);
                   if (!success) return;
                 } else {
@@ -730,15 +745,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
               : provider.guestNameController,
           onChanged: (val) {
             if (isBilling) {
-              if (provider.billingNameErrorText != null) {
-                provider.billingNameErrorText = null;
-                provider.notifyListeners();
-              }
+              provider.clearError("billing_name");
             } else {
-              if (provider.nameErrorText != null) {
-                provider.nameErrorText = null;
-                provider.notifyListeners();
-              }
+              provider.clearError("name");
             }
           },
           decoration: guestInputDecoration(
@@ -755,10 +764,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
             focusNode: provider.guestEmailFocusNode,
             keyboardType: TextInputType.emailAddress,
             onChanged: (val) {
-              if (provider.emailErrorText != null) {
-                provider.emailErrorText = null;
-                provider.notifyListeners();
-              }
+              provider.clearError("email");
             },
             decoration: guestInputDecoration(
               "Email *",
@@ -773,15 +779,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
               : provider.guestAddressController,
           onChanged: (val) {
             if (isBilling) {
-              if (provider.billingAddressErrorText != null) {
-                provider.billingAddressErrorText = null;
-                provider.notifyListeners();
-              }
+              provider.clearError("billing_address");
             } else {
-              if (provider.addressErrorText != null) {
-                provider.addressErrorText = null;
-                provider.notifyListeners();
-              }
+              provider.clearError("address");
             }
           },
           decoration: guestInputDecoration(
@@ -955,15 +955,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
           keyboardType: TextInputType.phone,
           onChanged: (val) {
             if (isBilling) {
-              if (provider.billingPhoneErrorText != null) {
-                provider.billingPhoneErrorText = null;
-                provider.notifyListeners();
-              }
+              provider.clearError("billing_phone");
             } else {
-              if (provider.phoneErrorText != null) {
-                provider.phoneErrorText = null;
-                provider.notifyListeners();
-              }
+              provider.clearError("phone");
             }
           },
           decoration: guestInputDecoration(
@@ -1369,7 +1363,14 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   ToastComponent.showDialog("Please select a payment method");
                   return;
                 }
-                provider.confirmOrder(context);
+                // provider.confirmOrder(context);
+                provider.confirmOrder(
+                  context,
+                  orderId: widget.orderId ?? 0,
+                  packageId: widget.packageId ?? "0",
+                  paymentType: widget.paymentType,
+                  rechargeAmount: widget.rechargeAmount,
+                );
               }
             },
             child: Container(
@@ -1670,6 +1671,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                             postalCode: postalCodeController.text,
                             phone: phoneController.text,
                           );
+                      if (!context.mounted) return;
                       Navigator.pop(context);
                       if (response.result == true) {
                         Navigator.pop(context);

@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'dart:async';
 import 'dart:convert';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
@@ -178,39 +180,6 @@ class _MapPlacePickerNoHeaderState extends State<MapPlacePickerNoHeader> {
           ? const Center(child: CircularProgressIndicator())
           : Column(
               children: [
-                // 🔎 SEARCH
-                // Padding(
-                //   padding: const EdgeInsets.all(10),
-                //   child: TypeAheadField(
-                //     controller: _searchController,
-                //     suggestionsCallback: searchAutocomplete,
-                //     builder: (context, controller, focusNode) {
-                //       return TextField(
-                //         controller: controller,
-                //         focusNode: focusNode,
-                //         decoration: const InputDecoration(
-                //           prefixIcon: Icon(Icons.search),
-                //           hintText: "Search location",
-                //           border: OutlineInputBorder(),
-                //         ),
-                //       );
-                //     },
-                //     itemBuilder: (context, suggestion) {
-                //       return ListTile(title: Text(suggestion["description"]));
-                //     },
-                //     onSelected: (suggestion) async {
-                //       final latLng = await getLatLng(suggestion["place_id"]);
-                //       if (latLng != null) {
-                //         setState(() {
-                //           _pickedLatLng = latLng;
-                //           _showAddButton = true;
-                //         });
-                //         moveCamera(latLng);
-                //       }
-                //     },
-                //   ),
-                // ),
-
                 // 🗺 MAP
                 Expanded(
                   child: GoogleMap(

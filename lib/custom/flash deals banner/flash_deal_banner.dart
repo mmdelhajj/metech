@@ -296,7 +296,7 @@ class _FlashDealBannerState extends State<FlashDealBanner> {
         if (hasDiscount)
           Positioned(
             top: 10.h,
-            right: 5.w,
+            left: 5.w,
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
               decoration: BoxDecoration(

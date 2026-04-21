@@ -7,9 +7,9 @@ import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/cart_counter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/auth/login.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/category_list_n_product/category_list.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/auction/auction_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/checkout/cart.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/auction/auction_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/profile.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
@@ -25,14 +25,12 @@ class Main extends StatefulWidget {
   State<Main> createState() => _MainState();
 }
 
-
 class _MainState extends State<Main> with WidgetsBindingObserver {
   int _currentIndex = 0;
   late final List<Widget> _children;
   final CartCounter counter = CartCounter();
 
-
-  Key _popScopeKey = UniqueKey();
+  bool _isDialogOpen = false;
 
   @override
   void initState() {
@@ -58,19 +56,8 @@ class _MainState extends State<Main> with WidgetsBindingObserver {
 
   @override
   void dispose() {
-
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
-  }
-
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed) {
-      setState(() {
-        _popScopeKey = UniqueKey();
-      });
-    }
   }
 
   void _fetchAll() {
@@ -95,184 +82,181 @@ class _MainState extends State<Main> with WidgetsBindingObserver {
     });
   }
 
-  void _onPopInvoked(bool didPop) async {
-    if (didPop) return;
-
-    if (_currentIndex != 0) {
-      setState(() {
-        _currentIndex = 0;
-      });
-      return;
-    }
-
-    final shouldExit = await showDialog<bool>(
-      context: context,
-      barrierDismissible: false,
-      builder: (dialogContext) => AlertDialog(
-        content: Text(
-          AppLocalizations.of(context)!.do_you_want_close_the_app,
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(dialogContext, false);
-            },
-            child: Text(AppLocalizations.of(context)!.no_ucf),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(dialogContext, true);
-            },
-            child: Text(AppLocalizations.of(context)!.yes_ucf),
-          ),
-        ],
-      ),
-    ) ?? false;
-
-    if (shouldExit) {
-      if (Platform.isAndroid) {
-        SystemNavigator.pop();
-      } else {
-        exit(0);
-      }
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Directionality(
-      textDirection:
-      app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
-      child: Scaffold(
-        extendBody: true,
+      textDirection: app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
 
-        body: Stack(
-          children: [
+      child: PopScope(
+        canPop: false,
+        onPopInvoked: (bool didPop) async {
+          if (didPop) return;
 
-            _children[_currentIndex],
+          if (_currentIndex != 0) {
+            setState(() {
+              _currentIndex = 0;
+            });
+            return;
+          }
 
+          if (_isDialogOpen) return;
 
-            PopScope(
-              key: _popScopeKey,
-              canPop: false,
-              onPopInvoked: _onPopInvoked,
-              child: const SizedBox.shrink(),
+          _isDialogOpen = true;
+
+          bool shouldExit = await showDialog<bool>(
+            context: context,
+            barrierDismissible: false,
+            builder: (dialogContext) => AlertDialog(
+              content: Text(
+                AppLocalizations.of(context)!.do_you_want_close_the_app,
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(dialogContext, false);
+                  },
+                  child: Text(AppLocalizations.of(context)!.no_ucf),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(dialogContext, true);
+                  },
+                  child: Text(AppLocalizations.of(context)!.yes_ucf),
+                ),
+              ],
             ),
-          ],
-        ),
-        bottomNavigationBar: Container(
-          color: Colors.white.withValues(alpha: 0.95),
-          child: SafeArea(
-            child: SizedBox(
-              height: 70.h,
-              child: BottomNavigationBar(
-                type: BottomNavigationBarType.fixed,
-                currentIndex: _currentIndex,
-                onTap: _onTapped,
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                unselectedItemColor:
-                const Color.fromRGBO(168, 175, 179, 1),
-                selectedItemColor: MyTheme.accent_color,
-                selectedLabelStyle: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  color: MyTheme.accent_color,
-                  fontSize: 12.sp,
-                ),
-                unselectedLabelStyle: TextStyle(
-                  fontWeight: FontWeight.w400,
-                  color: const Color.fromRGBO(168, 175, 179, 1),
-                  fontSize: 12.sp,
-                ),
-                items: [
-                  BottomNavigationBarItem(
-                    icon: Padding(
-                      padding: EdgeInsets.only(bottom: 8.h),
-                      child: Image.asset(
-                        "assets/home.png",
-                        height: 16.h,
-                        color: _currentIndex == 0
-                            ? MyTheme.accent_color
-                            : const Color.fromRGBO(153, 153, 153, 1),
-                      ),
-                    ),
-                    label: AppLocalizations.of(context)!.home_ucf,
+          ) ?? false;
+
+          _isDialogOpen = false;
+
+          if (shouldExit) {
+            if (Platform.isAndroid) {
+              SystemNavigator.pop();
+            } else {
+              exit(0);
+            }
+          }
+        },
+        child: Scaffold(
+          extendBody: true,
+          body: Stack(
+            children: [
+              _children[_currentIndex],
+            ],
+          ),
+          bottomNavigationBar: Container(
+            color: Colors.white.withValues(alpha: 0.95),
+            child: SafeArea(
+              child: SizedBox(
+                height: 70.h,
+                child: BottomNavigationBar(
+                  type: BottomNavigationBarType.fixed,
+                  currentIndex: _currentIndex,
+                  onTap: _onTapped,
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  unselectedItemColor: const Color.fromRGBO(168, 175, 179, 1),
+                  selectedItemColor: MyTheme.accent_color,
+                  selectedLabelStyle: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    color: MyTheme.accent_color,
+                    fontSize: 12.sp,
                   ),
-                  BottomNavigationBarItem(
-                    icon: Padding(
-                      padding: EdgeInsets.only(bottom: 8.h),
-                      child: Image.asset(
-                        "assets/auction.png",
-                        height: 16.h,
-                        color: _currentIndex == 1
-                            ? MyTheme.accent_color
-                            : const Color.fromRGBO(153, 153, 153, 1),
-                      ),
-                    ),
-                    label: "Auction",
+                  unselectedLabelStyle: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    color: const Color.fromRGBO(168, 175, 179, 1),
+                    fontSize: 12.sp,
                   ),
-                  BottomNavigationBarItem(
-                    icon: Padding(
-                      padding: EdgeInsets.only(bottom: 8.h),
-                      child: Image.asset(
-                        "assets/categories.png",
-                        height: 16.h,
-                        color: _currentIndex == 2
-                            ? MyTheme.accent_color
-                            : const Color.fromRGBO(153, 153, 153, 1),
-                      ),
-                    ),
-                    label: AppLocalizations.of(context)!.categories_ucf,
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Padding(
-                      padding: EdgeInsets.only(bottom: 8.h),
-                      child: badges.Badge(
-                        badgeStyle: badges.BadgeStyle(
-                          shape: badges.BadgeShape.circle,
-                          badgeColor: MyTheme.accent_color,
-                          borderRadius: BorderRadius.circular(10.r),
-                          padding: EdgeInsets.all(5.r),
-                        ),
-                        badgeAnimation:
-                        const badges.BadgeAnimation.slide(
-                            toAnimate: false),
-                        badgeContent: Consumer<CartCounter>(
-                          builder: (context, cart, child) {
-                            return Text(
-                              "${cart.cartCounter}",
-                              style: TextStyle(
-                                fontSize: 10.sp,
-                                color: Colors.white,
-                              ),
-                            );
-                          },
-                        ),
+                  items: [
+                    BottomNavigationBarItem(
+                      icon: Padding(
+                        padding: EdgeInsets.only(bottom: 8.h),
                         child: Image.asset(
-                          "assets/cart.png",
+                          "assets/home.png",
                           height: 16.h,
-                          color: _currentIndex == 3
+                          color: _currentIndex == 0
                               ? MyTheme.accent_color
                               : const Color.fromRGBO(153, 153, 153, 1),
                         ),
                       ),
+                      label: AppLocalizations.of(context)!.home_ucf,
                     ),
-                    label: AppLocalizations.of(context)!.cart_ucf,
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Padding(
-                      padding: EdgeInsets.only(bottom: 8.h),
-                      child: Image.asset(
-                        "assets/profile.png",
-                        height: 16.h,
-                        color: _currentIndex == 4
-                            ? MyTheme.accent_color
-                            : const Color.fromRGBO(153, 153, 153, 1),
+                    BottomNavigationBarItem(
+                      icon: Padding(
+                        padding: EdgeInsets.only(bottom: 8.h),
+                        child: Image.asset(
+                          "assets/auction.png",
+                          height: 16.h,
+                          color: _currentIndex == 1
+                              ? MyTheme.accent_color
+                              : const Color.fromRGBO(153, 153, 153, 1),
+                        ),
                       ),
+                      label: "Auction",
                     ),
-                    label: AppLocalizations.of(context)!.profile_ucf,
-                  ),
-                ],
+                    BottomNavigationBarItem(
+                      icon: Padding(
+                        padding: EdgeInsets.only(bottom: 8.h),
+                        child: Image.asset(
+                          "assets/categories.png",
+                          height: 16.h,
+                          color: _currentIndex == 2
+                              ? MyTheme.accent_color
+                              : const Color.fromRGBO(153, 153, 153, 1),
+                        ),
+                      ),
+                      label: AppLocalizations.of(context)!.categories_ucf,
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Padding(
+                        padding: EdgeInsets.only(bottom: 8.h),
+                        child: badges.Badge(
+                          badgeStyle: badges.BadgeStyle(
+                            shape: badges.BadgeShape.circle,
+                            badgeColor: MyTheme.accent_color,
+                            borderRadius: BorderRadius.circular(10.r),
+                            padding: EdgeInsets.all(5.r),
+                          ),
+                          badgeAnimation: const badges.BadgeAnimation.slide(
+                            toAnimate: false,
+                          ),
+                          badgeContent: Consumer<CartCounter>(
+                            builder: (context, cart, child) {
+                              return Text(
+                                "${cart.cartCounter}",
+                                style: TextStyle(
+                                  fontSize: 10.sp,
+                                  color: Colors.white,
+                                ),
+                              );
+                            },
+                          ),
+                          child: Image.asset(
+                            "assets/cart.png",
+                            height: 16.h,
+                            color: _currentIndex == 3
+                                ? MyTheme.accent_color
+                                : const Color.fromRGBO(153, 153, 153, 1),
+                          ),
+                        ),
+                      ),
+                      label: AppLocalizations.of(context)!.cart_ucf,
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Padding(
+                        padding: EdgeInsets.only(bottom: 8.h),
+                        child: Image.asset(
+                          "assets/profile.png",
+                          height: 16.h,
+                          color: _currentIndex == 4
+                              ? MyTheme.accent_color
+                              : const Color.fromRGBO(153, 153, 153, 1),
+                        ),
+                      ),
+                      label: AppLocalizations.of(context)!.profile_ucf,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

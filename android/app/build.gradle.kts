@@ -10,7 +10,7 @@ plugins {
 }
 
 android {
-    namespace = "com.metech.store"
+    namespace = "com.example.active_ecommerce_cms_demo_app"
     compileSdk = 36
     ndkVersion = "28.0.13004108"
 
@@ -26,7 +26,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.metech.store"
+        applicationId = "com.activeitzone.activeecommercecmsdemoapp"
         minSdk = flutter.minSdkVersion
         targetSdk = 36
         versionCode = flutter.versionCode

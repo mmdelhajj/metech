@@ -19,6 +19,7 @@ import 'package:active_ecommerce_cms_demo_app/screens/classified_ads/my_classifi
 import 'package:active_ecommerce_cms_demo_app/screens/coupon/coupons.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/digital_product/digital_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/filter.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/privacy_policy_screen.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/product/last_view_product.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/product/top_selling_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/refund_request.dart';
@@ -391,20 +392,20 @@ class _ProfileState extends State<Profile> {
 
           Divider(thickness: 1, color: MyTheme.light_grey),
           if (is_logged_in.$)
-          buildBottomVerticalCardListItem(
-            "assets/coupon.png",
-            LangText(context).local.coupons_ucf,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return Coupons();
-                  },
-                ),
-              );
-            },
-          ),
+            buildBottomVerticalCardListItem(
+              "assets/coupon.png",
+              LangText(context).local.coupons_ucf,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return Coupons();
+                    },
+                  ),
+                );
+              },
+            ),
 
           if (classified_product_status.$)
             Column(
@@ -659,6 +660,39 @@ class _ProfileState extends State<Profile> {
                 Divider(thickness: 1, color: MyTheme.light_grey),
               ],
             ),
+
+          buildBottomVerticalCardListItem(
+            "assets/privacy.png",
+            "Privacy Policy",
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CommonPolicyPage(
+                    title: "Privacy Policy",
+                    slug: "privacy-policy",
+                  ),
+                ),
+              );
+            },
+          ),
+          Divider(thickness: 1, color: MyTheme.light_grey),
+          buildBottomVerticalCardListItem(
+            "assets/terms.png",
+            "Terms And Conditions",
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CommonPolicyPage(
+                    title: "Terms And Conditions",
+                    slug: "terms",
+                  ),
+                ),
+              );
+            },
+          ),
+          Divider(thickness: 1, color: MyTheme.light_grey),
         ],
       ),
     );

@@ -5,11 +5,11 @@ import 'dart:async';
 import 'package:active_ecommerce_cms_demo_app/l10n/app_localizations.dart';
 import 'package:active_ecommerce_cms_demo_app/middlewares/auth_middleware.dart';
 import 'package:active_ecommerce_cms_demo_app/providers/checkout_provider.dart';
+import 'package:active_ecommerce_cms_demo_app/providers/page_provider.dart';
 import 'package:active_ecommerce_cms_demo_app/providers/todays_deal_provider.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/auth/login.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/filter.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
@@ -62,7 +62,7 @@ import 'single_banner/photo_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp();
   await StoreBox.init();
   await FlutterDownloader.initialize(debug: true, ignoreSsl: true);
   SystemChrome.setPreferredOrientations([
@@ -262,7 +262,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     Future.microtask(() async {
-      if (Firebase.apps.isEmpty) { await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform); }
+      await Firebase.initializeApp();
       if (OtherConfig.USE_PUSH_NOTIFICATION) {
         PushNotificationService().initialise();
       }
@@ -283,10 +283,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (_) => PhotoProvider()),
         ChangeNotifierProvider(create: (_) => TodaysDealProvider()),
         ChangeNotifierProvider(create: (_) => CheckoutProvider()),
-
-        // ChangeNotifierProvider(
-        //   create: (_) => FlashDealProvider()..fetchFlashDeals(),
-        // ),
+        ChangeNotifierProvider(create: (_) => PageProvider()),
       ],
       child: Consumer<LocaleProvider>(
         builder: (context, provider, snapshot) {

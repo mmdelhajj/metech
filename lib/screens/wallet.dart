@@ -136,14 +136,24 @@ class _WalletState extends State<Wallet> {
   Widget build(BuildContext context) {
     return PopScope(
       canPop: false,
+      // onPopInvokedWithResult: (didPop, result) {
+      //   if (widget.fromRecharge) {
+      //     Navigator.of(context).pushAndRemoveUntil(
+      //       MaterialPageRoute(builder: (_) => Main()),
+      //       (route) => false,
+      //     );
+      //   } else {
+      //     Navigator.of(context).pop();
+      //   }
+      // },
       onPopInvokedWithResult: (didPop, result) {
+        if (didPop) return;
+
         if (widget.fromRecharge) {
           Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (_) => Main()),
             (route) => false,
           );
-        } else {
-          Navigator.of(context).pop();
         }
       },
       child: Directionality(
@@ -222,7 +232,9 @@ class _WalletState extends State<Wallet> {
                 ),
               );
             } else {
-              return Navigator.of(context).pop();
+              if (Navigator.canPop(context)) {
+                Navigator.of(context).pop();
+              }
             }
           },
         ),

@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:active_ecommerce_cms_demo_app/app_config.dart';
+import 'package:active_ecommerce_cms_demo_app/custom/aiz_route.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/input_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/intl_phone_input.dart';
@@ -9,8 +10,8 @@ import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/other_config.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/auth_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/profile_repository.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/common_webview_screen.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/privacy_policy_screen.dart';
 import 'package:active_ecommerce_cms_demo_app/ui_elements/auth_ui.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/gestures.dart';
@@ -613,14 +614,11 @@ WebView Page resource error:
                               TextSpan(
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
-                                    Navigator.push(
+                                    AIZRoute.push(
                                       context,
-                                      MaterialPageRoute(
-                                        builder: (context) => CommonWebviewScreen(
-                                          pageName: "Terms Conditions",
-                                          url:
-                                              "${AppConfig.RAW_BASE_URL}/mobile-page/terms",
-                                        ),
+                                      CommonPolicyPage(
+                                        title: "Terms And Conditions",
+                                        slug: "terms",
                                       ),
                                     );
                                   },
@@ -631,14 +629,11 @@ WebView Page resource error:
                               TextSpan(
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
-                                    Navigator.push(
+                                    AIZRoute.push(
                                       context,
-                                      MaterialPageRoute(
-                                        builder: (context) => CommonWebviewScreen(
-                                          pageName: "Privacy Policy",
-                                          url:
-                                              "${AppConfig.RAW_BASE_URL}/mobile-page/privacy-policy",
-                                        ),
+                                      CommonPolicyPage(
+                                        title: "Privacy Policy",
+                                        slug: "privacy-policy",
                                       ),
                                     );
                                   },

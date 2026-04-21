@@ -79,6 +79,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         child: SafeArea(
           child: Scaffold(
             backgroundColor: Colors.white,
+
+            floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+
             body: Stack(
               children: [
                 RefreshIndicator(

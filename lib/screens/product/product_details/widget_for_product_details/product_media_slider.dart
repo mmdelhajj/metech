@@ -1,9 +1,7 @@
 import 'package:active_ecommerce_cms_demo_app/screens/product/product_details/widget_for_product_details/product_gallery_viewer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../helpers/shimmer_helper.dart';
 import '../../../../my_theme.dart';
 import 'product_media.dart';
@@ -27,7 +25,6 @@ class ProductMediaSlider extends StatefulWidget {
 
 class _ProductMediaSliderState extends State<ProductMediaSlider> {
   int _currentImage = 0;
-
 
   @override
   Widget build(BuildContext context) {
@@ -62,10 +59,11 @@ class _ProductMediaSliderState extends State<ProductMediaSlider> {
                   if (mediaItem.type == 'image') {
                     child = InkWell(
                       onTap: () {
-                        openProductGallery(context, _currentImage, widget.price,
+                        openProductGallery(
+                          context,
+                          _currentImage,
+                          widget.price,
                           widget.onPurchase,
-
-
                         );
                       },
                       child: SizedBox(
@@ -113,7 +111,7 @@ class _ProductMediaSliderState extends State<ProductMediaSlider> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: List.generate(
                             widget.mediaList.length,
-                                (index) => Container(
+                            (index) => Container(
                               width: 8.0.w,
                               height: 8.0.h,
                               margin: EdgeInsets.symmetric(
@@ -188,7 +186,12 @@ class _ProductMediaSliderState extends State<ProductMediaSlider> {
     );
   }
 
-  void openProductGallery(BuildContext context, int initialIndex,price,onPurchase) {
+  void openProductGallery(
+    BuildContext context,
+    int initialIndex,
+    price,
+    onPurchase,
+  ) {
     final images = widget.mediaList
         .where((e) => e.type == 'image')
         .map((e) => e.url)
@@ -206,8 +209,4 @@ class _ProductMediaSliderState extends State<ProductMediaSlider> {
       ),
     );
   }
-
-
-
 }
-

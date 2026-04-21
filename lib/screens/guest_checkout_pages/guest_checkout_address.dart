@@ -184,21 +184,6 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
     if (guestCheckResponse.result!) {
       ToastComponent.showDialog(LangText(context).local.already_have_account);
     } else {
-      Map<String, dynamic> shippingAddress = {
-        "name": _nameController.text.trim(),
-        "email": _emailController.text.trim(),
-        "address": _addressController.text.trim(),
-        "country_id": _selectedCountry!.id.toString(),
-        "state_id": _selectedState?.id.toString() ?? "0",
-        "city_id": _selectedCity!.id.toString(),
-        "area_id": _selectedArea?.id.toString(),
-        "postal_code": _postalCodeController.text.trim(),
-        "phone": _fullPhoneNumber,
-        "longitude": '',
-        "latitude": '',
-        "temp_user_id": temp_user_id.$,
-      };
-
       guestEmail.$ = _emailController.text.trim();
       guestEmail.save();
 

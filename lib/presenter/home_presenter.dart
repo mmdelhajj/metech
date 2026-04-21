@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:async';
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/data_model/flash_deal_response.dart'
@@ -10,7 +12,6 @@ import 'package:active_ecommerce_cms_demo_app/repositories/flash_deal_repository
 import 'package:active_ecommerce_cms_demo_app/repositories/product_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/sliders_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/single_banner/model.dart';
-import 'package:flutter/foundation.dart' hide Category;
 import 'package:flutter/material.dart';
 
 class HomePresenter extends ChangeNotifier {

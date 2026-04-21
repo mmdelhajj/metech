@@ -716,7 +716,7 @@ class _FilterState extends State<Filter> {
                       "${AppLocalizations.of(context)!.searched_for_all_lower} ${suggestion.count} ${AppLocalizations.of(context)!.times_all_lower}";
                   if (suggestion.type != "search") {
                     subtitle =
-                        "${suggestion.type_string} ${AppLocalizations.of(context)!.found_all_lower}";
+                        "${suggestion.typeString} ${AppLocalizations.of(context)!.found_all_lower}";
                   }
                   return ListTile(
                     tileColor: Colors.white,

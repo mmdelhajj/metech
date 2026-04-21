@@ -14,7 +14,6 @@ import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/address_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/guest_checkout_repository.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/checkout/shipping_info.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:active_ecommerce_cms_demo_app/l10n/app_localizations.dart';
@@ -277,10 +276,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
       guestEmail.$ = email!;
       guestEmail.save();
 
-      AIZRoute.push(
-        context,
-        const CheckoutPage(),
-      );
+      AIZRoute.push(context, const CheckoutPage());
     }
   }
 

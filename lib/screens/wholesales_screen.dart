@@ -63,7 +63,6 @@ class _WholesalesScreenState extends State<WholesalesScreen> {
 
   Widget buildProductList(context) {
     return FutureBuilder<WholesaleProductModel>(
-      // future: ApiService().fetchWholesaleProducts(),
       future: ProductRepository().getWholesaleProducts(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -199,9 +198,11 @@ class _WholeSalesProductCardState extends State<WholeSalesProductCard> {
                         ),
                       ),
                     ),
+
                     if (whole_sale_addon_installed.$ && widget.isWholesale!)
                       Positioned(
-                        bottom: 0,
+                        top: 8,
+                        left: 8,
                         child: Container(
                           padding: EdgeInsets.symmetric(
                             horizontal: 12,
@@ -210,13 +211,13 @@ class _WholeSalesProductCardState extends State<WholeSalesProductCard> {
                           decoration: BoxDecoration(
                             color: Colors.blueGrey,
                             borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(6),
-                              bottomLeft: Radius.circular(6),
+                              topLeft: Radius.circular(6),
+                              bottomRight: Radius.circular(6),
                             ),
                             boxShadow: [
                               BoxShadow(
                                 color: const Color(0x14000000),
-                                offset: Offset(-1, 1),
+                                offset: Offset(1, 1),
                                 blurRadius: 1,
                               ),
                             ],
@@ -263,13 +264,8 @@ class _WholeSalesProductCardState extends State<WholeSalesProductCard> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(16, 8, 16, 0),
                         child: Text(
-                          SystemConfig.systemCurrency != null
-                              ? widget.mainPrice?.replaceAll(
-                                      SystemConfig.systemCurrency!.code!,
-                                      SystemConfig.systemCurrency!.symbol!,
-                                    ) ??
-                                    ''
-                              : widget.mainPrice ?? '',
+                          formatPrice(widget.mainPrice),
+
                           textAlign: TextAlign.left,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
@@ -286,13 +282,7 @@ class _WholeSalesProductCardState extends State<WholeSalesProductCard> {
                     Padding(
                       padding: EdgeInsets.fromLTRB(16, 0, 16, 16),
                       child: Text(
-                        SystemConfig.systemCurrency != null
-                            ? widget.strokedPrice?.replaceAll(
-                                    SystemConfig.systemCurrency!.code!,
-                                    SystemConfig.systemCurrency!.symbol!,
-                                  ) ??
-                                  ''
-                            : widget.strokedPrice ?? '',
+                          formatPrice(widget.strokedPrice),
                         textAlign: TextAlign.left,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
@@ -306,16 +296,16 @@ class _WholeSalesProductCardState extends State<WholeSalesProductCard> {
           ),
           Positioned.fill(
             child: Align(
-              alignment: Alignment.topRight,
+              alignment: Alignment.topLeft,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   if (widget.hasDiscount)
                     Container(
                       height: 20,
                       width: 48,
-                      margin: EdgeInsets.only(top: 8, right: 8, bottom: 15),
+                      margin: EdgeInsets.only(top: 8, left: 8, bottom: 15),
                       decoration: BoxDecoration(
                         color: MyTheme.accent_color,
                         borderRadius: BorderRadius.circular(10),
@@ -329,7 +319,7 @@ class _WholeSalesProductCardState extends State<WholeSalesProductCard> {
                       ),
                       child: Center(
                         child: Text(
-                          widget.discount ?? '',
+                          formatPrice(widget.mainPrice),
                           style: TextStyle(
                             fontSize: 10,
                             color: Colors.white,
@@ -350,5 +340,9 @@ class _WholeSalesProductCardState extends State<WholeSalesProductCard> {
         ],
       ),
     );
+  }
+  String formatPrice(String? price) {
+    final symbol = SystemConfig.systemCurrency?.symbol ?? '';
+    return "$symbol ${price ?? ''}";
   }
 }

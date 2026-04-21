@@ -34,6 +34,7 @@ class Address extends StatefulWidget {
 class _AddressState extends State<Address> {
   final ScrollController _mainScrollController = ScrollController();
   bool _showStateField = true;
+  // ignore: unused_field
   int? _defaultShippingAddress = 0;
   City? _selectedCity;
   Country? _selectedCountry;
@@ -2414,16 +2415,17 @@ class _AddressState extends State<Address> {
   GestureDetector buildAddressItemCard(int index) {
     return GestureDetector(
       onDoubleTap: () {
-
         if (_shippingAddressList[index].setDefault != 1) {
-          _onMakeDefaultAction(_shippingAddressList[index].id, isShipping: true);
+          _onMakeDefaultAction(
+            _shippingAddressList[index].id,
+            isShipping: true,
+          );
         }
       },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 400),
         decoration: BoxDecorations.buildBoxDecoration_1().copyWith(
           border: Border.all(
-
             color: _shippingAddressList[index].setDefault == 1
                 ? MyTheme.accent_color
                 : MyTheme.light_grey,
@@ -2437,7 +2439,8 @@ class _AddressState extends State<Address> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if (_shippingAddressList[index].setDefault == 1 || _shippingAddressList[index].setBilling == 1)
+                  if (_shippingAddressList[index].setDefault == 1 ||
+                      _shippingAddressList[index].setBilling == 1)
                     Padding(
                       padding: const EdgeInsets.only(bottom: 5.0, right: 30.0),
                       child: buildDefaultBadges(index),
@@ -2486,7 +2489,7 @@ class _AddressState extends State<Address> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                //  buildDefaultBadges(index),
+                  //  buildDefaultBadges(index),
                   showOptions(listIndex: index),
                 ],
               ),
@@ -2507,7 +2510,7 @@ class _AddressState extends State<Address> {
         if (isDefaultShipping)
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-          //  margin: const EdgeInsets.only(right: 0),
+            //  margin: const EdgeInsets.only(right: 0),
             decoration: BoxDecoration(
               color: const Color(0xff1A1A1A),
               borderRadius: BorderRadius.circular(20),
@@ -2521,11 +2524,11 @@ class _AddressState extends State<Address> {
               ),
             ),
           ),
-        SizedBox(width: 5,),
+        SizedBox(width: 5),
         if (isDefaultBilling)
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
-           // margin: const EdgeInsets.only(right: 4),
+            // margin: const EdgeInsets.only(right: 4),
             decoration: BoxDecoration(
               color: const Color(0xff007BFF),
               borderRadius: BorderRadius.circular(20),
@@ -2617,7 +2620,8 @@ class _AddressState extends State<Address> {
   Widget showOptions({required int listIndex}) {
     return SizedBox(
       width: 25,
-      child: PopupMenuButton<MenuOptions>(color: Colors.white,
+      child: PopupMenuButton<MenuOptions>(
+        color: Colors.white,
         offset: const Offset(-25, 0),
         child: Padding(
           padding: EdgeInsets.zero,
@@ -2638,7 +2642,6 @@ class _AddressState extends State<Address> {
           _tabOption(result.index, listIndex);
         },
         itemBuilder: (BuildContext context) {
-
           List<PopupMenuEntry<MenuOptions>> menuItems = [
             PopupMenuItem<MenuOptions>(
               value: MenuOptions.Edit,

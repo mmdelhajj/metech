@@ -1,4 +1,17 @@
+
 import 'dart:convert';
+import 'package:active_ecommerce_cms_demo_app/screens/payment_method_screen/bkash_screen.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/payment_method_screen/flutterwave_screen.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/payment_method_screen/instamojo_screen.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/payment_method_screen/khalti_screen.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/payment_method_screen/nagad_screen.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/payment_method_screen/offline_screen.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/payment_method_screen/paypal_screen.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/payment_method_screen/paystack_screen.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/payment_method_screen/paytm_screen.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/payment_method_screen/razorpay_screen.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/payment_method_screen/sslcommerz_screen.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/payment_method_screen/stripe_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/address_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/shipping_repository.dart';
@@ -8,9 +21,18 @@ import 'package:active_ecommerce_cms_demo_app/repositories/business_setting_repo
 import 'package:active_ecommerce_cms_demo_app/repositories/coupon_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/orders/order_list.dart';
+import 'package:active_ecommerce_cms_demo_app/custom/enum_classes.dart';
 import '../helpers/shared_value_helper.dart';
 import '../repositories/guest_checkout_repository.dart';
+import '../screens/payment_method_screen/amarpay_screen.dart';
+import '../screens/payment_method_screen/cybersource_screen.dart';
+import '../screens/payment_method_screen/iyzico_screen.dart';
+import '../screens/payment_method_screen/my_fatoora_screen.dart';
+import '../screens/payment_method_screen/online_pay.dart';
+import '../screens/payment_method_screen/payfast_screen.dart';
+import '../screens/payment_method_screen/phonepay_screen.dart';
 
+// ignore: constant_identifier_names
 enum ShippingOption { HomeDelivery, PickUpPoint, Carrier }
 
 class SellerWithShipping {
@@ -36,6 +58,7 @@ class CheckoutProvider extends ChangeNotifier {
   String? nameErrorText;
   String? addressErrorText;
   String? phoneErrorText;
+  double _grandTotalValue = 0.0;
 
   // --- Guest BILLING Controllers ---
   TextEditingController guestBillingNameController = TextEditingController();
@@ -72,6 +95,7 @@ class CheckoutProvider extends ChangeNotifier {
 
   bool _isCityLoading = false;
   bool _isAreaLoading = false;
+  bool _isPlacingOrder = false;
 
   // --- Billing Dropdown states ---
   List<dynamic> _billingStateList = [];
@@ -201,6 +225,35 @@ class CheckoutProvider extends ChangeNotifier {
     billingNameErrorText = null;
     billingAddressErrorText = null;
     billingPhoneErrorText = null;
+    notifyListeners();
+  }
+
+  void clearError(String field) {
+    switch (field) {
+      case "name":
+        nameErrorText = null;
+        break;
+      case "email":
+        emailErrorText = null;
+        break;
+      case "address":
+        addressErrorText = null;
+        break;
+      case "phone":
+        phoneErrorText = null;
+        break;
+      case "billing_name":
+        billingNameErrorText = null;
+        break;
+      case "billing_address":
+        billingAddressErrorText = null;
+        break;
+
+      case "billing_phone":
+        billingPhoneErrorText = null;
+        break;
+    }
+
     notifyListeners();
   }
 
@@ -529,7 +582,7 @@ class CheckoutProvider extends ChangeNotifier {
       _sellerWiseShippingOption[sellerIndex].shippingId = 0;
     }
     notifyListeners();
-    var shipping_type_data = [
+    var shippingTypeData = [
       {
         "seller_id": _deliveryInfoList[sellerIndex].ownerId,
         "shipping_type": option == ShippingOption.PickUpPoint
@@ -539,7 +592,7 @@ class CheckoutProvider extends ChangeNotifier {
       },
     ];
     var response = await AddressRepository().getShippingCostResponse(
-      shippingType: shipping_type_data,
+      shippingType: shippingTypeData,
     );
     if (response.result == true) await fetchSummary();
   }
@@ -652,20 +705,20 @@ class CheckoutProvider extends ChangeNotifier {
         : (response.data ?? response);
 
     _sellerWiseShippingOption.clear();
-    var shipping_type_data = [];
+    var shippingTypeData = [];
     for (var element in _deliveryInfoList) {
       _sellerWiseShippingOption.add(
         SellerWithShipping(element.ownerId, ShippingOption.HomeDelivery, 0),
       );
-      shipping_type_data.add({
+      shippingTypeData.add({
         "seller_id": element.ownerId,
         "shipping_type": "home_delivery",
         "shipping_id": 0,
       });
     }
-    if (shipping_type_data.isNotEmpty) {
+    if (shippingTypeData.isNotEmpty) {
       await AddressRepository().getShippingCostResponse(
-        shippingType: shipping_type_data,
+        shippingType: shippingTypeData,
       );
       await fetchSummary();
     }
@@ -695,6 +748,7 @@ class CheckoutProvider extends ChangeNotifier {
       _gst = response.gst ?? response.tax ?? "0.00";
       _shippingCost = response.shippingCost ?? "0.00";
       _grandTotal = response.grandTotal.toString();
+      _grandTotalValue = response.grandTotalValue ?? 0.0;
       _discount = response.discount ?? "0.00";
       _couponApplied = response.couponApplied ?? false;
       _appliedCouponCode = response.couponCode ?? "";
@@ -895,20 +949,30 @@ class CheckoutProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> confirmOrder(BuildContext context) async {
-    if (_selectedPaymentMethodKey == "") {
+  Future<void> confirmOrder(
+    BuildContext context, {
+    int orderId = 0,
+    dynamic packageId = "0",
+    String paymentType = "cart_payment",
+    double? rechargeAmount,
+  }) async {
+    if (_isPlacingOrder) return;
+    _isPlacingOrder = true;
+
+    if (_selectedPaymentMethodKey == null || _selectedPaymentMethodKey == "") {
       ToastComponent.showDialog("Please select a payment method");
+      _isPlacingOrder = false;
       return;
     }
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) => const Center(child: CircularProgressIndicator()),
-    );
+
     if (guest_checkout_status.$ && !is_logged_in.$) {
-      bool success = await submitGuestAddress(context);
-      if (!success) return;
-      Map<String, dynamic> postBodyMap = {
+      bool addressSuccess = await submitGuestAddress(context);
+      if (!addressSuccess) {
+        _isPlacingOrder = false;
+        return;
+      }
+
+      Map<String, dynamic> guestData = {
         "name": guestNameController.text.trim(),
         "email": guestEmailController.text.trim(),
         "phone": guestPhoneController.text.trim(),
@@ -920,65 +984,521 @@ class CheckoutProvider extends ChangeNotifier {
         "area_id": _selectedArea != null ? "${_selectedArea.id}" : null,
         "postal_code": guestPostalCodeController.text.trim(),
       };
+
       if (_isBillingAddressRequired) {
         if (_isBillingSameAsShipping) {
-          postBodyMap["set_billing"] = "1";
+          guestData["set_billing"] = "1";
         } else {
-          postBodyMap["billing_name"] = guestBillingNameController.text.trim();
-          postBodyMap["billing_phone"] = guestBillingPhoneController.text
+          guestData["billing_name"] = guestBillingNameController.text.trim();
+          guestData["billing_phone"] = guestBillingPhoneController.text.trim();
+          guestData["billing_address"] = guestBillingAddressController.text
               .trim();
-          postBodyMap["billing_address"] = guestBillingAddressController.text
-              .trim();
-          postBodyMap["billing_country_id"] =
+          guestData["billing_country_id"] =
               "${_selectedBillingCountry?.id ?? ''}";
-          postBodyMap["billing_state_id"] = "${_selectedBillingState?.id ?? 0}";
-          postBodyMap["billing_city_id"] = "${_selectedBillingCity?.id ?? ''}";
-          postBodyMap["billing_area_id"] = _selectedBillingArea != null
-              ? "${_selectedBillingArea.id}"
-              : null;
-          postBodyMap["billing_postal_code"] = guestBillingPostalCodeController
+          guestData["billing_state_id"] = "${_selectedBillingState?.id ?? 0}";
+          guestData["billing_city_id"] = "${_selectedBillingCity?.id ?? ''}";
+          guestData["billing_postal_code"] = guestBillingPostalCodeController
               .text
               .trim();
         }
       }
-      var loginResponse = await GuestCheckoutRepository()
-          .guestUserAccountCreate(jsonEncode(postBodyMap));
-      if (loginResponse.result == true) {
+      var guestResponse = await GuestCheckoutRepository()
+          .guestUserAccountCreate(jsonEncode(guestData));
+
+      if (guestResponse.result == true) {
         is_logged_in.$ = true;
         is_logged_in.save();
-        access_token.$ = loginResponse.access_token;
+        access_token.$ = guestResponse.access_token;
         access_token.save();
-        user_id.$ = loginResponse.user.id;
+        user_id.$ = guestResponse.user.id;
         user_id.save();
       } else {
-        if (!context.mounted) return;
-        Navigator.of(context, rootNavigator: true).pop();
+        _isPlacingOrder = false;
         ToastComponent.showDialog(
-          loginResponse.message ?? "Could not create guest account",
+          guestResponse.message ?? "Guest account creation failed",
         );
         return;
       }
     }
-    var orderCreateResponse = await PaymentRepository()
-        .getOrderCreateResponseFromCod(_selectedPaymentMethodKey);
-    if (!context.mounted) return;
-    Navigator.of(context, rootNavigator: true).pop();
-    if (orderCreateResponse.result == true) {
-      ToastComponent.showDialog(orderCreateResponse.message);
-      resetCheckout();
-      Future.delayed(const Duration(milliseconds: 300), () {
-        if (context.mounted) {
+
+    final String paymentMethod = _selectedPaymentMethodKey!;
+    String checkType = paymentMethod;
+    dynamic selectedPaymentObj;
+
+    for (var p in _paymentTypeList) {
+      if (p.paymentTypeKey == paymentMethod) {
+        checkType = p.paymentType;
+        selectedPaymentObj = p;
+        break;
+      }
+    }
+
+    double amount = (rechargeAmount != null && rechargeAmount > 0)
+        ? rechargeAmount
+        : _grandTotalValue;
+
+    if (amount <= 0) {
+      ToastComponent.showDialog("Invalid amount");
+      _isPlacingOrder = false;
+      return;
+    }
+
+    try {
+      // ================= PAYMENT FLOW =================
+
+      // STRIPE
+      if (checkType == "stripe") {
+        _isPlacingOrder = false;
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => StripeScreen(
+              amount: amount,
+              paymentType: paymentType,
+              paymentMethodKey: paymentMethod,
+              packageId: packageId.toString(),
+              orderId: orderId,
+            ),
+          ),
+        );
+        return;
+      }
+
+      // PAYPAL
+      if (checkType == "paypal") {
+        _isPlacingOrder = false;
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => PaypalScreen(
+              amount: amount,
+              paymentType: paymentType,
+              paymentMethodKey: paymentMethod,
+              packageId: packageId.toString(),
+              orderId: orderId,
+            ),
+          ),
+        );
+        return;
+      }
+
+      // SSL COMMERZ
+      if (checkType == "sslcommerz") {
+        _isPlacingOrder = false;
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => SslCommerzScreen(
+              amount: amount,
+              paymentType: paymentType,
+              paymentMethodKey: paymentMethod,
+              packageId: packageId.toString(),
+              orderId: orderId,
+            ),
+          ),
+        );
+        return;
+      }
+
+      // BKASH
+      if (checkType == "bkash") {
+        _isPlacingOrder = false;
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => BkashScreen(
+              amount: amount,
+              paymentType: paymentType,
+              paymentMethodKey: paymentMethod,
+              packageId: packageId.toString(),
+              orderId: orderId,
+            ),
+          ),
+        );
+        return;
+      }
+
+      // NAGAD
+      if (checkType == "nagad") {
+        _isPlacingOrder = false;
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => NagadScreen(
+              amount: amount,
+              paymentType: paymentType,
+              paymentMethodKey: paymentMethod,
+              packageId: packageId.toString(),
+              orderId: orderId,
+            ),
+          ),
+        );
+        return;
+      }
+      //Instamojo
+      if (checkType == "instamojo") {
+        _isPlacingOrder = false;
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => InstamojoScreen(
+              amount: amount,
+              paymentType: paymentType,
+              paymentMethodKey: paymentMethod,
+              packageId: packageId.toString(),
+              orderId: orderId,
+            ),
+          ),
+        );
+        return;
+      }
+      // AAMARPAY
+      if (checkType == "aamarpay") {
+        _isPlacingOrder = false;
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => AmarpayScreen(
+              amount: amount,
+              paymentType: paymentType,
+              paymentMethodKey: paymentMethod,
+              packageId: packageId.toString(),
+              orderId: orderId,
+            ),
+          ),
+        );
+        return;
+      }
+
+      // RAZORPAY
+      if (checkType == "razorpay") {
+        _isPlacingOrder = false;
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => RazorpayScreen(
+              amount: amount,
+              paymentType: paymentType,
+              paymentMethodKey: paymentMethod,
+              packageId: packageId.toString(),
+              orderId: orderId,
+            ),
+          ),
+        );
+        return;
+      }
+
+      // PAYSTACK
+      if (checkType == "paystack") {
+        _isPlacingOrder = false;
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => PaystackScreen(
+              amount: amount,
+              paymentType: paymentType,
+              paymentMethodKey: paymentMethod,
+              packageId: packageId.toString(),
+              orderId: orderId,
+            ),
+          ),
+        );
+        return;
+      }
+
+      // IYZICO
+      if (checkType == "iyzico") {
+        _isPlacingOrder = false;
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => IyzicoScreen(
+              amount: amount,
+              paymentType: paymentType,
+              paymentMethodKey: paymentMethod,
+              packageId: packageId.toString(),
+              orderId: orderId,
+            ),
+          ),
+        );
+        return;
+      }
+
+      // MYFATOORA
+      if (checkType == "myfatoora") {
+        _isPlacingOrder = false;
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => MyFatooraScreen(
+              amount: amount,
+              paymentType: paymentType,
+              paymentMethodKey: paymentMethod,
+              packageId: packageId.toString(),
+              orderId: orderId,
+            ),
+          ),
+        );
+        return;
+      }
+
+      // CYBERSOURCE
+      if (checkType == "cybersource") {
+        _isPlacingOrder = false;
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => CybersourceScreen(
+              amount: amount,
+              paymentType: paymentType,
+              paymentMethodKey: paymentMethod,
+              packageId: packageId.toString(),
+              orderId: orderId,
+            ),
+          ),
+        );
+        return;
+      }
+
+      // FLUTTERWAVE
+      if (checkType == "flutterwave") {
+        _isPlacingOrder = false;
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => FlutterwaveScreen(
+              amount: amount,
+              paymentType: paymentType,
+              paymentMethodKey: paymentMethod,
+              packageId: packageId.toString(),
+              orderId: orderId,
+            ),
+          ),
+        );
+        return;
+      }
+
+      // PAYTM
+      if (checkType == "paytm") {
+        _isPlacingOrder = false;
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => PaytmScreen(
+              amount: amount,
+              paymentType: paymentType,
+              paymentMethodKey: paymentMethod,
+              packageId: packageId.toString(),
+              orderId: orderId,
+            ),
+          ),
+        );
+        return;
+      }
+
+      // KHALTI
+      if (checkType == "khalti") {
+        _isPlacingOrder = false;
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => KhaltiScreen(
+              amount: amount,
+              paymentType: paymentType,
+              paymentMethodKey: paymentMethod,
+              packageId: packageId.toString(),
+              orderId: orderId,
+            ),
+          ),
+        );
+        return;
+      }
+
+      // INSTAMOJO
+      if (checkType == "instamojo") {
+        _isPlacingOrder = false;
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => OnlinePay(
+              title: "Pay with Instamojo",
+              amount: amount,
+              paymentType: paymentType,
+              paymentMethodKey: paymentMethod,
+              packageId: packageId.toString(),
+              orderId: orderId,
+            ),
+          ),
+        );
+        return;
+      }
+
+      // PAYFAST
+      if (checkType == "payfast") {
+        _isPlacingOrder = false;
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => PayfastScreen(
+              amount: amount,
+              paymentType: paymentType,
+              paymentMethodKey: paymentMethod,
+              packageId: packageId.toString(),
+              orderId: orderId,
+            ),
+          ),
+        );
+        return;
+      }
+
+      // PHONEPE
+      if (checkType == "phonepe") {
+        _isPlacingOrder = false;
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => PhonePeScreen(
+              amount: amount,
+              paymentType: paymentType,
+              paymentMethodKey: paymentMethod,
+              packageId: packageId.toString(),
+              orderId: orderId,
+            ),
+          ),
+        );
+        return;
+      }
+
+      // 🔥 COD (Cash on Delivery)
+      if (checkType == "cash_payment") {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (_) => const Center(child: CircularProgressIndicator()),
+        );
+
+        var res = await PaymentRepository().getOrderCreateResponseFromCod(
+          paymentMethod,
+        );
+        if (!context.mounted) return;
+
+        Navigator.of(context, rootNavigator: true).pop();
+
+        if (res.result == true) {
+          ToastComponent.showDialog(res.message);
+          resetCheckout();
+
           Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(
-              builder: (context) => OrderList(fromCheckout: true),
-            ),
+            MaterialPageRoute(builder: (_) => OrderList(fromCheckout: true)),
             (route) => false,
           );
+        } else {
+          ToastComponent.showDialog(res.message);
         }
-      });
-    } else {
-      ToastComponent.showDialog(orderCreateResponse.message);
+
+        _isPlacingOrder = false;
+        return;
+      }
+
+      // 🔥 WALLET PAYMENT
+      if (checkType.contains("wallet")) {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (_) => const Center(child: CircularProgressIndicator()),
+        );
+
+        var res = await PaymentRepository().getOrderCreateResponseFromWallet(
+          paymentMethod,
+          amount,
+        );
+        if (!context.mounted) return;
+
+        Navigator.of(context, rootNavigator: true).pop();
+
+        if (res.result == true) {
+          ToastComponent.showDialog(res.message);
+          resetCheckout();
+
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (_) => OrderList(fromCheckout: true)),
+            (route) => false,
+          );
+        } else {
+          ToastComponent.showDialog(res.message);
+        }
+
+        _isPlacingOrder = false;
+        return;
+      }
+
+      // 🔥 MANUAL PAYMENT
+      if (checkType == "manual_payment") {
+        _isPlacingOrder = false;
+
+        if (paymentType == "cart_payment") {
+          showDialog(
+            context: context,
+
+            barrierDismissible: false,
+            builder: (_) => const Center(child: CircularProgressIndicator()),
+          );
+
+          var res = await PaymentRepository()
+              .getOrderCreateResponseFromManualPayment(paymentMethod);
+          if (!context.mounted) return;
+
+          Navigator.of(context, rootNavigator: true).pop();
+
+          if (res.result == true) {
+            ToastComponent.showDialog(res.message);
+            resetCheckout();
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (_) => OrderList(fromCheckout: true)),
+              (route) => false,
+            );
+          } else {
+            ToastComponent.showDialog(res.message);
+          }
+          return;
+        } else {
+          // Re-Payment/Wallet/Package flow
+          PaymentFor paymentForEnum = PaymentFor.manualPayment;
+
+          if (paymentType == "wallet_payment") {
+            paymentForEnum = PaymentFor.walletRecharge;
+          } else if (paymentType == "customer_package_payment" ||
+              paymentType == "seller_package_payment") {
+            paymentForEnum = PaymentFor.packagePay;
+          }
+
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => OfflineScreen(
+                orderId: orderId,
+                paymentInstruction: selectedPaymentObj?.details ?? "",
+                offlinePaymentId: selectedPaymentObj?.offlinePaymentId ?? 0,
+                rechargeAmount: amount,
+                paymentMethod: selectedPaymentObj?.name ?? paymentMethod,
+                packageId: packageId,
+                offLinePaymentFor: paymentForEnum,
+              ),
+            ),
+          );
+          return;
+        }
+      }
+
+      ToastComponent.showDialog("Unsupported payment method");
+      _isPlacingOrder = false;
+    } catch (e) {
+      _isPlacingOrder = false;
+
+      ToastComponent.showDialog("Something went wrong");
     }
   }
 }

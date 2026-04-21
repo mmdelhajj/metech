@@ -48,7 +48,6 @@ class OrderRepository {
       headers: header,
       middleware: BannedUser(),
     );
-    print('order$id');
     return orderDetailResponseFromJson(response.body);
   }
 

@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_typing_uninitialized_variables
+// ignore_for_file: use_build_context_synchronously, prefer_typing_uninitialized_variables
 
 import 'dart:async';
 import 'package:active_ecommerce_cms_demo_app/screens/product/product_details/widget_for_product_details/product_media.dart';
@@ -9,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:active_ecommerce_cms_demo_app/data_model/product_details_response.dart';
 import 'package:flutter/services.dart';
 import 'package:active_ecommerce_cms_demo_app/l10n/app_localizations.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -25,7 +26,6 @@ import '../../../custom/device_info.dart';
 import '../../../custom/lang_text.dart';
 import '../../../custom/quantity_input.dart';
 import '../../../custom/toast_component.dart';
-import '../../../data_model/product_details_response.dart';
 import '../../../helpers/color_helper.dart';
 import '../../../helpers/main_helpers.dart';
 import '../../../helpers/shared_value_helper.dart';
@@ -58,6 +58,7 @@ class _ProductDetailsState extends State<ProductDetails>
     with TickerProviderStateMixin {
   bool _showCopied = false;
   String? _appbarPriceString = ". . .";
+  // ignore: unused_field
   int _currentImage = 0;
   final ScrollController _mainScrollController = ScrollController(
     initialScrollOffset: 0.0,
@@ -115,7 +116,6 @@ class _ProductDetailsState extends State<ProductDetails>
     }
     return price;
   }
-
 
   @override
   void initState() {
@@ -399,13 +399,12 @@ class _ProductDetailsState extends State<ProductDetails>
     required BuildContext context,
     SnackBar? snackbar,
   }) async {
-    // login check first, before showing loading dialog
+    loading();
+    // login check
     if (!guest_checkout_status.$ && is_logged_in.$ == false) {
       context.go("/users/login");
       return;
     }
-
-    loading();
 
     final cartAddResponse = await CartRepository().getCartAddResponse(
       _productDetails!.id,
@@ -468,7 +467,6 @@ class _ProductDetailsState extends State<ProductDetails>
         return StatefulBuilder(
           builder: (context, StateSetter setState) {
             return AlertDialog(
-
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.r),
               ),
@@ -507,7 +505,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                 color: const Color.fromRGBO(253, 253, 253, 1),
                                 borderRadius: BorderRadius.circular(8.0.r),
                                 border: Border.all(
-                                  color:  MyTheme.light_grey,
+                                  color: MyTheme.light_grey,
                                   width: 1.0,
                                 ),
                               ),
@@ -515,52 +513,60 @@ class _ProductDetailsState extends State<ProductDetails>
                                 child: AnimatedSwitcher(
                                   duration: const Duration(milliseconds: 200),
                                   transitionBuilder: (child, animation) =>
-                                      FadeTransition(opacity: animation, child: child),
+                                      FadeTransition(
+                                        opacity: animation,
+                                        child: child,
+                                      ),
 
                                   child: _showCopied
                                       ? Row(
-                                    key: const ValueKey('copied'),
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.check,
-                                        color: Colors.green,
-                                        size: 18.sp,
-                                      ),
-                                      SizedBox(width: 6.w),
-                                      Text(
-                                        AppLocalizations.of(context)!.copied_ucf,
-                                        style: TextStyle(
-                                          color: MyTheme.medium_grey,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                    ],
-                                  )
+                                          key: const ValueKey('copied'),
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Icon(
+                                              Icons.check,
+                                              color: Colors.green,
+                                              size: 18.sp,
+                                            ),
+                                            SizedBox(width: 6.w),
+                                            Text(
+                                              AppLocalizations.of(
+                                                context,
+                                              )!.copied_ucf,
+                                              style: TextStyle(
+                                                color: MyTheme.medium_grey,
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ],
+                                        )
                                       : Row(
-                                    key: const ValueKey('copy'),
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.copy,
-                                        color: MyTheme.medium_grey,
-                                        size: 18.sp,
-                                      ),
-                                      SizedBox(width: 6.w),
-                                      Text(
-                                        AppLocalizations.of(context)!.copy_product_link_ucf,
-                                        style: TextStyle(
-                                          color: MyTheme.medium_grey,
+                                          key: const ValueKey('copy'),
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Icon(
+                                              Icons.copy,
+                                              color: MyTheme.medium_grey,
+                                              size: 18.sp,
+                                            ),
+                                            SizedBox(width: 6.w),
+                                            Text(
+                                              AppLocalizations.of(
+                                                context,
+                                              )!.copy_product_link_ucf,
+                                              style: TextStyle(
+                                                color: MyTheme.medium_grey,
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      ),
-                                    ],
-                                  ),
                                 ),
                               ),
                             ),
                           ),
-
                         ),
 
                         Padding(
@@ -576,7 +582,6 @@ class _ProductDetailsState extends State<ProductDetails>
                               decoration: BoxDecoration(
                                 color: MyTheme.accent_color,
                                 borderRadius: .circular(8.0.r),
-
                               ),
                               padding: .fromLTRB(10.w, 0, 5.w, 0),
                               child: Row(
@@ -618,7 +623,7 @@ class _ProductDetailsState extends State<ProductDetails>
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8.0.r),
                           side: BorderSide(
-                            color:  MyTheme.light_grey,
+                            color: MyTheme.light_grey,
                             width: 1.0,
                           ),
                         ),
@@ -869,9 +874,7 @@ class _ProductDetailsState extends State<ProductDetails>
       return;
     }
     if (message == "") {
-      ToastComponent.showDialog(
-        "Please enter a message",
-      );
+      ToastComponent.showDialog("Please enter a message");
       return;
     }
 
@@ -915,7 +918,7 @@ class _ProductDetailsState extends State<ProductDetails>
       });
     } catch (e) {
       if (mounted) {
-        Navigator.of(loadingcontext).pop();
+        try { Navigator.of(loadingcontext).pop(); } catch (_) {}
         ToastComponent.showDialog(
           AppLocalizations.of(context)!.could_not_create_conversation,
         );
@@ -975,6 +978,7 @@ class _ProductDetailsState extends State<ProductDetails>
           ? TextDirection.rtl
           : TextDirection.ltr,
       child: Scaffold(
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         extendBody: true,
         backgroundColor: MyTheme.mainColor,
         bottomNavigationBar: buildBottomAppBar(context, addedToCartSnackbar),
@@ -1027,7 +1031,7 @@ class _ProductDetailsState extends State<ProductDetails>
                           onPurchase: () {
                             onPressBuyNow(context);
                           },
-                          price:  formatPrice(_singlePriceString),
+                          price: formatPrice(_singlePriceString),
 
                           mediaList: _mediaList,
                           carouselController: _carouselController,
@@ -1288,7 +1292,6 @@ class _ProductDetailsState extends State<ProductDetails>
                                   height: 30.0.h,
                                 ),
                         ),
-                        SizedBox(height: 10.h),
                       ],
                     ),
                   ),
@@ -2700,4 +2703,3 @@ class _ProductDetailsState extends State<ProductDetails>
 """;
   }
 }
-
