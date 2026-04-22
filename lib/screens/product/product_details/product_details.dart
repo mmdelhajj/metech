@@ -712,7 +712,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                 if (resp.result == false) { ToastComponent.showDialog(AppLocalizations.of(context)!.could_not_create_conversation); return; }
                                 sellerChatTitleController.clear();
                                 sellerChatMessageController.clear();
-                                Navigator.push(context, MaterialPageRoute(builder: (_) => Chat(conversationId: resp.conversation_id, messengerName: resp.shop_name, messengerTitle: resp.title, messengerImage: resp.shop_logo))).then((v) => onPopped(v));
+                                ToastComponent.showDialog("Message sent successfully!");
                               } catch (e) {
                                 setDialogState(() => _chatSending = false);
                                 ToastComponent.showDialog("Error: $e");

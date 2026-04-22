@@ -415,12 +415,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                                 sellerChatTitleController.clear();
                                 sellerChatMessageController.clear();
 
-                                Navigator.push(context, MaterialPageRoute(builder: (_) => Chat(
-                                  conversationId: resp.conversation_id,
-                                  messengerName: resp.shop_name,
-                                  messengerTitle: resp.title,
-                                  messengerImage: resp.shop_logo,
-                                ))).then((v) => onPopped(v));
+                                ToastComponent.showDialog("Message sent successfully!");
                               } catch (e) {
                                 setDialogState(() => _chatSending = false);
                                 ToastComponent.showDialog("Error: $e");
