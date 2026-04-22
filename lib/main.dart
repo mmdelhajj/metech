@@ -62,9 +62,21 @@ import 'single_banner/photo_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  await StoreBox.init();
-  await FlutterDownloader.initialize(debug: true, ignoreSsl: true);
+  try {
+    await Firebase.initializeApp();
+  } catch (e) {
+    debugPrint('Firebase init failed: $e');
+  }
+  try {
+    await StoreBox.init();
+  } catch (e) {
+    debugPrint('StoreBox init failed: $e');
+  }
+  try {
+    await FlutterDownloader.initialize(debug: true, ignoreSsl: true);
+  } catch (e) {
+    debugPrint('FlutterDownloader init failed: $e');
+  }
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -75,6 +87,10 @@ void main() async {
       systemNavigationBarDividerColor: Colors.transparent,
     ),
   );
+
+  FlutterError.onError = (details) {
+    FlutterError.presentError(details);
+  };
 
   runApp(SharedValue.wrapApp(MyApp()));
 }

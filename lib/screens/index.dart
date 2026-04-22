@@ -41,24 +41,47 @@ class _IndexState extends State<Index> {
     _initData();
   }
 
+  String? _errorMessage;
+
   Future<void> _initData() async {
-    await getSharedValueHelperData(context);
-    if (!mounted) return;
-    await Future.delayed(const Duration(seconds: 3));
-    if (!mounted) return;
-    SystemConfig.isShownSplashScreed = true;
+    try {
+      await getSharedValueHelperData(context);
+      if (!mounted) return;
+      await Future.delayed(const Duration(seconds: 3));
+      if (!mounted) return;
+      SystemConfig.isShownSplashScreed = true;
 
-    Provider.of<LocaleProvider>(
-      context,
-      listen: false,
-    ).setLocale(app_mobile_language.$!);
+      Provider.of<LocaleProvider>(
+        context,
+        listen: false,
+      ).setLocale(app_mobile_language.$!);
 
-    setState(() {});
+      setState(() {});
+    } catch (e, stack) {
+      _errorMessage = "INIT ERROR:\n$e\n\n${stack.toString().split('\n').take(5).join('\n')}";
+      if (mounted) setState(() {});
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     SystemConfig.context ??= context;
+    if (_errorMessage != null) {
+      return MaterialApp(
+        home: Scaffold(
+          backgroundColor: Colors.red,
+          body: SafeArea(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.all(16),
+              child: SelectableText(
+                _errorMessage!,
+                style: TextStyle(color: Colors.white, fontSize: 14),
+              ),
+            ),
+          ),
+        ),
+      );
+    }
     return Scaffold(
       body: SystemConfig.isShownSplashScreed
           ? Main(goBack: widget.goBack ?? true)
