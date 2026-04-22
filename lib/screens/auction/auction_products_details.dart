@@ -466,7 +466,9 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                     ),
                     onPressed: () {
                       Navigator.of(context, rootNavigator: true).pop();
-                      onPressSendMessage();
+                      Future.delayed(Duration(milliseconds: 300), () {
+                        onPressSendMessage();
+                      });
                     },
                   ),
                 ),
