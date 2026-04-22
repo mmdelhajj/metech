@@ -439,7 +439,6 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
   }
 
   bool _chatSending = false;
-  }
 
   showLoginWarning() {
     return ToastComponent.showDialog(

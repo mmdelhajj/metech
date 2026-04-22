@@ -399,12 +399,13 @@ class _ProductDetailsState extends State<ProductDetails>
     required BuildContext context,
     SnackBar? snackbar,
   }) async {
-    loading();
     // login check
     if (!guest_checkout_status.$ && is_logged_in.$ == false) {
       context.go("/users/login");
       return;
     }
+
+    showDialog(context: context, barrierDismissible: false, builder: (ctx) => AlertDialog(content: Row(children: [CircularProgressIndicator(), SizedBox(width: 10), Text("Please wait...")])));
 
     final cartAddResponse = await CartRepository().getCartAddResponse(
       _productDetails!.id,
@@ -414,7 +415,7 @@ class _ProductDetailsState extends State<ProductDetails>
     );
 
     if (!context.mounted) return;
-    Navigator.of(loadingcontext).pop();
+    Navigator.of(context).pop();
 
     temp_user_id.$ = cartAddResponse.tempUserId;
     temp_user_id.save();
