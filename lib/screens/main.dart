@@ -9,6 +9,7 @@ import 'package:active_ecommerce_cms_demo_app/screens/auth/login.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/category_list_n_product/category_list.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/checkout/cart.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/auction/auction_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/profile.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
@@ -39,6 +40,7 @@ class _MainState extends State<Main> with WidgetsBindingObserver {
 
     _children = [
       const Home(),
+      AuctionProducts(),
       CategoryList(slug: "", isBaseCategory: true),
       Cart(hasBottomnav: true, fromNavigation: true, counter: counter),
       const Profile(),
@@ -65,12 +67,12 @@ class _MainState extends State<Main> with WidgetsBindingObserver {
   void _onTapped(int index) {
     _fetchAll();
 
-    if (!guest_checkout_status.$ && index == 2 && !is_logged_in.$) {
+    if (!guest_checkout_status.$ && index == 3 && !is_logged_in.$) {
       Navigator.push(context, MaterialPageRoute(builder: (_) => const Login()));
       return;
     }
 
-    if (index == 3) {
+    if (index == 4) {
       routes.push("/dashboard");
       return;
     }
@@ -183,10 +185,22 @@ class _MainState extends State<Main> with WidgetsBindingObserver {
                       icon: Padding(
                         padding: EdgeInsets.only(bottom: 8.h),
                         child: Image.asset(
-                          "assets/categories.png",
+                          "assets/auction.png",
                           height: 16.h,
                           color: _currentIndex == 1
                               ? MyTheme.accent_color
+                              : const Color.fromRGBO(153, 153, 153, 1),
+                        ),
+                      ),
+                      label: "Auction",
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Padding(
+                        padding: EdgeInsets.only(bottom: 8.h),
+                        child: Image.asset(
+                          "assets/categories.png",
+                          height: 16.h,
+                          
                               : const Color.fromRGBO(153, 153, 153, 1),
                         ),
                       ),
@@ -219,7 +233,7 @@ class _MainState extends State<Main> with WidgetsBindingObserver {
                           child: Image.asset(
                             "assets/cart.png",
                             height: 16.h,
-                            color: _currentIndex == 2
+                            color: _currentIndex == 3
                                 ? MyTheme.accent_color
                                 : const Color.fromRGBO(153, 153, 153, 1),
                           ),
@@ -233,7 +247,7 @@ class _MainState extends State<Main> with WidgetsBindingObserver {
                         child: Image.asset(
                           "assets/profile.png",
                           height: 16.h,
-                          color: _currentIndex == 3
+                          color: _currentIndex == 4
                               ? MyTheme.accent_color
                               : const Color.fromRGBO(153, 153, 153, 1),
                         ),
