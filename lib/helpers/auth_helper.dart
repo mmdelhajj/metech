@@ -1,6 +1,7 @@
 import 'package:active_ecommerce_cms_demo_app/helpers/system_config.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/auth_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/profile_repository.dart';
+import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 
@@ -33,26 +34,32 @@ class AuthHelper {
 
   static Future<void> _registerDeviceToken() async {
     try {
+      // Step 1: Get APNS token (iOS only)
+      String? apnsToken;
+      try {
+        apnsToken = await FirebaseMessaging.instance.getAPNSToken();
+      } catch (_) {}
+
+      // Step 2: Get FCM token
       String? token = await FirebaseMessaging.instance.getToken();
+
       if (token != null && token.isNotEmpty) {
         await ProfileRepository().getDeviceTokenUpdateResponse(token);
-        debugPrint('FCM token registered: ${token.substring(0, 20)}...');
+        ToastComponent.showDialog("DEBUG: FCM OK - ${token.substring(0, 15)}...");
       } else {
-        // iOS: try getting APNS token first
-        String? apnsToken = await FirebaseMessaging.instance.getAPNSToken();
-        debugPrint('FCM token null, APNS token: $apnsToken');
-        if (apnsToken != null) {
-          // Wait and retry FCM token
-          await Future.delayed(Duration(seconds: 2));
-          token = await FirebaseMessaging.instance.getToken();
-          if (token != null) {
-            await ProfileRepository().getDeviceTokenUpdateResponse(token);
-            debugPrint('FCM token registered on retry: ${token.substring(0, 20)}...');
-          }
+        // Retry after delay
+        ToastComponent.showDialog("DEBUG: FCM null, APNS=${apnsToken != null ? 'yes' : 'null'}, retrying...");
+        await Future.delayed(Duration(seconds: 3));
+        token = await FirebaseMessaging.instance.getToken();
+        if (token != null && token.isNotEmpty) {
+          await ProfileRepository().getDeviceTokenUpdateResponse(token);
+          ToastComponent.showDialog("DEBUG: FCM OK on retry!");
+        } else {
+          ToastComponent.showDialog("DEBUG: FCM FAILED - no token");
         }
       }
     } catch (e) {
-      debugPrint('FCM token registration failed: $e');
+      ToastComponent.showDialog("DEBUG: FCM ERROR - $e");
     }
   }
 
