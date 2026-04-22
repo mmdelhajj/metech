@@ -646,211 +646,86 @@ class _ProductDetailsState extends State<ProductDetails>
     );
   }
 
+  bool _chatSending = false;
+
   onTapSellerChat() {
+    _chatSending = false;
     return showDialog(
       context: context,
-
       builder: (_) => Directionality(
-        textDirection: app_language_rtl.$!
-            ? TextDirection.rtl
-            : TextDirection.ltr,
-        child: AlertDialog(
-          backgroundColor: MyTheme.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.r),
-          ),
-          insetPadding: EdgeInsets.symmetric(horizontal: 24.w),
-          contentPadding: EdgeInsets.only(
-            top: 36.0.h,
-            left: 36.0.w,
-            right: 36.0.w,
-            bottom: 2.0.h,
-          ),
-          content: SizedBox(
-            width: 400.w,
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 8.0.h),
-                    child: Text(
-                      AppLocalizations.of(context)!.title_ucf,
-                      style: TextStyle(
-                        color: MyTheme.font_grey,
-                        fontSize: 12.sp,
+        textDirection: app_language_rtl.$! ? TextDirection.rtl : TextDirection.ltr,
+        child: StatefulBuilder(
+          builder: (dialogContext, setDialogState) {
+            return AlertDialog(
+              backgroundColor: MyTheme.white,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
+              insetPadding: EdgeInsets.symmetric(horizontal: 24.w),
+              contentPadding: EdgeInsets.only(top: 36.0.h, left: 36.0.w, right: 36.0.w, bottom: 2.0.h),
+              content: SizedBox(
+                width: 400.w,
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(padding: EdgeInsets.only(bottom: 8.0.h), child: Text(AppLocalizations.of(context)!.title_ucf, style: TextStyle(color: MyTheme.font_grey, fontSize: 12.sp))),
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 16.0.h),
+                        child: SizedBox(height: 40.h, child: TextField(controller: sellerChatTitleController, autofocus: false, decoration: InputDecoration(hintText: AppLocalizations.of(context)!.enter_title_ucf, hintStyle: TextStyle(fontSize: 12.0.sp, color: MyTheme.textfield_grey), enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: MyTheme.textfield_grey, width: 0.5), borderRadius: BorderRadius.circular(8.0.r)), focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: MyTheme.textfield_grey, width: 1.0), borderRadius: BorderRadius.circular(8.0.r)), contentPadding: EdgeInsets.symmetric(horizontal: 8.0.w)))),
                       ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 16.0.h),
-                    child: SizedBox(
-                      height: 40.h,
-                      child: TextField(
-                        controller: sellerChatTitleController,
-                        autofocus: false,
-                        decoration: InputDecoration(
-                          hintText: AppLocalizations.of(
-                            context,
-                          )!.enter_title_ucf,
-                          hintStyle: TextStyle(
-                            fontSize: 12.0.sp,
-                            color: MyTheme.textfield_grey,
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: MyTheme.textfield_grey,
-                              width: 0.5,
-                            ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(8.0.r),
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: MyTheme.textfield_grey,
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(8.0.r),
-                            ),
-                          ),
-                          contentPadding: EdgeInsets.symmetric(
-                            horizontal: 8.0.w,
-                          ),
-                        ),
+                      Padding(padding: EdgeInsets.only(bottom: 8.0.h), child: Text("${AppLocalizations.of(context)!.message_ucf} *", style: TextStyle(color: MyTheme.font_grey, fontSize: 12.sp))),
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 16.0.h),
+                        child: TextField(controller: sellerChatMessageController, autofocus: false, minLines: 3, maxLines: 7, keyboardType: TextInputType.multiline, decoration: InputDecoration(hintText: AppLocalizations.of(context)!.enter_message_ucf, hintStyle: TextStyle(fontSize: 12.0.sp, color: MyTheme.textfield_grey), enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: MyTheme.textfield_grey, width: 0.5), borderRadius: BorderRadius.circular(8.0.r)), focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: MyTheme.textfield_grey, width: 1.0), borderRadius: BorderRadius.circular(8.0.r)), contentPadding: EdgeInsets.only(right: 16.0.w, left: 8.0.w, top: 16.0.h, bottom: 16.0.h))),
                       ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 8.0.h),
-                    child: Text(
-                      "${AppLocalizations.of(context)!.message_ucf} *",
-                      style: TextStyle(
-                        color: MyTheme.font_grey,
-                        fontSize: 12.sp,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 16.0.h),
-                    child: TextField(
-                      controller: sellerChatMessageController,
-                      autofocus: false,
-                      minLines: 3,
-                      maxLines: 7,
-                      keyboardType: TextInputType.multiline,
-                      decoration: InputDecoration(
-                        hintText: AppLocalizations.of(
-                          context,
-                        )!.enter_message_ucf,
-                        hintStyle: TextStyle(
-                          fontSize: 12.0.sp,
-                          color: MyTheme.textfield_grey,
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: MyTheme.textfield_grey,
-                            width: 0.5,
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(8.0.r),
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: MyTheme.textfield_grey,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(8.0.r),
-                          ),
-                        ),
-                        contentPadding: EdgeInsets.only(
-                          right: 16.0.w,
-                          left: 8.0.w,
-                          top: 16.0.h,
-                          bottom: 16.0.h,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          actions: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Expanded(
-                  child: Btn.minWidthFixHeight(
-                    minWidth: 75.w,
-                    height: 30.h,
-                    color: Color.fromRGBO(253, 253, 253, 1),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0.r),
-                      side: BorderSide(color: MyTheme.light_grey, width: 1.0),
-                    ),
-                    child: Text(
-                      AppLocalizations.of(context)!.close_all_capital,
-                      style: TextStyle(color: MyTheme.font_grey),
-                    ),
-                    onPressed: () {
-                      Navigator.of(context, rootNavigator: true).pop();
-                    },
+                    ],
                   ),
                 ),
-                SizedBox(width: 10.w),
-                Expanded(
-                  child: Btn.minWidthFixHeight(
-                    minWidth: 75.w,
-                    height: 30.h,
-                    color: MyTheme.accent_color,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0.r),
-                      side: BorderSide(color: MyTheme.light_grey, width: 1.0),
+              ),
+              actions: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Expanded(
+                      child: Btn.minWidthFixHeight(minWidth: 75.w, height: 30.h, color: Color.fromRGBO(253, 253, 253, 1), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0.r), side: BorderSide(color: MyTheme.light_grey, width: 1.0)), child: Text(AppLocalizations.of(context)!.close_all_capital, style: TextStyle(color: MyTheme.font_grey)), onPressed: () => Navigator.of(dialogContext).pop()),
                     ),
-                    child: Text(
-                      AppLocalizations.of(context)!.send_all_capital,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    SizedBox(width: 10.w),
+                    Expanded(
+                      child: _chatSending
+                        ? Center(child: SizedBox(width: 30, height: 30, child: CircularProgressIndicator(strokeWidth: 2)))
+                        : Btn.minWidthFixHeight(
+                            minWidth: 75.w, height: 30.h, color: MyTheme.accent_color,
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0.r), side: BorderSide(color: MyTheme.light_grey, width: 1.0)),
+                            child: Text(AppLocalizations.of(context)!.send_all_capital, style: TextStyle(color: Colors.white, fontSize: 16.sp, fontWeight: FontWeight.w600)),
+                            onPressed: () async {
+                              var title = sellerChatTitleController.text.toString();
+                              var message = sellerChatMessageController.text.toString();
+                              if (title.isEmpty) { ToastComponent.showDialog(AppLocalizations.of(context)!.title_or_message_empty_warning); return; }
+                              if (message.isEmpty) { ToastComponent.showDialog("Please enter a message"); return; }
+
+                              setDialogState(() => _chatSending = true);
+                              try {
+                                var resp = await ChatRepository().getCreateConversationResponse(productId: _productDetails!.id, title: title, message: message);
+                                if (!mounted) return;
+                                Navigator.of(dialogContext).pop();
+                                if (resp.result == false) { ToastComponent.showDialog(AppLocalizations.of(context)!.could_not_create_conversation); return; }
+                                sellerChatTitleController.clear();
+                                sellerChatMessageController.clear();
+                                Navigator.push(context, MaterialPageRoute(builder: (_) => Chat(conversationId: resp.conversation_id, messengerName: resp.shop_name, messengerTitle: resp.title, messengerImage: resp.shop_logo))).then((v) => onPopped(v));
+                              } catch (e) {
+                                setDialogState(() => _chatSending = false);
+                                ToastComponent.showDialog("Error: $e");
+                              }
+                            },
+                          ),
                     ),
-                    onPressed: () {
-                      Navigator.of(context, rootNavigator: true).pop();
-                      Future.delayed(Duration(milliseconds: 300), () {
-                        onPressSendMessage();
-                      });
-                    },
-                  ),
+                  ],
                 ),
               ],
-            ),
-          ],
+            );
+          },
         ),
       ),
-    );
-  }
-
-  loading() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        loadingcontext = context;
-        return AlertDialog(
-          content: Row(
-            children: [
-              CircularProgressIndicator(),
-              SizedBox(width: 10.w),
-              Text(AppLocalizations.of(context)!.please_wait_ucf),
-            ],
-          ),
-        );
-      },
     );
   }
 
@@ -858,74 +733,6 @@ class _ProductDetailsState extends State<ProductDetails>
     return ToastComponent.showDialog(
       AppLocalizations.of(context)!.you_need_to_log_in,
     );
-  }
-
-  onPressSendMessage() async {
-    if (!is_logged_in.$) {
-      showLoginWarning();
-      return;
-    }
-
-    var title = sellerChatTitleController.text.toString();
-    var message = sellerChatMessageController.text.toString();
-
-    if (title == "") {
-      ToastComponent.showDialog(
-        AppLocalizations.of(context)!.title_or_message_empty_warning,
-      );
-      return;
-    }
-    if (message == "") {
-      ToastComponent.showDialog("Please enter a message");
-      return;
-    }
-
-    loading();
-
-    try {
-      var conversationCreateResponse = await ChatRepository()
-          .getCreateConversationResponse(
-            productId: _productDetails!.id,
-            title: title,
-            message: message,
-          );
-      if (!mounted) return;
-      Navigator.of(loadingcontext).pop();
-
-      if (conversationCreateResponse.result == false) {
-        ToastComponent.showDialog(
-          AppLocalizations.of(context)!.could_not_create_conversation,
-        );
-        return;
-      }
-
-      sellerChatTitleController.clear();
-      sellerChatMessageController.clear();
-      setState(() {});
-
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) {
-            return Chat(
-              conversationId: conversationCreateResponse.conversation_id,
-              messengerName: conversationCreateResponse.shop_name,
-              messengerTitle: conversationCreateResponse.title,
-              messengerImage: conversationCreateResponse.shop_logo,
-            );
-          },
-        ),
-      ).then((value) {
-        onPopped(value);
-      });
-    } catch (e) {
-      if (mounted) {
-        try { Navigator.of(loadingcontext).pop(); } catch (_) {}
-        ToastComponent.showDialog(
-          AppLocalizations.of(context)!.could_not_create_conversation,
-        );
-      }
-    }
   }
 
   @override

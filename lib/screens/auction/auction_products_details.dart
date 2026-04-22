@@ -300,205 +300,145 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
   }
 
   onTapSellerChat() {
+    _chatSending = false;
     return showDialog(
       context: context,
       builder: (_) => Directionality(
         textDirection: app_language_rtl.$!
             ? TextDirection.rtl
             : TextDirection.ltr,
-        child: AlertDialog(
-          insetPadding: EdgeInsets.symmetric(horizontal: 10),
-          contentPadding: EdgeInsets.only(
-            top: 36.0,
-            left: 36.0,
-            right: 36.0,
-            bottom: 2.0,
-          ),
-          content: SizedBox(
-            width: 400,
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
-                    child: Text(
-                      AppLocalizations.of(context)!.title_ucf,
-                      style: TextStyle(color: MyTheme.font_grey, fontSize: 12),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 16.0),
-                    child: SizedBox(
-                      height: 40,
-                      child: TextField(
-                        controller: sellerChatTitleController,
-                        autofocus: false,
-                        decoration: InputDecoration(
-                          hintText: AppLocalizations.of(
-                            context,
-                          )!.enter_title_ucf,
-                          hintStyle: TextStyle(
-                            fontSize: 12.0,
-                            color: MyTheme.textfield_grey,
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: MyTheme.textfield_grey,
-                              width: 0.5,
-                            ),
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(8.0),
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: MyTheme.textfield_grey,
-                              width: 1.0,
-                            ),
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(8.0),
-                            ),
-                          ),
-                          contentPadding: EdgeInsets.symmetric(horizontal: 8.0),
-                        ),
+        child: StatefulBuilder(
+          builder: (dialogContext, setDialogState) {
+            return AlertDialog(
+              insetPadding: EdgeInsets.symmetric(horizontal: 10),
+              contentPadding: EdgeInsets.only(top: 36.0, left: 36.0, right: 36.0, bottom: 2.0),
+              content: SizedBox(
+                width: 400,
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: Text(AppLocalizations.of(context)!.title_ucf, style: TextStyle(color: MyTheme.font_grey, fontSize: 12)),
                       ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
-                    child: Text(
-                      "${AppLocalizations.of(context)!.message_ucf} *",
-                      style: TextStyle(color: MyTheme.font_grey, fontSize: 12),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 16.0),
-                    child: SizedBox(
-                      height: 55,
-                      child: TextField(
-                        controller: sellerChatMessageController,
-                        autofocus: false,
-                        maxLines: null,
-                        keyboardType: TextInputType.multiline,
-                        decoration: InputDecoration(
-                          hintText: AppLocalizations.of(
-                            context,
-                          )!.enter_message_ucf,
-                          hintStyle: TextStyle(
-                            fontSize: 12.0,
-                            color: MyTheme.textfield_grey,
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: MyTheme.textfield_grey,
-                              width: 0.5,
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 16.0),
+                        child: SizedBox(
+                          height: 40,
+                          child: TextField(
+                            controller: sellerChatTitleController,
+                            autofocus: false,
+                            decoration: InputDecoration(
+                              hintText: AppLocalizations.of(context)!.enter_title_ucf,
+                              hintStyle: TextStyle(fontSize: 12.0, color: MyTheme.textfield_grey),
+                              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: MyTheme.textfield_grey, width: 0.5), borderRadius: BorderRadius.circular(8.0)),
+                              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: MyTheme.textfield_grey, width: 1.0), borderRadius: BorderRadius.circular(8.0)),
+                              contentPadding: EdgeInsets.symmetric(horizontal: 8.0),
                             ),
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(8.0),
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: MyTheme.textfield_grey,
-                              width: 1.0,
-                            ),
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(8.0),
-                            ),
-                          ),
-                          contentPadding: EdgeInsets.only(
-                            right: 16.0,
-                            left: 8.0,
-                            top: 16.0,
-                            bottom: 16.0,
                           ),
                         ),
                       ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          actions: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Btn.minWidthFixHeight(
-                    minWidth: 75,
-                    height: 30,
-                    color: Color.fromRGBO(253, 253, 253, 1),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      side: BorderSide(color: MyTheme.light_grey, width: 1.0),
-                    ),
-                    child: Text(
-                      AppLocalizations.of(context)!.close_all_capital,
-                      style: TextStyle(color: MyTheme.font_grey),
-                    ),
-                    onPressed: () {
-                      Navigator.of(context, rootNavigator: true).pop();
-                    },
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: Text("${AppLocalizations.of(context)!.message_ucf} *", style: TextStyle(color: MyTheme.font_grey, fontSize: 12)),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 16.0),
+                        child: SizedBox(
+                          height: 55,
+                          child: TextField(
+                            controller: sellerChatMessageController,
+                            autofocus: false,
+                            maxLines: null,
+                            keyboardType: TextInputType.multiline,
+                            decoration: InputDecoration(
+                              hintText: AppLocalizations.of(context)!.enter_message_ucf,
+                              hintStyle: TextStyle(fontSize: 12.0, color: MyTheme.textfield_grey),
+                              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: MyTheme.textfield_grey, width: 0.5), borderRadius: BorderRadius.circular(8.0)),
+                              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: MyTheme.textfield_grey, width: 1.0), borderRadius: BorderRadius.circular(8.0)),
+                              contentPadding: EdgeInsets.only(right: 16.0, left: 8.0, top: 16.0, bottom: 16.0),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                SizedBox(width: 1),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 28.0),
-                  child: Btn.minWidthFixHeight(
-                    minWidth: 75,
-                    height: 30,
-                    color: MyTheme.accent_color,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      side: BorderSide(color: MyTheme.light_grey, width: 1.0),
-                    ),
-                    child: Text(
-                      AppLocalizations.of(context)!.send_all_capital,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
+              ),
+              actions: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Btn.minWidthFixHeight(
+                        minWidth: 75, height: 30,
+                        color: Color.fromRGBO(253, 253, 253, 1),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0), side: BorderSide(color: MyTheme.light_grey, width: 1.0)),
+                        child: Text(AppLocalizations.of(context)!.close_all_capital, style: TextStyle(color: MyTheme.font_grey)),
+                        onPressed: () => Navigator.of(dialogContext).pop(),
                       ),
                     ),
-                    onPressed: () {
-                      Navigator.of(context, rootNavigator: true).pop();
-                      Future.delayed(Duration(milliseconds: 300), () {
-                        onPressSendMessage();
-                      });
-                    },
-                  ),
+                    SizedBox(width: 1),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 28.0),
+                      child: _chatSending
+                        ? SizedBox(width: 30, height: 30, child: CircularProgressIndicator(strokeWidth: 2))
+                        : Btn.minWidthFixHeight(
+                            minWidth: 75, height: 30,
+                            color: MyTheme.accent_color,
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0), side: BorderSide(color: MyTheme.light_grey, width: 1.0)),
+                            child: Text(AppLocalizations.of(context)!.send_all_capital, style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)),
+                            onPressed: () async {
+                              var title = sellerChatTitleController.text.toString();
+                              var message = sellerChatMessageController.text.toString();
+                              if (title.isEmpty) { ToastComponent.showDialog(AppLocalizations.of(context)!.title_or_message_empty_warning); return; }
+                              if (message.isEmpty) { ToastComponent.showDialog("Please enter a message"); return; }
+
+                              setDialogState(() => _chatSending = true);
+
+                              try {
+                                var resp = await ChatRepository().getCreateConversationResponse(
+                                  productId: _auctionproductDetails.id, title: title, message: message,
+                                );
+
+                                if (!mounted) return;
+                                Navigator.of(dialogContext).pop();
+
+                                if (resp.result == false) {
+                                  ToastComponent.showDialog(AppLocalizations.of(context)!.could_not_create_conversation);
+                                  return;
+                                }
+
+                                sellerChatTitleController.clear();
+                                sellerChatMessageController.clear();
+
+                                Navigator.push(context, MaterialPageRoute(builder: (_) => Chat(
+                                  conversationId: resp.conversation_id,
+                                  messengerName: resp.shop_name,
+                                  messengerTitle: resp.title,
+                                  messengerImage: resp.shop_logo,
+                                ))).then((v) => onPopped(v));
+                              } catch (e) {
+                                setDialogState(() => _chatSending = false);
+                                ToastComponent.showDialog("Error: $e");
+                              }
+                            },
+                          ),
+                    ),
+                  ],
                 ),
               ],
-            ),
-          ],
+            );
+          },
         ),
       ),
     );
   }
 
-  bool _isSending = false;
-
-  loading() {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) {
-        loadingcontext = context;
-        return AlertDialog(
-          content: Row(
-            children: [
-              CircularProgressIndicator(),
-              SizedBox(width: 10),
-              Text(AppLocalizations.of(context)!.please_wait_ucf),
-            ],
-          ),
-        );
-      },
-    );
+  bool _chatSending = false;
   }
 
   showLoginWarning() {
@@ -507,82 +447,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
     );
   }
 
-  onPressSendMessage() async {
-    if (!is_logged_in.$) {
-      showLoginWarning();
-      return;
-    }
-
-    var title = sellerChatTitleController.text.toString();
-    var message = sellerChatMessageController.text.toString();
-
-    if (title == "") {
-      ToastComponent.showDialog(
-        AppLocalizations.of(context)!.title_or_message_empty_warning,
-      );
-      return;
-    }
-    if (message == "") {
-      ToastComponent.showDialog(
-        "Please enter a message",
-      );
-      return;
-    }
-
-    if (_isSending) return;
-    _isSending = true;
-
-    loading();
-
-    try {
-      var conversationCreateResponse = await ChatRepository()
-          .getCreateConversationResponse(
-            productId: _auctionproductDetails.id,
-            title: title,
-            message: message,
-          );
-
-      // Close loading dialog safely
-      if (mounted && Navigator.canPop(context)) {
-        Navigator.of(context).pop();
-      }
-
-      if (!mounted) { _isSending = false; return; }
-
-      if (conversationCreateResponse.result == false) {
-        _isSending = false;
-        ToastComponent.showDialog(
-          AppLocalizations.of(context)!.could_not_create_conversation,
-        );
-        return;
-      }
-
-      sellerChatTitleController.clear();
-      sellerChatMessageController.clear();
-
-      _isSending = false;
-
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (_) => Chat(
-            conversationId: conversationCreateResponse.conversation_id,
-            messengerName: conversationCreateResponse.shop_name,
-            messengerTitle: conversationCreateResponse.title,
-            messengerImage: conversationCreateResponse.shop_logo,
-          ),
-        ),
-      ).then((value) {
-        onPopped(value);
-      });
-    } catch (e) {
-      _isSending = false;
-      if (mounted) {
-        if (Navigator.canPop(context)) Navigator.of(context).pop();
-        ToastComponent.showDialog("Error: $e");
-      }
-    }
-  }
+  // onPressSendMessage moved inside onTapSellerChat dialog
 
   @override
   Widget build(BuildContext context) {
