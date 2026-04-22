@@ -1,5 +1,8 @@
 import 'package:active_ecommerce_cms_demo_app/helpers/system_config.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/auth_repository.dart';
+import 'package:active_ecommerce_cms_demo_app/repositories/profile_repository.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 
 import '../data_model/login_response.dart';
 import 'shared_value_helper.dart';
@@ -22,6 +25,34 @@ class AuthHelper {
       user_phone.save();
       avatar_original.$ = loginResponse.user?.avatar_original;
       avatar_original.save();
+
+      // Register FCM device token after login
+      _registerDeviceToken();
+    }
+  }
+
+  static Future<void> _registerDeviceToken() async {
+    try {
+      String? token = await FirebaseMessaging.instance.getToken();
+      if (token != null && token.isNotEmpty) {
+        await ProfileRepository().getDeviceTokenUpdateResponse(token);
+        debugPrint('FCM token registered: ${token.substring(0, 20)}...');
+      } else {
+        // iOS: try getting APNS token first
+        String? apnsToken = await FirebaseMessaging.instance.getAPNSToken();
+        debugPrint('FCM token null, APNS token: $apnsToken');
+        if (apnsToken != null) {
+          // Wait and retry FCM token
+          await Future.delayed(Duration(seconds: 2));
+          token = await FirebaseMessaging.instance.getToken();
+          if (token != null) {
+            await ProfileRepository().getDeviceTokenUpdateResponse(token);
+            debugPrint('FCM token registered on retry: ${token.substring(0, 20)}...');
+          }
+        }
+      }
+    } catch (e) {
+      debugPrint('FCM token registration failed: $e');
     }
   }
 
