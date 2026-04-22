@@ -1767,3 +1767,4 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
     return Container(color: MyTheme.light_grey, height: 5);
   }
 }
+// Build 48 - forced rebuild
