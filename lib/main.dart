@@ -278,9 +278,15 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     Future.microtask(() async {
-      await Firebase.initializeApp();
-      if (OtherConfig.USE_PUSH_NOTIFICATION) {
-        PushNotificationService().initialise();
+      try {
+        if (Firebase.apps.isEmpty) {
+          await Firebase.initializeApp();
+        }
+        if (OtherConfig.USE_PUSH_NOTIFICATION) {
+          await PushNotificationService().initialise();
+        }
+      } catch (e) {
+        debugPrint('Push notification init error: $e');
       }
     });
   }
