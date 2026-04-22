@@ -200,7 +200,8 @@ class _MainState extends State<Main> with WidgetsBindingObserver {
                         child: Image.asset(
                           "assets/categories.png",
                           height: 16.h,
-                          
+                          color: _currentIndex == 2
+                              ? MyTheme.accent_color
                               : const Color.fromRGBO(153, 153, 153, 1),
                         ),
                       ),
