@@ -54,21 +54,15 @@ class AuthHelper {
 
       if (token != null && token.isNotEmpty) {
         await ProfileRepository().getDeviceTokenUpdateResponse(token);
-        ToastComponent.showDialog("DEBUG: FCM OK - ${token.substring(0, 15)}...");
       } else {
-        // Retry after delay
-        ToastComponent.showDialog("DEBUG: FCM null, APNS=${apnsToken != null ? 'yes' : 'null'}, retrying...");
         await Future.delayed(Duration(seconds: 3));
         token = await FirebaseMessaging.instance.getToken();
         if (token != null && token.isNotEmpty) {
           await ProfileRepository().getDeviceTokenUpdateResponse(token);
-          ToastComponent.showDialog("DEBUG: FCM OK on retry!");
-        } else {
-          ToastComponent.showDialog("DEBUG: FCM FAILED - no token");
         }
       }
     } catch (e) {
-      ToastComponent.showDialog("DEBUG: FCM ERROR - $e");
+      debugPrint('FCM token error: $e');
     }
   }
 
