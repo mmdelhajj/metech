@@ -91,5 +91,9 @@ class AuthHelper {
     } else {
       clearUserData();
     }
+    // Register token on every app start if logged in
+    if (is_logged_in.$) {
+      _registerDeviceToken();
+    }
   }
 }
