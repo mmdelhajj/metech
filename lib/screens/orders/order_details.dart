@@ -1336,7 +1336,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     children: [
                       headingText('Seller Address'),
                       const SizedBox(height: 2),
-                      Text(_orderDetails!.seller_address!, style: addressStyle),
+                      Text(_orderDetails!.seller_address ?? '', style: addressStyle),
                       const SizedBox(
                         height: 5,
                       ), // Gap between address and GSTIN
