@@ -2,6 +2,7 @@ import 'package:active_ecommerce_cms_demo_app/helpers/system_config.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/auth_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/profile_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 
@@ -34,6 +35,11 @@ class AuthHelper {
 
   static Future<void> _registerDeviceToken() async {
     try {
+      // Ensure Firebase is initialized
+      if (Firebase.apps.isEmpty) {
+        await Firebase.initializeApp();
+      }
+
       // Step 1: Get APNS token (iOS only)
       String? apnsToken;
       try {
