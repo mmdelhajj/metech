@@ -144,16 +144,20 @@ class _OrderDetailsState extends State<OrderDetails> {
   }
 
   fetchOrderDetails() async {
-    var orderDetailsResponse = await OrderRepository().getOrderDetails(
-      id: widget.id,
-    );
+    try {
+      var orderDetailsResponse = await OrderRepository().getOrderDetails(
+        id: widget.id,
+      );
 
-    if (orderDetailsResponse.detailed_orders.length > 0) {
-      _orderDetails = orderDetailsResponse.detailed_orders[0];
-      setStepIndex(_orderDetails!.delivery_status);
+      if (orderDetailsResponse.detailed_orders.length > 0) {
+        _orderDetails = orderDetailsResponse.detailed_orders[0];
+        setStepIndex(_orderDetails!.delivery_status);
+      }
+    } catch (e) {
+      debugPrint('Order details error: $e');
     }
 
-    setState(() {});
+    if (mounted) setState(() {});
   }
 
   setStepIndex(key) {
@@ -162,13 +166,18 @@ class _OrderDetailsState extends State<OrderDetails> {
   }
 
   fetchOrderedItems() async {
-    var orderItemResponse = await OrderRepository().getOrderItems(
-      id: widget.id,
-    );
-    _orderedItemList.addAll(orderItemResponse.ordered_items);
-    _orderItemsInit = true;
+    try {
+      var orderItemResponse = await OrderRepository().getOrderItems(
+        id: widget.id,
+      );
+      _orderedItemList.addAll(orderItemResponse.ordered_items);
+      _orderItemsInit = true;
+    } catch (e) {
+      _orderItemsInit = true;
+      debugPrint('Order items error: $e');
+    }
 
-    setState(() {});
+    if (mounted) setState(() {});
   }
 
   reset() {
