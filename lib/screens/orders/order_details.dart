@@ -706,7 +706,11 @@ class _OrderDetailsState extends State<OrderDetails> {
         child: Scaffold(
           backgroundColor: Colors.white,
           appBar: buildAppBar(context),
-          body: RefreshIndicator(
+          body: _orderDetails == null && _orderItemsInit
+              ? Center(child: Text("No order details available"))
+              : _orderDetails == null
+              ? Center(child: CircularProgressIndicator())
+              : RefreshIndicator(
             color: MyTheme.accent_color,
             backgroundColor: Colors.white,
             onRefresh: _onPageRefresh,

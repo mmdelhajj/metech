@@ -176,16 +176,22 @@ class _OrderListState extends State<OrderList> {
   }
 
   fetchData() async {
-    var orderResponse = await OrderRepository().getOrderList(
-      page: _page,
-      paymentStatus: _selectedPaymentStatus!.optionKey,
-      deliveryStatus: _selectedDeliveryStatus!.optionKey,
-    );
-    _orderList.addAll(orderResponse.orders);
-    _isInitial = false;
-    _totalData = orderResponse.meta.total;
-    _showLoadingContainer = false;
-    setState(() {});
+    try {
+      var orderResponse = await OrderRepository().getOrderList(
+        page: _page,
+        paymentStatus: _selectedPaymentStatus!.optionKey,
+        deliveryStatus: _selectedDeliveryStatus!.optionKey,
+      );
+      _orderList.addAll(orderResponse.orders);
+      _isInitial = false;
+      _totalData = orderResponse.meta.total;
+      _showLoadingContainer = false;
+    } catch (e) {
+      _isInitial = false;
+      _showLoadingContainer = false;
+      debugPrint('Order list error: $e');
+    }
+    if (mounted) setState(() {});
   }
 
   List<DropdownMenuItem<PaymentStatus>> buildDropdownPaymentStatusItems(
