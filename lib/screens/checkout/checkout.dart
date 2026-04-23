@@ -657,62 +657,59 @@ class _CheckoutState extends State<Checkout> {
 
   payByWallet() async {
     loading();
-    var orderCreateResponse = await PaymentRepository()
-        .getOrderCreateResponseFromWallet(
-          _selectedPaymentMethodKey,
-          _grandTotalValue,
-        );
-    if (!mounted) return;
-    Navigator.of(loadingcontext).pop();
+    try {
+      var orderCreateResponse = await PaymentRepository()
+          .getOrderCreateResponseFromWallet(
+            _selectedPaymentMethodKey,
+            _grandTotalValue,
+          );
+      if (!mounted) return;
+      if (Navigator.canPop(context)) Navigator.of(context).pop();
 
-    if (orderCreateResponse.result == false) {
-      ToastComponent.showDialog(orderCreateResponse.message);
-      return;
+      if (orderCreateResponse.result == false) {
+        ToastComponent.showDialog(orderCreateResponse.message);
+        return;
+      }
+
+      Navigator.push(context, MaterialPageRoute(builder: (_) => OrderList(fromCheckout: true)));
+    } catch (e) {
+      if (mounted && Navigator.canPop(context)) Navigator.of(context).pop();
+      ToastComponent.showDialog("Error: please try again");
     }
-
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) {
-          return OrderList(fromCheckout: true);
-        },
-      ),
-    );
   }
 
   payByCod() async {
     loading();
-    var orderCreateResponse = await PaymentRepository()
-        .getOrderCreateResponseFromCod(_selectedPaymentMethodKey);
-    if (!mounted) return;
-    Navigator.of(loadingcontext).pop();
-    if (orderCreateResponse.result == false) {
-      ToastComponent.showDialog(orderCreateResponse.message);
-      Navigator.of(context).pop();
-      return;
-    }
+    try {
+      var orderCreateResponse = await PaymentRepository()
+          .getOrderCreateResponseFromCod(_selectedPaymentMethodKey);
+      if (!mounted) return;
+      if (Navigator.canPop(context)) Navigator.of(context).pop();
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) {
-          return OrderList(fromCheckout: true);
-        },
-      ),
-    );
+      if (orderCreateResponse.result == false) {
+        ToastComponent.showDialog(orderCreateResponse.message);
+        return;
+      }
+
+      Navigator.push(context, MaterialPageRoute(builder: (_) => OrderList(fromCheckout: true)));
+    } catch (e) {
+      if (mounted && Navigator.canPop(context)) Navigator.of(context).pop();
+      ToastComponent.showDialog("Error: please try again");
+    }
   }
 
   payByManualPayment() async {
     loading();
-    var orderCreateResponse = await PaymentRepository()
-        .getOrderCreateResponseFromManualPayment(_selectedPaymentMethodKey);
-    if (!mounted) return;
-    Navigator.pop(loadingcontext);
-    if (orderCreateResponse.result == false) {
-      ToastComponent.showDialog(orderCreateResponse.message);
-      Navigator.of(context).pop();
-      return;
-    }
+    try {
+      var orderCreateResponse = await PaymentRepository()
+          .getOrderCreateResponseFromManualPayment(_selectedPaymentMethodKey);
+      if (!mounted) return;
+      if (Navigator.canPop(context)) Navigator.of(context).pop();
+
+      if (orderCreateResponse.result == false) {
+        ToastComponent.showDialog(orderCreateResponse.message);
+        return;
+      }
 
     Navigator.push(
       context,

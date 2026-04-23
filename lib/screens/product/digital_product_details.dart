@@ -693,65 +693,13 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
     );
   }
 
-  loading() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        loadingcontext = context;
-        return AlertDialog(
-          content: Row(
-            children: [
-              CircularProgressIndicator(),
-              SizedBox(width: 10),
-              Text(AppLocalizations.of(context)!.please_wait_ucf),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
   showLoginWarning() {
     return ToastComponent.showDialog(
       AppLocalizations.of(context)!.you_need_to_log_in,
     );
   }
 
-  onPressSendMessage() async {
-    if (!is_logged_in.$) {
-      showLoginWarning();
-      return;
-    }
-    loading();
-    var title = sellerChatTitleController.text.toString();
-    var message = sellerChatMessageController.text.toString();
-
-    if (title == "" || message == "") {
-      ToastComponent.showDialog(
-        AppLocalizations.of(context)!.title_or_message_empty_warning,
-      );
-      return;
-    }
-
-    var conversationCreateResponse = await ChatRepository()
-        .getCreateConversationResponse(
-          productId: _productDetails!.id,
-          title: title,
-          message: message,
-        );
-    if (!mounted) return;
-    Navigator.of(loadingcontext).pop();
-
-    if (conversationCreateResponse.result == false) {
-      ToastComponent.showDialog(
-        AppLocalizations.of(context)!.could_not_create_conversation,
-      );
-      return;
-    }
-
-    sellerChatTitleController.clear();
-    sellerChatMessageController.clear();
-    setState(() {});
+  // onPressSendMessage handled inside onTapSellerChat dialog
 
     Navigator.push(
       context,

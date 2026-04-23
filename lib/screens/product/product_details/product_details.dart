@@ -394,59 +394,64 @@ class _ProductDetailsState extends State<ProductDetails>
     addToCart(mode: "buy_now", context: context);
   }
 
+  bool _addingToCart = false;
+
   Future<void> addToCart({
     required String mode,
     required BuildContext context,
     SnackBar? snackbar,
   }) async {
+    if (_addingToCart) return;
     // login check
     if (!guest_checkout_status.$ && is_logged_in.$ == false) {
       context.go("/users/login");
       return;
     }
 
-    showDialog(context: context, barrierDismissible: false, builder: (ctx) => AlertDialog(content: Row(children: [CircularProgressIndicator(), SizedBox(width: 10), Text("Please wait...")])));
+    _addingToCart = true;
+    setState(() {});
 
-    final cartAddResponse = await CartRepository().getCartAddResponse(
-      _productDetails!.id,
-      _variant,
-      user_id.$,
-      _quantity,
-    );
+    try {
+      final cartAddResponse = await CartRepository().getCartAddResponse(
+        _productDetails!.id,
+        _variant,
+        user_id.$,
+        _quantity,
+      );
 
-    if (!context.mounted) return;
-    Navigator.of(context).pop();
+      _addingToCart = false;
+      if (!context.mounted) return;
+      setState(() {});
 
-    temp_user_id.$ = cartAddResponse.tempUserId;
-    temp_user_id.save();
+      temp_user_id.$ = cartAddResponse.tempUserId;
+      temp_user_id.save();
 
-    if (cartAddResponse.result == false) {
-      ToastComponent.showDialog(cartAddResponse.message);
-      return;
-    }
-
-    // cart counter update
-    Provider.of<CartCounter>(context, listen: false).getCount();
-
-    if (mode == "add_to_cart") {
-      if (snackbar != null) {
-        final messenger = ScaffoldMessenger.of(context);
-        messenger.hideCurrentSnackBar();
-        messenger.showSnackBar(snackbar);
+      if (cartAddResponse.result == false) {
+        ToastComponent.showDialog(cartAddResponse.message);
+        return;
       }
 
-      reset();
-      fetchAll();
-    } else if (mode == "buy_now") {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (_) => Cart(hasBottomnav: false)),
-      ).then(onPopped);
-    } else if (mode == "buy_now") {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (_) => Cart(hasBottomnav: false)),
-      ).then(onPopped);
+      // cart counter update
+      Provider.of<CartCounter>(context, listen: false).getCount();
+
+      if (mode == "add_to_cart") {
+        if (snackbar != null) {
+          final messenger = ScaffoldMessenger.of(context);
+          messenger.hideCurrentSnackBar();
+          messenger.showSnackBar(snackbar);
+        }
+        reset();
+        fetchAll();
+      } else if (mode == "buy_now") {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => Cart(hasBottomnav: false)),
+        ).then(onPopped);
+      }
+    } catch (e) {
+      _addingToCart = false;
+      if (mounted) setState(() {});
+      ToastComponent.showDialog("Error: please try again");
     }
   }
 

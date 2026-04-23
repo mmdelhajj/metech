@@ -155,14 +155,19 @@ class _ProfileState extends State<Profile> {
 
   deleteAccountReq() async {
     loading();
-    var response = await AuthRepository().getAccountDeleteResponse();
-    if (!mounted) return;
-    if (response.result) {
-      AuthHelper().clearUserData();
-      Navigator.pop(loadingcontext);
-      context.go("/");
+    try {
+      var response = await AuthRepository().getAccountDeleteResponse();
+      if (!mounted) return;
+      if (Navigator.canPop(context)) Navigator.of(context).pop();
+      if (response.result) {
+        AuthHelper().clearUserData();
+        context.go("/");
+      }
+      ToastComponent.showDialog(response.message);
+    } catch (e) {
+      if (mounted && Navigator.canPop(context)) Navigator.of(context).pop();
+      ToastComponent.showDialog("Error: please try again");
     }
-    ToastComponent.showDialog(response.message);
   }
 
   String counterText(String txt, {int defaultLength = 3}) {
