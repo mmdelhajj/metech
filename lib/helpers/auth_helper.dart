@@ -4,6 +4,7 @@ import 'package:active_ecommerce_cms_demo_app/repositories/profile_repository.da
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:active_ecommerce_cms_demo_app/firebase_options.dart';
 import 'package:flutter/foundation.dart';
 
 import '../data_model/login_response.dart';
@@ -37,7 +38,9 @@ class AuthHelper {
     try {
       // Ensure Firebase is initialized
       if (Firebase.apps.isEmpty) {
-        await Firebase.initializeApp();
+        await Firebase.initializeApp(
+          options: DefaultFirebaseOptions.currentPlatform,
+        );
       }
 
       // Step 1: Get APNS token (iOS only)
