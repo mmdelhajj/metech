@@ -8,6 +8,7 @@ import '../../../custom/device_info.dart';
 import '../../../custom/lang_text.dart';
 import '../../../helpers/shared_value_helper.dart';
 import '../../orders/order_details.dart';
+import '../../chat/messenger_list.dart';
 import 'image_show.dart';
 
 class NotificationListCard extends StatefulWidget {
@@ -48,6 +49,9 @@ class _NotificationListCardState extends State<NotificationListCard> {
       var url = widget.link?.split(AppConfig.DOMAIN_PATH).last ?? "";
       if (url.isNotEmpty) {
         GoRouter.of(context).go(url);
+      } else {
+        // Message notification - open conversations
+        Navigator.push(context, MaterialPageRoute(builder: (_) => MessengerList()));
       }
     }
 
