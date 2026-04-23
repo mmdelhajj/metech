@@ -711,14 +711,18 @@ class _CheckoutState extends State<Checkout> {
         return;
       }
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) {
-          return OrderList(fromCheckout: true);
-        },
-      ),
-    );
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return OrderList(fromCheckout: true);
+          },
+        ),
+      );
+    } catch (e) {
+      if (mounted && Navigator.canPop(context)) Navigator.of(context).pop();
+      ToastComponent.showDialog("Error: please try again");
+    }
   }
 
   onPaymentMethodItemTap(index) {
