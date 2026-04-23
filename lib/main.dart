@@ -93,6 +93,26 @@ void main() async {
     FlutterError.presentError(details);
   };
 
+  ErrorWidget.builder = (FlutterErrorDetails details) {
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("SCREEN ERROR", style: TextStyle(color: Colors.red, fontSize: 18, fontWeight: FontWeight.bold)),
+              SizedBox(height: 10),
+              SelectableText(details.exception.toString(), style: TextStyle(fontSize: 12)),
+              SizedBox(height: 10),
+              SelectableText(details.stack.toString().split('\n').take(8).join('\n'), style: TextStyle(fontSize: 10, color: Colors.grey)),
+            ],
+          ),
+        ),
+      ),
+    );
+  };
+
   runApp(SharedValue.wrapApp(MyApp()));
 }
 
