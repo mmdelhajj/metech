@@ -3,6 +3,7 @@ import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/profile_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/auth/login.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/chat/messenger_list.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/orders/order_details.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
@@ -105,6 +106,17 @@ class PushNotificationService {
               );
             },
           ),
+        );
+      } catch (e) {
+        if (kDebugMode) {
+          print('print:$e');
+        }
+      }
+    } else if (data['type'] == 'conversation') {
+      // New message reply — open the conversations list.
+      try {
+        OneContext().push(
+          MaterialPageRoute(builder: (_) => const MessengerList()),
         );
       } catch (e) {
         if (kDebugMode) {

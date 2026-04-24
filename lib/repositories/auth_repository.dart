@@ -161,6 +161,32 @@ class AuthRepository {
     return confirmCodeResponseFromJson(response.body);
   }
 
+  /// Phone verification via SMS OTP.
+  /// Step 1: pass only [phone] to trigger SMS.
+  /// Step 2: pass [phone] + [verificationCode] to confirm.
+  Future<Map<String, dynamic>> verifyPhone({
+    required String phone,
+    String? verificationCode,
+  }) async {
+    final body = <String, dynamic>{"phone": phone};
+    if (verificationCode != null && verificationCode.isNotEmpty) {
+      body["verification_code"] = verificationCode;
+    }
+
+    final response = await ApiRequest.post(
+      url: "${AppConfig.BASE_URL}/auth/verify_phone",
+      headers: {
+        "Content-Type": "application/json",
+        "App-Language": app_language.$!,
+        "Authorization": "Bearer ${access_token.$}",
+      },
+      body: jsonEncode(body),
+    );
+
+    final decoded = json.decode(response.body);
+    return decoded is Map<String, dynamic> ? decoded : <String, dynamic>{};
+  }
+
   Future<PasswordForgetResponse> getPasswordForgetResponse(
     String? emailOrPhone,
     String sendCodeBy,

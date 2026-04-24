@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:active_ecommerce_cms_demo_app/screens/auth/otp.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/auth/phone_otp.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/profile_edit.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/box_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
@@ -136,7 +137,12 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
               if (isEmail) {
                 Navigator.push(context, MaterialPageRoute(builder: (_) => Otp()));
               } else {
-                Navigator.push(context, MaterialPageRoute(builder: (_) => ProfileEdit()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => PhoneOtp(initialPhone: user_phone.$),
+                  ),
+                );
               }
             },
             child: Text("Verify Now", style: TextStyle(fontWeight: FontWeight.bold)),

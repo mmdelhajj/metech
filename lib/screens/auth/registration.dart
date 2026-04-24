@@ -310,21 +310,29 @@ WebView Page resource error:
       AuthHelper().setUserData(signupResponse);
 
       if (OtherConfig.USE_PUSH_NOTIFICATION) {
-        final FirebaseMessaging fcm = FirebaseMessaging.instance;
-        await fcm.requestPermission(
-          alert: true,
-          announcement: false,
-          badge: true,
-          carPlay: false,
-          criticalAlert: false,
-          provisional: false,
-          sound: true,
-        );
+        try {
+          final FirebaseMessaging fcm = FirebaseMessaging.instance;
+          await fcm
+              .requestPermission(
+                alert: true,
+                announcement: false,
+                badge: true,
+                carPlay: false,
+                criticalAlert: false,
+                provisional: false,
+                sound: true,
+              )
+              .timeout(const Duration(seconds: 5));
 
-        String? fcmToken = await fcm.getToken();
+          String? fcmToken = await fcm.getToken().timeout(
+                const Duration(seconds: 5),
+              );
 
-        if (is_logged_in.$ == true) {
-          await ProfileRepository().getDeviceTokenUpdateResponse(fcmToken!);
+          if (is_logged_in.$ == true && fcmToken != null) {
+            await ProfileRepository().getDeviceTokenUpdateResponse(fcmToken);
+          }
+        } catch (e) {
+          log("FCM skipped (expected on iOS simulator): $e");
         }
       }
       if (!mounted) return;

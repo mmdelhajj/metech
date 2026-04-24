@@ -1,4 +1,5 @@
 import 'package:active_ecommerce_cms_demo_app/screens/auth/otp.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/auth/phone_otp.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/profile_edit.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/enum_classes.dart';
@@ -308,6 +309,34 @@ class _CheckoutState extends State<Checkout> {
       );
       return;
     }
+
+    // Pre-check: email + phone verification before any payment screen opens.
+    // The backend also enforces this; we check here so every payment method
+    // (Stripe, Razorpay, PhonePe, COD, wallet, manual) shows the proper popup.
+    if (is_logged_in.$ && widget.paymentFor == PaymentFor.order) {
+      if (SystemConfig.systemUser == null) {
+        await AuthHelper().fetchAndSet();
+      }
+      final user = SystemConfig.systemUser;
+      debugPrint(
+        "[VERIFY-PRECHECK] user=${user?.email} emailVerified=${user?.emailVerified} phoneVerified=${user?.phoneVerified}",
+      );
+      if (user != null && user.emailVerified != true) {
+        _handleVerificationError(
+          "Please verify your email address before making a purchase.",
+          'verify_email',
+        );
+        return;
+      }
+      if (user != null && user.phoneVerified != true) {
+        _handleVerificationError(
+          "Please verify your phone number before making a purchase.",
+          'verify_phone',
+        );
+        return;
+      }
+    }
+
     if (_grandTotalValue == null || _grandTotalValue! <= 0.00) {
       ToastComponent.showDialog(AppLocalizations.of(context)!.nothing_to_pay);
       return;
@@ -669,7 +698,7 @@ class _CheckoutState extends State<Checkout> {
       if (Navigator.canPop(context)) Navigator.of(context).pop();
 
       if (orderCreateResponse.result == false) {
-        _handleVerificationError(orderCreateResponse.message);
+        _handleVerificationError(orderCreateResponse.message, orderCreateResponse.action);
         return;
       }
 
@@ -689,7 +718,7 @@ class _CheckoutState extends State<Checkout> {
       if (Navigator.canPop(context)) Navigator.of(context).pop();
 
       if (orderCreateResponse.result == false) {
-        _handleVerificationError(orderCreateResponse.message);
+        _handleVerificationError(orderCreateResponse.message, orderCreateResponse.action);
         return;
       }
 
@@ -709,7 +738,7 @@ class _CheckoutState extends State<Checkout> {
       if (Navigator.canPop(context)) Navigator.of(context).pop();
 
       if (orderCreateResponse.result == false) {
-        _handleVerificationError(orderCreateResponse.message);
+        _handleVerificationError(orderCreateResponse.message, orderCreateResponse.action);
         return;
       }
 
@@ -1359,13 +1388,18 @@ class _CheckoutState extends State<Checkout> {
     );
   }
 
-  _handleVerificationError(String? message) {
-    if (message != null && message.contains('email')) {
+  _handleVerificationError(String? message, [String? action]) {
+    debugPrint("[VERIFY-ERROR] action=$action message=$message");
+    final isEmail = action == 'verify_email' ||
+        (action == null && message != null && message.toLowerCase().contains('email'));
+    final isPhone = action == 'verify_phone' ||
+        (action == null && message != null && message.toLowerCase().contains('phone'));
+    if (isEmail) {
       showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
           title: Text("Email Verification Required"),
-          content: Text(message),
+          content: Text(message ?? ""),
           actions: [
             TextButton(onPressed: () => Navigator.pop(ctx), child: Text("Cancel")),
             TextButton(
@@ -1378,18 +1412,23 @@ class _CheckoutState extends State<Checkout> {
           ],
         ),
       );
-    } else if (message != null && message.contains('phone')) {
+    } else if (isPhone) {
       showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
           title: Text("Phone Verification Required"),
-          content: Text(message),
+          content: Text(message ?? ""),
           actions: [
             TextButton(onPressed: () => Navigator.pop(ctx), child: Text("Cancel")),
             TextButton(
               onPressed: () {
                 Navigator.pop(ctx);
-                Navigator.push(context, MaterialPageRoute(builder: (_) => ProfileEdit()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => PhoneOtp(initialPhone: user_phone.$),
+                  ),
+                );
               },
               child: Text("Verify Now", style: TextStyle(fontWeight: FontWeight.bold)),
             ),

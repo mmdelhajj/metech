@@ -20,9 +20,13 @@ import 'package:active_ecommerce_cms_demo_app/repositories/payment_repository.da
 import 'package:active_ecommerce_cms_demo_app/repositories/business_setting_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/coupon_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/auth/otp.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/auth/phone_otp.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/orders/order_list.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/enum_classes.dart';
+import '../helpers/auth_helper.dart';
 import '../helpers/shared_value_helper.dart';
+import '../helpers/system_config.dart';
 import '../repositories/guest_checkout_repository.dart';
 import '../screens/payment_method_screen/amarpay_screen.dart';
 import '../screens/payment_method_screen/cybersource_screen.dart';
@@ -1043,6 +1047,41 @@ class CheckoutProvider extends ChangeNotifier {
       return;
     }
 
+    // Pre-check: email + phone verification before any payment screen opens.
+    // Server enforces this too, but every payment screen has its own error
+    // handling that just shows a toast — so without this check, the user
+    // never sees the "Verify Now" dialog.
+    if (is_logged_in.$ && paymentType == "cart_payment") {
+      if (SystemConfig.systemUser == null) {
+        await AuthHelper().fetchAndSet();
+      }
+      final user = SystemConfig.systemUser;
+      debugPrint(
+        "[VERIFY-PRECHECK] emailVerified=${user?.emailVerified} phoneVerified=${user?.phoneVerified}",
+      );
+      if (user != null && user.emailVerified != true) {
+        _isPlacingOrder = false;
+        _showVerifyDialog(
+          context,
+          title: "Email Verification Required",
+          message:
+              "Please verify your email address before making a purchase.",
+          isEmail: true,
+        );
+        return;
+      }
+      if (user != null && user.phoneVerified != true) {
+        _isPlacingOrder = false;
+        _showVerifyDialog(
+          context,
+          title: "Phone Verification Required",
+          message: "Please verify your phone number before making a purchase.",
+          isEmail: false,
+        );
+        return;
+      }
+    }
+
     try {
       // ================= PAYMENT FLOW =================
 
@@ -1500,5 +1539,48 @@ class CheckoutProvider extends ChangeNotifier {
 
       ToastComponent.showDialog("Something went wrong");
     }
+  }
+
+  void _showVerifyDialog(
+    BuildContext context, {
+    required String title,
+    required String message,
+    required bool isEmail,
+  }) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(title),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text("Cancel"),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(ctx);
+              if (isEmail) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => Otp()),
+                );
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => PhoneOtp(initialPhone: user_phone.$),
+                  ),
+                );
+              }
+            },
+            child: const Text(
+              "Verify Now",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
