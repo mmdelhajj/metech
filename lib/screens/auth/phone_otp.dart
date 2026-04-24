@@ -1,11 +1,15 @@
 import 'dart:async';
 
+import 'package:active_ecommerce_cms_demo_app/custom/input_decorations.dart';
+import 'package:active_ecommerce_cms_demo_app/custom/intl_phone_input.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/system_config.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
+import 'package:active_ecommerce_cms_demo_app/repositories/address_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/auth_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class PhoneOtp extends StatefulWidget {
   final String? initialPhone;
@@ -18,15 +22,33 @@ class PhoneOtp extends StatefulWidget {
 class _PhoneOtpState extends State<PhoneOtp> {
   final TextEditingController _phoneCtrl = TextEditingController();
   final TextEditingController _codeCtrl = TextEditingController();
+
+  String? _fullPhone; // e.g. "+9613080203"
   bool _codeSent = false;
   bool _busy = false;
   int _resendCooldown = 0;
   Timer? _cooldownTimer;
+  List<String?> _countriesCode = <String?>[];
 
   @override
   void initState() {
     super.initState();
-    if (widget.initialPhone != null) _phoneCtrl.text = widget.initialPhone!;
+    if (widget.initialPhone != null && widget.initialPhone!.isNotEmpty) {
+      _fullPhone = widget.initialPhone;
+    }
+    _loadCountries();
+  }
+
+  Future<void> _loadCountries() async {
+    try {
+      final data = await AddressRepository().getCountryList();
+      if (!mounted) return;
+      setState(() {
+        _countriesCode = data.countries.map((c) => c.code).toList();
+      });
+    } catch (_) {
+      // Ignore — picker still works with a default set
+    }
   }
 
   @override
@@ -55,7 +77,7 @@ class _PhoneOtpState extends State<PhoneOtp> {
   }
 
   Future<void> _sendCode() async {
-    final phone = _phoneCtrl.text.trim();
+    final phone = (_fullPhone ?? '').trim();
     if (phone.isEmpty) {
       ToastComponent.showDialog("Please enter your phone number");
       return;
@@ -73,7 +95,7 @@ class _PhoneOtpState extends State<PhoneOtp> {
   }
 
   Future<void> _confirmCode() async {
-    final phone = _phoneCtrl.text.trim();
+    final phone = (_fullPhone ?? '').trim();
     final code = _codeCtrl.text.trim();
     if (code.isEmpty) {
       ToastComponent.showDialog("Please enter the verification code");
@@ -91,7 +113,6 @@ class _PhoneOtpState extends State<PhoneOtp> {
     if (res["result"] == true && res["step"] == "verified") {
       user_phone.$ = phone;
       user_phone.save();
-      // Update in-memory user so the checkout pre-check doesn't re-prompt.
       SystemConfig.systemUser?.phoneVerified = true;
       SystemConfig.systemUser?.phone = phone;
       Navigator.of(context).pop(true);
@@ -116,36 +137,59 @@ class _PhoneOtpState extends State<PhoneOtp> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const SizedBox(height: 20),
+            const SizedBox(height: 12),
             Text(
               _codeSent
-                  ? "Enter the 6-digit code we sent to ${_phoneCtrl.text}"
-                  : "Enter your phone number. We'll send you a verification code by SMS.",
+                  ? "Enter the 6-digit code we sent to ${_fullPhone ?? ''}"
+                  : "Select your country and enter your phone number. We'll send you a verification code by SMS.",
               style: const TextStyle(fontSize: 14),
             ),
-            const SizedBox(height: 24),
-            TextField(
-              controller: _phoneCtrl,
-              keyboardType: TextInputType.phone,
-              enabled: !_codeSent,
-              decoration: const InputDecoration(
-                labelText: "Phone number (with country code, e.g. +9613...)",
-                border: OutlineInputBorder(),
-              ),
-            ),
-            if (_codeSent) ...[
-              const SizedBox(height: 16),
-              TextField(
-                controller: _codeCtrl,
-                keyboardType: TextInputType.number,
-                maxLength: 6,
-                decoration: const InputDecoration(
-                  labelText: "Verification code",
-                  border: OutlineInputBorder(),
+            const SizedBox(height: 20),
+            if (!_codeSent)
+              SizedBox(
+                height: 44,
+                child: CustomInternationalPhoneNumberInput(
+                  countries: _countriesCode,
+                  onInputChanged: (PhoneNumber number) {
+                    setState(() {
+                      _fullPhone = number.phoneNumber;
+                    });
+                  },
+                  onInputValidated: (bool value) {},
+                  selectorConfig: const SelectorConfig(
+                    selectorType: PhoneInputSelectorType.DIALOG,
+                  ),
+                  ignoreBlank: false,
+                  autoValidateMode: AutovalidateMode.disabled,
+                  selectorTextStyle: TextStyle(color: MyTheme.font_grey),
+                  textFieldController: _phoneCtrl,
+                  formatInput: true,
+                  keyboardType: const TextInputType.numberWithOptions(
+                    signed: true,
+                    decimal: true,
+                  ),
+                  inputDecoration: InputDecorations.buildInputDecorationPhone(
+                    hintText: "Phone number",
+                  ),
+                  onSaved: (PhoneNumber number) {},
                 ),
+              )
+            else
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  TextField(
+                    controller: _codeCtrl,
+                    keyboardType: TextInputType.number,
+                    maxLength: 6,
+                    decoration: const InputDecoration(
+                      labelText: "Verification code",
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                ],
               ),
-            ],
-            const SizedBox(height: 24),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: _busy ? null : (_codeSent ? _confirmCode : _sendCode),
               style: ElevatedButton.styleFrom(
@@ -169,9 +213,7 @@ class _PhoneOtpState extends State<PhoneOtp> {
             if (_codeSent) ...[
               const SizedBox(height: 8),
               TextButton(
-                onPressed: (_busy || _resendCooldown > 0)
-                    ? null
-                    : _sendCode,
+                onPressed: (_busy || _resendCooldown > 0) ? null : _sendCode,
                 child: Text(
                   _resendCooldown > 0
                       ? "Resend code in ${_resendCooldown}s"

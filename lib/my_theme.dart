@@ -8,7 +8,7 @@ ThemeData lightMode = ThemeData();
 class MyTheme {
   /*configurable colors stars*/
   static Color mainColor = Color(0xffF2F1F6);
-  static const Color accent_color = Color(0xff0066CC);
+  static const Color accent_color = Color(0xff2196F3);
   static const Color accent_color_shadow = Color.fromRGBO(
     229,
     65,
@@ -16,7 +16,7 @@ class MyTheme {
     .40,
   ); // this color is a dropshadow of
   static Color soft_accent_color = Color.fromRGBO(254, 234, 209, 1);
-  static Color splash_screen_color = Color(0xff0066CC);
+  static Color splash_screen_color = Color(0xff2196F3);
   static Color price_color = Colors.black;
   static Color blackColour=Colors.black;
 
@@ -37,7 +37,7 @@ class MyTheme {
   static Color golden = Color.fromRGBO(255, 168, 0, 1);
   static Color amber = Color.fromRGBO(254, 234, 209, 1);
   static Color amber_medium = Color.fromRGBO(254, 240, 215, 1);
-  static Color golden_shadow = Color(0xff0066CC).withValues(alpha: .15);
+  static Color golden_shadow = Color(0xff2196F3).withValues(alpha: .15);
   static Color black_shadow = Colors.black.withValues(alpha: .15);
   static Color green = Colors.green;
   static Color? green_light = Colors.green[200];
