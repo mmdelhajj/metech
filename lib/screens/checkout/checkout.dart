@@ -1,3 +1,5 @@
+import 'package:active_ecommerce_cms_demo_app/screens/auth/otp.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/profile_edit.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/enum_classes.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/lang_text.dart';
@@ -667,7 +669,7 @@ class _CheckoutState extends State<Checkout> {
       if (Navigator.canPop(context)) Navigator.of(context).pop();
 
       if (orderCreateResponse.result == false) {
-        ToastComponent.showDialog(orderCreateResponse.message);
+        _handleVerificationError(orderCreateResponse.message);
         return;
       }
 
@@ -687,7 +689,7 @@ class _CheckoutState extends State<Checkout> {
       if (Navigator.canPop(context)) Navigator.of(context).pop();
 
       if (orderCreateResponse.result == false) {
-        ToastComponent.showDialog(orderCreateResponse.message);
+        _handleVerificationError(orderCreateResponse.message);
         return;
       }
 
@@ -707,7 +709,7 @@ class _CheckoutState extends State<Checkout> {
       if (Navigator.canPop(context)) Navigator.of(context).pop();
 
       if (orderCreateResponse.result == false) {
-        ToastComponent.showDialog(orderCreateResponse.message);
+        _handleVerificationError(orderCreateResponse.message);
         return;
       }
 
@@ -1355,6 +1357,48 @@ class _CheckoutState extends State<Checkout> {
         ),
       ),
     );
+  }
+
+  _handleVerificationError(String? message) {
+    if (message != null && message.contains('email')) {
+      showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text("Email Verification Required"),
+          content: Text(message),
+          actions: [
+            TextButton(onPressed: () => Navigator.pop(ctx), child: Text("Cancel")),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(ctx);
+                Navigator.push(context, MaterialPageRoute(builder: (_) => Otp()));
+              },
+              child: Text("Verify Now", style: TextStyle(fontWeight: FontWeight.bold)),
+            ),
+          ],
+        ),
+      );
+    } else if (message != null && message.contains('phone')) {
+      showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text("Phone Verification Required"),
+          content: Text(message),
+          actions: [
+            TextButton(onPressed: () => Navigator.pop(ctx), child: Text("Cancel")),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(ctx);
+                Navigator.push(context, MaterialPageRoute(builder: (_) => ProfileEdit()));
+              },
+              child: Text("Verify Now", style: TextStyle(fontWeight: FontWeight.bold)),
+            ),
+          ],
+        ),
+      );
+    } else {
+      ToastComponent.showDialog(message ?? "Error");
+    }
   }
 
   loading() {

@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:active_ecommerce_cms_demo_app/screens/auth/otp.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/profile_edit.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/box_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
@@ -107,9 +109,41 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
 
     if (bidPlacedResponse.result == true) {
       ToastComponent.showDialog(bidPlacedResponse.message!);
-
       fetchAll();
+    } else {
+      String? msg = bidPlacedResponse.message;
+      if (msg != null && msg.contains('email')) {
+        _showVerificationDialog("Email Verification Required", msg, true);
+      } else if (msg != null && msg.contains('phone')) {
+        _showVerificationDialog("Phone Verification Required", msg, false);
+      } else {
+        ToastComponent.showDialog(msg ?? "Bid failed");
+      }
     }
+  }
+
+  _showVerificationDialog(String title, String message, bool isEmail) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(title),
+        content: Text(message),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(ctx), child: Text("Cancel")),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(ctx);
+              if (isEmail) {
+                Navigator.push(context, MaterialPageRoute(builder: (_) => Otp()));
+              } else {
+                Navigator.push(context, MaterialPageRoute(builder: (_) => ProfileEdit()));
+              }
+            },
+            child: Text("Verify Now", style: TextStyle(fontWeight: FontWeight.bold)),
+          ),
+        ],
+      ),
+    );
   }
 
   fetchAll() {
