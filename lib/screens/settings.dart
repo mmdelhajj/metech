@@ -38,8 +38,6 @@ class _SettingsState extends State<Settings> {
             height: DeviceInfo(context).height! / 1,
             width: DeviceInfo(context).width,
             color: Colors.white,
-            alignment: Alignment.topCenter,
-            child: Image.asset("assets/background_1.png", color: Colors.grey),
           ),
           Scaffold(
             backgroundColor: Colors.transparent,
