@@ -196,7 +196,7 @@
 //   RefreshIndicator buildBody(BuildContext context) {
 //     return RefreshIndicator(
 //       color: MyTheme.accent_color,
-//       backgroundColor: Colors.white,
+//       backgroundColor: MyTheme.white,
 //       onRefresh: _onRefresh,
 //       displacement: 0,
 //       child: buildBodyChildren(context),
@@ -515,7 +515,7 @@
 //             ),
 //             child: const Padding(
 //               padding: EdgeInsets.all(3),
-//               child: Icon(Icons.check, color: Colors.white, size: 10),
+//               child: Icon(Icons.check, color: MyTheme.white, size: 10),
 //             ),
 //           )
 //         : Container();
@@ -537,7 +537,7 @@
 //           child: Text(
 //             AppLocalizations.of(context)!.proceed_to_checkout,
 //             style: const TextStyle(
-//               color: Colors.white,
+//               color: MyTheme.white,
 //               fontSize: 16,
 //               fontWeight: FontWeight.w600,
 //             ),

@@ -15,7 +15,7 @@ class AuthScreen {
           ? TextDirection.rtl
           : TextDirection.ltr,
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: MyTheme.white,
         body: Stack(
           children: [
             // Background container
@@ -97,7 +97,7 @@ class AuthScreen {
                     color: Colors.grey.withValues(alpha: 0.7),
                     shape: BoxShape.circle,
                   ),
-                  child: Icon(Icons.close, color: Colors.white, size: 24),
+                  child: Icon(Icons.close, color: MyTheme.white, size: 24),
                 ),
               ),
             ),

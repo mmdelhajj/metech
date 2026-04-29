@@ -100,7 +100,7 @@ class _DigitalProductCardState extends State<DigitalProductCard> {
                             "Wholesale",
                             style: TextStyle(
                               fontSize: 10,
-                              color: Colors.white,
+                              color: MyTheme.white,
                               fontWeight: FontWeight.w700,
                               height: 1.8,
                             ),
@@ -207,7 +207,7 @@ class _DigitalProductCardState extends State<DigitalProductCard> {
                           widget.discount ?? '',
                           style: TextStyle(
                             fontSize: 10,
-                            color: Colors.white,
+                            color: MyTheme.white,
                             fontWeight: FontWeight.w700,
                             height: 1.8,
                           ),

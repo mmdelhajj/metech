@@ -138,13 +138,13 @@ class _MapPlacePickerNoHeaderState extends State<MapPlacePickerNoHeader> {
         title: Text(
           "Pick Location",
           style: TextStyle(
-            color: Colors.black,
+            color: MyTheme.blackColour,
             fontSize: 18,
             fontWeight: FontWeight.w600,
           ),
         ),
         backgroundColor: MyTheme.white,
-        iconTheme: const IconThemeData(color: Colors.black),
+        iconTheme: IconThemeData(color: MyTheme.blackColour),
         elevation: 1,
       ),
 
@@ -162,8 +162,8 @@ class _MapPlacePickerNoHeaderState extends State<MapPlacePickerNoHeader> {
                 ),
                 onPressed: _saving ? null : saveLocation,
                 child: _saving
-                    ? const CircularProgressIndicator(color: Colors.white)
-                    : const Text(
+                    ? CircularProgressIndicator(color: MyTheme.white)
+                    : Text(
                         "Add this location",
                         style: TextStyle(
                           fontSize: 16,

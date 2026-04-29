@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 
 class BoxDecorations {
   static BoxDecoration buildBoxDecoration_1({double radius = 6.0}) {
     return BoxDecoration(
       borderRadius: BorderRadius.circular(radius),
-      color: Colors.white,
+      color: MyTheme.white,
     );
   }
 
   static BoxDecoration buildBoxDecorationWithShadow({double radius = 6.0}) {
     return BoxDecoration(
       borderRadius: BorderRadius.circular(radius),
-      color: Colors.white,
+      color: MyTheme.white,
       boxShadow: [
         BoxShadow(
-          color: Colors.black.withValues(alpha: .08),
+          color: MyTheme.blackColour.withValues(alpha: .08),
           blurRadius: 20,
           spreadRadius: 0.0,
           offset: Offset(0.0, 10.0),
@@ -33,10 +34,10 @@ class BoxDecorations {
   static BoxDecoration buildCircularButtonDecoration_1() {
     return BoxDecoration(
       borderRadius: BorderRadius.circular(36.0),
-      color: Colors.white.withValues(alpha: 0.80),
+      color: MyTheme.white.withValues(alpha: 0.80),
       boxShadow: [
         BoxShadow(
-          color: Colors.black.withValues(alpha: 0.08),
+          color: MyTheme.blackColour.withValues(alpha: 0.08),
           blurRadius: 20,
           spreadRadius: 0.0,
           offset: Offset(0.0, 10.0),
@@ -48,10 +49,10 @@ class BoxDecorations {
   static BoxDecoration buildCircularButtonDecorationForProductDetails() {
     return BoxDecoration(
       shape: BoxShape.circle,
-      color: Colors.white.withValues(alpha: 0.80),
+      color: MyTheme.white.withValues(alpha: 0.80),
       boxShadow: [
         BoxShadow(
-          color: Colors.black.withValues(alpha: 0.08),
+          color: MyTheme.blackColour.withValues(alpha: 0.08),
           blurRadius: 20,
           spreadRadius: 0,
           offset: Offset(0.0, 10.0),

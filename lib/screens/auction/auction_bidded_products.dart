@@ -117,7 +117,7 @@ class _AuctionBiddedProductsState extends State<AuctionBiddedProducts> {
           ? TextDirection.rtl
           : TextDirection.ltr,
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: MyTheme.white,
         appBar: buildAppBar(context),
         body: RefreshIndicator(
           triggerMode: RefreshIndicatorTriggerMode.anywhere,
@@ -229,7 +229,7 @@ class _AuctionBiddedProductsState extends State<AuctionBiddedProducts> {
                         constraints: const BoxConstraints(maxWidth: 250),
                         child: Text(
                           name!,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 14,
                             color: MyTheme.font_grey,
                             fontWeight: FontWeight.w400,
@@ -246,7 +246,7 @@ class _AuctionBiddedProductsState extends State<AuctionBiddedProducts> {
                     children: [
                       Text(
                         AppLocalizations.of(context)!.auction_my_bid_ucf,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 12,
                           color: MyTheme.font_grey,
                           fontWeight: FontWeight.w400,
@@ -273,7 +273,7 @@ class _AuctionBiddedProductsState extends State<AuctionBiddedProducts> {
                     children: [
                       Text(
                         AppLocalizations.of(context)!.auction_highest_bid_ucf,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 12,
                           color: MyTheme.font_grey,
                           fontWeight: FontWeight.w400,
@@ -300,7 +300,7 @@ class _AuctionBiddedProductsState extends State<AuctionBiddedProducts> {
                     children: [
                       Text(
                         AppLocalizations.of(context)!.auction_end_date_ucf,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 12,
                           color: MyTheme.font_grey,
                           fontWeight: FontWeight.w400,
@@ -394,7 +394,7 @@ class _AuctionBiddedProductsState extends State<AuctionBiddedProducts> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: MyTheme.white,
       centerTitle: false,
       leading: UsefulElements.backButton(context),
       title: Text(

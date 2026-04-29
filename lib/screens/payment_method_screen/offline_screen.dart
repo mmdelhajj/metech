@@ -206,7 +206,7 @@ class _OfflineState extends State<OfflineScreen> {
           ? TextDirection.rtl
           : TextDirection.ltr,
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: MyTheme.white,
         appBar: buildAppBar(context),
         body: buildBody(context),
       ),
@@ -215,7 +215,7 @@ class _OfflineState extends State<OfflineScreen> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: MyTheme.white,
       centerTitle: true,
       leading: Builder(
         builder: (context) => IconButton(
@@ -246,7 +246,7 @@ class _OfflineState extends State<OfflineScreen> {
     } else {
       return RefreshIndicator(
         color: MyTheme.accent_color,
-        backgroundColor: Colors.white,
+        backgroundColor: MyTheme.white,
         onRefresh: _onPageRefresh,
         displacement: 10,
         child: CustomScrollView(
@@ -408,7 +408,7 @@ class _OfflineState extends State<OfflineScreen> {
                     child: Text(
                       AppLocalizations.of(context)!.photo_proof_ucf,
                       style: TextStyle(
-                        color: Colors.white,
+                        color: MyTheme.white,
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                       ),
@@ -450,7 +450,7 @@ class _OfflineState extends State<OfflineScreen> {
                     child: Text(
                       AppLocalizations.of(context)!.submit_ucf,
                       style: TextStyle(
-                        color: Colors.white,
+                        color: MyTheme.white,
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                       ),

@@ -58,7 +58,7 @@ class _VideoDescriptionState extends State<VideoDescription> {
         textDirection: app_language_rtl.$!
             ? TextDirection.rtl
             : TextDirection.ltr,
-        child: Scaffold(backgroundColor: Colors.white, body: buildBody()),
+        child: Scaffold(backgroundColor: MyTheme.white, body: buildBody()),
       ),
     );
   }

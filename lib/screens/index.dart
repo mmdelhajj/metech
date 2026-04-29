@@ -1,4 +1,5 @@
 import 'package:active_ecommerce_cms_demo_app/helpers/addons_helper.dart';
+import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/auth_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/business_setting_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
@@ -75,7 +76,7 @@ class _IndexState extends State<Index> {
               padding: EdgeInsets.all(16),
               child: SelectableText(
                 _errorMessage!,
-                style: TextStyle(color: Colors.white, fontSize: 14),
+                style: TextStyle(color: MyTheme.white, fontSize: 14),
               ),
             ),
           ),

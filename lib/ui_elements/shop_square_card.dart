@@ -46,7 +46,7 @@ class _ShopSquareCardState extends State<ShopSquareCard> {
               height: 165,
               width: 170,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: MyTheme.white,
                 borderRadius: BorderRadius.circular(10),
               ),
               padding: EdgeInsets.all(35),

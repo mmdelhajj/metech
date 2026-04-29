@@ -515,7 +515,7 @@ class CustomSelectorButton extends StatelessWidget {
         : Container(
             height: 36,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: MyTheme.white,
               border: Border.all(color: MyTheme.textfield_grey, width: .5),
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(5.0),
@@ -527,7 +527,7 @@ class CustomSelectorButton extends StatelessWidget {
               style: TextButton.styleFrom(
                 padding: EdgeInsets.zero,
                 minimumSize: Size(0, 20),
-                backgroundColor: Colors.white,
+                backgroundColor: MyTheme.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(5.0),

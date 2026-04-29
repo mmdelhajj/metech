@@ -301,7 +301,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
     return Container(
       padding: const EdgeInsets.fromLTRB(12, 14, 21, 12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: MyTheme.white,
         borderRadius: BorderRadius.circular(6.0),
       ),
       child: Row(
@@ -334,7 +334,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
                     ),
                     Text(
                       _purchaseList[index].date!,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: MyTheme.font_grey,
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
@@ -354,7 +354,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
                     ),
                     Text(
                       "${AppLocalizations.of(context)!.payment_status_ucf} - ",
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: MyTheme.font_grey,
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
@@ -393,7 +393,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
                   ),
                   Text(
                     "${AppLocalizations.of(context)!.delivery_status_ucf} -",
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: MyTheme.font_grey,
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
@@ -401,7 +401,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
                   ),
                   Text(
                     _purchaseList[index].deliveryStatus!,
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: MyTheme.font_grey,
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
@@ -464,7 +464,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
                 child: Container(
                   height: 75,
                   width: double.infinity,
-                  color: Colors.white,
+                  color: MyTheme.white,
                 ),
               ),
             );
@@ -511,7 +511,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
         children: [
           Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: MyTheme.white,
               borderRadius: BorderRadius.circular(3),
             ),
             padding: EdgeInsets.symmetric(horizontal: 14),
@@ -539,7 +539,7 @@ class _AuctionPurchaseHistoryState extends State<AuctionPurchaseHistory> {
           ),
           Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: MyTheme.white,
               borderRadius: BorderRadius.circular(3),
             ),
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),

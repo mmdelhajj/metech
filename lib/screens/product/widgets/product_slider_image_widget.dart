@@ -83,7 +83,7 @@ class _ProductSliderImageWidgetState extends State<ProductSliderImageWidget> {
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: widget.currentImage == index
-                                ? Colors.black.withValues(alpha: 0.5)
+                                ? MyTheme.blackColour.withValues(alpha: 0.5)
                                 : Color(0xff484848).withValues(alpha: 0.5),
                           ),
                         ),

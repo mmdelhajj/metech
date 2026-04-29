@@ -125,7 +125,7 @@ class _SslCommerzScreenState extends State<SslCommerzScreen> {
           ? TextDirection.rtl
           : TextDirection.ltr,
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: MyTheme.white,
         appBar: buildAppBar(context),
         body: buildBody(),
       ),
@@ -210,7 +210,7 @@ class _SslCommerzScreenState extends State<SslCommerzScreen> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: MyTheme.white,
       centerTitle: true,
       leading: Builder(
         builder: (context) => IconButton(

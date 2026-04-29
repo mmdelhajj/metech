@@ -173,7 +173,7 @@ class _BlogListScreenState extends State<BlogListScreen> {
                 Center(
                   child: Text(
                     "No blogs found",
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+                    style: TextStyle(color: MyTheme.white, fontSize: 16),
                   ),
                 ),
               ],
@@ -222,8 +222,8 @@ class _BlogListScreenState extends State<BlogListScreen> {
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter,
                                 colors: [
-                                  Colors.white.withValues(alpha: 0.5),
-                                  Colors.black.withValues(alpha: 0.5),
+                                  MyTheme.white.withValues(alpha: 0.5),
+                                  MyTheme.blackColour.withValues(alpha: 0.5),
                                 ],
                               ),
                             ),
@@ -237,20 +237,20 @@ class _BlogListScreenState extends State<BlogListScreen> {
                             children: [
                               Text(
                                 blogProvider.blogs[index].title,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 13,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white,
+                                  color: MyTheme.white,
                                 ),
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                               ),
-                              const SizedBox(height: 8),
+                              SizedBox(height: 8),
                               Text(
                                 blogProvider.blogs[index].shortDescription,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 10,
-                                  color: Colors.white,
+                                  color: MyTheme.white,
                                 ),
                                 maxLines: 3,
                                 overflow: TextOverflow.ellipsis,

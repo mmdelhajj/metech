@@ -122,7 +122,7 @@ class _ProductMediaSliderState extends State<ProductMediaSlider> {
                                 shape: BoxShape.circle,
                                 color: _currentImage == index
                                     ? MyTheme.white
-                                    : Colors.white.withValues(alpha: 0.5),
+                                    : MyTheme.white.withValues(alpha: 0.5),
                               ),
                             ),
                           ),
@@ -174,7 +174,7 @@ class _ProductMediaSliderState extends State<ProductMediaSlider> {
                 } else {
                   return Icon(
                     Icons.play_circle_fill_rounded,
-                    color: Colors.white.withValues(alpha: 0.85),
+                    color: MyTheme.white.withValues(alpha: 0.85),
                     size: 60.0.sp,
                   );
                 }

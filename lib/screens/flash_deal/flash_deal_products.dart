@@ -221,11 +221,11 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
                   width: DeviceInfo(context).width,
                   margin: EdgeInsets.symmetric(horizontal: 18),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: MyTheme.white,
                     borderRadius: BorderRadius.circular(6),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.16),
+                        color: MyTheme.blackColour.withValues(alpha: 0.16),
                         blurRadius: 20,
                         offset: Offset(0, 10),
                       ),

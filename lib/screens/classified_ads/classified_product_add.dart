@@ -80,7 +80,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
     bool? userAgreed = await showDialog<bool>(
       context: context,
       builder: (BuildContext context) => AlertDialog(
-        backgroundColor: Colors.white,
+        backgroundColor: MyTheme.white,
         title: const Text("Permission Required"),
         content: Text(purpose, textAlign: TextAlign.center),
         actions: <Widget>[
@@ -1031,7 +1031,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
                           onPressed: submit,
                           child: Text(
                             AppLocalizations.of(context)!.save_product_ucf,
-                            style: const TextStyle(color: Colors.white),
+                            style: TextStyle(color: MyTheme.white),
                           ),
                         ),
                       ),
@@ -1110,7 +1110,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
   Text buildFieldTitle(title) {
     return Text(
       title,
-      style: const TextStyle(
+      style: TextStyle(
         fontSize: 12,
         fontWeight: FontWeight.bold,
         color: MyTheme.font_grey,
@@ -1169,7 +1169,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
         height: 40,
         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: MyTheme.white,
           borderRadius: BorderRadius.circular(6),
           border: Border.all(
             color: MyTheme.accent_color,
@@ -1180,7 +1180,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
         ),
         child: DropdownButton<CommonDropDownItem>(
           borderRadius: BorderRadius.circular(10),
-          dropdownColor: Colors.white,
+          dropdownColor: MyTheme.white,
           menuMaxHeight: 300,
           isDense: true,
           underline: Container(),
@@ -1403,7 +1403,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
   Text buildGroupTitle(title) {
     return Text(
       title,
-      style: const TextStyle(
+      style: TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.bold,
         color: MyTheme.font_grey,
@@ -1422,7 +1422,7 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
       children: [
         Text(
           title,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.bold,
             color: MyTheme.font_grey,

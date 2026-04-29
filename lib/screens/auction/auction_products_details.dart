@@ -242,7 +242,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                           color: Color.fromRGBO(253, 253, 253, 1),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0),
-                            side: BorderSide(color: Colors.black, width: 1.0),
+                            side: BorderSide(color: MyTheme.blackColour, width: 1.0),
                           ),
                           child: Text(
                             AppLocalizations.of(context)!.copy_product_link_ucf,
@@ -286,11 +286,11 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                           color: Colors.blue,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0),
-                            side: BorderSide(color: Colors.black, width: 1.0),
+                            side: BorderSide(color: MyTheme.blackColour, width: 1.0),
                           ),
                           child: Text(
                             AppLocalizations.of(context)!.share_options_ucf,
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: MyTheme.white),
                           ),
                           onPressed: () {
                             Share.share(_auctionproductDetails.link);
@@ -430,7 +430,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                             minWidth: 75, height: 30,
                             color: MyTheme.accent_color,
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0), side: BorderSide(color: MyTheme.light_grey, width: 1.0)),
-                            child: Text(AppLocalizations.of(context)!.send_all_capital, style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)),
+                            child: Text(AppLocalizations.of(context)!.send_all_capital, style: TextStyle(color: MyTheme.white, fontSize: 16, fontWeight: FontWeight.w600)),
                             onPressed: () async {
                               var title = sellerChatTitleController.text.toString();
                               var message = sellerChatMessageController.text.toString();
@@ -531,7 +531,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                             ? AppLocalizations.of(context)!.place_bid_ucf
                             : AppLocalizations.of(context)!.change_bid_ucf,
                         style: TextStyle(
-                          color: Colors.white,
+                          color: MyTheme.white,
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                         ),
@@ -543,7 +543,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
             : ShimmerHelper().buildBasicShimmer(height: 30.0, width: 60),
         body: RefreshIndicator(
           color: MyTheme.accent_color,
-          backgroundColor: Colors.white,
+          backgroundColor: MyTheme.white,
           onRefresh: _onPageRefresh,
           child: CustomScrollView(
             controller: _mainScrollController,
@@ -553,7 +553,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
             slivers: <Widget>[
               SliverAppBar(
                 elevation: 0,
-                backgroundColor: Colors.white.withValues(alpha: opacity),
+                backgroundColor: MyTheme.white.withValues(alpha: opacity),
                 pinned: true,
                 automaticallyImplyLeading: false,
                 title: Row(
@@ -1310,7 +1310,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
                       ),
                       child: Text(
                         '${auctionEndTimeList[index]}${labels[index]}',
-                        style: TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w600),
+                        style: TextStyle(color: MyTheme.white, fontSize: 11, fontWeight: FontWeight.w600),
                       ),
                     );
                   },
@@ -1425,7 +1425,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
 
   AppBar buildAppBar(double statusBarHeight, BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: MyTheme.white,
       leading: Builder(
         builder: (context) => IconButton(
           icon: Icon(CupertinoIcons.arrow_left, color: MyTheme.dark_grey),

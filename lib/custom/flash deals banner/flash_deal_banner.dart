@@ -72,7 +72,7 @@ class _FlashDealBannerState extends State<FlashDealBanner> {
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: MyTheme.white,
                       borderRadius: BorderRadius.circular(6.r),
                     ),
                     clipBehavior: Clip.hardEdge,
@@ -162,7 +162,7 @@ class _FlashDealBannerState extends State<FlashDealBanner> {
     return Container(
       height: 160.h,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: MyTheme.white,
         borderRadius: BorderRadius.circular(6.r),
       ),
       child: Column(
@@ -212,7 +212,7 @@ class _FlashDealBannerState extends State<FlashDealBanner> {
         Container(
           height: 160.h,
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: MyTheme.white,
             borderRadius: BorderRadius.circular(6.r),
             boxShadow: [
               BoxShadow(
@@ -306,7 +306,7 @@ class _FlashDealBannerState extends State<FlashDealBanner> {
               child: Text(
                 product.discount ?? "",
                 style: TextStyle(
-                  color: Colors.white,
+                  color: MyTheme.white,
                   fontSize: 8.sp,
                   fontWeight: FontWeight.bold,
                 ),

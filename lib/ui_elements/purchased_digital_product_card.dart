@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'dart:isolate';
 import 'dart:ui';
 
@@ -107,7 +108,7 @@ class _PurchasedDigitalProductCardState
                 style: TextStyle(
                   fontFamily: 'Public Sans',
                   fontSize: 10,
-                  color: Colors.white,
+                  color: MyTheme.white,
                   fontWeight: FontWeight.w500,
                   height: 1.8,
                 ),

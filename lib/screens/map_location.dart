@@ -137,7 +137,7 @@ class MapLocationState extends State<MapLocation>
                                     ),
                                     child: Text(
                                       AppLocalizations.of(context)!.pick_here,
-                                      style: TextStyle(color: Colors.white),
+                                      style: TextStyle(color: MyTheme.white),
                                     ),
                                     onPressed: () {
                                       onTapPickHere(selectedPlace);

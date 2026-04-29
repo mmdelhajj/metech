@@ -3,7 +3,7 @@ description: "A new Flutter project."
 
 publish_to: 'none'
 
-version: 5.8.4+74
+version: 5.9.0+75
 
 environment:
   sdk: '>=3.10.0 <4.0.0'
@@ -83,6 +83,7 @@ dependencies:
   chewie: ^1.7.5
   package_info_plus: ^4.1.0
   path: ^1.9.1
+  flutter_phoenix: ^1.1.1
 
 dependency_overrides:
   google_maps_place_picker_mb: ^3.1.2

@@ -289,7 +289,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
                       child: Text(
                         AppLocalizations.of(context)!.confirm_ucf,
                         style: TextStyle(
-                          color: Colors.white,
+                          color: MyTheme.white,
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                         ),
@@ -374,7 +374,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
                 child: Text(
                   AppLocalizations.of(context)!.back_to_Login_ucf,
                   style: TextStyle(
-                    color: Colors.white,
+                    color: MyTheme.white,
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
                   ),

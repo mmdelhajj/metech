@@ -104,7 +104,7 @@ class _AuctionProductsState extends State<AuctionProducts> {
     return Container(
       height: _showLoadingContainer ? 36 : 0,
       width: double.infinity,
-      color: Colors.white,
+      color: MyTheme.white,
       child: Center(
         child: Text(
           _totalData == _auctionProductItems.length

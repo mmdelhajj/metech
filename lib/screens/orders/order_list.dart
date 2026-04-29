@@ -249,7 +249,7 @@ class _OrderListState extends State<OrderList> {
     return Container(
       height: _showLoadingContainer ? 36 : 0,
       width: double.infinity,
-      color: Colors.white,
+      color: MyTheme.white,
       child: Center(
         child: Text(
           _totalData == _orderList.length
@@ -272,7 +272,7 @@ class _OrderListState extends State<OrderList> {
             height: 36,
             width: MediaQuery.of(context).size.width * .4,
             child: DropdownButton<PaymentStatus>(
-              dropdownColor: Colors.white,
+              dropdownColor: MyTheme.white,
               borderRadius: BorderRadius.circular(6),
               icon: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -301,7 +301,7 @@ class _OrderListState extends State<OrderList> {
             height: 36,
             width: MediaQuery.of(context).size.width * .4,
             child: DropdownButton<DeliveryStatus>(
-              dropdownColor: Colors.white,
+              dropdownColor: MyTheme.white,
               borderRadius: BorderRadius.circular(6),
               icon: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -416,7 +416,7 @@ class _OrderListState extends State<OrderList> {
                 child: Container(
                   height: 75,
                   width: double.infinity,
-                  color: Colors.white,
+                  color: MyTheme.white,
                 ),
               ),
             );
@@ -426,7 +426,7 @@ class _OrderListState extends State<OrderList> {
     } else if (_orderList.isNotEmpty) {
       return RefreshIndicator(
         color: MyTheme.accent_color,
-        backgroundColor: Colors.white,
+        backgroundColor: MyTheme.white,
         displacement: 0,
         onRefresh: _onRefresh,
         child: SingleChildScrollView(
@@ -573,7 +573,7 @@ class _OrderListState extends State<OrderList> {
         padding: const EdgeInsets.all(3),
         child: Icon(
           paymentStatus == "paid" ? Icons.check : Icons.check,
-          color: Colors.white,
+          color: MyTheme.white,
           size: 10,
         ),
       ),

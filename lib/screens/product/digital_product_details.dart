@@ -416,7 +416,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                           color: Color.fromRGBO(253, 253, 253, 1),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0),
-                            side: BorderSide(color: Colors.black, width: 1.0),
+                            side: BorderSide(color: MyTheme.blackColour, width: 1.0),
                           ),
                           child: Text(
                             AppLocalizations.of(context)!.copy_product_link_ucf,
@@ -461,11 +461,11 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                           color: Colors.blue,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0),
-                            side: BorderSide(color: Colors.black, width: 1.0),
+                            side: BorderSide(color: MyTheme.blackColour, width: 1.0),
                           ),
                           child: Text(
                             AppLocalizations.of(context)!.share_options_ucf,
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: MyTheme.white),
                           ),
                           onPressed: () {
                             Share.share(_productDetails!.link!);
@@ -674,7 +674,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                     child: Text(
                       AppLocalizations.of(context)!.send_all_capital,
                       style: TextStyle(
-                        color: Colors.white,
+                        color: MyTheme.white,
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                       ),
@@ -808,7 +808,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
         bottomNavigationBar: buildBottomAppBar(context, addedToCartSnackbar),
         body: RefreshIndicator(
           color: MyTheme.accent_color,
-          backgroundColor: Colors.white,
+          backgroundColor: MyTheme.white,
           onRefresh: _onPageRefresh,
           child: CustomScrollView(
             controller: _mainScrollController,
@@ -920,7 +920,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                                         "${cart.cartCounter}",
                                         style: TextStyle(
                                           fontSize: 12,
-                                          color: Colors.white,
+                                          color: MyTheme.white,
                                         ),
                                       );
                                     },
@@ -974,10 +974,10 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(6),
-                      color: Colors.white,
+                      color: MyTheme.white,
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withValues(alpha: .08),
+                          color: MyTheme.blackColour.withValues(alpha: .08),
                           blurRadius: 20,
                           spreadRadius: 0.0,
                           offset: Offset(0.0, 0.0),
@@ -1107,10 +1107,10 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: MyTheme.white,
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.08),
+                            color: MyTheme.blackColour.withValues(alpha: 0.08),
                             spreadRadius: 0,
                             blurRadius: 16,
                             offset: Offset(0, 0),
@@ -1237,10 +1237,10 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                       child: Container(
                         height: 48,
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: MyTheme.white,
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withValues(alpha: 0.08),
+                              color: MyTheme.blackColour.withValues(alpha: 0.08),
                               spreadRadius: 0,
                               blurRadius: 16,
                               offset: Offset(0, 0),
@@ -1294,10 +1294,10 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                       child: Container(
                         height: 48,
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: MyTheme.white,
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withValues(alpha: 0.08),
+                              color: MyTheme.blackColour.withValues(alpha: 0.08),
                               spreadRadius: 0,
                               blurRadius: 16,
                               offset: Offset(0, 0),
@@ -1343,7 +1343,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                     child: Text(
                       AppLocalizations.of(context)!.products_you_may_also_like,
                       style: TextStyle(
-                        color: Colors.black,
+                        color: MyTheme.blackColour,
                         fontFamily: 'Roboto',
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -1362,7 +1362,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                     child: Text(
                       AppLocalizations.of(context)!.top_selling_products_ucf,
                       style: TextStyle(
-                        color: Colors.black,
+                        color: MyTheme.blackColour,
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
@@ -1457,10 +1457,10 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(36.0),
-                color: Colors.white,
+                color: MyTheme.white,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withValues(alpha: .08),
+                    color: MyTheme.blackColour.withValues(alpha: .08),
                     blurRadius: 20,
                     spreadRadius: 0.0,
                     offset: Offset(0.0, 10.0),
@@ -1718,7 +1718,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
             color: MyTheme.white,
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withValues(alpha: 0.12),
+                color: MyTheme.blackColour.withValues(alpha: 0.12),
                 blurRadius: 6,
                 spreadRadius: 1,
                 offset: Offset(0.0, 3.0),
@@ -1806,7 +1806,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
           boxShadow: [
             _selectedColorIndex == index
                 ? BoxShadow(
-                    color: Colors.black.withValues(
+                    color: MyTheme.blackColour.withValues(
                       alpha: _selectedColorIndex == index ? 0.25 : 0.12,
                     ),
                     blurRadius: 10,
@@ -1814,7 +1814,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                     offset: Offset(0.0, 6.0),
                   )
                 : BoxShadow(
-                    color: Colors.black.withValues(
+                    color: MyTheme.blackColour.withValues(
                       alpha: _selectedColorIndex == index ? 0.25 : 0.16,
                     ),
                     blurRadius: 6,
@@ -2005,7 +2005,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
 
   AppBar buildAppBar(double statusBarHeight, BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: MyTheme.white,
       leading: Builder(
         builder: (context) => IconButton(
           icon: Icon(CupertinoIcons.arrow_left, color: MyTheme.dark_grey),
@@ -2075,7 +2075,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                 child: Text(
                   AppLocalizations.of(context)!.add_to_cart_ucf,
                   style: TextStyle(
-                    color: Colors.white,
+                    color: MyTheme.white,
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),
@@ -2109,7 +2109,7 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
                 child: Text(
                   AppLocalizations.of(context)!.buy_now_ucf,
                   style: TextStyle(
-                    color: Colors.white,
+                    color: MyTheme.white,
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),
@@ -2390,10 +2390,10 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
   buildQuantityUpButton() => Container(
     decoration: BoxDecoration(
       shape: BoxShape.circle,
-      color: Colors.white,
+      color: MyTheme.white,
       boxShadow: [
         BoxShadow(
-          color: Colors.black.withValues(alpha: 0.16),
+          color: MyTheme.blackColour.withValues(alpha: 0.16),
           blurRadius: 6,
           spreadRadius: 0.0,
           offset: Offset(0.0, 3.0),
@@ -2417,10 +2417,10 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
   buildQuantityDownButton() => Container(
     decoration: BoxDecoration(
       shape: BoxShape.circle,
-      color: Colors.white,
+      color: MyTheme.white,
       boxShadow: [
         BoxShadow(
-          color: Colors.black.withValues(alpha: 0.16),
+          color: MyTheme.blackColour.withValues(alpha: 0.16),
           blurRadius: 6,
           spreadRadius: 0.0,
           offset: Offset(0.0, 3.0),

@@ -36,13 +36,13 @@ class _CurrencyChangeState extends State<CurrencyChange> {
           ? TextDirection.rtl
           : TextDirection.ltr,
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: MyTheme.white,
         appBar: buildAppBar(context),
         body: Stack(
           children: [
             RefreshIndicator(
               color: MyTheme.accent_color,
-              backgroundColor: Colors.white,
+              backgroundColor: MyTheme.white,
               onRefresh: () {
                 return Provider.of<CurrencyPresenter>(
                   context,
@@ -75,7 +75,7 @@ class _CurrencyChangeState extends State<CurrencyChange> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: MyTheme.white,
       centerTitle: false,
       leading: Builder(
         builder: (context) => IconButton(
@@ -170,7 +170,7 @@ class _CurrencyChangeState extends State<CurrencyChange> {
             ),
             child: Padding(
               padding: const EdgeInsets.all(3),
-              child: Icon(Icons.check, color: Colors.white, size: 10),
+              child: Icon(Icons.check, color: MyTheme.white, size: 10),
             ),
           )
         : Container();

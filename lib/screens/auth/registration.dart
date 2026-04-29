@@ -671,7 +671,7 @@ WebView Page resource error:
                       child: Text(
                         AppLocalizations.of(context)!.sign_up_ucf,
                         style: TextStyle(
-                          color: Colors.white,
+                          color: MyTheme.white,
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                         ),

@@ -569,7 +569,7 @@ class _LoginState extends State<Login> {
                           child: Text(
                             AppLocalizations.of(context)!.login_screen_log_in,
                             style: TextStyle(
-                              color: Colors.white,
+                              color: MyTheme.white,
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
                             ),

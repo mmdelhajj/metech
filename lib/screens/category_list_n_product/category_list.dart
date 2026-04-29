@@ -176,7 +176,7 @@ class _CategoryListState extends State<CategoryList> {
 
   Container buildBottomContainer() {
     return Container(
-      decoration: BoxDecoration(color: Colors.white),
+      decoration: BoxDecoration(color: MyTheme.white),
       height: widget.isBaseCategory ? 0 : 80,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -196,7 +196,7 @@ class _CategoryListState extends State<CategoryList> {
                   child: Text(
                     "${AppLocalizations.of(context)!.all_products_of_ucf} ",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: MyTheme.white,
                       fontSize: 13,
                       fontWeight: FontWeight.w600,
                     ),

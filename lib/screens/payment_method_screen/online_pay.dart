@@ -153,7 +153,7 @@ class _OnlinePayState extends State<OnlinePay> {
           ? TextDirection.rtl
           : TextDirection.ltr,
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: MyTheme.white,
         appBar: buildAppBar(context),
         body: buildBody(),
       ),
@@ -174,7 +174,7 @@ class _OnlinePayState extends State<OnlinePay> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: MyTheme.white,
       centerTitle: true,
       leading: Builder(
         builder: (context) => IconButton(

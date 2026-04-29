@@ -61,20 +61,20 @@ class _CheckoutPageState extends State<CheckoutPage> {
         bool isGuest = guest_checkout_status.$ && !is_logged_in.$;
 
         return Scaffold(
-          backgroundColor: const Color(0xffF2F1F6),
+          backgroundColor: MyTheme.mainColor,
           appBar: AppBar(
-            title: const Text(
+            title: Text(
               "Checkout",
               style: TextStyle(
-                color: Colors.black,
+                color: MyTheme.blackColour,
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            backgroundColor: Colors.white,
+            backgroundColor: MyTheme.white,
             elevation: 0,
             leading: IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.black),
+              icon: Icon(Icons.arrow_back, color: MyTheme.blackColour),
               onPressed: () => Navigator.pop(context),
             ),
           ),
@@ -138,11 +138,11 @@ class _CheckoutPageState extends State<CheckoutPage> {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: MyTheme.white,
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: .05),
+            color: MyTheme.blackColour.withValues(alpha: .05),
             spreadRadius: 0,
             blurRadius: 5,
             offset: const Offset(0, 2),
@@ -173,8 +173,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     alignment: Alignment.center,
                     child: Text(
                       "Total Products  ${provider.totalItemCount.toString().padLeft(2, '0')}",
-                      style: const TextStyle(
-                        color: Colors.white,
+                      style: TextStyle(
+                        color: MyTheme.white,
                         fontSize: 13,
                         fontWeight: FontWeight.w600,
                       ),
@@ -185,8 +185,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   Expanded(
                     flex: 1,
                     child: Container(
-                      decoration: const BoxDecoration(
-                        color: Colors.black,
+                      decoration: BoxDecoration(
+                        color: MyTheme.blackColour,
                         borderRadius: BorderRadius.only(
                           topRight: Radius.circular(8),
                         ),
@@ -194,8 +194,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       alignment: Alignment.center,
                       child: Text(
                         "Total Clubpoint  ${provider.totalClubPoint}",
-                        style: const TextStyle(
-                          color: Colors.white,
+                        style: TextStyle(
+                          color: MyTheme.white,
                           fontSize: 13,
                           fontWeight: FontWeight.w600,
                         ),
@@ -329,8 +329,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
                           },
                           child: Text(
                             provider.couponApplied ? "Change Coupon" : "Apply",
-                            style: const TextStyle(
-                              color: Colors.white,
+                            style: TextStyle(
+                              color: MyTheme.white,
                               fontSize: 12,
                               fontWeight: FontWeight.bold,
                             ),
@@ -394,7 +394,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
           Text(
             value,
             style: TextStyle(
-              color: Colors.black,
+              color: MyTheme.blackColour,
               fontSize: 13,
               fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
             ),
@@ -417,11 +417,11 @@ class _CheckoutPageState extends State<CheckoutPage> {
     return Container(
       margin: const EdgeInsets.only(top: 8, left: 12, right: 12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: MyTheme.white,
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
+            color: MyTheme.blackColour.withValues(alpha: 0.05),
             spreadRadius: 0,
             blurRadius: 5,
             offset: const Offset(0, 2),
@@ -561,10 +561,10 @@ class _CheckoutPageState extends State<CheckoutPage> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
+            Text(
               "Shipping address",
               style: TextStyle(
-                color: Colors.black,
+                color: MyTheme.blackColour,
                 fontSize: 13,
                 fontWeight: FontWeight.bold,
               ),
@@ -627,10 +627,10 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
+                    Text(
                       "Billing address",
                       style: TextStyle(
-                        color: Colors.black,
+                        color: MyTheme.blackColour,
                         fontSize: 13,
                         fontWeight: FontWeight.bold,
                       ),
@@ -793,7 +793,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
         ),
         const SizedBox(height: 10),
         DropdownButtonFormField<dynamic>(
-          dropdownColor: Colors.white,
+          dropdownColor: MyTheme.white,
           isExpanded: true,
           decoration: guestInputDecoration("Select Country *"),
           hint: const Text(
@@ -810,7 +810,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   value: c,
                   child: Text(
                     c.name,
-                    style: const TextStyle(fontSize: 14, color: Colors.black),
+                    style: TextStyle(fontSize: 14, color: MyTheme.blackColour),
                   ),
                 ),
               )
@@ -821,7 +821,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
         ),
         const SizedBox(height: 10),
         DropdownButtonFormField<dynamic>(
-          dropdownColor: Colors.white,
+          dropdownColor: MyTheme.white,
           isExpanded: true,
           decoration: guestInputDecoration("Select State"),
           hint: const Text(
@@ -838,7 +838,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   value: s,
                   child: Text(
                     s.name,
-                    style: const TextStyle(fontSize: 14, color: Colors.black),
+                    style: TextStyle(fontSize: 14, color: MyTheme.blackColour),
                   ),
                 ),
               )
@@ -849,7 +849,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
         ),
         const SizedBox(height: 10),
         DropdownButtonFormField<dynamic>(
-          dropdownColor: Colors.white,
+          dropdownColor: MyTheme.white,
           isExpanded: true,
           decoration: guestInputDecoration("Select City *"),
           hint: const Text(
@@ -891,9 +891,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                     value: c,
                                     child: Text(
                                       c.name,
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: 14,
-                                        color: Colors.black,
+                                        color: MyTheme.blackColour,
                                       ),
                                     ),
                                   ),
@@ -909,7 +909,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
         const SizedBox(height: 10),
         if (showAreaDropdown) ...[
           DropdownButtonFormField<dynamic>(
-            dropdownColor: Colors.white,
+            dropdownColor: MyTheme.white,
             isExpanded: true,
             decoration: guestInputDecoration("Select Area *"),
             hint: Text(
@@ -930,7 +930,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     value: a,
                     child: Text(
                       a.name,
-                      style: const TextStyle(fontSize: 14, color: Colors.black),
+                      style: TextStyle(fontSize: 14, color: MyTheme.blackColour),
                     ),
                   ),
                 )
@@ -1066,7 +1066,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
           margin: const EdgeInsets.only(bottom: 15),
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: MyTheme.white,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: Colors.grey.shade200),
           ),
@@ -1167,7 +1167,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                             ),
                             color: isThisPointSelected
                                 ? MyTheme.accent_color.withValues(alpha: 0.05)
-                                : Colors.white,
+                                : MyTheme.white,
                           ),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -1191,7 +1191,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                         fontSize: 13,
                                         color: isThisPointSelected
                                             ? MyTheme.accent_color
-                                            : Colors.black,
+                                            : MyTheme.blackColour,
                                       ),
                                     ),
                                     const SizedBox(height: 4),
@@ -1247,7 +1247,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
           decoration: BoxDecoration(
-            color: isSelected ? MyTheme.accent_color : Colors.white,
+            color: isSelected ? MyTheme.accent_color : MyTheme.white,
             border: Border.all(
               color: isSelected ? MyTheme.accent_color : Colors.grey.shade300,
             ),
@@ -1259,14 +1259,14 @@ class _CheckoutPageState extends State<CheckoutPage> {
               Icon(
                 icon,
                 size: 16,
-                color: isSelected ? Colors.white : Colors.black,
+                color: isSelected ? MyTheme.white : MyTheme.blackColour,
               ),
               const SizedBox(width: 5),
               Text(
                 title,
                 style: TextStyle(
                   fontSize: 11,
-                  color: isSelected ? Colors.white : Colors.black,
+                  color: isSelected ? MyTheme.white : MyTheme.blackColour,
                   fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                 ),
               ),
@@ -1292,7 +1292,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
         return Container(
           margin: const EdgeInsets.only(bottom: 8),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: MyTheme.white,
             border: Border.all(
               color: isSelected ? MyTheme.accent_color : Colors.transparent,
             ),
@@ -1317,7 +1317,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
         : (provider.activeStep == 1 ? "Proceed to Payment" : "Confirm Order");
 
     return Container(
-      color: Colors.white,
+      color: MyTheme.white,
       child: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -1382,8 +1382,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
               child: Center(
                 child: Text(
                   btnText,
-                  style: const TextStyle(
-                    color: Colors.white,
+                  style: TextStyle(
+                    color: MyTheme.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 14,
                   ),
@@ -1453,7 +1453,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                           children: [
                             editLabel("Country"),
                             DropdownButtonFormField<dynamic>(
-                              dropdownColor: Colors.white,
+                              dropdownColor: MyTheme.white,
                               isExpanded: true,
                               decoration: editInputDecoration(),
                               hint: const Text(
@@ -1474,9 +1474,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                       value: c,
                                       child: Text(
                                         c.name,
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           fontSize: 14,
-                                          color: Colors.black,
+                                          color: MyTheme.blackColour,
                                         ),
                                       ),
                                     ),
@@ -1490,7 +1490,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         ),
                       editLabel("State"),
                       DropdownButtonFormField<dynamic>(
-                        dropdownColor: Colors.white,
+                        dropdownColor: MyTheme.white,
                         isExpanded: true,
                         decoration: editInputDecoration(),
                         hint: const Text(
@@ -1508,9 +1508,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                 value: s,
                                 child: Text(
                                   s.name,
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontSize: 14,
-                                    color: Colors.black,
+                                    color: MyTheme.blackColour,
                                   ),
                                 ),
                               ),
@@ -1521,7 +1521,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       const SizedBox(height: 10),
                       editLabel("City"),
                       DropdownButtonFormField<dynamic>(
-                        dropdownColor: Colors.white,
+                        dropdownColor: MyTheme.white,
                         isExpanded: true,
                         decoration: editInputDecoration(),
                         hint: const Text(
@@ -1567,9 +1567,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                                   value: ct,
                                                   child: Text(
                                                     ct.name,
-                                                    style: const TextStyle(
+                                                    style: TextStyle(
                                                       fontSize: 14,
-                                                      color: Colors.black,
+                                                      color: MyTheme.blackColour,
                                                     ),
                                                   ),
                                                 ),
@@ -1587,7 +1587,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                           checkoutProvider.isAreaLoading) ...[
                         editLabel("Area"),
                         DropdownButtonFormField<dynamic>(
-                          dropdownColor: Colors.white,
+                          dropdownColor: MyTheme.white,
                           isExpanded: true,
                           decoration: editInputDecoration(),
                           hint: Text(
@@ -1610,9 +1610,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                   value: a,
                                   child: Text(
                                     a.name,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: 14,
-                                      color: Colors.black,
+                                      color: MyTheme.blackColour,
                                     ),
                                   ),
                                 ),
@@ -1682,9 +1682,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         ToastComponent.showDialog(response.message);
                       }
                     },
-                    child: const Text(
+                    child: Text(
                       "Save",
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: MyTheme.white),
                     ),
                   ),
                 ),

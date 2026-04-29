@@ -120,7 +120,7 @@ class _BkashScreenState extends State<BkashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: MyTheme.white,
       appBar: buildAppBar(context),
       body: buildBody(),
     );
@@ -235,7 +235,7 @@ class _BkashScreenState extends State<BkashScreen> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: MyTheme.white,
       centerTitle: true,
       leading: Builder(
         builder: (context) => IconButton(

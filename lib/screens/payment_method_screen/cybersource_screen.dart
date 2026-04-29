@@ -63,7 +63,7 @@ class _CybersourceScreenState extends State<CybersourceScreen> {
   void _initializeWebViewController() {
     _webViewController = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setBackgroundColor(Colors.white)
+      ..setBackgroundColor(MyTheme.white)
       ..setNavigationDelegate(
         NavigationDelegate(
           onProgress: (int progress) {
@@ -238,7 +238,7 @@ class _CybersourceScreenState extends State<CybersourceScreen> {
           ? TextDirection.rtl
           : TextDirection.ltr,
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: MyTheme.white,
         appBar: buildAppBar(context),
         body: _buildPaymentView(),
       ),
@@ -305,7 +305,7 @@ class _CybersourceScreenState extends State<CybersourceScreen> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: MyTheme.white,
       centerTitle: true,
       leading: IconButton(
         icon: Icon(CupertinoIcons.arrow_left, color: MyTheme.dark_grey),

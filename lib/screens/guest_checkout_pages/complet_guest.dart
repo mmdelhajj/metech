@@ -342,7 +342,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
       bottomNavigationBar: buildBottomAppBar(context),
       body: RefreshIndicator(
         color: MyTheme.accent_color,
-        backgroundColor: Colors.white,
+        backgroundColor: MyTheme.white,
         onRefresh: _onRefresh,
         displacement: 0,
         child: CustomScrollView(
@@ -413,7 +413,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                 StateSetter setModalState /*You can rename this!*/,
               ) {
                 return AlertDialog(
-                  backgroundColor: Colors.white,
+                  backgroundColor: MyTheme.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),
@@ -843,7 +843,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                             child: Text(
                               LangText(context).local.add_ucf,
                               style: TextStyle(
-                                color: Colors.white,
+                                color: MyTheme.white,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -1211,7 +1211,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                             child: Text(
                               AppLocalizations.of(context)!.update_all_capital,
                               style: TextStyle(
-                                color: Colors.white,
+                                color: MyTheme.white,
                                 fontSize: 13,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -1545,7 +1545,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
             child: Text(
               AppLocalizations.of(context)!.back_to_shipping_info,
               style: TextStyle(
-                color: Colors.white,
+                color: MyTheme.white,
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
               ),

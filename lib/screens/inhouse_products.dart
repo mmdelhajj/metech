@@ -84,7 +84,7 @@ class _InhouseProductsState extends State<InhouseProducts> {
           ? TextDirection.rtl
           : TextDirection.ltr,
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: MyTheme.white,
         appBar: buildAppBar(context),
         body: Stack(
           children: [
@@ -103,7 +103,7 @@ class _InhouseProductsState extends State<InhouseProducts> {
     return Container(
       height: _showLoadingContainer ? 36 : 0,
       width: double.infinity,
-      color: Colors.white,
+      color: MyTheme.white,
       child: Center(
         child: Text(
           _totalData == _inhouseProductList.length
@@ -116,7 +116,7 @@ class _InhouseProductsState extends State<InhouseProducts> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: MyTheme.white,
       // centerTitle: true,
       leading: Builder(
         builder: (context) => IconButton(
@@ -147,7 +147,7 @@ class _InhouseProductsState extends State<InhouseProducts> {
     } else if (_inhouseProductList.isNotEmpty) {
       return RefreshIndicator(
         color: MyTheme.accent_color,
-        backgroundColor: Colors.white,
+        backgroundColor: MyTheme.white,
         displacement: 0,
         onRefresh: _onRefresh,
         child: SingleChildScrollView(

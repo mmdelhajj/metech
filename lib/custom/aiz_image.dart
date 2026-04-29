@@ -34,11 +34,11 @@ class AIZImage {
           onError: (obj, e) {},
         ),
         borderRadius: BorderRadius.circular(radius),
-        color: Colors.white,
+        color: MyTheme.white,
         boxShadow: isShadow
             ? [
           BoxShadow(
-            color: Colors.black.withValues(alpha: .08),
+            color: MyTheme.blackColour.withValues(alpha: .08),
             blurRadius: 20,
             spreadRadius: 0.0,
             offset: Offset(0.0, 10.0),
@@ -78,11 +78,11 @@ class AIZImage {
               onError: (obj, e) {},
             ),
             borderRadius: BorderRadius.circular(radius),
-            color: Colors.white,
+            color: MyTheme.white,
             boxShadow: isShadow
                 ? [
               BoxShadow(
-                color: Colors.black.withValues(alpha: .08),
+                color: MyTheme.blackColour.withValues(alpha: .08),
                 blurRadius: 20,
                 spreadRadius: 0.0,
                 offset: Offset(0.0, 10.0),
@@ -121,7 +121,7 @@ Widget buildMiniTimer(BuildContext context, int endTime) {
         width: 120,
         padding: const EdgeInsets.symmetric(horizontal: 2),
         decoration: BoxDecoration(
-          color: Colors.white.withValues(alpha: 0.8),
+          color: MyTheme.white.withValues(alpha: 0.8),
           borderRadius: BorderRadius.circular(4),
         ),
         child: FittedBox(
@@ -147,8 +147,8 @@ Widget buildMiniTimer(BuildContext context, int endTime) {
 Widget _timerBox(int value) {
   return Text(
     timeText(value.toString(), defaultLength: 2),
-    style: const TextStyle(
-      color: Colors.black,
+    style: TextStyle(
+      color: MyTheme.blackColour,
       fontSize: 12,
       fontWeight: FontWeight.bold,
     ),

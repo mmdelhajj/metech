@@ -38,7 +38,7 @@ class _ProductGalleryViewerState extends State<ProductGalleryViewer> {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: MyTheme.blackColour,
       body: SafeArea(
         child: Stack(
           children: [
@@ -52,7 +52,7 @@ class _ProductGalleryViewerState extends State<ProductGalleryViewer> {
                 return PhotoView(
                   imageProvider: NetworkImage(widget.images[index]),
                   backgroundDecoration:
-                  const BoxDecoration(color: Colors.black),
+                  BoxDecoration(color: MyTheme.blackColour),
                   minScale: PhotoViewComputedScale.contained,
                   maxScale: PhotoViewComputedScale.covered * 3,
                 );
@@ -81,16 +81,16 @@ class _ProductGalleryViewerState extends State<ProductGalleryViewer> {
                 children: [
                   GestureDetector(
                     onTap: () => Navigator.pop(context),
-                    child: const Icon(
+                    child: Icon(
                       Icons.close,
-                      color: Colors.white,
+                      color: MyTheme.white,
                       size: 26,
                     ),
                   ),
                   const Spacer(),
                   Text(
                     '${_currentIndex + 1}/${widget.images.length}',
-                    style: const TextStyle(color: Colors.white),
+                    style: TextStyle(color: MyTheme.white),
                   ),
                   SizedBox(width: 8.w,)
                 ],
@@ -126,7 +126,7 @@ class _ProductGalleryViewerState extends State<ProductGalleryViewer> {
                           height: 60,
                           margin: const EdgeInsets.symmetric(horizontal: 6),
                           decoration: BoxDecoration(
-                            color: Colors.black,
+                            color: MyTheme.blackColour,
                             borderRadius: BorderRadius.circular(6),
                             border: Border.all(
                               color: active
@@ -159,10 +159,10 @@ class _ProductGalleryViewerState extends State<ProductGalleryViewer> {
                 height: 64,
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 decoration: BoxDecoration(
-                  color: Colors.black.withValues(alpha:  0.92),
+                  color: MyTheme.blackColour.withValues(alpha:  0.92),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withValues(alpha:  0.4),
+                      color: MyTheme.blackColour.withValues(alpha:  0.4),
                       blurRadius: 12,
                       offset: const Offset(0, -2),
                     ),

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -105,14 +106,14 @@ class _VideoScreenState extends State<VideoScreen> {
         playedColor: Color(0xff0078D7),
         handleColor: Color(0xff0078D7),
         bufferedColor: Color(0xffEFEFEF),
-        backgroundColor: Colors.white,
+        backgroundColor: MyTheme.white,
       ),
 
       cupertinoProgressColors: ChewieProgressColors(
         playedColor: Color(0xff0078D7),
         handleColor: Color(0xff0078D7),
         bufferedColor: Color(0xffEFEFEF),
-        backgroundColor: Colors.white,
+        backgroundColor: MyTheme.white,
       ),
     );
     if (mounted) {
@@ -130,21 +131,21 @@ class _VideoScreenState extends State<VideoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: MyTheme.blackColour,
       body: Stack(
         children: [
           Center(
             child: _isLoading
-                ? const CircularProgressIndicator(color: Colors.white)
+                ? CircularProgressIndicator(color: MyTheme.white)
                 : Chewie(controller: _chewieController),
           ),
           Positioned(
             top: 40.0,
             left: 10.0,
             child: IconButton(
-              icon: const Icon(
+              icon: Icon(
                 Icons.arrow_back,
-                color: Colors.white,
+                color: MyTheme.white,
                 size: 30.0,
               ),
               onPressed: () => Navigator.of(context).pop(),
@@ -201,7 +202,7 @@ class _YoutubePlayerScreenState extends State<YoutubePlayerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: MyTheme.blackColour,
       body: Stack(
         children: [
           Center(
@@ -209,9 +210,9 @@ class _YoutubePlayerScreenState extends State<YoutubePlayerScreen> {
               controller: _controller,
               aspectRatio: _isShorts ? 9 / 16 : 16 / 9,
               showVideoProgressIndicator: true,
-              progressColors: const ProgressBarColors(
-                playedColor: Colors.white,
-                handleColor: Colors.white,
+              progressColors: ProgressBarColors(
+                playedColor: MyTheme.white,
+                handleColor: MyTheme.white,
                 bufferedColor: Colors.white54,
                 backgroundColor: Colors.white24,
               ),
@@ -221,7 +222,7 @@ class _YoutubePlayerScreenState extends State<YoutubePlayerScreen> {
             top: 20,
             left: 20,
             child: IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.white, size: 30),
+              icon: Icon(Icons.arrow_back, color: MyTheme.white, size: 30),
               onPressed: () => Navigator.pop(context),
             ),
           ),

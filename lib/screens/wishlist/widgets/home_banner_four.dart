@@ -1,4 +1,5 @@
 // import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
+import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 // import 'package:active_ecommerce_cms_demo_app/screens/flash_deal/flash_deal_banner.dart';
 // import 'package:flutter/material.dart';
 // import 'package:carousel_slider/carousel_slider.dart';
@@ -45,7 +46,7 @@
 //                     //   ),
 //                     // ),
 //                     decoration: BoxDecoration(
-//                       color: Colors.white, // background color for container
+//                       color: MyTheme.white, // background color for container
 //                       borderRadius:
 //                           BorderRadius.circular(10), // rounded corners
 //                       boxShadow: [

@@ -224,7 +224,7 @@ class _ProfileEditState extends State<ProfileEdit> {
     } else {
       return RefreshIndicator(
         color: MyTheme.accent_color,
-        backgroundColor: Colors.white,
+        backgroundColor: MyTheme.white,
         onRefresh: _onPageRefresh,
         displacement: 10,
         child: CustomScrollView(
@@ -470,11 +470,11 @@ class _ProfileEditState extends State<ProfileEdit> {
                 color: MyTheme.accent_color,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: const Text(
+              child: Text(
                 'Save Changes',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Colors.white,
+                  color: MyTheme.white,
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
                 ),
@@ -516,7 +516,7 @@ class _ProfileEditState extends State<ProfileEdit> {
           padding: const EdgeInsets.only(bottom: 14.0),
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: MyTheme.white,
               borderRadius: BorderRadius.circular(6),
               boxShadow: [MyTheme.commonShadow()],
             ),
@@ -554,7 +554,7 @@ class _ProfileEditState extends State<ProfileEdit> {
           padding: const EdgeInsets.only(bottom: 14.0),
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: MyTheme.white,
               borderRadius: BorderRadius.circular(6),
               boxShadow: [MyTheme.commonShadow()],
             ),
@@ -598,7 +598,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                 padding: const EdgeInsets.only(bottom: 14.0),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: MyTheme.white,
                     borderRadius: BorderRadius.circular(6),
                     boxShadow: [MyTheme.commonShadow()],
                   ),
@@ -631,11 +631,11 @@ class _ProfileEditState extends State<ProfileEdit> {
                 color: MyTheme.accent_color,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: const Text(
+              child: Text(
                 'Update Profile',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Colors.white,
+                  color: MyTheme.white,
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
                 ),

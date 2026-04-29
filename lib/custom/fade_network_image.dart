@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 
 class MyImage{
   static Widget imageNetworkPlaceholder(
@@ -8,7 +9,7 @@ class MyImage{
         width = 0.0,
         BorderRadiusGeometry radius = BorderRadius.zero,
         BoxFit fit = BoxFit.cover,
-        Color backgroundColor  = Colors.white
+        Color backgroundColor  = MyTheme.white
       }) {
     return Material(
       color: backgroundColor,

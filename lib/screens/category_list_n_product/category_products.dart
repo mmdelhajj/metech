@@ -127,7 +127,7 @@ class _CategoryProductsState extends State<CategoryProducts> {
     return Container(
       height: _showLoadingContainer ? 36 : 0,
       width: double.infinity,
-      color: Colors.white,
+      color: MyTheme.white,
       child: Center(
         child: Text(
           _totalData == _productList.length
@@ -147,7 +147,7 @@ class _CategoryProductsState extends State<CategoryProducts> {
       flexibleSpace: Container(
         height: DeviceInfo(context).height! / 4,
         width: DeviceInfo(context).width,
-        color: Color(0xffF2F1F6),
+        color: MyTheme.mainColor,
         alignment: Alignment.topRight,
       ),
       bottom: PreferredSize(
@@ -268,7 +268,7 @@ class _CategoryProductsState extends State<CategoryProducts> {
       itemBuilder: (context, index) {
         Color containerColor;
         if (index == 0) {
-          containerColor = Colors.black; // First container
+          containerColor = MyTheme.blackColour; // First container
         } else if (index == 1) {
           containerColor = Color(0xffFF5500); // Second container
         } else {
@@ -277,7 +277,7 @@ class _CategoryProductsState extends State<CategoryProducts> {
 
         Color textColor;
         if (index == 0 || index == 1) {
-          textColor = Colors.white;
+          textColor = MyTheme.white;
         } else {
           textColor = MyTheme.font_grey;
         }
@@ -331,7 +331,7 @@ class _CategoryProductsState extends State<CategoryProducts> {
     } else if (_productList.isNotEmpty) {
       return RefreshIndicator(
         color: MyTheme.accent_color,
-        backgroundColor: Colors.white,
+        backgroundColor: MyTheme.white,
         displacement: 0,
         onRefresh: _onRefresh,
         child: SingleChildScrollView(

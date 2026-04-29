@@ -1,4 +1,5 @@
 import 'package:active_ecommerce_cms_demo_app/app_config.dart';
+import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:flutter/material.dart';
 
 class HomeSearchBox extends StatelessWidget {
@@ -21,7 +22,7 @@ class HomeSearchBox extends StatelessWidget {
             height: 38,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: Color(0xfff3f3f3),
+              color: MyTheme.light_grey,
               boxShadow: [
                 BoxShadow(
                   color: const Color.fromARGB(

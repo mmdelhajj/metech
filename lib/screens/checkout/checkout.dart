@@ -958,7 +958,7 @@ class _CheckoutState extends State<Checkout> {
           children: [
             RefreshIndicator(
               color: MyTheme.accent_color,
-              backgroundColor: Colors.white,
+              backgroundColor: MyTheme.white,
               onRefresh: _onRefresh,
               displacement: 0,
               child: CustomScrollView(
@@ -988,13 +988,13 @@ class _CheckoutState extends State<Checkout> {
                       widget.paymentFor == PaymentFor.packagePay
                   ? SizedBox.shrink()
                   : Container(
-                      decoration: BoxDecoration(color: Colors.white),
+                      decoration: BoxDecoration(color: MyTheme.white),
                       height:
                           (widget.paymentFor == PaymentFor.manualPayment) ||
                               (widget.paymentFor == PaymentFor.orderRePayment)
                           ? 80
                           : 140,
-                      //color: Colors.white,
+                      //color: MyTheme.white,
                       child: Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Column(
@@ -1096,7 +1096,7 @@ class _CheckoutState extends State<Checkout> {
                   child: Text(
                     AppLocalizations.of(context)!.apply_coupon_all_capital,
                     style: TextStyle(
-                      color: Colors.white,
+                      color: MyTheme.white,
                       fontSize: 13,
                       fontWeight: FontWeight.w600,
                     ),
@@ -1121,7 +1121,7 @@ class _CheckoutState extends State<Checkout> {
                   child: Text(
                     AppLocalizations.of(context)!.remove_ucf,
                     style: TextStyle(
-                      color: Colors.white,
+                      color: MyTheme.white,
                       fontSize: 13,
                       fontWeight: FontWeight.w600,
                     ),
@@ -1205,7 +1205,7 @@ class _CheckoutState extends State<Checkout> {
             duration: Duration(milliseconds: 400),
             decoration:
                 BoxDecoration(
-                  color: Colors.white,
+                  color: MyTheme.white,
                   borderRadius: BorderRadius.circular(6),
                 ).copyWith(
                   border: Border.all(
@@ -1292,7 +1292,7 @@ class _CheckoutState extends State<Checkout> {
         ),
         child: Padding(
           padding: const EdgeInsets.all(3),
-          child: Icon(Icons.check, color: Colors.white, size: 10),
+          child: Icon(Icons.check, color: MyTheme.white, size: 10),
         ),
       ),
     );
@@ -1319,7 +1319,7 @@ class _CheckoutState extends State<Checkout> {
                 ? AppLocalizations.of(context)!.buy_package_ucf
                 : AppLocalizations.of(context)!.place_my_order_all_capital,
             style: TextStyle(
-              color: Colors.white,
+              color: MyTheme.white,
               fontSize: 16,
               fontWeight: FontWeight.w600,
             ),

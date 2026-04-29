@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
@@ -140,7 +141,10 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
           context,
           listen: false,
         ).setLocale(_list[_selectedIndex].mobile_app_code);
-        context.go('/');
+        // Force a clean rebuild so server-translated content
+        // (categories, products, errors) reloads in the new language
+        // without the user needing to close & reopen the app.
+        Phoenix.rebirth(context);
       }
     } else {
       ToastComponent.showDialog(
@@ -162,7 +166,7 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
           children: [
             RefreshIndicator(
               color: MyTheme.accent_color,
-              backgroundColor: Colors.white,
+              backgroundColor: MyTheme.white,
               onRefresh: _onRefresh,
               displacement: 0,
               child: CustomScrollView(
@@ -261,7 +265,7 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
             duration: const Duration(milliseconds: 400),
             decoration:
                 BoxDecoration(
-                  color: Colors.white,
+                  color: MyTheme.white,
                   borderRadius: BorderRadius.circular(6.0),
                 ).copyWith(
                   border: Border.all(
@@ -337,9 +341,9 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
               borderRadius: BorderRadius.circular(16.0),
               color: Colors.green,
             ),
-            child: const Padding(
+            child: Padding(
               padding: EdgeInsets.all(3),
-              child: Icon(Icons.check, color: Colors.white, size: 10),
+              child: Icon(Icons.check, color: MyTheme.white, size: 10),
             ),
           )
         : Container();

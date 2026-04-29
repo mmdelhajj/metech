@@ -195,12 +195,12 @@ class _SellerDetailsState extends State<SellerDetails> {
           ? TextDirection.rtl
           : TextDirection.ltr,
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: MyTheme.white,
         appBar: buildAppBar(context),
         //bottomNavigationBar: buildBottomAppBar(context),
         body: RefreshIndicator(
           color: MyTheme.accent_color,
-          backgroundColor: Colors.white,
+          backgroundColor: MyTheme.white,
           onRefresh: _onPageRefresh,
           child: CustomScrollView(
             controller: _mainScrollController,
@@ -310,7 +310,7 @@ class _SellerDetailsState extends State<SellerDetails> {
                 child: Text(
                   AppLocalizations.of(context)!.new_arrivals_products_ucf,
                   style: TextStyle(
-                    color: Colors.black,
+                    color: MyTheme.blackColour,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
@@ -348,7 +348,7 @@ class _SellerDetailsState extends State<SellerDetails> {
       padding: const EdgeInsets.only(top: 16),
       child: Container(
         height: 296,
-        decoration: BoxDecoration(color: Color(0xffF2F1F6)),
+        decoration: BoxDecoration(color: MyTheme.mainColor),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -561,7 +561,7 @@ class _SellerDetailsState extends State<SellerDetails> {
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.2),
+              color: MyTheme.blackColour.withValues(alpha: 0.2),
               blurRadius: 20,
               spreadRadius: 0.5,
               offset: Offset(0, 10),
@@ -621,7 +621,7 @@ class _SellerDetailsState extends State<SellerDetails> {
                               shape: BoxShape.circle,
                               border: Border.all(
                                 color: _currentSlider == index
-                                    ? Colors.white
+                                    ? MyTheme.white
                                     : Color(0xffE62E04),
                                 width: 1.0,
                               ),
@@ -630,7 +630,7 @@ class _SellerDetailsState extends State<SellerDetails> {
                                   : Colors.transparent,
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withValues(alpha: 0.2),
+                                  color: MyTheme.blackColour.withValues(alpha: 0.2),
 
                                   spreadRadius: 2,
                                   blurRadius: 4,
@@ -773,11 +773,11 @@ class _SellerDetailsState extends State<SellerDetails> {
             height: 60,
 
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: MyTheme.white,
               borderRadius: BorderRadius.circular(6),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.08),
+                  color: MyTheme.blackColour.withValues(alpha: 0.08),
                   blurRadius: 20,
                   spreadRadius: 0.0,
                   offset: Offset(0.0, 10.0),
@@ -810,7 +810,7 @@ class _SellerDetailsState extends State<SellerDetails> {
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   style: TextStyle(
-                    color: Colors.black,
+                    color: MyTheme.blackColour,
                     fontSize: 13,
                     fontWeight: FontWeight.bold,
                   ),
@@ -837,7 +837,7 @@ class _SellerDetailsState extends State<SellerDetails> {
               color: Color(0xffFEF0D7),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.08),
+                  color: MyTheme.blackColour.withValues(alpha: 0.08),
                   blurRadius: 20,
                   spreadRadius: 0.0,
                   offset: Offset(0.0, 10.0),
@@ -1115,7 +1115,7 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: TextStyle(
-                            color: Colors.black,
+                            color: MyTheme.blackColour,
                             fontSize: 16,
                             fontWeight: FontWeight.w700,
                           ),
@@ -1154,7 +1154,7 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
                             widget.discount ?? '',
                             style: TextStyle(
                               fontSize: 10,
-                              color: Colors.white,
+                              color: MyTheme.white,
                               fontWeight: FontWeight.w700,
                               height: 1.8,
                             ),
@@ -1189,7 +1189,7 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
                           "Wholesale",
                           style: TextStyle(
                             fontSize: 10,
-                            color: Colors.white,
+                            color: MyTheme.white,
                             fontWeight: FontWeight.w700,
                             height: 1.8,
                           ),

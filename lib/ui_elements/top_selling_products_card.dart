@@ -45,11 +45,11 @@ class _TopSellingProductsCardState extends State<TopSellingProductsCard> {
       child: Container(
         height: 90,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: MyTheme.white,
           borderRadius: BorderRadius.circular(8),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.08),
+              color: MyTheme.blackColour.withValues(alpha: 0.08),
               blurRadius: 16,
               offset: Offset(0, 0),
             ),

@@ -106,7 +106,7 @@ class _NotificationListCardState extends State<NotificationListCard> {
                         style: TextStyle(
                             color: (widget.link != '' && widget.link != null)
                                 ? MyTheme.accent_color
-                                : Colors.black,
+                                : MyTheme.blackColour,
                             fontSize: 16),
                       ),
                     if (widget.type == "App\\Notifications\\OrderNotification")

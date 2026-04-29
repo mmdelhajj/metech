@@ -60,7 +60,7 @@ class _SplashState extends State<Splash> {
         style: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 14.0,
-          color: Colors.white,
+          color: MyTheme.white,
         ),
       ),
       useLoader: false,
@@ -69,7 +69,7 @@ class _SplashState extends State<Splash> {
         style: TextStyle(
           fontWeight: FontWeight.w400,
           fontSize: 13.0,
-          color: Colors.white,
+          color: MyTheme.white,
         ),
       ),
       image: Image.asset("assets/splash_screen_logo.png"),
@@ -149,11 +149,11 @@ class CustomSplashScreen extends StatefulWidget {
     this.onClick,
     this.navigateAfterSeconds,
     this.title = const Text(''),
-    this.backgroundColor = Colors.white,
+    this.backgroundColor = MyTheme.white,
     this.styleTextUnderTheLoader = const TextStyle(
       fontSize: 18.0,
       fontWeight: FontWeight.bold,
-      color: Colors.black,
+      color: MyTheme.blackColour,
     ),
     this.image,
     this.backgroundImage,

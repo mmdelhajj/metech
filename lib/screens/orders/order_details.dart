@@ -278,7 +278,7 @@ class _OrderDetailsState extends State<OrderDetails> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          backgroundColor: Colors.white,
+          backgroundColor: MyTheme.white,
           title: Row(
             children: [
               Icon(Icons.info_outline, color: MyTheme.accent_color),
@@ -320,7 +320,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                 ),
                 child: Text(
                   "Go to Cart",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: MyTheme.white),
                 ),
                 onPressed: () {
                   Navigator.of(context).pop();
@@ -603,7 +603,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         child: Text(
                           AppLocalizations.of(context)!.submit_ucf,
                           style: TextStyle(
-                            color: Colors.white,
+                            color: MyTheme.white,
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
                           ),
@@ -704,7 +704,7 @@ class _OrderDetailsState extends State<OrderDetails> {
             ? TextDirection.rtl
             : TextDirection.ltr,
         child: Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: MyTheme.white,
           appBar: buildAppBar(context),
           body: _orderDetails == null && _orderItemsInit
               ? Center(child: Text("No order details available"))
@@ -712,7 +712,7 @@ class _OrderDetailsState extends State<OrderDetails> {
               ? Center(child: CircularProgressIndicator())
               : RefreshIndicator(
             color: MyTheme.accent_color,
-            backgroundColor: Colors.white,
+            backgroundColor: MyTheme.white,
             onRefresh: _onPageRefresh,
             child: CustomScrollView(
               controller: _mainScrollController,
@@ -1020,9 +1020,9 @@ class _OrderDetailsState extends State<OrderDetails> {
                       width: 2,
                     ),
                   ),
-                  child: const Icon(
+                  child: Icon(
                     Icons.list_alt,
-                    color: Colors.white,
+                    color: MyTheme.white,
                     size: 16,
                   ),
                 ),
@@ -1069,9 +1069,9 @@ class _OrderDetailsState extends State<OrderDetails> {
                       width: 2,
                     ),
                   ),
-                  child: const Icon(
+                  child: Icon(
                     Icons.thumb_up_sharp,
-                    color: Colors.white,
+                    color: MyTheme.white,
                     size: 16,
                   ),
                 ),
@@ -1127,9 +1127,9 @@ class _OrderDetailsState extends State<OrderDetails> {
                       width: 2,
                     ),
                   ),
-                  child: const Icon(
+                  child: Icon(
                     Icons.local_shipping_outlined,
-                    color: Colors.white,
+                    color: MyTheme.white,
                     size: 16,
                   ),
                 ),
@@ -1180,9 +1180,9 @@ class _OrderDetailsState extends State<OrderDetails> {
                       width: 2,
                     ),
                   ),
-                  child: const Icon(
+                  child: Icon(
                     Icons.done_all,
-                    color: Colors.white,
+                    color: MyTheme.white,
                     size: 16,
                   ),
                 ),
@@ -1619,7 +1619,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     ? RichText(
                         text: TextSpan(
                           children: [
-                            const TextSpan(
+                            TextSpan(
                               text: "Variation: ",
                               style: TextStyle(
                                 color: MyTheme.grey_153,
@@ -1629,7 +1629,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                             ),
                             TextSpan(
                               text: item.variation,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: MyTheme.grey_153,
                                 fontSize: 12,
                               ),
@@ -1681,7 +1681,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                       TextSpan(
                         text:
                             "${AppLocalizations.of(context)!.refund_status_ucf}: ",
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: MyTheme.font_grey,
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
@@ -1739,7 +1739,7 @@ class _OrderDetailsState extends State<OrderDetails> {
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
       scrolledUnderElevation: 0,
-      backgroundColor: Colors.white,
+      backgroundColor: MyTheme.white,
       // centerTitle: true,
       leading: Builder(
         builder: (context) => IconButton(
@@ -1798,7 +1798,7 @@ class _OrderDetailsState extends State<OrderDetails> {
               },
               child: Text(
                 LangText(context).local.cancel_order_ucf,
-                style: const TextStyle(color: Colors.white, fontSize: 14),
+                style: TextStyle(color: MyTheme.white, fontSize: 14),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -1824,7 +1824,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                 isManualPayment
                     ? AppLocalizations.of(context)!.make_offline_payment_ucf
                     : LangText(context).local.make_payment_ucf,
-                style: const TextStyle(color: Colors.white, fontSize: 14),
+                style: TextStyle(color: MyTheme.white, fontSize: 14),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -1848,7 +1848,7 @@ class _OrderDetailsState extends State<OrderDetails> {
         padding: const EdgeInsets.all(3),
         child: Icon(
           paymentStatus == "paid" ? Icons.check : Icons.check,
-          color: Colors.white,
+          color: MyTheme.white,
           size: 10,
         ),
       ),
@@ -1859,7 +1859,7 @@ class _OrderDetailsState extends State<OrderDetails> {
     BuildContext context, {
     required String label,
     required String value,
-    Color valueColor = Colors.black,
+    Color valueColor = const Color(0xFF000000),
   }) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
@@ -1894,15 +1894,15 @@ class _OrderDetailsState extends State<OrderDetails> {
   Text headingText(text) {
     return Text(
       text,
-      style: TextStyle(color: Colors.black, fontSize: 12, fontWeight: .bold),
+      style: TextStyle(color: MyTheme.blackColour, fontSize: 12, fontWeight: .bold),
     );
   }
 
   Text hedingValue(text) {
-    return Text(text, style: TextStyle(color: Colors.black));
+    return Text(text, style: TextStyle(color: MyTheme.blackColour));
   }
 
-  TextStyle addressStyle = TextStyle(color: Colors.black, fontSize: 12);
+  TextStyle addressStyle = TextStyle(color: MyTheme.blackColour, fontSize: 12);
 }
 
 @pragma('vm:entry-point')

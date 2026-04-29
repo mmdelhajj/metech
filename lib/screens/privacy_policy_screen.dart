@@ -28,7 +28,7 @@ class _CommonPolicyPageState extends State<CommonPolicyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: MyTheme.white,
       appBar: AppBar(
         scrolledUnderElevation: 0,
         leading: IconButton(
@@ -47,7 +47,7 @@ class _CommonPolicyPageState extends State<CommonPolicyPage> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: MyTheme.white,
         elevation: 0.5,
         toolbarHeight: 50.h,
       ),

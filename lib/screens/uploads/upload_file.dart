@@ -530,7 +530,7 @@ class _UploadFileState extends State<UploadFile> {
         ),
         child: Padding(
           padding: const EdgeInsets.all(3),
-          child: Icon(Icons.check, color: Colors.white, size: 10),
+          child: Icon(Icons.check, color: MyTheme.white, size: 10),
         ),
       ),
     );

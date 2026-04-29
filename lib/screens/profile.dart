@@ -95,7 +95,7 @@ class _ProfileState extends State<Profile> {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext dialogContext) => AlertDialog(
-        backgroundColor: Colors.white,
+        backgroundColor: MyTheme.white,
         title: const Text("Permission Required"),
         content: Text(purpose, textAlign: TextAlign.center),
         actions: <Widget>[
@@ -219,7 +219,7 @@ class _ProfileState extends State<Profile> {
 
   Widget buildView(context) {
     return Container(
-      color: Colors.white,
+      color: MyTheme.white,
       height: DeviceInfo(context).height,
       child: Stack(
         children: [
@@ -904,7 +904,7 @@ class _ProfileState extends State<Profile> {
       margin: EdgeInsets.only(top: 14),
       width: DeviceInfo(context).width,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: MyTheme.white,
         borderRadius: BorderRadius.circular(6),
       ),
 
@@ -989,7 +989,7 @@ class _ProfileState extends State<Profile> {
                 builder: (context, notification, child) {
                   return Text(
                     "${notification.unReadNotificationCounter}",
-                    style: TextStyle(fontSize: 10, color: Colors.white),
+                    style: TextStyle(fontSize: 10, color: MyTheme.white),
                   );
                 },
               ),
@@ -1229,7 +1229,7 @@ class _ProfileState extends State<Profile> {
           GestureDetector(
             child: Icon(
               is_logged_in.$ ? Icons.logout : Icons.login,
-              color: Colors.white,
+              color: MyTheme.white,
               size: 25,
             ),
             onTap: () {
@@ -1240,7 +1240,7 @@ class _ProfileState extends State<Profile> {
                   context: context,
                   builder: (BuildContext dialogContext) {
                     return AlertDialog(
-                      backgroundColor: Colors.white,
+                      backgroundColor: MyTheme.white,
                       title: Text("Logout"),
                       content: Text("Are you sure you want to logout?"),
                       actions: [
@@ -1275,7 +1275,7 @@ class _ProfileState extends State<Profile> {
                       context,
                     ).push(MaterialPageRoute(builder: (context) => Settings()));
                   },
-                  icon: Icon(Icons.settings, color: Colors.white),
+                  icon: Icon(Icons.settings, color: MyTheme.white),
                 )
               : SizedBox(),
         ],

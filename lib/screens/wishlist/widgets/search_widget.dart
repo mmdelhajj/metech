@@ -339,7 +339,7 @@ class _SearchWidgetState extends State<SearchWidget> {
     return Container(
       height: _showProductLoadingContainer ? 36 : 0,
       width: double.infinity,
-      color: Colors.white,
+      color: MyTheme.white,
       child: Center(
         child: Text(
           _totalProductData == _productList.length
@@ -354,7 +354,7 @@ class _SearchWidgetState extends State<SearchWidget> {
     return Container(
       height: _showBrandLoadingContainer ? 36 : 0,
       width: double.infinity,
-      color: Colors.white,
+      color: MyTheme.white,
       child: Center(
         child: Text(
           _totalBrandData == _brandList.length
@@ -369,7 +369,7 @@ class _SearchWidgetState extends State<SearchWidget> {
     return Container(
       height: _showShopLoadingContainer ? 36 : 0,
       width: double.infinity,
-      color: Colors.white,
+      color: MyTheme.white,
       child: Center(
         child: Text(
           _totalShopData == _shopList.length
@@ -438,12 +438,12 @@ class _SearchWidgetState extends State<SearchWidget> {
     return Row(
       children: [
         Container(
-          decoration: BoxDecoration(color: Colors.white),
+          decoration: BoxDecoration(color: MyTheme.white),
           padding: EdgeInsets.fromLTRB(16, 5, 8, 5),
           height: 36,
           width: MediaQuery.of(context).size.width * .33,
           child: DropdownButton<WhichFilter>(
-            dropdownColor: Colors.white,
+            dropdownColor: MyTheme.white,
             isExpanded: true,
             icon: Padding(
               padding: app_language_rtl.$!
@@ -453,9 +453,9 @@ class _SearchWidgetState extends State<SearchWidget> {
             ),
             hint: Text(
               AppLocalizations.of(context)!.products_ucf,
-              style: TextStyle(color: Colors.black, fontSize: 13),
+              style: TextStyle(color: MyTheme.blackColour, fontSize: 13),
             ),
-            style: TextStyle(color: Colors.black, fontSize: 13),
+            style: TextStyle(color: MyTheme.blackColour, fontSize: 13),
             iconSize: 13,
             underline: SizedBox(),
             value: _selectedFilter,
@@ -480,7 +480,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                   );
           },
           child: Container(
-            decoration: BoxDecoration(color: Colors.white),
+            decoration: BoxDecoration(color: MyTheme.white),
             height: 36,
             width: MediaQuery.of(context).size.width * .33,
             child: Center(
@@ -492,7 +492,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                     SizedBox(width: 2),
                     Text(
                       AppLocalizations.of(context)!.filter_ucf,
-                      style: TextStyle(color: Colors.black, fontSize: 13),
+                      style: TextStyle(color: MyTheme.blackColour, fontSize: 13),
                     ),
                   ],
                 ),
@@ -510,7 +510,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                           ? TextDirection.rtl
                           : TextDirection.ltr,
                       child: AlertDialog(
-                        backgroundColor: Colors.white,
+                        backgroundColor: MyTheme.white,
                         contentPadding: EdgeInsets.only(
                           top: 16.0,
                           left: 2.0,
@@ -617,7 +617,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                   );
           },
           child: Container(
-            decoration: BoxDecoration(color: Colors.white),
+            decoration: BoxDecoration(color: MyTheme.white),
             height: 36,
             width: MediaQuery.of(context).size.width * .33,
             child: Center(
@@ -629,7 +629,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                     SizedBox(width: 2),
                     Text(
                       AppLocalizations.of(context)!.sort_ucf,
-                      style: TextStyle(color: Colors.black, fontSize: 13),
+                      style: TextStyle(color: MyTheme.blackColour, fontSize: 13),
                     ),
                   ],
                 ),
@@ -671,7 +671,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                 loadingBuilder: (context) {
                   return Container(
                     height: 50,
-                    color: Colors.white,
+                    color: MyTheme.white,
                     child: Center(
                       child: Text(
                         AppLocalizations.of(context)!.loading_suggestions,
@@ -688,7 +688,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                         "${suggestion.type_string} ${AppLocalizations.of(context)!.found_all_lower}";
                   }
                   return ListTile(
-                    tileColor: Colors.white,
+                    tileColor: MyTheme.white,
                     dense: true,
                     title: Text(
                       suggestion.query,
@@ -775,7 +775,7 @@ class _SearchWidgetState extends State<SearchWidget> {
       child: Drawer(
         child: Container(
           padding: EdgeInsets.only(top: 50),
-          color: Colors.white,
+          color: MyTheme.white,
           child: Column(
             children: [
               SizedBox(
@@ -964,7 +964,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                       ),
                       child: Text(
                         'CLEAR',
-                        style: TextStyle(color: Colors.white, fontSize: 12),
+                        style: TextStyle(color: MyTheme.white, fontSize: 12),
                       ),
                     ),
                     ElevatedButton(
@@ -992,7 +992,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                       ),
                       child: Text(
                         'CLEAR',
-                        style: TextStyle(color: Colors.white, fontSize: 12),
+                        style: TextStyle(color: MyTheme.white, fontSize: 12),
                       ),
                     ),
                   ],
@@ -1079,7 +1079,7 @@ class _SearchWidgetState extends State<SearchWidget> {
       );
     } else if (_productList.isNotEmpty) {
       return RefreshIndicator(
-        color: Colors.white,
+        color: MyTheme.white,
         backgroundColor: MyTheme.accent_color,
         onRefresh: _onProductListRefresh,
         child: SingleChildScrollView(
@@ -1148,7 +1148,7 @@ class _SearchWidgetState extends State<SearchWidget> {
       );
     } else if (_brandList.isNotEmpty) {
       return RefreshIndicator(
-        color: Colors.white,
+        color: MyTheme.white,
         backgroundColor: MyTheme.accent_color,
         onRefresh: _onBrandListRefresh,
         child: SingleChildScrollView(
@@ -1217,7 +1217,7 @@ class _SearchWidgetState extends State<SearchWidget> {
       );
     } else if (_shopList.isNotEmpty) {
       return RefreshIndicator(
-        color: Colors.white,
+        color: MyTheme.white,
         backgroundColor: MyTheme.accent_color,
         onRefresh: _onShopListRefresh,
         child: SingleChildScrollView(

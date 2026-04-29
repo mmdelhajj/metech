@@ -38,7 +38,7 @@ class CategoryItemCardWidget extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: Colors.white,
+              color: MyTheme.white,
             ),
             width: itemWidth,
             height: itemWidth,

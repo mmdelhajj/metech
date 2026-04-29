@@ -340,7 +340,7 @@ class _FilterState extends State<Filter> {
     return Container(
       height: _showProductLoadingContainer ? 36 : 0,
       width: double.infinity,
-      color: Colors.white,
+      color: MyTheme.white,
       child: Center(
         child: Text(
           _totalProductData == _productList.length
@@ -355,7 +355,7 @@ class _FilterState extends State<Filter> {
     return Container(
       height: _showBrandLoadingContainer ? 36 : 0,
       width: double.infinity,
-      color: Colors.white,
+      color: MyTheme.white,
       child: Center(
         child: Text(
           _totalBrandData == _brandList.length
@@ -370,7 +370,7 @@ class _FilterState extends State<Filter> {
     return Container(
       height: _showShopLoadingContainer ? 36 : 0,
       width: double.infinity,
-      color: Colors.white,
+      color: MyTheme.white,
       child: Center(
         child: Text(
           _totalShopData == _shopList.length
@@ -441,7 +441,7 @@ class _FilterState extends State<Filter> {
       children: [
         Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: MyTheme.white,
             border: Border.symmetric(
               vertical: BorderSide(color: MyTheme.light_grey, width: .5),
               horizontal: BorderSide(color: MyTheme.light_grey, width: 1),
@@ -451,7 +451,7 @@ class _FilterState extends State<Filter> {
           height: MediaQuery.of(context).size.height * .04,
           width: MediaQuery.of(context).size.width * .33,
           child: DropdownButton<WhichFilter>(
-            dropdownColor: Colors.white,
+            dropdownColor: MyTheme.white,
             borderRadius: BorderRadius.circular(5),
             icon: Padding(
               padding: app_language_rtl.$!
@@ -461,9 +461,9 @@ class _FilterState extends State<Filter> {
             ),
             hint: Text(
               AppLocalizations.of(context)!.products_ucf,
-              style: TextStyle(color: Colors.black, fontSize: 13),
+              style: TextStyle(color: MyTheme.blackColour, fontSize: 13),
             ),
-            style: TextStyle(color: Colors.black, fontSize: 13),
+            style: TextStyle(color: MyTheme.blackColour, fontSize: 13),
             iconSize: 13,
             underline: SizedBox(),
             value: _selectedFilter,
@@ -490,7 +490,7 @@ class _FilterState extends State<Filter> {
           },
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: MyTheme.white,
               border: Border.symmetric(
                 vertical: BorderSide(color: MyTheme.light_grey, width: .5),
                 horizontal: BorderSide(color: MyTheme.light_grey, width: 1),
@@ -507,7 +507,7 @@ class _FilterState extends State<Filter> {
                     SizedBox(width: 2),
                     Text(
                       AppLocalizations.of(context)!.filter_ucf,
-                      style: TextStyle(color: Colors.black, fontSize: 13),
+                      style: TextStyle(color: MyTheme.blackColour, fontSize: 13),
                     ),
                   ],
                 ),
@@ -633,7 +633,7 @@ class _FilterState extends State<Filter> {
           },
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: MyTheme.white,
               border: Border.symmetric(
                 vertical: BorderSide(color: MyTheme.light_grey, width: .5),
                 horizontal: BorderSide(color: MyTheme.light_grey, width: 1),
@@ -650,7 +650,7 @@ class _FilterState extends State<Filter> {
                     SizedBox(width: 2),
                     Text(
                       AppLocalizations.of(context)!.sort_ucf,
-                      style: TextStyle(color: Colors.black, fontSize: 13),
+                      style: TextStyle(color: MyTheme.blackColour, fontSize: 13),
                     ),
                   ],
                 ),
@@ -702,7 +702,7 @@ class _FilterState extends State<Filter> {
                 loadingBuilder: (context) {
                   return Container(
                     height: 40,
-                    color: Colors.white,
+                    color: MyTheme.white,
                     child: Center(
                       child: Text(
                         AppLocalizations.of(context)!.loading_suggestions,
@@ -719,7 +719,7 @@ class _FilterState extends State<Filter> {
                         "${suggestion.typeString} ${AppLocalizations.of(context)!.found_all_lower}";
                   }
                   return ListTile(
-                    tileColor: Colors.white,
+                    tileColor: MyTheme.white,
                     dense: true,
                     title: Text(
                       suggestion.query,
@@ -807,7 +807,7 @@ class _FilterState extends State<Filter> {
           ? TextDirection.rtl
           : TextDirection.ltr,
       child: Drawer(
-        backgroundColor: Colors.white,
+        backgroundColor: MyTheme.white,
         child: Container(
           padding: EdgeInsets.only(top: 50),
           child: Column(
@@ -998,7 +998,7 @@ class _FilterState extends State<Filter> {
                       },
                       child: Text(
                         AppLocalizations.of(context)!.clear_all_capital,
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: MyTheme.white),
                       ),
                     ),
                     ElevatedButton(
@@ -1026,7 +1026,7 @@ class _FilterState extends State<Filter> {
                       },
                       child: Text(
                         AppLocalizations.of(context)!.apply_all_capital,
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: MyTheme.white),
                       ),
                     ),
                   ],
@@ -1113,7 +1113,7 @@ class _FilterState extends State<Filter> {
       );
     } else if (_productList.isNotEmpty) {
       return RefreshIndicator(
-        color: Colors.white,
+        color: MyTheme.white,
         backgroundColor: MyTheme.accent_color,
         onRefresh: _onProductListRefresh,
         child: SingleChildScrollView(
@@ -1183,7 +1183,7 @@ class _FilterState extends State<Filter> {
       );
     } else if (_brandList.isNotEmpty) {
       return RefreshIndicator(
-        color: Colors.white,
+        color: MyTheme.white,
         backgroundColor: MyTheme.accent_color,
         onRefresh: _onBrandListRefresh,
         child: SingleChildScrollView(
@@ -1252,7 +1252,7 @@ class _FilterState extends State<Filter> {
       );
     } else if (_shopList.isNotEmpty) {
       return RefreshIndicator(
-        color: Colors.white,
+        color: MyTheme.white,
         backgroundColor: MyTheme.accent_color,
         onRefresh: _onShopListRefresh,
         child: SingleChildScrollView(

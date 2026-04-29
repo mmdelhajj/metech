@@ -52,13 +52,13 @@ class _CartState extends State<Cart> {
               : TextDirection.ltr,
           child: Scaffold(
             key: scaffoldKey,
-            backgroundColor: const Color(0xffF2F1F6),
+            backgroundColor: MyTheme.mainColor,
             appBar: buildAppBar(context),
             body: Stack(
               children: [
                 RefreshIndicator(
                   color: MyTheme.accent_color,
-                  backgroundColor: Colors.white,
+                  backgroundColor: MyTheme.white,
                   onRefresh: () => cartProvider.onRefresh(context),
                   displacement: 0,
                   child: CustomScrollView(
@@ -95,7 +95,7 @@ class _CartState extends State<Cart> {
         cartProvider.shopList.isNotEmpty && !cartProvider.isAnyItemOutOfStock;
 
     return Container(
-      decoration: const BoxDecoration(color: Color(0xffF2F1F6)),
+      decoration: BoxDecoration(color: MyTheme.mainColor),
 
       child: SafeArea(
         child: Padding(
@@ -150,7 +150,7 @@ class _CartState extends State<Cart> {
                   child: Text(
                     AppLocalizations.of(context)!.proceed_to_shipping_ucf,
                     style: TextStyle(
-                      color: Colors.white,
+                      color: MyTheme.white,
                       fontSize: 13.sp,
                       fontWeight: FontWeight.w700,
                     ),
@@ -169,7 +169,7 @@ class _CartState extends State<Cart> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: const Color(0xffF2F1F6),
+      backgroundColor: MyTheme.mainColor,
       leading: Builder(
         builder: (context) => widget.fromNavigation
             ? UsefulElements.backToMain(context, goBack: false)

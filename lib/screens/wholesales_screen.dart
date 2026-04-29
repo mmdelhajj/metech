@@ -226,7 +226,7 @@ class _WholeSalesProductCardState extends State<WholeSalesProductCard> {
                             "Wholesale",
                             style: TextStyle(
                               fontSize: 10,
-                              color: Colors.white,
+                              color: MyTheme.white,
                               fontWeight: FontWeight.w700,
                               height: 1.8,
                             ),
@@ -322,7 +322,7 @@ class _WholeSalesProductCardState extends State<WholeSalesProductCard> {
                           formatPrice(widget.mainPrice),
                           style: TextStyle(
                             fontSize: 10,
-                            color: Colors.white,
+                            color: MyTheme.white,
                             fontWeight: FontWeight.w700,
                             height: 1.8,
                           ),

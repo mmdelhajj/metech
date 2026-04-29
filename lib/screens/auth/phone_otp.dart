@@ -122,9 +122,9 @@ class _PhoneOtpState extends State<PhoneOtp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: MyTheme.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: MyTheme.white,
         elevation: 0,
         iconTheme: IconThemeData(color: MyTheme.dark_grey),
         title: Text(
@@ -197,17 +197,17 @@ class _PhoneOtpState extends State<PhoneOtp> {
                 padding: const EdgeInsets.symmetric(vertical: 14),
               ),
               child: _busy
-                  ? const SizedBox(
+                  ? SizedBox(
                       height: 20,
                       width: 20,
                       child: CircularProgressIndicator(
-                        color: Colors.white,
+                        color: MyTheme.white,
                         strokeWidth: 2,
                       ),
                     )
                   : Text(
                       _codeSent ? "Verify code" : "Send code",
-                      style: const TextStyle(color: Colors.white),
+                      style: TextStyle(color: MyTheme.white),
                     ),
             ),
             if (_codeSent) ...[

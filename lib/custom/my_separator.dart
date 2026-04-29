@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 
 class MySeparator extends StatelessWidget {
-  const MySeparator({super.key, this.height = 1, this.color = Colors.black});
+  const MySeparator({super.key, this.height = 1, this.color = const Color(0xFF000000)});
   final double height;
   final Color color;
 

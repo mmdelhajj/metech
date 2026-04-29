@@ -367,18 +367,18 @@ class _PasswordForgetState extends State<PasswordForget> {
                             onPressSendCode();
                           },
                     child: _isRecaptchaVerifying
-                        ? const SizedBox(
+                        ? SizedBox(
                             height: 20,
                             width: 20,
                             child: CircularProgressIndicator(
-                              color: Colors.white,
+                              color: MyTheme.white,
                               strokeWidth: 2.0,
                             ),
                           )
                         : Text(
                             "Send Code",
                             style: TextStyle(
-                              color: Colors.white,
+                              color: MyTheme.white,
                               fontSize: 13,
                               fontWeight: FontWeight.w600,
                             ),

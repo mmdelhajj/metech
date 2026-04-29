@@ -78,8 +78,8 @@ class FeaturedProductHorizontalListWidget extends StatelessWidget {
                 return (index == homeData.featuredProductList.length)
                     ? SpinKitFadingFour(
                         itemBuilder: (BuildContext context, int index) {
-                          return const DecoratedBox(
-                            decoration: BoxDecoration(color: Colors.white),
+                          return DecoratedBox(
+                            decoration: BoxDecoration(color: MyTheme.white),
                           );
                         },
                       )

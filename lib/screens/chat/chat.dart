@@ -170,7 +170,7 @@ class _ChatState extends State<Chat> {
     return Container(
       height: _showLoadingContainer ? 36 : 0,
       width: double.infinity,
-      color: Colors.white,
+      color: MyTheme.white,
       child: Center(
         child: Text(
           _totalData == _list.length
@@ -433,7 +433,7 @@ class _ChatState extends State<Chat> {
                 ),
               ),
               child: Center(
-                child: Icon(Icons.send, color: Colors.white, size: 16),
+                child: Icon(Icons.send, color: MyTheme.white, size: 16),
               ),
             ),
           ),
@@ -590,10 +590,10 @@ class _ChatState extends State<Chat> {
         ),
         color: (_list[index].sendType == "customer"
             ? const Color(0xffE62E04)
-            : Colors.white),
+            : MyTheme.white),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: .08),
+            color: MyTheme.blackColour.withValues(alpha: .08),
             blurRadius: 20,
             spreadRadius: 0.0,
             offset: Offset(0.0, 10.0),
@@ -624,7 +624,7 @@ class _ChatState extends State<Chat> {
                 fontSize: 12,
                 color: (_list[index].sendType == "customer"
                     ? MyTheme.white
-                    : Colors.black),
+                    : MyTheme.blackColour),
               ),
             ),
           ),
@@ -640,7 +640,7 @@ class _ChatState extends State<Chat> {
         padding: const EdgeInsets.only(left: 20, bottom: 10, top: 10),
         height: 60,
         width: double.infinity,
-        color: Colors.white.withValues(alpha: 0.95),
+        color: MyTheme.white.withValues(alpha: 0.95),
         child: Row(
           children: <Widget>[
             Expanded(
@@ -685,7 +685,7 @@ class _ChatState extends State<Chat> {
                   backgroundColor: MyTheme.accent_color,
                   elevation: 0,
                   shape: const CircleBorder(),
-                  child: const Icon(Icons.send, color: Colors.white, size: 18),
+                  child: Icon(Icons.send, color: MyTheme.white, size: 18),
                 ),
               ),
             ),
@@ -770,7 +770,7 @@ class _ChatState extends State<Chat> {
                 "    ",
                 style: TextStyle(
                   fontSize: 12,
-                  color: (index.isOdd ? MyTheme.white : Colors.black),
+                  color: (index.isOdd ? MyTheme.white : MyTheme.blackColour),
                 ),
               ),
             ),

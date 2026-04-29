@@ -873,7 +873,7 @@ class _AddressState extends State<Address> {
       bottomNavigationBar: buildBottomAppBar(context),
       body: RefreshIndicator(
         color: MyTheme.accent_color,
-        backgroundColor: Colors.white,
+        backgroundColor: MyTheme.white,
         onRefresh: _onRefresh,
         displacement: 0,
         child: CustomScrollView(
@@ -939,7 +939,7 @@ class _AddressState extends State<Address> {
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setModalState) {
             return AlertDialog(
-              backgroundColor: Colors.white,
+              backgroundColor: MyTheme.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
               ),
@@ -1406,9 +1406,9 @@ class _AddressState extends State<Address> {
                                 minWidth: 120,
                                 height: 40,
                                 color: MyTheme.accent_color,
-                                child: const Text(
+                                child: Text(
                                   "Pick from map",
-                                  style: TextStyle(color: Colors.white),
+                                  style: TextStyle(color: MyTheme.white),
                                 ),
                                 onPressed: () async {
                                   final result = await Navigator.push(
@@ -1584,7 +1584,7 @@ class _AddressState extends State<Address> {
                         child: Text(
                           LangText(context).local.add_ucf,
                           style: TextStyle(
-                            color: Colors.white,
+                            color: MyTheme.white,
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
                           ),
@@ -1633,7 +1633,7 @@ class _AddressState extends State<Address> {
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setModalState) {
             return AlertDialog(
-              backgroundColor: Colors.white,
+              backgroundColor: MyTheme.white,
               insetPadding: EdgeInsets.symmetric(horizontal: 10),
               contentPadding: EdgeInsets.only(
                 top: 36.0,
@@ -2114,9 +2114,9 @@ class _AddressState extends State<Address> {
                                 minWidth: 120,
                                 height: 40,
                                 color: MyTheme.accent_color,
-                                child: const Text(
+                                child: Text(
                                   "Pick on map",
-                                  style: TextStyle(color: Colors.white),
+                                  style: TextStyle(color: MyTheme.white),
                                 ),
                                 onPressed: () async {
                                   final result = await Navigator.push(
@@ -2313,7 +2313,7 @@ class _AddressState extends State<Address> {
                         child: Text(
                           AppLocalizations.of(context)!.update_all_capital,
                           style: TextStyle(
-                            color: Colors.white,
+                            color: MyTheme.white,
                             fontSize: 13,
                             fontWeight: FontWeight.w600,
                           ),
@@ -2515,10 +2515,10 @@ class _AddressState extends State<Address> {
               color: const Color(0xff1A1A1A),
               borderRadius: BorderRadius.circular(20),
             ),
-            child: const Text(
+            child: Text(
               "Default Shipping",
               style: TextStyle(
-                color: Colors.white,
+                color: MyTheme.white,
                 fontSize: 9,
                 fontWeight: FontWeight.w500,
               ),
@@ -2533,10 +2533,10 @@ class _AddressState extends State<Address> {
               color: const Color(0xff007BFF),
               borderRadius: BorderRadius.circular(20),
             ),
-            child: const Text(
+            child: Text(
               "Default Billing",
               style: TextStyle(
-                color: Colors.white,
+                color: MyTheme.white,
                 fontSize: 9,
                 fontWeight: FontWeight.w500,
               ),
@@ -2603,7 +2603,7 @@ class _AddressState extends State<Address> {
             child: Text(
               AppLocalizations.of(context)!.back_to_shipping_info,
               style: TextStyle(
-                color: Colors.white,
+                color: MyTheme.white,
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
               ),
@@ -2621,7 +2621,7 @@ class _AddressState extends State<Address> {
     return SizedBox(
       width: 25,
       child: PopupMenuButton<MenuOptions>(
-        color: Colors.white,
+        color: MyTheme.white,
         offset: const Offset(-25, 0),
         child: Padding(
           padding: EdgeInsets.zero,
@@ -2686,7 +2686,7 @@ void _showLoadingDialog(BuildContext context) {
   showDialog(
     context: context,
     barrierDismissible: false,
-    barrierColor: Colors.black.withValues(alpha: .25),
+    barrierColor: MyTheme.blackColour.withValues(alpha: .25),
     builder: (_) => const Center(
       child: CircularProgressIndicator(color: MyTheme.accent_color),
     ),

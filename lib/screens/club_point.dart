@@ -134,7 +134,7 @@ class _ClubpointState extends State<Clubpoint> {
           children: [
             RefreshIndicator(
               color: MyTheme.accent_color,
-              backgroundColor: Colors.white,
+              backgroundColor: MyTheme.white,
               onRefresh: _onRefresh,
               displacement: 0,
               child: CustomScrollView(
@@ -168,7 +168,7 @@ class _ClubpointState extends State<Clubpoint> {
     return Container(
       height: _showLoadingContainer ? 36 : 0,
       width: double.infinity,
-      color: Colors.white,
+      color: MyTheme.white,
       child: Center(
         child: Text(
           _totalData == _list.length
@@ -244,7 +244,7 @@ class _ClubpointState extends State<Clubpoint> {
     return Container(
       height: 91,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: MyTheme.white,
         borderRadius: BorderRadius.circular(6),
       ),
       child: Padding(
@@ -354,7 +354,7 @@ class _ClubpointState extends State<Clubpoint> {
                               AppLocalizations.of(context)?.convert_now_ucf ??
                                   "CONVERT NOW",
                               style: TextStyle(
-                                color: Colors.white,
+                                color: MyTheme.white,
                                 fontSize: 10,
                               ),
                             ),

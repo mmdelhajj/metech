@@ -144,7 +144,7 @@ class _CouponsState extends State<Coupons> {
       height: 40.h,
       padding: EdgeInsets.symmetric(horizontal: 10.w),
       decoration: BoxDecoration(
-        color: Colors.white..withValues(alpha: 0.2),
+        color: MyTheme.white..withValues(alpha: 0.2),
         borderRadius: BorderRadius.circular(8.r),
       ),
       child: Row(
@@ -153,7 +153,7 @@ class _CouponsState extends State<Coupons> {
             child: Text(
               "${LangText(context).local.code}: ${coupon.code}",
               style: TextStyle(
-                color: Colors.white,
+                color: MyTheme.white,
                 fontSize: 14.sp,
                 fontWeight: FontWeight.bold,
               ),
@@ -161,7 +161,7 @@ class _CouponsState extends State<Coupons> {
             ),
           ),
           IconButton(
-            icon: Icon(Icons.copy, size: 18.sp, color: Colors.white),
+            icon: Icon(Icons.copy, size: 18.sp, color: MyTheme.white),
             onPressed: () {
               Clipboard.setData(ClipboardData(text: coupon.code!));
               ToastComponent.showDialog(LangText(context).local.copied_ucf);
@@ -189,7 +189,7 @@ class _CouponsState extends State<Coupons> {
               children: [
                 buildCouponHeader(index),
                 SizedBox(height: 25.h),
-                MySeparator(color: Colors.white),
+                MySeparator(color: MyTheme.white),
                 SizedBox(height: 5.h),
                 buildProductImageList(index),
                 SizedBox(height: 8.h),
@@ -238,7 +238,7 @@ class _CouponsState extends State<Coupons> {
         Text(
           coupon.shopName,
           style: TextStyle(
-            color: Colors.white,
+            color: MyTheme.white,
             fontSize: 11.sp,
             fontWeight: FontWeight.bold,
           ),
@@ -249,7 +249,7 @@ class _CouponsState extends State<Coupons> {
               ? "${coupon.discount}% ${LangText(context).local.off}"
               : "${convertPrice(coupon.discount.toString())} ${LangText(context).local.off}",
           style: TextStyle(
-            color: Colors.white,
+            color: MyTheme.white,
             fontSize: 21.sp,
             fontWeight: FontWeight.bold,
           ),

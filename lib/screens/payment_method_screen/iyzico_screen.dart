@@ -91,7 +91,7 @@ class _IyzicoScreenState extends State<IyzicoScreen> {
           ? TextDirection.rtl
           : TextDirection.ltr,
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: MyTheme.white,
         appBar: buildAppBar(context),
         body: buildBody(),
       ),
@@ -187,7 +187,7 @@ class _IyzicoScreenState extends State<IyzicoScreen> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: MyTheme.white,
       centerTitle: true,
       leading: Builder(
         builder: (context) => IconButton(

@@ -159,13 +159,13 @@ class _ProductReviewsState extends State<ProductReviews> {
           ? TextDirection.rtl
           : TextDirection.ltr,
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: MyTheme.white,
         appBar: buildAppBar(context),
         body: Stack(
           children: [
             RefreshIndicator(
               color: MyTheme.accent_color,
-              backgroundColor: Colors.white,
+              backgroundColor: MyTheme.white,
               onRefresh: _onRefresh,
               displacement: 0,
               child: CustomScrollView(
@@ -205,7 +205,7 @@ class _ProductReviewsState extends State<ProductReviews> {
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
         child: Container(
-          decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.8)),
+          decoration: BoxDecoration(color: MyTheme.white.withValues(alpha: 0.8)),
           height: 180,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 8.0),
@@ -218,7 +218,7 @@ class _ProductReviewsState extends State<ProductReviews> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: MyTheme.white,
       centerTitle: true,
       leading: Builder(
         builder: (context) => IconButton(
@@ -357,7 +357,7 @@ class _ProductReviewsState extends State<ProductReviews> {
                     _reviewList[index].userName,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 13,
                       color: MyTheme.font_grey,
                       fontWeight: FontWeight.w600,
@@ -456,7 +456,7 @@ class _ProductReviewsState extends State<ProductReviews> {
     return Container(
       height: _showLoadingContainer ? 36 : 0,
       width: double.infinity,
-      color: Colors.white,
+      color: MyTheme.white,
       child: Center(
         child: Text(
           _totalData == _reviewList.length
@@ -544,7 +544,7 @@ class _ProductReviewsState extends State<ProductReviews> {
                   shape: BoxShape.circle,
                   border: Border.all(color: MyTheme.textfield_grey),
                 ),
-                child: const Center(
+                child: Center(
                   child: Icon(
                     Icons.add_a_photo_outlined,
                     color: MyTheme.font_grey,
@@ -607,8 +607,8 @@ class _ProductReviewsState extends State<ProductReviews> {
                   color: MyTheme.accent_color,
                   shape: BoxShape.circle,
                 ),
-                child: const Center(
-                  child: Icon(Icons.send, color: Colors.white, size: 16),
+                child: Center(
+                  child: Icon(Icons.send, color: MyTheme.white, size: 16),
                 ),
               ),
             ),

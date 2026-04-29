@@ -299,7 +299,7 @@ class _PhonePeScreenState extends State<PhonePeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: MyTheme.white,
         centerTitle: true,
         leading: Builder(
           builder: (context) => IconButton(

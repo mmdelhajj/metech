@@ -80,7 +80,7 @@ class _MessengerListState extends State<MessengerList> {
           children: [
             RefreshIndicator(
               color: MyTheme.accent_color,
-              backgroundColor: Colors.white,
+              backgroundColor: MyTheme.white,
               onRefresh: _onRefresh,
               displacement: 0,
               child: CustomScrollView(
@@ -114,7 +114,7 @@ class _MessengerListState extends State<MessengerList> {
     return Container(
       height: _showLoadingContainer ? 36 : 0,
       width: double.infinity,
-      color: Colors.white,
+      color: MyTheme.white,
       child: Center(
         child: Text(
           _totalData == _list.length

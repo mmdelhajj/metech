@@ -88,7 +88,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 14.0,
-                        color: Colors.white,
+                        color: MyTheme.white,
                       ),
                     ),
                   ),
@@ -97,7 +97,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 14.0,
-                      color: Colors.white,
+                      color: MyTheme.white,
                     ),
                   ),
                 ],
@@ -113,7 +113,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 13.0,
-                      color: Colors.white,
+                      color: MyTheme.white,
                     ),
                   ),
                 ),

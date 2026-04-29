@@ -192,7 +192,7 @@ class _DigitalProductsState extends State<DigitalProducts> {
         },
         decoration: InputDecoration(
           hintText: "Search Digital Products...",
-          hintStyle: const TextStyle(
+          hintStyle: TextStyle(
             fontSize: 14.0,
             color: MyTheme.textfield_grey,
           ),
@@ -266,7 +266,7 @@ class _DigitalProductsState extends State<DigitalProducts> {
     return Container(
       height: _showLoadingContainer ? 36 : 0,
       width: double.infinity,
-      color: Colors.white,
+      color: MyTheme.white,
       child: Center(
         child: Text(
           _totalData == _digitalProducts.length

@@ -78,7 +78,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             : TextDirection.ltr,
         child: SafeArea(
           child: Scaffold(
-            backgroundColor: Colors.white,
+            backgroundColor: MyTheme.white,
 
             floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
 
@@ -86,7 +86,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               children: [
                 RefreshIndicator(
                   color: MyTheme.accent_color,
-                  backgroundColor: Colors.white,
+                  backgroundColor: MyTheme.white,
                   onRefresh: _fetchData,
                   displacement: 0,
                   child: CustomScrollView(
@@ -99,7 +99,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         floating: false,
                         snap: false,
                         pinned: true,
-                        backgroundColor: Colors.white,
+                        backgroundColor: MyTheme.white,
                         elevation: 0,
                         scrolledUnderElevation: 0.0,
                         automaticallyImplyLeading: false,
@@ -323,7 +323,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     return SliverList(
       delegate: SliverChildListDelegate([
         Container(
-          color: Color(0xffF2F1F6),
+          color: MyTheme.mainColor,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -352,7 +352,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     return SliverList(
       delegate: SliverChildListDelegate([
         Container(
-          color: const Color(0xffF2F1F6),
+          color: MyTheme.mainColor,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -380,7 +380,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       duration: const Duration(milliseconds: 300),
       height: homeData.showAllLoadingContainer ? 36.h : 0,
       width: double.infinity,
-      color: Colors.white,
+      color: MyTheme.white,
       child: Center(
         child: Text(
           homeData.totalAllProductData == homeData.allProductList.length
@@ -439,10 +439,10 @@ class _HomeMenu extends StatelessWidget {
 
           if (index == 0) {
             containerColor = const Color(0xff000000);
-            textAndIconColor = Colors.white;
+            textAndIconColor = MyTheme.white;
           } else if (index == 1) {
             containerColor = const Color(0xffFF5500);
-            textAndIconColor = Colors.white;
+            textAndIconColor = MyTheme.white;
           } else {
             containerColor = const Color(0xffE9EAEB);
             textAndIconColor = const Color(0xff263140);
@@ -537,7 +537,7 @@ class StickyMenuDelegate extends SliverPersistentHeaderDelegate {
     bool overlapsContent,
   ) {
     return Container(
-      color: Colors.white,
+      color: MyTheme.white,
       alignment: Alignment.centerLeft,
       padding: EdgeInsets.fromLTRB(0, 8.h, 0, 10.h),
       child: _HomeMenu(homeData: homeData),

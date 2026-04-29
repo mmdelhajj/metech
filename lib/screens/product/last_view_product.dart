@@ -61,7 +61,7 @@ class _LastViewProductState extends State<LastViewProduct> {
           ? TextDirection.rtl
           : TextDirection.ltr,
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: MyTheme.white,
         appBar: buildAppBar(context),
         body: body(),
       ),
@@ -111,7 +111,7 @@ class _LastViewProductState extends State<LastViewProduct> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: MyTheme.white,
       centerTitle: false,
       leading: UsefulElements.backButton(context),
       title: Text(

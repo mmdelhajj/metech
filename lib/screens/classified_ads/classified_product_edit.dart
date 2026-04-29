@@ -83,7 +83,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
     bool? userAgreed = await showDialog<bool>(
       context: context,
       builder: (BuildContext dialogContext) => AlertDialog(
-        backgroundColor: Colors.white,
+        backgroundColor: MyTheme.white,
         title: const Text("Permission Required", textAlign: TextAlign.center),
         content: Text(purpose, textAlign: TextAlign.center),
         actions: <Widget>[
@@ -1012,7 +1012,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
                           onPressed: submit,
                           child: Text(
                             AppLocalizations.of(context)!.save_product_ucf,
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: MyTheme.white),
                           ),
                         ),
                       ),
@@ -1099,7 +1099,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
   Text buildFieldTitle(title) {
     return Text(
       title,
-      style: const TextStyle(
+      style: TextStyle(
         fontSize: 12,
         fontWeight: FontWeight.bold,
         color: MyTheme.font_grey,
@@ -1175,7 +1175,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
         ),
         child: DropdownButton<CommonDropDownItem>(
           borderRadius: BorderRadius.circular(10),
-          dropdownColor: Colors.white,
+          dropdownColor: MyTheme.white,
           menuMaxHeight: 300,
           isDense: true,
           underline: Container(),
@@ -1392,7 +1392,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
   Text buildGroupTitle(title) {
     return Text(
       title,
-      style: const TextStyle(
+      style: TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.bold,
         color: MyTheme.font_grey,
@@ -1413,7 +1413,7 @@ class _ClassifiedProductEditState extends State<ClassifiedProductEdit> {
       children: [
         Text(
           title,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.bold,
             color: MyTheme.font_grey,

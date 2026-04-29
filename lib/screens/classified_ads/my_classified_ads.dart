@@ -322,7 +322,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
               borderRadius: BorderRadius.circular(6),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.08),
+                  color: MyTheme.blackColour.withValues(alpha: 0.08),
                   spreadRadius: 0.5,
                   blurRadius: 20,
                   offset: Offset(0, 10),
@@ -378,7 +378,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
                 borderRadius: BorderRadius.circular(6),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.08),
+                    color: MyTheme.blackColour.withValues(alpha: 0.08),
                     spreadRadius: 0.5,
                     blurRadius: 20,
                     offset: Offset(0, 10),
@@ -478,11 +478,11 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: MyTheme.white,
           borderRadius: BorderRadius.circular(6),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.08),
+              color: MyTheme.blackColour.withValues(alpha: 0.08),
               //   spreadRadius: 0.5,
               blurRadius: 20,
               offset: Offset(0, 10),
@@ -594,7 +594,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
       builder: (context) => SizedBox(
         width: DeviceInfo(context).width! * 1.5,
         child: AlertDialog(
-          backgroundColor: Colors.white,
+          backgroundColor: MyTheme.white,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           title: Text(
             LangText(context).local.do_you_want_to_delete_it,
@@ -632,7 +632,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
     return SizedBox(
       width: 35,
       child: PopupMenuButton<MenuOptions>(
-        color: Colors.white,
+        color: MyTheme.white,
         offset: Offset(-12, 0),
         child: Padding(
           padding: EdgeInsets.zero,
@@ -681,7 +681,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
         return StatefulBuilder(
           builder: (context, setState) {
             return AlertDialog(
-              backgroundColor: Colors.white,
+              backgroundColor: MyTheme.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(6.0),
               ),
@@ -701,7 +701,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
                         style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w500,
-                          color: Colors.black,
+                          color: MyTheme.blackColour,
                         ),
                       ),
                       Transform.scale(
@@ -748,7 +748,7 @@ class _MyClassifiedAdsState extends State<MyClassifiedAds> {
                       style: TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.w500,
-                        color: Colors.black,
+                        color: MyTheme.blackColour,
                       ),
                     ),
                     Switch(

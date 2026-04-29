@@ -74,7 +74,7 @@ class _CouponProductsState extends State<CouponProducts> {
                   });
                 }
               },
-              icon: Icon(color: Colors.black, Icons.copy, size: 18.0),
+              icon: Icon(color: MyTheme.blackColour, Icons.copy, size: 18.0),
             ),
           ],
         ),

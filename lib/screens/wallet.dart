@@ -161,18 +161,18 @@ class _WalletState extends State<Wallet> {
             ? TextDirection.rtl
             : TextDirection.ltr,
         child: Scaffold(
-          backgroundColor: Color(0xffF2F1F6),
+          backgroundColor: MyTheme.mainColor,
           appBar: buildAppBar(context),
           body: RefreshIndicator(
             color: MyTheme.accent_color,
-            backgroundColor: Color(0xffF2F1F6),
+            backgroundColor: MyTheme.mainColor,
             onRefresh: _onPageRefresh,
             displacement: 10,
             child: Stack(
               children: [
                 Container(
                   width: double.infinity,
-                  color: Color(0xffF2F1F6),
+                  color: MyTheme.mainColor,
                   child: Padding(
                     padding: const EdgeInsets.only(
                       top: 8.0,
@@ -201,7 +201,7 @@ class _WalletState extends State<Wallet> {
     return Container(
       height: _showRechageLoadingContainer ? 36 : 0,
       width: double.infinity,
-      color: Colors.white,
+      color: MyTheme.white,
       child: Center(
         child: Text(
           _totalRechargeData == _rechargeList.length
@@ -216,7 +216,7 @@ class _WalletState extends State<Wallet> {
     return AppBar(
       scrolledUnderElevation: 0.0,
       key: appBarKey,
-      backgroundColor: Color(0xffF2F1F6),
+      backgroundColor: MyTheme.mainColor,
       centerTitle: false,
       leading: Builder(
         builder: (context) => IconButton(
@@ -328,7 +328,7 @@ class _WalletState extends State<Wallet> {
     return Container(
       height: 100,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: MyTheme.white,
         borderRadius: BorderRadius.circular(8),
       ),
       margin: EdgeInsets.symmetric(horizontal: 16.0),
@@ -432,7 +432,7 @@ class _WalletState extends State<Wallet> {
                 child: Text(
                   AppLocalizations.of(context)!.wallet_balance_ucf,
                   style: TextStyle(
-                    color: Colors.white,
+                    color: MyTheme.white,
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
                   ),
@@ -443,7 +443,7 @@ class _WalletState extends State<Wallet> {
                 child: Text(
                   convertPrice(_balanceDetails.balance),
                   style: TextStyle(
-                    color: Colors.white,
+                    color: MyTheme.white,
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),
@@ -510,7 +510,7 @@ class _WalletState extends State<Wallet> {
             ? TextDirection.rtl
             : TextDirection.ltr,
         child: AlertDialog(
-          backgroundColor: Colors.white,
+          backgroundColor: MyTheme.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(6.0),
           ),
@@ -621,7 +621,7 @@ class _WalletState extends State<Wallet> {
                     child: Text(
                       AppLocalizations.of(context)!.proceed_ucf,
                       style: TextStyle(
-                        color: Colors.white,
+                        color: MyTheme.white,
                         fontSize: 10,
                         fontWeight: FontWeight.normal,
                       ),

@@ -594,7 +594,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                 children: [
                                   Icon(
                                     CupertinoIcons.arrowshape_turn_up_right,
-                                    color: Colors.white,
+                                    color: MyTheme.white,
                                     size: 18.sp,
                                   ),
                                   SizedBox(width: 5.w),
@@ -602,7 +602,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                     AppLocalizations.of(
                                       context,
                                     )!.share_options_ucf,
-                                    style: TextStyle(color: Colors.white),
+                                    style: TextStyle(color: MyTheme.white),
                                   ),
                                 ],
                               ),
@@ -702,7 +702,7 @@ class _ProductDetailsState extends State<ProductDetails>
                         : Btn.minWidthFixHeight(
                             minWidth: 75.w, height: 30.h, color: MyTheme.accent_color,
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0.r), side: BorderSide(color: MyTheme.light_grey, width: 1.0)),
-                            child: Text(AppLocalizations.of(context)!.send_all_capital, style: TextStyle(color: Colors.white, fontSize: 16.sp, fontWeight: FontWeight.w600)),
+                            child: Text(AppLocalizations.of(context)!.send_all_capital, style: TextStyle(color: MyTheme.white, fontSize: 16.sp, fontWeight: FontWeight.w600)),
                             onPressed: () async {
                               var title = sellerChatTitleController.text.toString();
                               var message = sellerChatMessageController.text.toString();
@@ -799,7 +799,7 @@ class _ProductDetailsState extends State<ProductDetails>
         bottomNavigationBar: buildBottomAppBar(context, addedToCartSnackbar),
         body: RefreshIndicator(
           color: MyTheme.accent_color,
-          backgroundColor: Colors.white,
+          backgroundColor: MyTheme.white,
           displacement: 10.0,
           edgeOffset: 0,
           onRefresh: _onPageRefresh,
@@ -929,7 +929,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                         "${cart.cartCounter}",
                                         style: TextStyle(
                                           fontSize: 12.sp,
-                                          color: Colors.white,
+                                          color: MyTheme.white,
                                         ),
                                       );
                                     },
@@ -981,10 +981,10 @@ class _ProductDetailsState extends State<ProductDetails>
                     padding: EdgeInsets.symmetric(horizontal: 16.w),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(6.r),
-                      color: Colors.white,
+                      color: MyTheme.white,
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withValues(alpha: .08),
+                          color: MyTheme.blackColour.withValues(alpha: .08),
                           blurRadius: 20.r,
                           spreadRadius: 0.0,
                           offset: Offset(0.0, 0.0),
@@ -1119,10 +1119,10 @@ class _ProductDetailsState extends State<ProductDetails>
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: MyTheme.white,
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.08),
+                            color: MyTheme.blackColour.withValues(alpha: 0.08),
                             spreadRadius: 0,
                             blurRadius: 16.r,
                             offset: Offset(0, 0),
@@ -1239,10 +1239,10 @@ class _ProductDetailsState extends State<ProductDetails>
                       child: Container(
                         height: 48.h,
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: MyTheme.white,
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withValues(alpha: 0.08),
+                              color: MyTheme.blackColour.withValues(alpha: 0.08),
                               spreadRadius: 0,
                               blurRadius: 16.r,
                               offset: Offset(0, 0),
@@ -1291,7 +1291,7 @@ class _ProductDetailsState extends State<ProductDetails>
                           context,
                         )!.products_you_may_also_like,
                         style: TextStyle(
-                          color: Colors.black,
+                          color: MyTheme.blackColour,
                           fontFamily: 'Roboto',
                           fontSize: 18.sp,
                           fontWeight: FontWeight.bold,
@@ -1310,7 +1310,7 @@ class _ProductDetailsState extends State<ProductDetails>
                     child: Text(
                       AppLocalizations.of(context)!.top_selling_products_ucf,
                       style: TextStyle(
-                        color: Colors.black,
+                        color: MyTheme.blackColour,
                         fontSize: 18.sp,
                         fontWeight: FontWeight.bold,
                       ),
@@ -1404,10 +1404,10 @@ class _ProductDetailsState extends State<ProductDetails>
               padding: EdgeInsets.all(10.r),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(36.0.r),
-                color: Colors.white,
+                color: MyTheme.white,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withValues(alpha: .08),
+                    color: MyTheme.blackColour.withValues(alpha: .08),
                     blurRadius: 20.r,
                     spreadRadius: 0.0,
                     offset: Offset(0.0, 10.0),
@@ -1719,7 +1719,7 @@ class _ProductDetailsState extends State<ProductDetails>
             color: MyTheme.white,
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withValues(alpha: 0.12),
+                color: MyTheme.blackColour.withValues(alpha: 0.12),
                 blurRadius: 6.r,
                 spreadRadius: 1,
                 offset: Offset(0.0, 3.0),
@@ -1804,7 +1804,7 @@ class _ProductDetailsState extends State<ProductDetails>
           boxShadow: [
             _selectedColorIndex == index
                 ? BoxShadow(
-                    color: Colors.black.withValues(
+                    color: MyTheme.blackColour.withValues(
                       alpha: _selectedColorIndex == index ? 0.25 : 0.12,
                     ),
                     blurRadius: 10.r,
@@ -1812,7 +1812,7 @@ class _ProductDetailsState extends State<ProductDetails>
                     offset: Offset(0.0, 6.0),
                   )
                 : BoxShadow(
-                    color: Colors.black.withValues(
+                    color: MyTheme.blackColour.withValues(
                       alpha: _selectedColorIndex == index ? 0.25 : 0.16,
                     ),
                     blurRadius: 6.r,
@@ -1990,7 +1990,7 @@ class _ProductDetailsState extends State<ProductDetails>
 
   AppBar buildAppBar(double statusBarHeight, BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: MyTheme.white,
       leading: Builder(
         builder: (context) => IconButton(
           icon: Icon(CupertinoIcons.arrow_left, color: MyTheme.dark_grey),
@@ -2044,7 +2044,7 @@ class _ProductDetailsState extends State<ProductDetails>
             child: Text(
               "Out of Stock",
               style: TextStyle(
-                color: Colors.white,
+                color: MyTheme.white,
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w600,
               ),
@@ -2082,7 +2082,7 @@ class _ProductDetailsState extends State<ProductDetails>
                 child: Text(
                   AppLocalizations.of(context)!.add_to_cart_ucf,
                   style: TextStyle(
-                    color: Colors.white,
+                    color: MyTheme.white,
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
                   ),
@@ -2116,7 +2116,7 @@ class _ProductDetailsState extends State<ProductDetails>
                 child: Text(
                   AppLocalizations.of(context)!.buy_now_ucf,
                   style: TextStyle(
-                    color: Colors.white,
+                    color: MyTheme.white,
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
                   ),
@@ -2424,10 +2424,10 @@ class _ProductDetailsState extends State<ProductDetails>
   buildQuantityUpButton() => Container(
     decoration: BoxDecoration(
       shape: BoxShape.circle,
-      color: Colors.white,
+      color: MyTheme.white,
       boxShadow: [
         BoxShadow(
-          color: Colors.black.withValues(alpha: 0.16),
+          color: MyTheme.blackColour.withValues(alpha: 0.16),
           blurRadius: 6.r,
           spreadRadius: 0.0,
           offset: Offset(0.0, 3.0),
@@ -2453,10 +2453,10 @@ class _ProductDetailsState extends State<ProductDetails>
   buildQuantityDownButton() => Container(
     decoration: BoxDecoration(
       shape: BoxShape.circle,
-      color: Colors.white,
+      color: MyTheme.white,
       boxShadow: [
         BoxShadow(
-          color: Colors.black.withValues(alpha: 0.16),
+          color: MyTheme.blackColour.withValues(alpha: 0.16),
           blurRadius: 6.r,
           spreadRadius: 0.0,
           offset: Offset(0.0, 3.0),

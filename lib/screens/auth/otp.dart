@@ -88,7 +88,7 @@ class _OtpState extends State<Otp> {
           ? TextDirection.rtl
           : TextDirection.ltr,
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: MyTheme.white,
         body: Stack(
           children: [
             Container(
@@ -171,7 +171,7 @@ class _OtpState extends State<Otp> {
                                 child: Text(
                                   AppLocalizations.of(context)!.confirm_ucf,
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color: MyTheme.white,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w600,
                                   ),

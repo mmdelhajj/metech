@@ -145,7 +145,7 @@ class _MainState extends State<Main> with WidgetsBindingObserver {
             ],
           ),
           bottomNavigationBar: Container(
-            color: Colors.white.withValues(alpha: 0.95),
+            color: MyTheme.white.withValues(alpha: 0.95),
             child: SafeArea(
               child: SizedBox(
                 height: 70.h,
@@ -226,7 +226,7 @@ class _MainState extends State<Main> with WidgetsBindingObserver {
                                 "${cart.cartCounter}",
                                 style: TextStyle(
                                   fontSize: 10.sp,
-                                  color: Colors.white,
+                                  color: MyTheme.white,
                                 ),
                               );
                             },

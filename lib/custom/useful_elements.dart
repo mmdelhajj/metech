@@ -14,7 +14,7 @@ class UsefulElements {
         app_language_rtl.$!
             ? CupertinoIcons.arrow_right
             : CupertinoIcons.arrow_left,
-        color: color == 'white' ? Colors.white : MyTheme.dark_font_grey,
+        color: color == 'white' ? MyTheme.white : MyTheme.dark_font_grey,
       ),
       onPressed: () => Navigator.pop(context),
     );
@@ -25,7 +25,7 @@ class UsefulElements {
       app_language_rtl.$!
           ? CupertinoIcons.arrow_right
           : CupertinoIcons.arrow_left,
-      color: color == 'white' ? Colors.white : MyTheme.dark_font_grey,
+      color: color == 'white' ? MyTheme.white : MyTheme.dark_font_grey,
     );
   }
 
@@ -33,7 +33,7 @@ class UsefulElements {
     return IconButton(
       icon: Icon(
         CupertinoIcons.arrow_left,
-        color: color == 'white' ? Colors.white : MyTheme.dark_font_grey,
+        color: color == 'white' ? MyTheme.white : MyTheme.dark_font_grey,
       ),
       onPressed: () => Navigator.push(
         context,
@@ -51,8 +51,8 @@ class UsefulElements {
     double paddingX = 0.0,
     double paddingY = 0.0,
     BorderRadius borderRadius = BorderRadius.zero,
-    Color backgroundColor = Colors.white,
-    Color borderColor = Colors.white,
+    Color backgroundColor = const Color.fromRGBO(255, 255, 255, 1),
+    Color borderColor = const Color.fromRGBO(255, 255, 255, 1),
     BoxFit fit = BoxFit.cover,
   }) {
     return Material(

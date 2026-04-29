@@ -206,7 +206,7 @@ class _ProductCardBlackState extends State<ProductCardBlack> {
                           widget.discount ?? '',
                           style: TextStyle(
                             fontSize: 10.sp,
-                            color: Colors.white,
+                            color: MyTheme.white,
                             fontWeight: FontWeight.w700,
                           ),
                           softWrap: false,
@@ -238,7 +238,7 @@ class _ProductCardBlackState extends State<ProductCardBlack> {
                         "Wholesale",
                         style: TextStyle(
                           fontSize: 10.sp,
-                          color: Colors.white,
+                          color: MyTheme.white,
                           fontWeight: FontWeight.w700,
                         ),
                         softWrap: false,

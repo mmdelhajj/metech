@@ -12,7 +12,10 @@ import 'package:active_ecommerce_cms_demo_app/screens/currency_change.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/home.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/profile_edit.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/address.dart';
+import 'package:active_ecommerce_cms_demo_app/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:provider/provider.dart';
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
@@ -37,21 +40,21 @@ class _SettingsState extends State<Settings> {
           Container(
             height: DeviceInfo(context).height! / 1,
             width: DeviceInfo(context).width,
-            color: Colors.white,
+            color: MyTheme.white,
           ),
           Scaffold(
             backgroundColor: Colors.transparent,
             appBar: AppBar(
               title: Text(
                 'Settings',
-                style: TextStyle(fontSize: 18, color: Colors.black),
+                style: TextStyle(fontSize: 18, color: MyTheme.blackColour),
               ),
               backgroundColor: Colors.transparent,
               leading: IconButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: Icon(Icons.arrow_back, color: Colors.black),
+                icon: Icon(Icons.arrow_back, color: MyTheme.blackColour),
               ),
             ),
             body: buildBody(context),
@@ -108,6 +111,14 @@ class _SettingsState extends State<Settings> {
           ),
           Divider(thickness: 1, color: MyTheme.light_grey),
           buildBottomVerticalCardListItem(
+            "assets/edit.png",
+            "Theme",
+            onPressed: () {
+              _showThemePicker(context);
+            },
+          ),
+          Divider(thickness: 1, color: MyTheme.light_grey),
+          buildBottomVerticalCardListItem(
             "assets/delete.png",
             LangText(context).local.delete_my_account,
             onPressed: () {
@@ -117,6 +128,51 @@ class _SettingsState extends State<Settings> {
           Divider(thickness: 1, color: MyTheme.light_grey),
         ],
       ),
+    );
+  }
+
+  void _showThemePicker(BuildContext context) {
+    final provider = Provider.of<ThemeProvider>(context, listen: false);
+    showModalBottomSheet(
+      context: context,
+      builder: (ctx) {
+        return SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Padding(
+                padding: EdgeInsets.all(16),
+                child: Text(
+                  "Choose theme",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              ),
+              for (final entry in const [
+                MapEntry(ThemeMode.system, "Follow system"),
+                MapEntry(ThemeMode.light, "Light"),
+                MapEntry(ThemeMode.dark, "Dark"),
+              ])
+                RadioListTile<ThemeMode>(
+                  title: Text(entry.value),
+                  value: entry.key,
+                  groupValue: provider.mode,
+                  onChanged: (mode) async {
+                    if (mode != null) {
+                      await provider.setMode(mode);
+                      if (!ctx.mounted) return;
+                      Navigator.pop(ctx);
+                      // Hardcoded MyTheme.white etc. were swapped — rebirth
+                      // forces every already-rendered widget to repaint with
+                      // the new colors.
+                      Phoenix.rebirth(context);
+                    }
+                  },
+                ),
+              const SizedBox(height: 8),
+            ],
+          ),
+        );
+      },
     );
   }
 

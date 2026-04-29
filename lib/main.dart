@@ -2,6 +2,7 @@
 
 import 'dart:async';
 
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:active_ecommerce_cms_demo_app/l10n/app_localizations.dart';
 import 'package:active_ecommerce_cms_demo_app/middlewares/auth_middleware.dart';
 import 'package:active_ecommerce_cms_demo_app/providers/checkout_provider.dart';
@@ -34,6 +35,7 @@ import 'presenter/home_presenter.dart';
 import 'presenter/unRead_notification_counter.dart';
 import 'providers/blog_provider.dart';
 import 'providers/locale_provider.dart';
+import 'providers/theme_provider.dart';
 import 'screens/auction/auction_bidded_products.dart';
 import 'screens/auction/auction_products.dart';
 import 'screens/auction/auction_products_details.dart';
@@ -113,7 +115,7 @@ void main() async {
     );
   };
 
-  runApp(SharedValue.wrapApp(MyApp()));
+  runApp(Phoenix(child: SharedValue.wrapApp(MyApp())));
 }
 
 var routes = GoRouter(
@@ -317,6 +319,7 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => LocaleProvider()),
+        ChangeNotifierProvider(create: (_) => ThemeProvider()..load()),
         ChangeNotifierProvider(create: (_) => CartCounter()),
         ChangeNotifierProvider(create: (_) => CartProvider()),
         ChangeNotifierProvider(create: (_) => UnReadNotificationCounter()),
@@ -328,8 +331,8 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (_) => CheckoutProvider()),
         ChangeNotifierProvider(create: (_) => PageProvider()),
       ],
-      child: Consumer<LocaleProvider>(
-        builder: (context, provider, snapshot) {
+      child: Consumer2<LocaleProvider, ThemeProvider>(
+        builder: (context, provider, themeProv, snapshot) {
           return ScreenUtilInit(
             designSize: const Size(392.7, 850.9),
             minTextAdapt: true,
@@ -339,13 +342,39 @@ class _MyAppState extends State<MyApp> {
               routerConfig: routes,
               title: AppConfig.app_name,
               debugShowCheckedModeBanner: false,
+              themeMode: themeProv.mode,
               theme: ThemeData(
-                primaryColor: MyTheme.white,
+                brightness: Brightness.light,
+                primaryColor: MyTheme.accent_color,
                 scaffoldBackgroundColor: MyTheme.white,
                 visualDensity: VisualDensity.adaptivePlatformDensity,
                 fontFamily: "Inter",
                 textTheme: MyTheme.textTheme2,
-                fontFamilyFallback: ['Inter'],
+                fontFamilyFallback: const ['Inter'],
+                colorScheme: ColorScheme.fromSeed(
+                  seedColor: MyTheme.accent_color,
+                  brightness: Brightness.light,
+                ),
+                scrollbarTheme: ScrollbarThemeData(
+                  thumbVisibility: WidgetStateProperty.all<bool>(false),
+                ),
+              ),
+              darkTheme: ThemeData(
+                brightness: Brightness.dark,
+                primaryColor: MyTheme.accent_color,
+                scaffoldBackgroundColor: const Color(0xFF121212),
+                visualDensity: VisualDensity.adaptivePlatformDensity,
+                fontFamily: "Inter",
+                fontFamilyFallback: const ['Inter'],
+                colorScheme: ColorScheme.fromSeed(
+                  seedColor: MyTheme.accent_color,
+                  brightness: Brightness.dark,
+                ),
+                cardColor: const Color(0xFF1E1E1E),
+                appBarTheme: const AppBarTheme(
+                  backgroundColor: Color(0xFF1E1E1E),
+                  foregroundColor: Colors.white,
+                ),
                 scrollbarTheme: ScrollbarThemeData(
                   thumbVisibility: WidgetStateProperty.all<bool>(false),
                 ),

@@ -140,7 +140,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                           color: Color.fromRGBO(253, 253, 253, 1),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0),
-                            side: BorderSide(color: Colors.black, width: 1.0),
+                            side: BorderSide(color: MyTheme.blackColour, width: 1.0),
                           ),
                           child: Text(
                             AppLocalizations.of(context)!.copy_product_link_ucf,
@@ -171,11 +171,11 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
                           color: Colors.blue,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0),
-                            side: BorderSide(color: Colors.black, width: 1.0),
+                            side: BorderSide(color: MyTheme.blackColour, width: 1.0),
                           ),
                           child: Text(
                             AppLocalizations.of(context)!.share_options_ucf,
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: MyTheme.white),
                           ),
                           onPressed: () {
                             Share.share(_productDetails!.link!);
@@ -263,7 +263,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
         extendBody: true,
         body: RefreshIndicator(
           color: MyTheme.accent_color,
-          backgroundColor: Colors.white,
+          backgroundColor: MyTheme.white,
           onRefresh: _onPageRefresh,
           child: CustomScrollView(
             controller: _mainScrollController,
@@ -273,7 +273,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
             slivers: <Widget>[
               SliverAppBar(
                 elevation: 0,
-                backgroundColor: Colors.white.withValues(alpha: opacity),
+                backgroundColor: MyTheme.white.withValues(alpha: opacity),
                 pinned: true,
                 automaticallyImplyLeading: false,
                 title: Row(

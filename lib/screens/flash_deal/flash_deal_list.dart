@@ -172,11 +172,11 @@ class _FlashDealListState extends State<FlashDealList> {
                     height: 198,
                     margin: EdgeInsets.symmetric(horizontal: 20),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: MyTheme.white,
                       borderRadius: BorderRadius.circular(6),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withValues(alpha: 0.16),
+                          color: MyTheme.blackColour.withValues(alpha: 0.16),
                           blurRadius: 20,
                           offset: Offset(0, 10),
                         ),

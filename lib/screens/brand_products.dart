@@ -99,7 +99,7 @@ class _BrandProductsState extends State<BrandProducts> {
     return Container(
       height: _showLoadingContainer ? 36 : 0,
       width: double.infinity,
-      color: Colors.white,
+      color: MyTheme.white,
       child: Center(
         child: Text(
           _totalData == _productList.length
@@ -112,7 +112,7 @@ class _BrandProductsState extends State<BrandProducts> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: MyTheme.white,
       leading: Builder(
         builder: (context) => IconButton(
           icon: Icon(CupertinoIcons.arrow_left, color: MyTheme.dark_grey),
@@ -177,7 +177,7 @@ class _BrandProductsState extends State<BrandProducts> {
     } else if (_productList.isNotEmpty) {
       return RefreshIndicator(
         color: MyTheme.accent_color,
-        backgroundColor: Colors.white,
+        backgroundColor: MyTheme.white,
         displacement: 0,
         onRefresh: _onRefresh,
         child: SingleChildScrollView(

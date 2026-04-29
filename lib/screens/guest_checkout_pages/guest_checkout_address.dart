@@ -349,7 +349,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setModalState) {
             return AlertDialog(
-              backgroundColor: Colors.white,
+              backgroundColor: MyTheme.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
               ),
@@ -435,7 +435,7 @@ class _GuestCheckoutAddressState extends State<GuestCheckoutAddress> {
                         color: MyTheme.accent_color,
                         child: Text(
                           LangText(context).local.continue_ucf,
-                          style: const TextStyle(color: Colors.white),
+                          style: TextStyle(color: MyTheme.white),
                         ),
                         onPressed: () {
                           _continueToDeliveryInfo();
@@ -755,7 +755,7 @@ void _showLoadingDialog(BuildContext context) {
   showDialog(
     context: context,
     barrierDismissible: false,
-    barrierColor: Colors.black.withValues(alpha: .25),
+    barrierColor: MyTheme.blackColour.withValues(alpha: .25),
     builder: (_) => const Center(
       child: CircularProgressIndicator(color: MyTheme.accent_color),
     ),

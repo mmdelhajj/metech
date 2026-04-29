@@ -30,7 +30,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
     return Container(
       height: 105.h,
       decoration: BoxDecoration(
-        color: isOutOfStock ? Colors.grey.shade300 : Colors.white,
+        color: isOutOfStock ? Colors.grey.shade300 : MyTheme.white,
         borderRadius: BorderRadius.circular(6.r),
       ),
       child: Row(
@@ -62,7 +62,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
                   if (isOutOfStock)
                     Container(
                       decoration: BoxDecoration(
-                        color: Colors.black.withValues(alpha: 0.7),
+                        color: MyTheme.blackColour.withValues(alpha: 0.7),
                         borderRadius: BorderRadius.horizontal(
                           left: Radius.circular(6.r),
                           right: Radius.zero,
@@ -72,7 +72,7 @@ class CartSellerItemCardWidget extends StatelessWidget {
                         child: Text(
                           'Out of Stock',
                           style: TextStyle(
-                            color: Colors.white,
+                            color: MyTheme.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 12.sp,
                           ),
