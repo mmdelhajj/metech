@@ -803,5 +803,8 @@
 
 
 
-    "a":""
+    "a":"",
+    "privacy_policy_ucf": "Privacy Policy",
+    "terms_and_conditions_ucf": "Terms And Conditions",
+    "blog_list_ucf": "Blog List"
 }

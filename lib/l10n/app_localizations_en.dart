@@ -2294,4 +2294,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get all_blogs_ucf => 'All Blogs';
+
+  @override
+  String get privacy_policy_ucf => 'Privacy Policy';
+
+  @override
+  String get terms_and_conditions_ucf => 'Terms And Conditions';
+
+  @override
+  String get blog_list_ucf => 'Blog List';
 }

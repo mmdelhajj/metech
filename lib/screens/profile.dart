@@ -364,22 +364,6 @@ class _ProfileState extends State<Profile> {
                 Divider(thickness: 1, color: MyTheme.light_grey),
               ],
             ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              buildBottomVerticalCardListItem(
-                "assets/blog.png",
-                'Blog List',
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => BlogListScreen()),
-                  );
-                },
-              ),
-              Divider(thickness: 1, color: MyTheme.light_grey),
-            ],
-          ),
           buildBottomVerticalCardListItem(
             "assets/download.png",
             LangText(context).local.all_digital_products_ucf,
@@ -668,13 +652,13 @@ class _ProfileState extends State<Profile> {
 
           buildBottomVerticalCardListItem(
             "assets/privacy.png",
-            "Privacy Policy",
+            AppLocalizations.of(context)!.privacy_policy_ucf,
             onPressed: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => CommonPolicyPage(
-                    title: "Privacy Policy",
+                    title: AppLocalizations.of(context)!.privacy_policy_ucf,
                     slug: "privacy-policy",
                   ),
                 ),
@@ -684,13 +668,13 @@ class _ProfileState extends State<Profile> {
           Divider(thickness: 1, color: MyTheme.light_grey),
           buildBottomVerticalCardListItem(
             "assets/terms.png",
-            "Terms And Conditions",
+            AppLocalizations.of(context)!.terms_and_conditions_ucf,
             onPressed: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => CommonPolicyPage(
-                    title: "Terms And Conditions",
+                    title: AppLocalizations.of(context)!.terms_and_conditions_ucf,
                     slug: "terms",
                   ),
                 ),
@@ -995,7 +979,7 @@ class _ProfileState extends State<Profile> {
               ),
               child: buildSettingAndAddonsHorizontalMenuItem(
                 "assets/notification.png",
-                "Notifications",
+                AppLocalizations.of(context)!.notification_ucf,
                 is_logged_in.$
                     ? () {
                         Navigator.push(
@@ -1039,47 +1023,6 @@ class _ProfileState extends State<Profile> {
                 ),
               ),
 
-            Container(
-              child: buildSettingAndAddonsHorizontalMenuItem(
-                "assets/download.png",
-                AppLocalizations.of(context)!.downloads_ucf,
-                is_logged_in.$
-                    ? () {
-                        Navigator.push(
-                          context,
-                          PageAnimation.fadeRoute(PurchasedDigitalProducts()),
-                        );
-                      }
-                    : () => null,
-              ),
-            ),
-            Container(
-              child: buildSettingAndAddonsHorizontalMenuItem(
-                "assets/upload.png",
-                "Upload file",
-                is_logged_in.$
-                    ? () async {
-                        String purpose =
-                            "To upload files, the app needs access to your device's storage.";
-                        bool userAgreed = await _showPermissionDialog(
-                          context,
-                          purpose,
-                        );
-                        if (!context.mounted) return;
-                        if (userAgreed) {
-                          Navigator.push(
-                            context,
-                            PageAnimation.fadeRoute(UploadFile()),
-                          );
-                        } else {
-                          ToastComponent.showDialog(
-                            "Permission is required to upload files.",
-                          );
-                        }
-                      }
-                    : () => null,
-              ),
-            ),
           ];
 
           return Wrap(

@@ -9,7 +9,7 @@ import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 class ThemeProvider with ChangeNotifier {
   static const _prefsKey = 'app_theme_mode';
 
-  ThemeMode _mode = ThemeMode.system;
+  ThemeMode _mode = ThemeMode.light;
   ThemeMode get mode => _mode;
 
   Future<void> load() async {
@@ -23,7 +23,9 @@ class ThemeProvider with ChangeNotifier {
         _mode = ThemeMode.dark;
         break;
       default:
-        _mode = ThemeMode.system;
+        // Default to LIGHT mode on first install — not "follow system"
+        // (so users don't get a dark app on first open if their phone is dark).
+        _mode = ThemeMode.light;
     }
     _applyMyThemeColors();
     notifyListeners();

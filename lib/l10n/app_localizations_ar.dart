@@ -18,16 +18,16 @@ class AppLocalizationsAr extends AppLocalizations {
   String get auction_product_screen_title => 'منتج المزاد';
 
   @override
-  String get all_bidded_products => 'جميع منتجات العطاءات';
+  String get all_bidded_products => 'جميع المنتجات المعروضة';
 
   @override
   String get auction_purchase_history_ucf => 'تاريخ شراء المزاد';
 
   @override
-  String get auction_my_bid_ucf => 'مناقصتي';
+  String get auction_my_bid_ucf => 'عرضي';
 
   @override
-  String get auction_highest_bid_ucf => 'منظر علوي';
+  String get auction_highest_bid_ucf => 'أعلى عرض';
 
   @override
   String get auction_order_ucf => 'أوامر المزاد';
@@ -48,14 +48,14 @@ class AppLocalizationsAr extends AppLocalizations {
   String get auction_view_bids_ucf => 'عرض جميع العطاءات';
 
   @override
-  String get auction_all_bids_ucf => 'كل العطاءات';
+  String get auction_all_bids_ucf => 'جميع العطاءات';
 
   @override
   String get auction_biding_price_date_range_ucf =>
-      'سعر عرض أسعار المنتج + النطاق الزمني';
+      'سعر عرض المنتج + النطاق الزمني';
 
   @override
-  String get auction_starting_bid_price_ucf => 'ابدأ سعر المزايدة';
+  String get auction_starting_bid_price_ucf => 'بدء سعر المزايدة';
 
   @override
   String get auction_date_range_ucf => 'نطاق تاريخ المزاد';
@@ -64,24 +64,24 @@ class AppLocalizationsAr extends AppLocalizations {
   String get auction_will_end => 'سينتهي المزاد';
 
   @override
-  String get starting_bid_ucf => 'ابدأ بالمزايدة';
+  String get starting_bid_ucf => 'بداية العطاء';
 
   @override
-  String get highest_bid_ucf => 'منظر علوي';
+  String get highest_bid_ucf => 'أعلى عرض';
 
   @override
-  String get place_bid_ucf => 'مكان العطاءات';
+  String get place_bid_ucf => 'مكان العطاء';
 
   @override
   String get change_bid_ucf => 'تغيير العطاء';
 
   @override
   String get are_you_sure_to_mark_this_as_delivered =>
-      'هل أنت متأكد من وضع علامة على هذا على أنه تم التسليم؟';
+      'هل أنت متأكد من وضع علامة على هذا كمسلم؟';
 
   @override
   String get are_you_sure_to_mark_this_as_picked_up =>
-      'هل أنت متأكد من تحديد هذا على أنه محدد؟';
+      'هل أنت متأكد من وضع علامة على هذا على أنه تم الالتقاط؟';
 
   @override
   String get are_you_sure_to_request_cancellation =>
@@ -91,16 +91,16 @@ class AppLocalizationsAr extends AppLocalizations {
   String get enter_address_ucf => 'أدخل العنوان';
 
   @override
-  String get back_to_shipping_info => 'رجوع إلى معلومات الشحن';
+  String get back_to_shipping_info => 'العودة إلى معلومات الشحن';
 
   @override
   String get select_a_city => 'اختر مدينة';
 
   @override
-  String get select_a_state => 'اختر ولاية';
+  String get select_a_state => 'اختر دولة';
 
   @override
-  String get select_a_country => 'اختر دولة';
+  String get select_a_country => 'اختر بلدا';
 
   @override
   String get address_ucf => 'عنوان';
@@ -118,19 +118,19 @@ class AppLocalizationsAr extends AppLocalizations {
   String get enter_postal_code_ucf => 'أدخل الرمز البريدي';
 
   @override
-  String get country_ucf => 'أمة';
+  String get country_ucf => 'دولة';
 
   @override
-  String get enter_country_ucf => 'أدخل الدولة';
+  String get enter_country_ucf => 'أدخل البلد';
 
   @override
   String get state_ucf => 'ولاية';
 
   @override
-  String get enter_state_ucf => 'أدخل الدولة';
+  String get enter_state_ucf => 'أدخل الولاية';
 
   @override
-  String get phone_ucf => 'هاتف';
+  String get phone_ucf => 'رقم التليفون';
 
   @override
   String get enter_phone_ucf => 'أدخل الهاتف';
@@ -140,38 +140,38 @@ class AppLocalizationsAr extends AppLocalizations {
       'هل أنت متأكد من إزالة هذا العنوان؟';
 
   @override
-  String get addresses_of_user => 'عناوين المستخدمين';
+  String get addresses_of_user => 'عناوين المستخدم';
 
   @override
   String get double_tap_on_an_address_to_make_it_default =>
-      'انقر نقرًا مزدوجًا على عنوان لجعله افتراضيًا';
+      'انقر نقرًا مزدوجًا على العنوان لجعله افتراضيًا';
 
   @override
   String get no_country_available => 'لا يوجد بلد متاح';
 
   @override
-  String get no_state_available => 'لا يوجد بلد متاح';
+  String get no_state_available => 'لا توجد ولاية متاحة';
 
   @override
   String get no_city_available => 'لا توجد مدينة متاحة';
 
   @override
-  String get loading_countries_ucf => 'تحميل البلدان ...';
+  String get loading_countries_ucf => 'جارٍ تحميل البلدان...';
 
   @override
-  String get loading_states_ucf => 'تحميل البلدان ...';
+  String get loading_states_ucf => 'جارٍ تحميل الولايات...';
 
   @override
-  String get loading_cities_ucf => 'تحميل المدن ...';
+  String get loading_cities_ucf => 'جارٍ تحميل المدن...';
 
   @override
-  String get select_a_country_first => 'حدد الدولة أولا';
+  String get select_a_country_first => 'اختر دولة أولا';
 
   @override
-  String get select_a_state_first => 'حدد ولاية أولاً';
+  String get select_a_state_first => 'اختر الولاية أولاً';
 
   @override
-  String get edit_ucf => 'يطلق';
+  String get edit_ucf => 'يحرر';
 
   @override
   String get delete_ucf => 'يمسح';
@@ -180,22 +180,22 @@ class AppLocalizationsAr extends AppLocalizations {
   String get add_location_ucf => 'أضف الموقع';
 
   @override
-  String get assigned => 'متهم';
+  String get assigned => 'مُكَلَّف';
 
   @override
-  String get amount_to_Collect_ucf => 'المبلغ المراد تحصيله';
+  String get amount_to_Collect_ucf => 'المبلغ المطلوب جمعه';
 
   @override
   String get account_delete_ucf => 'حذف الحساب';
 
   @override
-  String get fetching_bkash_url => 'إحضار رابط بكاش ...';
+  String get fetching_bkash_url => 'جارٍ جلب عنوان URL لـ bkash ...';
 
   @override
-  String get pay_with_bkash => 'الدفع نقدا';
+  String get pay_with_bkash => 'الدفع مع بكاش';
 
   @override
-  String get search_product_here => 'Search products here...';
+  String get search_product_here => 'ابحث عن المنتجات هنا...';
 
   @override
   String get do_you_want_to_delete_it => 'هل تريد حذفه؟';
@@ -204,7 +204,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get you_need_to_log_in => 'تحتاج إلى تسجيل الدخول';
 
   @override
-  String get please_choose_valid_info => 'الرجاء اختيار المعلومات الصحيحة';
+  String get please_choose_valid_info => 'الرجاء اختيار معلومات صالحة';
 
   @override
   String get nothing_to_pay => 'لا شيء للدفع';
@@ -213,22 +213,22 @@ class AppLocalizationsAr extends AppLocalizations {
   String get see_details_all_lower => 'انظر التفاصيل';
 
   @override
-  String get no_payment_method_is_added => 'لم يتم إضافة طريقة الدفع';
+  String get no_payment_method_is_added => 'لا تتم إضافة أي طريقة دفع';
 
   @override
-  String get please_choose_one_option_to_pay => 'الرجاء اختيار خيار دفع واحد';
+  String get please_choose_one_option_to_pay => 'يرجى اختيار خيار واحد للدفع';
 
   @override
-  String get no_data_is_available => 'لا تتوافر بيانات';
+  String get no_data_is_available => 'لا توجد بيانات متاحة';
 
   @override
-  String get no_address_is_added => 'لم يتم إضافة عناوين';
+  String get no_address_is_added => 'تتم إضافة أية عناوين';
 
   @override
-  String get add_new_address => 'أضف عناوين جديدة';
+  String get add_new_address => 'إضافة عنوان جديد.';
 
   @override
-  String get loading_more_products_ucf => 'جارٍ تحميل المزيد من المنتجات ...';
+  String get loading_more_products_ucf => 'تحميل المزيد من المنتجات ...';
 
   @override
   String get no_more_products_ucf => 'لا مزيد من المنتجات';
@@ -238,7 +238,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get loading_more_brands_ucf =>
-      'جارٍ تحميل المزيد من العلامات التجارية ...';
+      'جارٍ تحميل المزيد من العلامات التجارية...';
 
   @override
   String get no_more_brands_ucf => 'لا مزيد من العلامات التجارية';
@@ -247,43 +247,43 @@ class AppLocalizationsAr extends AppLocalizations {
   String get no_brand_is_available => 'لا توجد علامة تجارية متاحة';
 
   @override
-  String get loading_more_items_ucf => 'جارٍ تحميل المزيد من العناصر ...';
+  String get loading_more_items_ucf => 'جارٍ تحميل المزيد من العناصر...';
 
   @override
-  String get no_more_items_ucf => 'ليس هناك المزيد من العناصر';
+  String get no_more_items_ucf => 'لا مزيد من العناصر';
 
   @override
-  String get no_item_is_available => 'لا يوجد عنصر متاح';
+  String get no_item_is_available => 'لا يوجد أي عنصر متاح';
 
   @override
-  String get loading_more_shops_ucf => 'تحميل المزيد من المتاجر ...';
+  String get loading_more_shops_ucf => 'جارٍ تحميل المزيد من المتاجر...';
 
   @override
-  String get no_more_shops_ucf => 'لا مزيد من المتاجر';
+  String get no_more_shops_ucf => 'لا مزيد من المحلات التجارية';
 
   @override
   String get no_shop_is_available => 'لا يوجد متجر متاح';
 
   @override
-  String get loading_more_histories_ucf => 'تحميل المزيد من السجلات ...';
+  String get loading_more_histories_ucf => 'جارٍ تحميل المزيد من التواريخ...';
 
   @override
   String get no_more_histories_ucf => 'لا مزيد من التاريخ';
 
   @override
-  String get no_history_is_available => 'لا يوجد سجل متاح';
+  String get no_history_is_available => 'لا يوجد تاريخ متاح';
 
   @override
-  String get loading_more_categories_ucf => 'تحميل المزيد من الفئات ...';
+  String get loading_more_categories_ucf => 'جارٍ تحميل المزيد من الفئات...';
 
   @override
   String get no_more_categories_ucf => 'لا مزيد من الفئات';
 
   @override
-  String get no_category_is_available => 'لا يوجد فصل متاح';
+  String get no_category_is_available => 'لا توجد فئة متاحة';
 
   @override
-  String get coming_soon => 'بالكاد';
+  String get coming_soon => 'قريباً';
 
   @override
   String get close_all_capital => 'يغلق';
@@ -295,31 +295,31 @@ class AppLocalizationsAr extends AppLocalizations {
   String get close_ucf => 'يغلق';
 
   @override
-  String get cancel_all_capital => 'يقضي على';
+  String get cancel_all_capital => 'يلغي';
 
   @override
-  String get cancel_all_lower => 'يقضي على';
+  String get cancel_all_lower => 'يلغي';
 
   @override
-  String get cancel_ucf => 'يقضي على';
+  String get cancel_ucf => 'يلغي';
 
   @override
-  String get confirm_all_capital => 'بالتأكيد';
+  String get confirm_all_capital => 'يتأكد';
 
   @override
-  String get confirm_all_lower => 'بالتأكيد';
+  String get confirm_all_lower => 'يتأكد';
 
   @override
-  String get confirm_ucf => 'بالتأكيد';
+  String get confirm_ucf => 'يتأكد';
 
   @override
-  String get update_all_capital => 'للتحديث';
+  String get update_all_capital => 'تحديث';
 
   @override
-  String get update_all_lower => 'للتحديث';
+  String get update_all_lower => 'تحديث';
 
   @override
-  String get update_ucf => 'للتحديث';
+  String get update_ucf => 'تحديث';
 
   @override
   String get send_all_capital => 'يرسل';
@@ -340,13 +340,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get clear_ucf => 'واضح';
 
   @override
-  String get apply_all_capital => 'تتقدم';
+  String get apply_all_capital => 'يتقدم';
 
   @override
-  String get apply_all_lower => 'تتقدم';
+  String get apply_all_lower => 'يتقدم';
 
   @override
-  String get apply_ucf => 'تتقدم';
+  String get apply_ucf => 'يتقدم';
 
   @override
   String get add_all_capital => 'يضيف';
@@ -358,50 +358,50 @@ class AppLocalizationsAr extends AppLocalizations {
   String get add_ucf => 'يضيف';
 
   @override
-  String get copied_ucf => 'نسخ';
+  String get copied_ucf => 'منقول';
 
   @override
-  String get proceed_ucf => 'يكمل';
+  String get proceed_ucf => 'يتابع';
 
   @override
-  String get proceed_all_caps => 'يكمل';
+  String get proceed_all_caps => 'يتابع';
 
   @override
-  String get submit_ucf => 'انه يقدم';
+  String get submit_ucf => 'يُقدِّم';
 
   @override
-  String get shop_more_ucf => 'Shop More';
+  String get shop_more_ucf => 'تسوق أكثر';
 
   @override
   String get show_less_ucf => 'عرض أقل';
 
   @override
-  String get selected_ucf => 'محدد';
+  String get selected_ucf => 'مختارة';
 
   @override
-  String get creating_order => 'إنشاء طلب ...';
+  String get creating_order => 'خلق النظام...';
 
   @override
   String get payment_cancelled_ucf => 'تم إلغاء الدفع';
 
   @override
-  String get photo_permission_ucf => 'حتى الصور';
+  String get photo_permission_ucf => 'إذن الصورة';
 
   @override
   String get this_app_needs_permission => 'هذا التطبيق يحتاج إلى إذن';
 
   @override
-  String get deny_ucf => 'ينفي';
+  String get deny_ucf => 'ينكر';
 
   @override
   String get settings_ucf => 'إعدادات';
 
   @override
   String get go_to_your_application_settings_and_give_photo_permission =>
-      'انتقل إلى إعدادات التطبيق الخاص بك ومنح الإذن للصور';
+      'انتقل إلى إعدادات التطبيق الخاص بك وامنح إذن الصورة';
 
   @override
-  String get no_file_is_chosen => 'لم يتم اختيار اي ملف';
+  String get no_file_is_chosen => 'لم يتم اختيار أي ملف';
 
   @override
   String get yes_ucf => 'نعم';
@@ -413,16 +413,16 @@ class AppLocalizationsAr extends AppLocalizations {
   String get date_ucf => 'تاريخ';
 
   @override
-  String get follow_ucf => 'هو يتابع';
+  String get follow_ucf => 'يتبع';
 
   @override
-  String get followed_ucf => 'هو يتابع';
+  String get followed_ucf => 'تمت المتابعة';
 
   @override
   String get unfollow_ucf => 'إلغاء متابعة هذا البائع';
 
   @override
-  String get continue_ucf => 'مكتمل';
+  String get continue_ucf => 'يكمل';
 
   @override
   String get day_ucf => 'يوم';
@@ -431,16 +431,16 @@ class AppLocalizationsAr extends AppLocalizations {
   String get days_ucf => 'أيام';
 
   @override
-  String get network_error => 'هناك شئ غير صحيح. خطأ في الشبكة';
+  String get network_error => 'حدث خطأ ما. خطأ في الشبكة';
 
   @override
-  String get get_locations => 'احصل على المواقع';
+  String get get_locations => 'الحصول على المواقع';
 
   @override
-  String get get_direction_ucf => 'احصل على اتجاه';
+  String get get_direction_ucf => 'الحصول على الاتجاه';
 
   @override
-  String get digital_product_screen_ => 'منتج رقمي';
+  String get digital_product_screen_ => 'المنتج الرقمي';
 
   @override
   String get digital_product_ucf => 'المنتجات الرقمية';
@@ -452,22 +452,22 @@ class AppLocalizationsAr extends AppLocalizations {
   String get earnings_ucf => 'الأرباح';
 
   @override
-  String get not_logged_in_ucf => 'لم يتم دخولك';
+  String get not_logged_in_ucf => 'لم يتم تسجيل الدخول';
 
   @override
   String get change_language_ucf => 'تغيير اللغة';
 
   @override
-  String get home_ucf => 'منزل';
+  String get home_ucf => 'بيت';
 
   @override
-  String get profile_ucf => 'حساب الملف الشخصي';
+  String get profile_ucf => 'حساب تعريفي';
 
   @override
-  String get orders_ucf => 'الطلبات';
+  String get orders_ucf => 'طلبات';
 
   @override
-  String get my_wishlist_ucf => 'قائمة امنياتي';
+  String get my_wishlist_ucf => 'قائمة أمنياتي';
 
   @override
   String get messages_ucf => 'رسائل';
@@ -479,16 +479,16 @@ class AppLocalizationsAr extends AppLocalizations {
   String get login_ucf => 'تسجيل الدخول';
 
   @override
-  String get logout_ucf => 'تسجيل خروج';
+  String get logout_ucf => 'تسجيل الخروج';
 
   @override
-  String get mark_as_picked => 'ضع علامة عليها على أنها محددة';
+  String get mark_as_picked => 'وضع علامة على أنه تم اختياره';
 
   @override
   String get my_delivery_ucf => 'التسليم الخاص بي';
 
   @override
-  String get my_earnings_ucf => 'أجري';
+  String get my_earnings_ucf => 'أرباحي';
 
   @override
   String get my_collection_ucf => 'مجموعتي';
@@ -497,43 +497,44 @@ class AppLocalizationsAr extends AppLocalizations {
   String get do_you_want_close_the_app => 'هل تريد إغلاق التطبيق؟';
 
   @override
-  String get top_categories_ucf => 'أعلى الفئات';
+  String get top_categories_ucf => 'أهم الفئات';
 
   @override
   String get brands_ucf => 'العلامات التجارية';
 
   @override
-  String get top_sellers_ucf => 'الأفضل مبيعًا';
+  String get top_sellers_ucf => 'أعلى البائعين';
 
   @override
   String get todays_deal_ucf => 'صفقة اليوم';
 
   @override
-  String get flash_deal_ucf => 'صفقة سريعة';
+  String get flash_deal_ucf => 'صفقة فلاش';
 
   @override
-  String get featured_categories_ucf => 'فئات مميزة';
+  String get featured_categories_ucf => 'الفئات المميزة';
 
   @override
-  String get featured_products_ucf => 'منتجات مميزة';
+  String get featured_products_ucf => 'المنتجات المميزة';
 
   @override
   String get all_products_ucf => 'جميع المنتجات';
 
   @override
-  String get search_in_active_ecommerce_cms => 'ابحث عن أي شيء ...';
+  String get search_in_active_ecommerce_cms =>
+      'البحث في نظام إدارة التجارة الإلكترونية النشط...';
 
   @override
-  String get no_carousel_image_found => 'لم يتم العثور على صورة دائرية';
+  String get no_carousel_image_found => 'لم يتم العثور على صورة دائري';
 
   @override
-  String get no_category_found => 'الفئة غير موجودة';
+  String get no_category_found => 'لم يتم العثور على فئة';
 
   @override
   String get categories_ucf => 'فئات';
 
   @override
-  String get view_products_ucf => 'مشاهدة المنتجات';
+  String get view_products_ucf => 'عرض المنتجات';
 
   @override
   String get view_subcategories_ucf => 'عرض الفئات الفرعية';
@@ -542,39 +543,39 @@ class AppLocalizationsAr extends AppLocalizations {
   String get no_subcategories_available => 'لا توجد فئات فرعية متاحة';
 
   @override
-  String get all_products_of_ucf => 'جميع المنتجات';
+  String get all_products_of_ucf => 'جميع منتجات';
 
   @override
-  String get cannot_order_more_than => 'لا يمكن طلب أكثر من واحد';
+  String get cannot_order_more_than => 'لا يمكن طلب أقل من';
 
   @override
-  String get items_of_this_all_lower => 'عنصر (عناصر) من هذا';
+  String get items_of_this_all_lower => 'البند (العناصر) من هذا';
 
   @override
   String get are_you_sure_to_remove_this_item =>
       'هل أنت متأكد من إزالة هذا العنصر؟';
 
   @override
-  String get cart_is_empty => 'البطاقة فارغة';
+  String get cart_is_empty => 'العربة فارغة';
 
   @override
   String get total_amount_ucf => 'المبلغ الإجمالي';
 
   @override
-  String get update_cart_ucf => 'قم بتحديث سلة التسوق الخاصة بك';
+  String get update_cart_ucf => 'تحديث العربة';
 
   @override
-  String get proceed_to_shipping_ucf => 'اذهب إلى الشحن';
+  String get proceed_to_shipping_ucf => 'انتقل إلى الشحن';
 
   @override
-  String get shopping_cart_ucf => 'عربة التسوق';
+  String get shopping_cart_ucf => 'سلة التسوق';
 
   @override
   String get please_log_in_to_see_the_cart_items =>
-      'الرجاء تسجيل الدخول لعرض عناصر عربة التسوق';
+      'الرجاء تسجيل الدخول لرؤية عناصر السلة';
 
   @override
-  String get cancel_request_is_already_send => 'تم تقديم طلب الإلغاء بالفعل';
+  String get cancel_request_is_already_send => 'تم إرسال طلب الإلغاء بالفعل';
 
   @override
   String get classified_ads_ucf => 'الإعلانات المبوبة';
@@ -601,25 +602,25 @@ class AppLocalizationsAr extends AppLocalizations {
   String get tax_all_capital => 'ضريبة';
 
   @override
-  String get shipping_cost_all_capital => 'رسوم الشحن';
+  String get shipping_cost_all_capital => 'تكلفة الشحن';
 
   @override
-  String get discount_all_capital => 'تخفيض';
+  String get discount_all_capital => 'خصم القسيمة';
 
   @override
   String get grand_total_all_capital => 'المجموع الإجمالي';
 
   @override
-  String get coupon_code_ucf => 'رمز الكوبون';
+  String get coupon_code_ucf => 'رمز القسيمة';
 
   @override
   String get apply_coupon_all_capital => 'تطبيق القسيمة';
 
   @override
-  String get place_my_order_all_capital => 'ضع طلبي';
+  String get place_my_order_all_capital => 'تقديم طلبي';
 
   @override
-  String get buy_package_ucf => 'شراء حزمة';
+  String get buy_package_ucf => 'شراء الحزمة';
 
   @override
   String get remove_ucf => 'يزيل';
@@ -628,16 +629,16 @@ class AppLocalizationsAr extends AppLocalizations {
   String get checkout_ucf => 'الدفع';
 
   @override
-  String get cancelled_delivery_ucf => 'التسليم ملغى';
+  String get cancelled_delivery_ucf => 'تم إلغاء التسليم';
 
   @override
-  String get completed_delivery_ucf => 'التسليم الكامل';
+  String get completed_delivery_ucf => 'تسليم مكتمل';
 
   @override
-  String get search_products_from => 'ابحث عن منتجات من';
+  String get search_products_from => 'البحث عن المنتجات من';
 
   @override
-  String get no_language_is_added => 'لا توجد لغة مضافة';
+  String get no_language_is_added => 'لم تتم إضافة أي لغة';
 
   @override
   String get points_converted_to_wallet => 'النقاط المحولة إلى المحفظة';
@@ -646,13 +647,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get show_wallet_all_capital => 'عرض المحفظة';
 
   @override
-  String get earned_points_ucf => 'النقاط التي أحرزتها';
+  String get earned_points_ucf => 'النقاط المكتسبة';
 
   @override
-  String get converted_ucf => 'محولة';
+  String get converted_ucf => 'تحويلها';
 
   @override
-  String get done_all_capital => 'النهاية';
+  String get done_all_capital => 'منتهي';
 
   @override
   String get convert_now_ucf => 'تحويل الآن';
@@ -661,42 +662,42 @@ class AppLocalizationsAr extends AppLocalizations {
   String get my_products_ucf => 'منتجاتي';
 
   @override
-  String get current_package_ucf => 'الرزمة الحالية';
+  String get current_package_ucf => 'الحزمة الحالية';
 
   @override
-  String get upgrade_package_ucf => 'حزمة الترقية';
+  String get upgrade_package_ucf => 'ترقية الحزمة';
 
   @override
-  String get add_new_products_ucf => 'أضف منتجات جديدة';
+  String get add_new_products_ucf => 'إضافة منتجات جديدة';
 
   @override
   String get please_turn_on_your_internet_connection =>
-      'يرجى تشغيل اتصال الإنترنت الخاص بك';
+      'يرجى تشغيل اتصالك بالإنترنت';
 
   @override
   String get please_log_in_to_see_the_profile =>
-      'الرجاء تسجيل الدخول لعرض الملف الشخصي';
+      'الرجاء تسجيل الدخول لرؤية الملف الشخصي';
 
   @override
-  String get notification_ucf => 'يلاحظ';
+  String get notification_ucf => 'إشعارات';
 
   @override
   String get purchase_history_ucf => 'تاريخ الشراء';
 
   @override
-  String get earning_points_history_ucf => 'تاريخ النقاط المكتسبة';
+  String get earning_points_history_ucf => 'تاريخ كسب النقاط';
 
   @override
-  String get refund_requests_ucf => 'طلبات الاسترداد';
+  String get refund_requests_ucf => 'طلبات استرداد الأموال';
 
   @override
-  String get in_your_cart_all_lower => 'في عربة التسوق الخاصة بك';
+  String get in_your_cart_all_lower => 'في سلة التسوق الخاصة بك';
 
   @override
   String get in_your_wishlist_all_lower => 'في قائمة أمنياتك';
 
   @override
-  String get your_ordered_all_lower => 'انا سألت';
+  String get your_ordered_all_lower => 'لقد طلبت';
 
   @override
   String get language_ucf => 'لغة';
@@ -708,7 +709,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get my_orders_ucf => 'طلباتي';
 
   @override
-  String get downloads_ucf => 'التحميلات';
+  String get downloads_ucf => 'التنزيلات';
 
   @override
   String get coupons_ucf => 'كوبونات';
@@ -723,7 +724,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get on_auction_products_ucf => 'على منتجات المزاد';
 
   @override
-  String get bidded_products_ucf => 'منتجات العطاءات';
+  String get bidded_products_ucf => 'المنتجات المطروحة';
 
   @override
   String get wholesale_products_ucf => 'منتجات بالجملة';
@@ -732,26 +733,26 @@ class AppLocalizationsAr extends AppLocalizations {
   String get browse_all_sellers_ucf => 'تصفح جميع البائعين';
 
   @override
-  String get delete_my_account => 'احذف حسابي';
+  String get delete_my_account => 'حذف حسابي';
 
   @override
   String get delete_account_warning_title => 'هل تريد حذف حسابك من نظامنا؟';
 
   @override
   String get delete_account_warning_description =>
-      'بمجرد حذف حسابك من نظامنا ، ستفقد رصيدك والمعلومات الأخرى من نظامنا.';
+      'بمجرد حذف حسابك من نظامنا، ستفقد رصيدك والمعلومات الأخرى من نظامنا.';
 
   @override
-  String get blogs_ucf => 'التدوين';
+  String get blogs_ucf => 'مدونات';
 
   @override
-  String get check_balance_ucf => 'تحقق من التوازن';
+  String get check_balance_ucf => 'التحقق من الرصيد';
 
   @override
   String get account_ucf => 'حساب';
 
   @override
-  String get auction_ucf => 'مزاد علني';
+  String get auction_ucf => 'مزاد';
 
   @override
   String get classified_products => 'المنتجات المصنفة';
@@ -763,56 +764,56 @@ class AppLocalizationsAr extends AppLocalizations {
   String get upload_limit_ucf => 'حد التحميل';
 
   @override
-  String get pending_delivery_ucf => 'إنتظار التسليم';
+  String get pending_delivery_ucf => 'في انتظار التسليم';
 
   @override
-  String get flash_deal_has_ended => 'انتهت صلاحية صفقة الفلاش';
+  String get flash_deal_has_ended => 'انتهت صفقة فلاش';
 
   @override
-  String get ended_ucf => 'أنهيت';
+  String get ended_ucf => 'انتهى';
 
   @override
   String get flash_deals_ucf => 'عروض فلاش';
 
   @override
-  String get top_selling_products_ucf => 'أفضل المنتجات مبيعًا';
+  String get top_selling_products_ucf => 'المنتجات الأكثر مبيعا';
 
   @override
-  String get product_ucf => 'مشروع';
+  String get product_ucf => 'منتج';
 
   @override
   String get products_ucf => 'منتجات';
 
   @override
-  String get sellers_ucf => 'الباعة';
+  String get sellers_ucf => 'البائعين';
 
   @override
   String get you_can_use_filters_while_searching_for_products =>
       'يمكنك استخدام المرشحات أثناء البحث عن المنتجات.';
 
   @override
-  String get filter_ucf => 'منقي';
+  String get filter_ucf => 'فلتر';
 
   @override
   String get sort_products_by_ucf => 'فرز المنتجات حسب';
 
   @override
-  String get price_high_to_low => 'السعر الاعلى الى الادنى';
+  String get price_high_to_low => 'السعر مرتفع إلى منخفض';
 
   @override
-  String get price_low_to_high => 'السعر من الأقل إلى الأعلى';
+  String get price_low_to_high => 'السعر منخفض إلى مرتفع';
 
   @override
-  String get new_arrival_ucf => 'الوافد الجديد';
+  String get new_arrival_ucf => 'وصول جديد';
 
   @override
   String get popularity_ucf => 'شعبية';
 
   @override
-  String get top_rated_ucf => 'أعلى التصنيفات';
+  String get top_rated_ucf => 'الأعلى تقييمًا';
 
   @override
-  String get maximum_ucf => 'أقصى';
+  String get maximum_ucf => 'الحد الأقصى';
 
   @override
   String get minimum_ucf => 'الحد الأدنى';
@@ -827,22 +828,22 @@ class AppLocalizationsAr extends AppLocalizations {
   String get no_suggestion_available => 'لا يوجد اقتراح متاح';
 
   @override
-  String get searched_for_all_lower => 'بحثت عن';
+  String get searched_for_all_lower => 'بحثت عنه';
 
   @override
-  String get times_all_lower => 'الوقت (مرات)';
+  String get times_all_lower => 'الوقت (الأوقات)';
 
   @override
   String get found_all_lower => 'وجد';
 
   @override
-  String get loading_suggestions => 'جارٍ تحميل الاقتراحات ...';
+  String get loading_suggestions => 'جارٍ تحميل الاقتراحات...';
 
   @override
-  String get sort_ucf => 'يكتب';
+  String get sort_ucf => 'نوع';
 
   @override
-  String get def_ault_ucf => 'Default';
+  String get def_ault_ucf => 'تقصير';
 
   @override
   String get you_can_use_sorting_while_searching_for_products =>
@@ -853,13 +854,13 @@ class AppLocalizationsAr extends AppLocalizations {
       'لا يمكن أن يكون الحد الأدنى للسعر أكبر من الحد الأقصى للسعر';
 
   @override
-  String get followed_sellers_ucf => 'الباعة المتبعون';
+  String get followed_sellers_ucf => 'البائعين المتابعون';
 
   @override
   String get copy_product_link_ucf => 'انسخ رابط المنتج';
 
   @override
-  String get share_options_ucf => 'مشاركة الخيارات';
+  String get share_options_ucf => 'خيارات المشاركة';
 
   @override
   String get title_ucf => 'عنوان';
@@ -871,29 +872,29 @@ class AppLocalizationsAr extends AppLocalizations {
   String get message_ucf => 'رسالة';
 
   @override
-  String get enter_message_ucf => 'أدخل رسالة';
+  String get enter_message_ucf => 'أدخل الرسالة';
 
   @override
   String get title_or_message_empty_warning =>
-      'لا يمكن أن يكون العنوان أو الرسالة فارغين';
+      'لا يمكن أن يكون العنوان أو الرسالة فارغًا';
 
   @override
-  String get could_not_create_conversation => 'لا يمكن إنشاء محادثة';
+  String get could_not_create_conversation => 'تعذر إنشاء محادثة';
 
   @override
-  String get added_to_cart => 'تمت الإضافة إلى عربة التسوق';
+  String get added_to_cart => 'تمت إضافته إلى سلة التسوق';
 
   @override
-  String get show_cart_all_capital => 'عرض عربة التسوق';
+  String get show_cart_all_capital => 'عرض العربة';
 
   @override
   String get description_ucf => 'وصف:';
 
   @override
-  String get brand_ucf => 'ماركة:';
+  String get brand_ucf => 'ماركة :';
 
   @override
-  String get total_price_ucf => 'السعر الكلي';
+  String get total_price_ucf => 'السعر الإجمالي :';
 
   @override
   String get price_ucf => 'سعر';
@@ -902,7 +903,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get color_ucf => 'لون';
 
   @override
-  String get seller_ucf => 'رجل الأعمال';
+  String get seller_ucf => 'بائع';
 
   @override
   String get club_point_ucf => 'كلوب بوينت';
@@ -917,7 +918,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get video_ucf => 'فيديو';
 
   @override
-  String get reviews_ucf => 'المراجعات';
+  String get reviews_ucf => 'التعليقات';
 
   @override
   String get seller_policy_ucf => 'سياسة البائع';
@@ -929,17 +930,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get support_policy_ucf => 'سياسة الدعم';
 
   @override
-  String get products_you_may_also_like => 'المنتجات التي قد تعجبك أيضا';
+  String get products_you_may_also_like =>
+      'المنتجات التي يتم شراؤها بشكل متكرر';
 
   @override
-  String get other_ads_of_ucf => 'إعلانات أخرى من';
+  String get other_ads_of_ucf => 'إعلانات أخرى ل';
 
   @override
   String get top_selling_products_from_seller =>
-      'المنتجات الأكثر مبيعًا من هذا البائع';
+      'المنتجات الأكثر مبيعا من هذا البائع';
 
   @override
-  String get chat_with_seller => 'تحدث مع البائع';
+  String get chat_with_seller => 'الدردشة مع البائع';
 
   @override
   String get available_all_lower => 'متاح';
@@ -952,10 +954,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get no_top_selling_products_from_this_seller =>
-      'لا توجد منتجات للبيع من هذا البائع';
+      'لا توجد منتجات مبيعا من هذا البائع';
 
   @override
-  String get no_related_product => 'لا توجد منتجات ذات صلة';
+  String get no_related_product => 'لا توجد منتجات تم شراؤها بشكل متكرر';
 
   @override
   String get on_the_way_ucf => 'على الطريق';
@@ -967,31 +969,31 @@ class AppLocalizationsAr extends AppLocalizations {
   String get today_ucf => 'اليوم';
 
   @override
-  String get this_week_ucf => 'This Week';
+  String get this_week_ucf => 'هذا الاسبوع';
 
   @override
-  String get this_month_ucf => 'This Month';
+  String get this_month_ucf => 'هذا الشهر';
 
   @override
-  String get cod_ucf => 'COD';
+  String get cod_ucf => 'سمك القد';
 
   @override
-  String get non_cod_ucf => 'NON-COD';
+  String get non_cod_ucf => 'غير COD';
 
   @override
   String get all_payments_ucf => 'جميع المدفوعات';
 
   @override
-  String get all_deliveries_ucf => 'جميع عمليات التسليم';
+  String get all_deliveries_ucf => 'جميع التوصيلات';
 
   @override
-  String get paid_ucf => 'البراز';
+  String get paid_ucf => 'مدفوع';
 
   @override
-  String get unpaid_ucf => 'غير مدفوع الأجر';
+  String get unpaid_ucf => 'غير مدفوعة الأجر';
 
   @override
-  String get confirmed_ucf => 'تأكيد';
+  String get confirmed_ucf => 'مؤكد';
 
   @override
   String get delivered_ucf => 'تم التوصيل';
@@ -1000,10 +1002,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get no_more_orders_ucf => 'لا مزيد من الطلبات';
 
   @override
-  String get loading_more_orders_ucf => 'تحميل المزيد من الطلبات ...';
+  String get loading_more_orders_ucf => 'جارٍ تحميل المزيد من الطلبات...';
 
   @override
-  String get payment_status_ucf => 'حالة السداد';
+  String get payment_status_ucf => 'حالة الدفع';
 
   @override
   String get delivery_status_ucf => 'حالة التسليم';
@@ -1012,10 +1014,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get product_name_ucf => 'اسم المنتج';
 
   @override
-  String get product_unit_ucf => 'Product Unit';
+  String get product_unit_ucf => 'وحدة المنتج';
 
   @override
-  String get order_code_ucf => 'كود الطلب';
+  String get order_code_ucf => 'رمز الطلب';
 
   @override
   String get reason_ucf => 'سبب';
@@ -1027,7 +1029,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get enter_reason_ucf => 'أدخل السبب';
 
   @override
-  String get show_request_list_ucf => 'إظهار قائمة الطلبات';
+  String get show_request_list_ucf => 'عرض قائمة الطلبات';
 
   @override
   String get ordered_product_ucf => 'المنتج المطلوب';
@@ -1039,16 +1041,16 @@ class AppLocalizationsAr extends AppLocalizations {
   String get sub_total_all_capital => 'المجموع الفرعي';
 
   @override
-  String get order_placed => 'تم الطلب';
+  String get order_placed => 'تم تقديم الطلب';
 
   @override
   String get shipping_method_ucf => 'طريقة الشحن';
 
   @override
-  String get order_date_ucf => 'تاريخ تقديم الطلب';
+  String get order_date_ucf => 'تاريخ الطلب';
 
   @override
-  String get payment_method_ucf => 'طريقة الدفع أو الدفع';
+  String get payment_method_ucf => 'طريقة الدفع';
 
   @override
   String get shipping_address_ucf => 'عنوان الشحن';
@@ -1063,19 +1065,19 @@ class AppLocalizationsAr extends AppLocalizations {
   String get postal_code => 'رمز بريدي';
 
   @override
-  String get item_all_lower => 'غاية';
+  String get item_all_lower => 'غرض';
 
   @override
-  String get ask_for_refund_ucf => 'اطلب استرداد';
+  String get ask_for_refund_ucf => 'اطلب استرداد الأموال';
 
   @override
-  String get refund_status_ucf => 'حالة الاسترداد';
+  String get refund_status_ucf => 'حالة استرداد الأموال';
 
   @override
   String get order_details_ucf => 'تفاصيل الطلب';
 
   @override
-  String get make_offline_payment_ucf => 'قم بالدفع دون اتصال بالإنترنت';
+  String get make_offline_payment_ucf => 'إجراء الدفع دون اتصال بالإنترنت';
 
   @override
   String get choose_an_address => 'اختر عنوانا';
@@ -1084,17 +1086,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get choose_delivery_ucf => 'اختر التسليم';
 
   @override
-  String get home_delivery_ucf => 'توصيل منزلي';
+  String get home_delivery_ucf => 'توصيل الطلبات للمنازل';
 
   @override
-  String get choose_an_address_or_pickup_point => 'اختر عنوانًا أو نقطة التقاط';
+  String get choose_an_address_or_pickup_point =>
+      'اختر عنوانًا أو نقطة الالتقاء';
 
   @override
   String get to_add_or_edit_addresses_go_to_address_page =>
-      'لإضافة أو تحرير العناوين ، انتقل إلى صفحة العنوان';
+      'لإضافة عناوين أو تعديلها، انتقل إلى صفحة العناوين';
 
   @override
-  String get shipping_cost_ucf => 'رسوم الشحن';
+  String get shipping_cost_ucf => 'تكلفة الشحن';
 
   @override
   String get shipping_info => 'معلومات الشحن';
@@ -1109,40 +1112,40 @@ class AppLocalizationsAr extends AppLocalizations {
   String get proceed_to_checkout => 'الشروع في الخروج';
 
   @override
-  String get continue_to_delivery_info_ucf => 'تواصل إلى تسليم المعلومات';
+  String get continue_to_delivery_info_ucf => 'تابع إلى معلومات التسليم';
 
   @override
-  String get pickup_point_is_unavailable_ucf => 'نقطة الالتقاط غير متوفرة';
+  String get pickup_point_is_unavailable_ucf => 'نقطة الالتقاط غير متاحة';
 
   @override
   String get pickup_point_ucf => 'نقطة الالتقاط';
 
   @override
-  String get mark_as_delivered => 'وضع علامة \"تم التسليم\"';
+  String get mark_as_delivered => 'وضع علامة على أنه تم التسليم';
 
   @override
   String get please_wait_ucf => 'انتظر من فضلك...';
 
   @override
-  String get remaining_uploads => 'التنزيلات المتبقية';
+  String get remaining_uploads => 'التحميلات المتبقية';
 
   @override
   String get amount_cannot_be_empty => 'لا يمكن أن يكون المبلغ فارغًا';
 
   @override
-  String get my_wallet_ucf => 'محفظتى';
+  String get my_wallet_ucf => 'محفظتي';
 
   @override
   String get no_recharges_yet => 'لا توجد عمليات إعادة شحن حتى الآن';
 
   @override
-  String get approval_status_ucf => 'حالة القبول';
+  String get approval_status_ucf => 'حالة الموافقة';
 
   @override
   String get wallet_balance_ucf => 'رصيد المحفظة';
 
   @override
-  String get last_recharged => 'الشحن الأخير';
+  String get last_recharged => 'آخر إعادة شحن';
 
   @override
   String get wallet_recharge_history_ucf => 'سجل إعادة شحن المحفظة';
@@ -1161,7 +1164,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get please_log_in_to_see_the_wishlist_items =>
-      'الرجاء تسجيل الدخول لعرض عناصر قائمة الرغبات';
+      'الرجاء تسجيل الدخول لرؤية عناصر قائمة الرغبات';
 
   @override
   String get enter_email => 'أدخل البريد الإلكتروني';
@@ -1173,10 +1176,11 @@ class AppLocalizationsAr extends AppLocalizations {
   String get enter_password => 'أدخل كلمة المرور';
 
   @override
-  String get or_login_with_a_phone => 'أو قم بتسجيل الدخول باستخدام رقم هاتف';
+  String get or_login_with_a_phone => 'أو قم بتسجيل الدخول باستخدام رقم الهاتف';
 
   @override
-  String get or_login_with_an_email => 'أو تسجيل الدخول بالبريد الإلكتروني';
+  String get or_login_with_an_email =>
+      'أو قم بتسجيل الدخول باستخدام البريد الإلكتروني';
 
   @override
   String get password_ucf => 'كلمة المرور';
@@ -1185,7 +1189,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get login_screen_phone => 'هاتف';
 
   @override
-  String get login_screen_forgot_password => 'نسيت كلمة السر؟';
+  String get login_screen_forgot_password => 'هل نسيت كلمة السر؟';
 
   @override
   String get login_screen_log_in => 'تسجيل الدخول';
@@ -1194,7 +1198,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get login_screen_or_create_new_account => 'أو إنشاء حساب جديد؟';
 
   @override
-  String get login_screen_sign_up => 'الاشتراك';
+  String get login_screen_sign_up => 'اشتراك';
 
   @override
   String get login_screen_login_with => 'تسجيل الدخول مع';
@@ -1206,59 +1210,60 @@ class AppLocalizationsAr extends AppLocalizations {
   String get login_to => 'تسجيل الدخول إلى';
 
   @override
-  String get enter_your_name => 'أدخل أسمك';
+  String get enter_your_name => 'أدخل اسمك';
 
   @override
-  String get confirm_your_password => 'أكد رقمك السري';
+  String get confirm_your_password => 'قم بتأكيد كلمة المرور الخاصة بك';
 
   @override
   String get password_must_contain_at_least_6_characters =>
       'يجب أن تحتوي كلمة المرور على 6 أحرف على الأقل';
 
   @override
-  String get passwords_do_not_match => 'كلمة المرور غير مطابقة';
+  String get passwords_do_not_match => 'كلمات المرور غير متطابقة';
 
   @override
   String get join_ucf => 'ينضم';
 
   @override
-  String get retype_password_ucf => 'أعد إدخال كلمة المرور';
+  String get retype_password_ucf => 'أعد كتابة كلمة المرور';
 
   @override
-  String get or_register_with_a_phone => 'أو سجل برقم هاتف';
+  String get or_register_with_a_phone => 'أو قم بالتسجيل باستخدام رقم الهاتف';
 
   @override
-  String get or_register_with_an_email => 'أو التسجيل عبر البريد الإلكتروني';
+  String get or_register_with_an_email =>
+      'أو قم بالتسجيل باستخدام البريد الإلكتروني';
 
   @override
-  String get sign_up_ucf => 'الاشتراك';
+  String get sign_up_ucf => 'اشتراك';
 
   @override
-  String get already_have_an_account => 'هل لديك حساب ؟';
+  String get already_have_an_account => 'هل لديك حساب بالفعل؟';
 
   @override
   String get log_in => 'تسجيل الدخول';
 
   @override
-  String get requested_for_cancellation => 'مطلوب للإلغاء';
+  String get requested_for_cancellation => 'تم طلب الإلغاء';
 
   @override
-  String get forget_password_ucf => 'نسيت كلمة السر؟';
+  String get forget_password_ucf => 'نسيت كلمة المرور؟';
 
   @override
-  String get or_send_code_via_phone_number => 'أو أرسل الرمز عبر رقم الهاتف';
+  String get or_send_code_via_phone_number => 'أو أرسل الكود عبر رقم الهاتف';
 
   @override
-  String get or_send_code_via_email => 'أو إرسال رمز عبر البريد الإلكتروني';
+  String get or_send_code_via_email => 'أو أرسل الرمز عبر البريد الإلكتروني';
 
   @override
-  String get send_code_ucf => 'أرسل الرمز';
+  String get send_code_ucf => 'إرسال الرمز';
 
   @override
   String get enter_verification_code => 'أدخل رمز التحقق';
 
   @override
-  String get verify_your => 'تحقق الخاص بك';
+  String get verify_your => 'التحقق من الخاص بك';
 
   @override
   String get email_account_ucf => 'حساب البريد الإلكتروني';
@@ -1275,32 +1280,32 @@ class AppLocalizationsAr extends AppLocalizations {
       'أدخل رمز التحقق الذي تم إرساله إلى هاتفك مؤخرًا.';
 
   @override
-  String get resend_code_ucf => 'أعد إرسال الرمز';
+  String get resend_code_ucf => 'إعادة إرسال الرمز';
 
   @override
-  String get enter_the_code => 'ادخل الرمز';
+  String get enter_the_code => 'أدخل الرمز';
 
   @override
   String get enter_the_code_sent => 'أدخل الرمز المرسل';
 
   @override
-  String get congratulations_ucf => 'تهانينا !!';
+  String get congratulations_ucf => 'مبروك !!';
 
   @override
   String get you_have_successfully_changed_your_password =>
-      'لقد غيرت كلمة سرك بنجاح';
+      'لقد قمت بتغيير كلمة المرور الخاصة بك بنجاح';
 
   @override
-  String get password_changed_ucf => 'تم تغيير كلمة السر';
+  String get password_changed_ucf => 'تم تغيير كلمة المرور';
 
   @override
   String get back_to_Login_ucf => 'العودة إلى تسجيل الدخول';
 
   @override
-  String get cart_ucf => 'عربة التسوق';
+  String get cart_ucf => 'عربة';
 
   @override
-  String get fetching_nagad_url => 'إحضار رابط نجاد ...';
+  String get fetching_nagad_url => 'جارٍ جلب عنوان url الخاص بـ nagad ...';
 
   @override
   String get pay_with_nagad => 'ادفع مع نجاد';
@@ -1310,16 +1315,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get if_you_are_finding_any_problem_while_logging_in =>
-      'إذا وجدت أي مشكلة أثناء تسجيل الدخول ، يرجى الاتصال بالمسؤول';
+      'إذا وجدت أي مشكلة أثناء تسجيل الدخول يرجى الاتصال بالمسؤول';
 
   @override
-  String get fetching_paypal_url => 'الحصول على عنوان url الخاص بـ paypal ...';
+  String get fetching_paypal_url => 'جارٍ جلب عنوان URL الخاص بـ paypal...';
 
   @override
-  String get fetching_amarpay_url => 'Fetching amarpay url ...';
+  String get fetching_amarpay_url => 'جارٍ جلب عنوان URL الخاص بـ amarpay ...';
 
   @override
-  String get pay_with_paypal => 'الدفع عن طريق PayPal';
+  String get pay_with_paypal => 'الدفع مع باي بال';
 
   @override
   String get pay_with_paystack => 'الدفع باستخدام Paystack';
@@ -1328,37 +1333,37 @@ class AppLocalizationsAr extends AppLocalizations {
   String get pay_with_paytm => 'الدفع باستخدام Paytm';
 
   @override
-  String get pay_with_razorpay => 'ادفع بواسطة Razorpay';
+  String get pay_with_razorpay => 'ادفع باستخدام Razorpay';
 
   @override
-  String get pay_with_amarpay => 'Pay with Amarpay';
+  String get pay_with_amarpay => 'الدفع باستخدام Amarpay';
 
   @override
-  String get pay_with_instamojo => 'ادفع مع Instamojo';
+  String get pay_with_instamojo => 'الدفع باستخدام Instamojo';
 
   @override
-  String get fetching_sslcommerz_url => 'إحضار عنوان url sslcommerz ...';
+  String get fetching_sslcommerz_url => 'جارٍ جلب عنوان URL لـ sslcommerz ...';
 
   @override
-  String get pay_with_sslcommerz => 'ادفع مع Sslcommerz';
+  String get pay_with_sslcommerz => 'الدفع مع Sslcommerz';
 
   @override
-  String get pay_with_stripe => 'الدفع باستخدام Stripe';
+  String get pay_with_stripe => 'الدفع باستخدام الشريط';
 
   @override
-  String get pay_with_payfast => 'Pay with PayFast';
+  String get pay_with_payfast => 'ادفع باستخدام PayFast';
 
   @override
-  String get pay_with_phonepay => 'Pay with Phonepay';
+  String get pay_with_phonepay => 'الدفع باستخدام Phonepay';
 
   @override
-  String get pay_with_my_fatoora => 'Pay with MyFatoora';
+  String get pay_with_my_fatoora => 'ادفع مع ماي فاتورة';
 
   @override
-  String get your_delivery_location => 'موقع التسليم الخاص بك. . .';
+  String get your_delivery_location => 'مكان التسليم الخاص بك. . .';
 
   @override
-  String get calculating => 'تشغيل الحساب ...';
+  String get calculating => 'جارٍ الحساب...';
 
   @override
   String get pick_here => 'اختر هنا';
@@ -1371,40 +1376,41 @@ class AppLocalizationsAr extends AppLocalizations {
   String get photo_proof_is_necessary => 'إثبات الصورة ضروري';
 
   @override
-  String get all_marked_fields_are_mandatory => '* جميع الحقول المعلمة إلزامية';
+  String get all_marked_fields_are_mandatory =>
+      'جميع الحقول المميزة بعلامة * إلزامية';
 
   @override
   String get correctly_fill_up_the_necessary_information =>
-      'أدخل المعلومات اللازمة بشكل صحيح. في وقت لاحق لا يمكنك تحرير أو إعادة إرسال النموذج';
+      'قم بملء المعلومات اللازمة بشكل صحيح. ولا يمكنك تعديل النموذج أو إعادة إرساله لاحقًا';
 
   @override
-  String get transaction_id_ucf => 'رقم التحويلة';
+  String get transaction_id_ucf => 'معرف المعاملة';
 
   @override
-  String get photo_proof_ucf => 'إثبات الصورة';
+  String get photo_proof_ucf => 'دليل على الصورة';
 
   @override
-  String get only_image_file_allowed => 'يسمح فقط بملف الصورة';
+  String get only_image_file_allowed => 'مسموح بملف الصورة فقط';
 
   @override
-  String get offline_ucf => 'غير متصل على الانترنت';
+  String get offline_ucf => 'غير متصل';
 
   @override
-  String get type_your_review_here => 'اكتب رأيك هنا ...';
+  String get type_your_review_here => 'اكتب رأيك هنا...';
 
   @override
-  String get no_more_reviews_ucf => 'لا المزيد من التعليقات';
+  String get no_more_reviews_ucf => 'لا مزيد من التقييمات';
 
   @override
-  String get loading_more_reviews_ucf => 'جارٍ تحميل المزيد من المراجعات ...';
+  String get loading_more_reviews_ucf => 'جارٍ تحميل المزيد من التقييمات...';
 
   @override
   String get no_reviews_yet_be_the_first =>
-      'لا تعليقات حتى الآن. كن أول من يراجع هذا المنتج';
+      'لا توجد تعليقات حتى الآن. كن أول من يراجع هذا المنتج';
 
   @override
   String get you_need_to_login_to_give_a_review =>
-      'تحتاج إلى تسجيل الدخول لتقديم الاستعراض';
+      'تحتاج إلى تسجيل الدخول لإعطاء مراجعة';
 
   @override
   String get review_can_not_empty_warning => 'لا يمكن أن تكون المراجعة فارغة';
@@ -1414,28 +1420,28 @@ class AppLocalizationsAr extends AppLocalizations {
       'يجب إعطاء نجمة واحدة على الأقل';
 
   @override
-  String get password_changes_ucf => 'تغيير كلمة المرور';
+  String get password_changes_ucf => 'تغييرات كلمة المرور';
 
   @override
-  String get basic_information_ucf => 'معلومات اساسية';
+  String get basic_information_ucf => 'المعلومات الأساسية';
 
   @override
   String get new_password_ucf => 'كلمة المرور الجديدة';
 
   @override
-  String get update_profile_ucf => 'تحديث الملف';
+  String get update_profile_ucf => 'تحديث الملف الشخصي';
 
   @override
-  String get update_password_ucf => 'تطوير كلمة المرور';
+  String get update_password_ucf => 'تحديث كلمة المرور';
 
   @override
-  String get edit_profile_ucf => 'تعديل الملف الشخصي';
+  String get edit_profile_ucf => 'تحرير الملف الشخصي';
 
   @override
-  String get picked_ucf => 'المحدد';
+  String get picked_ucf => 'اختار';
 
   @override
-  String get top_selling_ucf => 'الأكثر مبيعًا';
+  String get top_selling_ucf => 'الأكثر مبيعا';
 
   @override
   String get store_home_ucf => 'متجر المنزل';
@@ -1445,29 +1451,29 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get no_featured_product_is_available_from_this_seller =>
-      'لا يوجد منتج مميز متاح من هذا البائع';
+      'لا يوجد منتج مميز متوفر من هذا البائع';
 
   @override
-  String get no_new_arrivals => 'لا يوجد قادمون جدد';
+  String get no_new_arrivals => 'لا الوافدين الجدد';
 
   @override
   String get view_all_products_prom_this_seller_all_capital =>
       'عرض جميع المنتجات من هذا البائع';
 
   @override
-  String get search_products_of_shop => 'ابحث عن منتجات المتجر';
+  String get search_products_of_shop => 'البحث عن منتجات المتجر';
 
   @override
-  String get total_collected_ucf => 'المجموع الذي تم جمعه';
+  String get total_collected_ucf => 'مجموع المجمعة';
 
   @override
   String get yesterday_ucf => 'أمس';
 
   @override
-  String get your_app_is_now => 'تطبيقك الآن';
+  String get your_app_is_now => 'التطبيق الخاص بك هو الآن';
 
   @override
-  String get you_are_currently_offline => 'أنت حاليا غير متصل';
+  String get you_are_currently_offline => 'أنت غير متصل حاليا';
 
   @override
   String get pending_ucf => 'قيد الانتظار';
@@ -1476,13 +1482,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get picked_up_ucf => 'التقطت';
 
   @override
-  String get money_withdraw_ucf => 'سحب نقدي';
+  String get money_withdraw_ucf => 'سحب الأموال';
 
   @override
   String get payment_history_ucf => 'تاريخ الدفع';
 
   @override
-  String get add_new_coupon_ucf => 'أضف قسيمة جديدة';
+  String get add_new_coupon_ucf => 'إضافة قسيمة جديدة';
 
   @override
   String get warning_ucf => 'تحذير!';
@@ -1498,7 +1504,7 @@ class AppLocalizationsAr extends AppLocalizations {
       'الرجاء تحديد منتج واحد على الأقل';
 
   @override
-  String get invalid_minimum_shopping_ucf => 'الحد الأدنى للشراء غير صالح';
+  String get invalid_minimum_shopping_ucf => 'الحد الأدنى للتسوق غير صالح';
 
   @override
   String get invalid_maximum_discount_ucf => 'الحد الأقصى للخصم غير صالح';
@@ -1516,13 +1522,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get add_your_coupon_code_ucf => 'أضف رمز القسيمة الخاص بك';
 
   @override
-  String get minimum_shopping_ucf => 'تسوق بسيط';
+  String get minimum_shopping_ucf => 'الحد الأدنى للتسوق';
 
   @override
   String get maximum_discount_amount_ucf => 'الحد الأقصى لمبلغ الخصم';
 
   @override
-  String get coupon_information_adding => 'أضف معلومات القسيمة';
+  String get coupon_information_adding => 'إضافة معلومات القسيمة';
 
   @override
   String get select_products_ucf => 'حدد المنتجات';
@@ -1531,28 +1537,28 @@ class AppLocalizationsAr extends AppLocalizations {
   String get offline_payment_ucf => 'الدفع دون اتصال بالإنترنت';
 
   @override
-  String get youtube_ucf => 'موقع YouTube';
+  String get youtube_ucf => 'يوتيوب';
 
   @override
   String get dailymotion_ucf => 'ديلي موشن';
 
   @override
-  String get vimeo_ucf => 'فام';
+  String get vimeo_ucf => 'فيميو';
 
   @override
-  String get save_n_unpublish_ucf => 'حفظ & إلغاء النشر';
+  String get save_n_unpublish_ucf => 'حفظ وإلغاء النشر';
 
   @override
-  String get save_n_publish_ucf => 'احفظها وانشرها';
+  String get save_n_publish_ucf => 'حفظ ونشر';
 
   @override
   String get product_information_ucf => 'معلومات المنتج';
 
   @override
-  String get unit_ucf => 'الوحدة';
+  String get unit_ucf => 'وحدة';
 
   @override
-  String get unit_eg_ucf => 'الوحدة (مثل KG ، Pc ، إلخ.)';
+  String get unit_eg_ucf => 'الوحدة (مثل KG، وأجهزة الكمبيوتر، وما إلى ذلك)';
 
   @override
   String get weight_in_kg_ucf => 'الوزن (كجم)';
@@ -1565,22 +1571,22 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get type_and_hit_enter_to_add_a_tag_ucf =>
-      'اكتب واضغط على Enter لإضافة علامة';
+      'اكتب واضغط على زر الإدخال لإضافة علامة';
 
   @override
   String get barcode_ucf => 'الباركود';
 
   @override
-  String get refundable_ucf => 'برد';
+  String get refundable_ucf => 'مستردة';
 
   @override
   String get product_description_ucf => 'وصف المنتج';
 
   @override
-  String get cash_on_delivery_ucf => 'الدفع عند الاستلام';
+  String get cash_on_delivery_ucf => 'الدفع عند التسليم';
 
   @override
-  String get vat_n_tax_ucf => 'ضريبة القيمة المضافة';
+  String get vat_n_tax_ucf => 'ضريبة القيمة المضافة والضرائب';
 
   @override
   String get product_images_ucf => 'صور المنتج';
@@ -1590,10 +1596,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get thumbnail_image_300_des =>
-      'هذه الصور مرئية على علبة جميع المنتجات. استخدم صورة بحجم 300 × 300. احتفظ ببعض المساحة الفارغة حول الكائن الرئيسي لصورتك حيث كان علينا قص بعض الحواف في أجهزة مختلفة لجعلها مستجيبة.';
+      'هذه الصور مرئية في جميع صناديق المنتجات. استخدم صورة بحجم 300×300. احتفظ ببعض المساحة الفارغة حول الكائن الرئيسي لصورتك حيث كان علينا قص بعض الحواف في الأجهزة المختلفة لجعلها سريعة الاستجابة.';
 
   @override
-  String get product_videos_ucf => 'فيديو المنتج';
+  String get product_videos_ucf => 'فيديوهات المنتج';
 
   @override
   String get video_provider_ucf => 'مزود الفيديو';
@@ -1603,13 +1609,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get video_link_des =>
-      'استخدم الارتباط المناسب بدون معلمة إضافية. لا تستخدم رابط المشاركة المختصر / كود iframe المضمن.';
+      'استخدم الرابط المناسب بدون معلمة إضافية. لا تستخدم رابط مشاركة قصير/رمز iframe المضمن.';
 
   @override
-  String get pdf_description_ucf => 'وصف PDF';
+  String get pdf_description_ucf => 'وصف قوات الدفاع الشعبي';
 
   @override
-  String get pdf_specification_ucf => 'مواصفات PDF';
+  String get pdf_specification_ucf => 'مواصفات قوات الدفاع الشعبي';
 
   @override
   String get unit_price_ucf => 'سعر الوحدة';
@@ -1618,26 +1624,26 @@ class AppLocalizationsAr extends AppLocalizations {
   String get discount_date_range_ucf => 'نطاق تاريخ الخصم';
 
   @override
-  String get sku_all_capital => 'SKU';
+  String get sku_all_capital => 'رمز التخزين التعريفي';
 
   @override
   String get external_link_ucf => 'رابط خارجي';
 
   @override
   String get leave_it_blank_if_you_do_not_use_external_site_link =>
-      'اتركه فارغًا إذا كنت لا تستخدم ارتباط موقع خارجي';
+      'اتركه فارغًا إذا كنت لا تستخدم رابط موقع خارجي';
 
   @override
   String get external_link_button_text_ucf => 'نص زر الارتباط الخارجي';
 
   @override
-  String get low_stock_quantity_warning_ucf => 'تحذير انخفاض كمية المخزون';
+  String get low_stock_quantity_warning_ucf => 'تحذير من انخفاض كمية المخزون';
 
   @override
   String get stock_visibility_state_ucf => 'حالة رؤية المخزون';
 
   @override
-  String get product_variation_ucf => 'تنوع المنتج';
+  String get product_variation_ucf => 'اختلاف المنتج';
 
   @override
   String get colors_ucf => 'الألوان';
@@ -1646,20 +1652,20 @@ class AppLocalizationsAr extends AppLocalizations {
   String get attributes_ucf => 'صفات';
 
   @override
-  String get seo_all_capital => 'SEO';
+  String get seo_all_capital => 'تحسين محركات البحث';
 
   @override
-  String get meta_title_ucf => 'عنوان الفوقية';
+  String get meta_title_ucf => 'عنوان ميتا';
 
   @override
-  String get meta_image_ucf => 'الصورة الوصفية';
+  String get meta_image_ucf => 'صورة ميتا';
 
   @override
   String get shipping_configuration_ucf => 'تكوين الشحن';
 
   @override
   String get shipping_configuration_is_maintained_by_admin =>
-      'يتم الاحتفاظ بتكوين الشحن من قبل المسؤول.';
+      'يتم الحفاظ على تكوين الشحن من قبل المسؤول.';
 
   @override
   String get estimate_shipping_time_ucf => 'تقدير وقت الشحن';
@@ -1672,7 +1678,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get these_images_are_visible_in_product_details_page_gallery_600 =>
-      'هذه الصور مرئية في معرض صفحة تفاصيل المنتج. استخدم 600 × 600 صورة.';
+      'تظهر هذه الصور في معرض صفحات تفاصيل المنتج. استخدم صورًا بأحجام 600 × 600.';
 
   @override
   String get photo_ucf => 'صورة';
@@ -1681,7 +1687,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get general_ucf => 'عام';
 
   @override
-  String get media_ucf => 'أساليب';
+  String get media_ucf => 'وسائط';
 
   @override
   String get price_n_stock_ucf => 'السعر والمخزون';
@@ -1690,13 +1696,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get shipping_ucf => 'شحن';
 
   @override
-  String get add_new_product_ucf => 'أضف منتج جديد';
+  String get add_new_product_ucf => 'إضافة منتج جديد';
 
   @override
-  String get product_reviews_ucf => 'تعليقات المنتج';
+  String get product_reviews_ucf => 'مراجعات المنتج';
 
   @override
-  String get update_now_ucf => 'تحديث الان';
+  String get update_now_ucf => 'التحديث الآن';
 
   @override
   String get slug_ucf => 'سبيكة';
@@ -1705,20 +1711,20 @@ class AppLocalizationsAr extends AppLocalizations {
   String get update_product_ucf => 'تحديث المنتج';
 
   @override
-  String get shop_banner_image_is_required => 'مطلوب صورة لافتة المتجر.';
+  String get shop_banner_image_is_required => 'صورة شعار المتجر مطلوبة.';
 
   @override
-  String get banner_settings => 'إعدادات البانر';
+  String get banner_settings => 'إعدادات الشعار';
 
   @override
   String get banner_1500_x_450 => 'بانر (1500 × 450)';
 
   @override
   String get banner_1500_x_450_des =>
-      'كان علينا تحديد الارتفاع للحفاظ على الاتساق. في بعض الأجهزة ، قد يتم اقتصاص جانبي الشعار لتقليل الارتفاع.';
+      'كان علينا الحد من الارتفاع للحفاظ على الاتساق. في بعض الأجهزة، قد يتم اقتصاص جانبي اللافتة لتحديد الارتفاع.';
 
   @override
-  String get delivery_boy_pickup_point => 'فتى التوصيل يلتقط نقطة';
+  String get delivery_boy_pickup_point => 'نقطة الالتقاط صبي التسليم';
 
   @override
   String get longitude_ucf => 'خط الطول';
@@ -1730,7 +1736,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get update_location => 'تحديث الموقع';
 
   @override
-  String get location_ucf => 'Location';
+  String get location_ucf => 'موقع';
 
   @override
   String get calculating_ucf => 'حساب';
@@ -1739,10 +1745,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get pick_here_ucf => 'اختر هنا';
 
   @override
-  String get shop_name_is_required => 'اسم المتجر مطلوب';
+  String get shop_name_is_required => 'اسم المحل مطلوب';
 
   @override
-  String get shop_phone_is_required => 'هاتف المتجر مطلوب';
+  String get shop_phone_is_required => 'مطلوب هاتف المحل';
 
   @override
   String get shop_address_is_required => 'عنوان المحل مطلوب';
@@ -1751,22 +1757,22 @@ class AppLocalizationsAr extends AppLocalizations {
   String get shop_title_is_required => 'عنوان المحل مطلوب';
 
   @override
-  String get shop_description_is_required => 'وصف المحل مطلوب';
+  String get shop_description_is_required => 'وصف المتجر مطلوب';
 
   @override
-  String get shop_logo_is_required => 'شعار المتجر مطلوب';
+  String get shop_logo_is_required => 'مطلوب شعار المتجر';
 
   @override
   String get general_setting_ucf => 'الإعداد العام';
 
   @override
-  String get shop_description => 'وصف المحل';
+  String get shop_description => 'وصف المتجر';
 
   @override
   String get shop_title => 'عنوان المحل';
 
   @override
-  String get shop_phone => 'متجر الهواتف';
+  String get shop_phone => 'هاتف المتجر';
 
   @override
   String get shop_address => 'عنوان المحل';
@@ -1775,7 +1781,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get shop_name_ucf => 'اسم المحل';
 
   @override
-  String get shop_logo_ucf => 'متجر الشعار';
+  String get shop_logo_ucf => 'شعار المتجر';
 
   @override
   String get shop_settings_ucf => 'إعدادات المتجر';
@@ -1787,7 +1793,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get google_ucf => 'جوجل';
 
   @override
-  String get twitter_ucf => 'تويتر';
+  String get twitter_ucf => 'تغريد';
 
   @override
   String get instagram_ucf => 'انستغرام';
@@ -1796,7 +1802,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get facebook_ucf => 'فيسبوك';
 
   @override
-  String get upload_file_ucf => 'تحميل ملف';
+  String get upload_file_ucf => 'تحميل الملف';
 
   @override
   String get commission_history_ucf => 'تاريخ اللجنة';
@@ -1805,22 +1811,22 @@ class AppLocalizationsAr extends AppLocalizations {
   String get chat_list => 'قائمة الدردشة';
 
   @override
-  String get admin_commission_ucf => 'لجنة الإدارة';
+  String get admin_commission_ucf => 'اللجنة الادارية';
 
   @override
   String get create_a_ticket => 'إنشاء تذكرة';
 
   @override
-  String get subject_ucf => 'مشكلة';
+  String get subject_ucf => 'موضوع';
 
   @override
-  String get provide_a_detailed_description => 'قدم وصفاً مفصلاً';
+  String get provide_a_detailed_description => 'تقديم وصف تفصيلي';
 
   @override
-  String get send_ticket => 'أرسل التذكرة';
+  String get send_ticket => 'أرسل تذكرة';
 
   @override
-  String get top_products_ucf => 'أهم المنتجات';
+  String get top_products_ucf => 'أعلى المنتجات';
 
   @override
   String get your_categories_ucf => 'فئاتك';
@@ -1832,25 +1838,26 @@ class AppLocalizationsAr extends AppLocalizations {
   String get product_upload_limit_ucf => 'حد تحميل المنتج:';
 
   @override
-  String get package_expires_at_ucf => 'تنتهي العبوة في:';
+  String get package_expires_at_ucf => 'تنتهي صلاحية الحزمة في:';
 
   @override
-  String get manage_n_organize_your_shop => 'إدارة وتنظيم متجرك.';
+  String get manage_n_organize_your_shop => 'إدارة وتنظيم\\nمتجرك.';
 
   @override
-  String get configure_your_payment_method => 'تكوين طريقة الدفع الخاصة بك.';
+  String get configure_your_payment_method =>
+      'قم بتكوين طريقة\\nالدفع الخاصة بك.';
 
   @override
   String get configure_now_ucf => 'تكوين الآن';
 
   @override
-  String get go_to_settings => 'اذهب للاعدادات';
+  String get go_to_settings => 'انتقل إلى الإعدادات';
 
   @override
   String get payment_settings_ucf => 'إعدادات الدفع';
 
   @override
-  String get rating_ucf => 'تقييم';
+  String get rating_ucf => 'تصنيف';
 
   @override
   String get total_orders_ucf => 'إجمالي الطلبات';
@@ -1859,26 +1866,26 @@ class AppLocalizationsAr extends AppLocalizations {
   String get total_sales_ucf => 'إجمالي المبيعات';
 
   @override
-  String get hi_welcome_to_all_lower => 'مرحبا أهلا وسهلا';
+  String get hi_welcome_to_all_lower => 'مرحبا بكم في';
 
   @override
   String get login_to_your_account_all_lower => 'تسجيل الدخول إلى حسابك';
 
   @override
   String get in_case_of_any_difficulties_contact_with_admin =>
-      'في حالة وجود أي صعوبات ، اتصل بالمسؤول.';
+      'في حالة وجود أي صعوبات، تواصل مع المشرف.';
 
   @override
-  String get pending_balance_ucf => 'اتزان رائع';
+  String get pending_balance_ucf => 'الرصيد المعلق';
 
   @override
-  String get send_withdraw_request_ucf => 'تقديم طلب سحب';
+  String get send_withdraw_request_ucf => 'إرسال طلب السحب';
 
   @override
-  String get premium_package_for_seller_ucf => 'حزمة قسط للبائع';
+  String get premium_package_for_seller_ucf => 'الحزمة المميزة للبائع';
 
   @override
-  String get select_payment_type_ucf => 'اختر طريقة الدفع';
+  String get select_payment_type_ucf => 'حدد نوع الدفع';
 
   @override
   String get select_payment_option_ucf => 'حدد خيار الدفع';
@@ -1888,23 +1895,23 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get we_will_send_you_a_OTP_code_if_the_mail_id_is_correct_ucf =>
-      'سنرسل لك رمز OTP إذا كان معرف البريد صحيحًا.';
+      'سوف نرسل لك رمز OTP إذا كان معرف البريد صحيحًا.';
 
   @override
   String get we_will_send_you_a_OTP_code_if_the_phone_no_is_correct_ucf =>
-      'سنرسل لك رمز OTP إذا كان رقم الهاتف صحيحًا.';
+      'سوف نرسل لك رمز OTP إذا كان رقم الهاتف صحيحًا.';
 
   @override
   String get reset_password_ucf => 'إعادة تعيين كلمة المرور';
 
   @override
-  String get bank_payment => 'الدفع المصرفية';
+  String get bank_payment => 'الدفع البنكي';
 
   @override
   String get cash_payment => 'الدفع نقدا';
 
   @override
-  String get bank_account_number => 'رقم الحساب المصرفي';
+  String get bank_account_number => 'رقم الحساب البنكي';
 
   @override
   String get bank_account_name => 'اسم الحساب البنكي';
@@ -1913,7 +1920,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get bank_name_ucf => 'اسم البنك';
 
   @override
-  String get bank_routing_number_ucf => 'رقم التحويل المصرفي';
+  String get bank_routing_number_ucf => 'رقم توجيه البنك';
 
   @override
   String get no_more_refund_requests_ucf => 'لا مزيد من طلبات استرداد الأموال';
@@ -1925,13 +1932,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get approve_ucf => 'يعتمد';
 
   @override
-  String get rejected_ucf => 'غير مقبول';
+  String get rejected_ucf => 'مرفوض';
 
   @override
   String get reject_ucf => 'يرفض';
 
   @override
-  String get support_tickets_ucf => 'تذاكر الدعم الفني';
+  String get support_tickets_ucf => 'تذاكر الدعم';
 
   @override
   String get options_ucf => 'خيارات';
@@ -1940,22 +1947,22 @@ class AppLocalizationsAr extends AppLocalizations {
   String get amount_is_invalid => 'المبلغ غير صالح';
 
   @override
-  String get message_is_invalid => 'الرسالة غير صحيحة';
+  String get message_is_invalid => 'الرسالة غير صالحة';
 
   @override
   String get coupon_ucf => 'قسيمة';
 
   @override
-  String get withdraw_ucf => 'تراجع';
+  String get withdraw_ucf => 'ينسحب';
 
   @override
   String get conversation_ucf => 'محادثة';
 
   @override
-  String get wholesale_prices_ucf => 'السعر الكلي';
+  String get wholesale_prices_ucf => 'أسعار الجملة';
 
   @override
-  String get min_quantity_ucf => 'الكمية الدنيا';
+  String get min_quantity_ucf => 'الحد الأدنى للكمية';
 
   @override
   String get max_quantity_ucf => 'الكمية القصوى';
@@ -1973,10 +1980,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get be_a_seller => 'كن بائعا';
 
   @override
-  String get personal_info_ucf => 'معلومات شخصية';
+  String get personal_info_ucf => 'المعلومات الشخصية';
 
   @override
-  String get basic_info_ucf => 'معلومات اساسية';
+  String get basic_info_ucf => 'معلومات أساسية';
 
   @override
   String get shop_name => 'اسم المحل';
@@ -1985,40 +1992,40 @@ class AppLocalizationsAr extends AppLocalizations {
   String get ok => 'نعم';
 
   @override
-  String get verify_now => 'تأكد الان';
+  String get verify_now => 'تحقق الآن';
 
   @override
-  String get verify_your_account => 'تحقق من حسابك';
+  String get verify_your_account => 'التحقق من حسابك';
 
   @override
   String get your_account_is_unverified => 'لم يتم التحقق من حسابك';
 
   @override
-  String get verification_form_ucf => 'استمارة التحقق';
+  String get verification_form_ucf => 'نموذج التحقق';
 
   @override
-  String get cancel_order_ucf => 'إلغاء الأمر';
+  String get cancel_order_ucf => 'إلغاء الطلب';
 
   @override
   String get re_order_ucf => 'إعادة الترتيب';
 
   @override
-  String get info_ucf => 'معلومة';
+  String get info_ucf => 'معلومات';
 
   @override
-  String get min_qty_ucf => 'الكمية الدنيا';
+  String get min_qty_ucf => 'الحد الأدنى للكمية';
 
   @override
-  String get max_qty_ucf => 'الكمية القصوى';
+  String get max_qty_ucf => 'ماكس الكمية';
 
   @override
-  String get invoice_ucf => 'Invoice';
+  String get invoice_ucf => 'فاتورة';
 
   @override
   String get a => '';
 
   @override
-  String get no_file_chosen_ucf => 'لم تقم باختيار ملف';
+  String get no_file_chosen_ucf => 'لم يتم اختيار ملف';
 
   @override
   String get product_file_ucf => 'ملف المنتج';
@@ -2027,13 +2034,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get purchase_price_ucf => 'سعر الشراء';
 
   @override
-  String get refunded_ucf => 'القيامة';
+  String get refunded_ucf => 'ردها';
 
   @override
-  String get bid_for_product_ucf => 'حاول الحصول على المنتج';
+  String get bid_for_product_ucf => 'محاولة للحصول على المنتج';
 
   @override
-  String get min_bid_amount_ucf => 'الحد الأدنى لمبلغ العطاء';
+  String get min_bid_amount_ucf => 'الحد الأدنى لمبلغ العرض';
 
   @override
   String get place_bid_price_ucf => 'مكان سعر العطاء';
@@ -2043,250 +2050,259 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get value_must_be_greater =>
-      'يجب أن تكون القيمة أكبر من الحد الأدنى لعرض التسعير';
+      'يجب أن تكون القيمة أكبر من\\n الحد الأدنى لعرض التسعير';
 
   @override
   String get value_must_be_greater_or_equal =>
-      'يجب أن تكون القيمة أكبر من أو تساوي الحد الأدنى لعرض التسعير';
+      'يجب أن تكون القيمة أكبر من\\n أو تساوي الحد الأدنى لعرض التسعير';
 
   @override
-  String get seller_dashboard_support_ticket_ucf => 'Support Ticket';
+  String get seller_dashboard_support_ticket_ucf => 'تذكرة الدعم';
 
   @override
-  String get view_a_ticket => 'View a Ticket';
+  String get view_a_ticket => 'عرض تذكرة';
 
   @override
-  String get visit_store_ucf => 'Visit store';
+  String get visit_store_ucf => 'قم بزيارة المتجر';
 
   @override
-  String get off => 'OFF';
+  String get off => 'عن';
 
   @override
-  String get min_spend_ucf => 'Min Spend';
+  String get min_spend_ucf => 'الحد الأدنى للإنفاق';
 
   @override
-  String get from => 'From';
+  String get from => 'من';
 
   @override
-  String get store_to_get => 'Store to get';
+  String get store_to_get => 'متجر للحصول على';
 
   @override
-  String get off_on_total_orders => 'OFF on total orders';
+  String get off_on_total_orders => 'إيقاف على إجمالي الطلبات';
 
   @override
-  String get code => 'Code';
+  String get code => 'شفرة';
 
   @override
-  String get in_house_products_ucf => 'In House Products';
+  String get in_house_products_ucf => 'منتجات داخل المنزل';
 
   @override
-  String get coupon_products_ucf => 'Coupon Products';
+  String get coupon_products_ucf => 'منتجات القسيمة';
 
   @override
-  String get loading_coupons_ucf => 'Loading Coupons ...';
+  String get loading_coupons_ucf => 'جارٍ تحميل الكوبونات...';
 
   @override
-  String get no_more_coupons_ucf => 'No More Coupons';
+  String get no_more_coupons_ucf => 'لا مزيد من القسائم';
 
   @override
-  String get name_required => 'Name Required';
+  String get name_required => 'الاسم مطلوب';
 
   @override
-  String get email_required => 'Email Required';
+  String get email_required => 'البريد الإلكتروني مطلوب';
 
   @override
-  String get address_required => 'Address  Required';
+  String get address_required => 'العنوان مطلوب';
 
   @override
-  String get country_required => 'Country Name  Required';
+  String get country_required => 'اسم البلد مطلوب';
 
   @override
-  String get state_required => 'State Name  Required';
+  String get state_required => 'اسم الدولة مطلوب';
 
   @override
-  String get city_required => 'City Name  Required';
+  String get city_required => 'اسم المدينة مطلوب';
 
   @override
-  String get postal_code_required => 'Postal Code  Required';
+  String get postal_code_required => 'الرمز البريدي مطلوب';
 
   @override
-  String get phone_number_required => 'Phone Number  Required';
+  String get phone_number_required => 'رقم الهاتف مطلوب';
 
   @override
-  String get select_ucf => 'Select';
+  String get select_ucf => 'يختار';
 
   @override
-  String get pos_manager => 'Pos Manager';
+  String get pos_manager => 'مدير نقاط البيع';
 
   @override
-  String get sub_total => 'Sub Total';
+  String get sub_total => 'المجموع الفرعي';
 
   @override
-  String get tax => 'Tax';
+  String get tax => 'ضريبة';
 
   @override
-  String get total => 'Total';
+  String get total => 'المجموع';
 
   @override
-  String get shipping => 'Shipping';
+  String get shipping => 'شحن';
 
   @override
-  String get place_order => 'Place Order';
+  String get place_order => 'وضع النظام';
 
   @override
-  String get no_customer_info => 'No customer information selected.';
+  String get no_customer_info => 'لم يتم تحديد معلومات العميل.';
 
   @override
-  String get confirm_with_cash => 'Confirm with Cash';
+  String get confirm_with_cash => 'التأكيد نقدًا';
 
   @override
-  String get order_summery => 'Order Summery';
+  String get order_summery => 'اطلب الصيفي';
 
   @override
-  String get offline_payment_info => 'Offline Payment Info';
+  String get offline_payment_info => 'معلومات الدفع دون اتصال بالإنترنت';
 
   @override
-  String get payment_proof => 'Payment Proof';
+  String get payment_proof => 'إثبات الدفع';
 
   @override
-  String get back_ucf => 'Back';
+  String get back_ucf => 'خلف';
 
   @override
-  String get no_notification_ucf => 'No Notification Found!';
+  String get no_notification_ucf => 'لم يتم العثور على أي إشعار!';
 
   @override
   String get already_have_account =>
-      'You already have an account with this information. Please Login first.';
+      'لديك بالفعل حساب بهذه المعلومات. الرجاء تسجيل الدخول أولا.';
 
   @override
-  String get add_new_classified_product_ucf => 'Add New Classified Product';
+  String get add_new_classified_product_ucf => 'إضافة منتج مصنف جديد';
 
   @override
-  String get condition_ucf => 'Condition ';
+  String get condition_ucf => 'حالة';
 
   @override
-  String get descriptions_ucf => 'Description ';
+  String get descriptions_ucf => 'وصف';
 
   @override
-  String get thumbnail_image_ucf => 'Thumbnail Image';
+  String get thumbnail_image_ucf => 'صورة مصغرة';
 
   @override
-  String get video_form_ucf => 'Video Form';
+  String get video_form_ucf => 'نموذج فيديو';
 
   @override
-  String get video_url_ucf => 'Video Url';
+  String get video_url_ucf => 'رابط الفيديو';
 
   @override
-  String get document => 'document';
+  String get document => 'وثيقة';
 
   @override
-  String get choose_file => 'Choose File';
+  String get choose_file => 'اختر ملف';
 
   @override
-  String get browse => 'Browse';
+  String get browse => 'تصفح';
 
   @override
-  String get custom_unit_price_and_base_price => 'Unit Price (base price)';
+  String get custom_unit_price_and_base_price => 'سعر الوحدة (السعر الأساسي)';
 
   @override
-  String get meta_tags_ucf => 'Meta Tags';
+  String get meta_tags_ucf => 'العلامات التعريفية';
 
   @override
-  String get meta_description_ucf => 'Meta Description';
+  String get meta_description_ucf => 'وصف ميتا';
 
   @override
-  String get save_product_ucf => 'Save Product';
+  String get save_product_ucf => 'حفظ المنتج';
 
   @override
-  String get type_and_hit_submit_ucf => 'Type and hit submit';
+  String get type_and_hit_submit_ucf => 'اكتب واضغط على إرسال';
 
   @override
-  String get gallery_images => 'Gallery Images';
+  String get gallery_images => 'معرض الصور';
 
   @override
-  String get product_name_required => 'Product Name Required';
+  String get product_name_required => 'اسم المنتج مطلوب';
 
   @override
-  String get product_unit_required => 'Product Unit Required';
+  String get product_unit_required => 'وحدة المنتج مطلوبة';
 
   @override
-  String get location_required => 'Location Required';
+  String get location_required => 'الموقع مطلوب';
 
   @override
-  String get product_tag_required => 'Product Tag Required';
+  String get product_tag_required => 'علامة المنتج مطلوبة';
 
   @override
-  String get product_description_required => 'Product Description Required';
+  String get product_description_required => 'وصف المنتج مطلوب';
 
   @override
   String get classified_product_limit_expired =>
-      'Your classified product upload limit has been reached. Please buy a package.';
+      'لقد تم الوصول إلى حد تحميل المنتج المصنف الخاص بك. يرجى شراء الحزمة.';
 
   @override
-  String get status_ucf => 'Status';
+  String get status_ucf => 'حالة';
 
   @override
-  String get published_ucf => 'Published';
+  String get published_ucf => 'تم النشر';
 
   @override
-  String get unpublished_ucf => 'Unpublished';
+  String get unpublished_ucf => 'غير منشورة';
 
   @override
-  String get loading_ucf => 'Loading';
+  String get loading_ucf => 'تحميل';
 
   @override
-  String get enter_correct_email => 'Enter Correct Email';
+  String get enter_correct_email => 'أدخل البريد الإلكتروني الصحيح';
 
   @override
-  String get shipping_address_required => 'Shipping Address Required';
+  String get shipping_address_required => 'عنوان الشحن مطلوب';
 
   @override
   String get existing_email_address =>
-      'If you have already used the same mail address or phone number before, Please ';
+      'إذا كنت قد استخدمت بالفعل نفس عنوان البريد أو رقم الهاتف من قبل، من فضلك';
 
   @override
-  String get first_to_continue => ' first to continue!';
+  String get first_to_continue => 'أول من يستمر!';
 
   @override
-  String get pay_with_flutterwave => 'Pay With Flutterwave';
+  String get pay_with_flutterwave => 'الدفع باستخدام Flutterwave';
 
   @override
-  String get pay_with_khalti => 'Pay With Khalti';
+  String get pay_with_khalti => 'ادفع مع خالتي';
 
   @override
   String get pirated_app =>
-      'This is a pirated app. Do not use this. It may have security issues.';
+      'هذا هو التطبيق المقرصنة. لا تستخدم هذا. قد يكون لديها مشاكل أمنية.';
 
   @override
-  String get login_or_reg => 'Login/Registration';
+  String get login_or_reg => 'تسجيل الدخول / التسجيل';
 
   @override
-  String get make_payment_ucf => 'Make Payment';
+  String get make_payment_ucf => 'إجراء الدفع';
 
   @override
-  String get last_view_product_ucf => 'Last View Product';
+  String get last_view_product_ucf => 'آخر عرض للمنتج';
 
   @override
-  String get delete_selection => 'Delete Selection';
+  String get delete_selection => 'حذف التحديد';
 
   @override
-  String get select_all => 'Select All';
+  String get select_all => 'حدد الكل';
 
   @override
-  String get nothing_selected => 'Nothing is Selected';
+  String get nothing_selected => 'لم يتم تحديد أي شيء';
 
   @override
-  String get your_order => 'You Order ';
+  String get your_order => 'أنت تأمر';
 
   @override
-  String get has_been => ' Has been ';
+  String get has_been => 'كان';
 
   @override
-  String get view_more => 'View More...';
+  String get view_more => 'عرض المزيد...';
 
   @override
-  String get less => 'Less';
+  String get less => 'أقل';
 
   @override
-  String get all_blogs_ucf => 'All Blogs';
+  String get all_blogs_ucf => 'جميع المدونات';
+
+  @override
+  String get privacy_policy_ucf => 'سياسة الخصوصية';
+
+  @override
+  String get terms_and_conditions_ucf => 'الشروط والأحكام';
+
+  @override
+  String get blog_list_ucf => 'قائمة المدونة';
 }
