@@ -15,6 +15,7 @@ import 'package:active_ecommerce_cms_demo_app/screens/address.dart';
 import 'package:active_ecommerce_cms_demo_app/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class Settings extends StatefulWidget {
@@ -161,10 +162,10 @@ class _SettingsState extends State<Settings> {
                       await provider.setMode(mode);
                       if (!ctx.mounted) return;
                       Navigator.pop(ctx);
-                      // Hardcoded MyTheme.white etc. were swapped — rebirth
-                      // forces every already-rendered widget to repaint with
-                      // the new colors.
-                      Phoenix.rebirth(context);
+                      // Navigate to home — when MaterialApp rebuilds via
+                      // notifyListeners(), all widgets that read MyTheme.*
+                      // pick up the new color values.
+                      if (context.mounted) context.go('/');
                     }
                   },
                 ),

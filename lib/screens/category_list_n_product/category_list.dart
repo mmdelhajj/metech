@@ -61,7 +61,7 @@ class _CategoryListState extends State<CategoryList> {
 
   Widget buildBody() {
     return Container(
-      color: Color(0xffECF1F5),
+      color: MyTheme.mainColor,
       child: CustomScrollView(
         physics: AlwaysScrollableScrollPhysics(),
         slivers: [
@@ -104,7 +104,7 @@ class _CategoryListState extends State<CategoryList> {
         getAppBarTitle(),
         style: TextStyle(
           fontSize: 16,
-          color: Color(0xff121423),
+          color: MyTheme.dark_font_grey,
           fontWeight: FontWeight.bold,
         ),
       ),

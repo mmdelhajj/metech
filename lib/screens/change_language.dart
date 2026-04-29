@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/useful_elements.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
@@ -141,10 +140,11 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
           context,
           listen: false,
         ).setLocale(_list[_selectedIndex].mobile_app_code);
-        // Force a clean rebuild so server-translated content
-        // (categories, products, errors) reloads in the new language
-        // without the user needing to close & reopen the app.
-        Phoenix.rebirth(context);
+        // Phoenix.rebirth was causing the app to suspend after switching;
+        // navigating to home triggers a clean rebuild with the new locale
+        // (AppLocalizations updates instantly; server-translated content
+        // refreshes naturally as user navigates).
+        context.go('/');
       }
     } else {
       ToastComponent.showDialog(
