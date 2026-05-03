@@ -1,8 +1,26 @@
 default_platform(:android)
 
+PUBSPEC = File.expand_path("../../pubspec.yaml", __dir__)
+
+# Bumps the build number (the part after +) in pubspec.yaml.
+# version: 5.10.0+77  →  version: 5.10.0+78
+def bump_build_number
+  content = File.read(PUBSPEC)
+  unless content =~ /^version:\s*(\S+?)\+(\d+)\s*$/
+    UI.user_error!("Could not parse version line in pubspec.yaml")
+  end
+  semver = $1
+  new_build = $2.to_i + 1
+  new_line = "version: #{semver}+#{new_build}"
+  File.write(PUBSPEC, content.sub(/^version:\s*\S+\s*$/, new_line))
+  UI.success("Bumped pubspec.yaml: #{semver}+#{new_build}")
+  "#{semver}+#{new_build}"
+end
+
 platform :android do
-  desc "Build signed AAB and upload to Play Console Alpha (closed testing)"
+  desc "Bump build number, build signed AAB, upload to Play Console Alpha"
   lane :alpha do
+    version = bump_build_number
     sh("cd ../.. && flutter build appbundle --release")
     upload_to_play_store(
       track: "alpha",
@@ -13,10 +31,12 @@ platform :android do
       skip_upload_screenshots: true,
       release_status: "draft"
     )
+    UI.success("Uploaded #{version} to Alpha track 🎉")
   end
 
-  desc "Build signed AAB and upload to Play Console Production"
+  desc "Bump build number, build signed AAB, upload to Play Console Production"
   lane :production do
+    version = bump_build_number
     sh("cd ../.. && flutter build appbundle --release")
     upload_to_play_store(
       track: "production",
@@ -27,6 +47,12 @@ platform :android do
       skip_upload_screenshots: true,
       release_status: "draft"
     )
+    UI.success("Uploaded #{version} to Production track 🎉")
+  end
+
+  desc "Bump build number only (no build, no upload)"
+  lane :bump do
+    bump_build_number
   end
 
   desc "Verify service account credentials work (no upload)"
