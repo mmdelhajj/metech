@@ -1,0 +1,38 @@
+default_platform(:android)
+
+platform :android do
+  desc "Build signed AAB and upload to Play Console Alpha (closed testing)"
+  lane :alpha do
+    sh("cd ../.. && flutter build appbundle --release")
+    upload_to_play_store(
+      track: "alpha",
+      aab: "../build/app/outputs/bundle/release/app-release.aab",
+      skip_upload_apk: true,
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true,
+      release_status: "draft"
+    )
+  end
+
+  desc "Build signed AAB and upload to Play Console Production"
+  lane :production do
+    sh("cd ../.. && flutter build appbundle --release")
+    upload_to_play_store(
+      track: "production",
+      aab: "../build/app/outputs/bundle/release/app-release.aab",
+      skip_upload_apk: true,
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true,
+      release_status: "draft"
+    )
+  end
+
+  desc "Verify service account credentials work (no upload)"
+  lane :validate do
+    validate_play_store_json_key(
+      json_key: "fastlane/play-store-key.json"
+    )
+  end
+end

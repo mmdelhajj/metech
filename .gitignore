@@ -46,6 +46,9 @@ app.*.map.json
 
 # Signing keys - DO NOT COMMIT
 android/key.properties
+android/fastlane/play-store-key.json
+android/fastlane/report.xml
+android/fastlane/README.md
 
 # Environment
 .env
