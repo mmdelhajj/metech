@@ -55,6 +55,43 @@ platform :android do
     bump_build_number
   end
 
+  desc "Upload an already-built AAB to Alpha (skip bump and build)"
+  lane :upload_alpha do
+    upload_to_play_store(
+      track: "alpha",
+      aab: "../build/app/outputs/bundle/release/app-release.aab",
+      skip_upload_apk: true,
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true,
+      release_status: "draft"
+    )
+  end
+
+  desc "Upload an already-built AAB to Production (skip bump and build)"
+  lane :upload_production do
+    upload_to_play_store(
+      track: "production",
+      aab: "../build/app/outputs/bundle/release/app-release.aab",
+      skip_upload_apk: true,
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true,
+      release_status: "draft"
+    )
+  end
+
+  desc "Build signed AAB and upload to Internal App Sharing (instant install link)"
+  lane :internal do
+    version = bump_build_number
+    sh("cd ../.. && flutter build appbundle --release")
+    upload_to_play_store_internal_app_sharing(
+      aab: "../build/app/outputs/bundle/release/app-release.aab"
+    )
+    UI.success("Uploaded #{version} to Internal App Sharing 🎉")
+    UI.success("Look above for the download_url — open it on any Android phone to install.")
+  end
+
   desc "Verify service account credentials work (no upload)"
   lane :validate do
     validate_play_store_json_key(
