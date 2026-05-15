@@ -48,9 +48,9 @@ class HomeBannerThree extends StatelessWidget {
             initialPage: 0,
             padEnds: false,
             enableInfiniteScroll: true,
-            autoPlay: true,
-            autoPlayInterval: Duration(seconds: 2),
-            autoPlayAnimationDuration: Duration(milliseconds: 300),
+            // Customer feedback (Otto-app reference): users swipe manually,
+            // no auto-rotation. Matches home_carousel_slider.dart.
+            autoPlay: false,
             onPageChanged: (index, reason) {},
           ),
           items: homeData!.bannerOneImageList.map((i) {
