@@ -39,10 +39,9 @@ class HomeCarouselSlider extends StatelessWidget {
             viewportFraction: 1,
             initialPage: 0,
             enableInfiniteScroll: true,
-            autoPlay: true,
-            autoPlayInterval: Duration(seconds: 5),
-            autoPlayAnimationDuration: Duration(milliseconds: 1000),
-            autoPlayCurve: Curves.easeInExpo,
+            // Customer feedback (Muhammad / Otto-app reference): users want
+            // to swipe the banner themselves, so auto-rotation is off.
+            autoPlay: false,
             enlargeCenterPage: false,
             scrollDirection: Axis.horizontal,
             onPageChanged: (index, reason) {

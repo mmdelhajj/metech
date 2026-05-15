@@ -122,6 +122,26 @@ class _ProductDetailsState extends State<ProductDetails>
     quantityText.text = "${_quantity ?? 0}";
     controller;
 
+    // Auto-expand the description WebView once its HTML has rendered.
+    // Customer asked for the description module to span the full content
+    // height by default instead of starting collapsed at 50.h. We still
+    // keep the manual toggle so very long descriptions can be collapsed.
+    controller.setNavigationDelegate(
+      NavigationDelegate(
+        onPageFinished: (_) async {
+          try {
+            final result = await controller.runJavaScriptReturningResult(
+              "document.body.scrollHeight",
+            );
+            final h = double.tryParse(result.toString());
+            if (h != null && h > webViewHeight && mounted) {
+              setState(() => webViewHeight = h);
+            }
+          } catch (_) {/* swallow — initial render only */}
+        },
+      ),
+    );
+
     _mainScrollController.addListener(() {
       _scrollPosition = _mainScrollController.position.pixels;
 
@@ -797,6 +817,25 @@ class _ProductDetailsState extends State<ProductDetails>
         extendBody: true,
         backgroundColor: MyTheme.mainColor,
         bottomNavigationBar: buildBottomAppBar(context, addedToCartSnackbar),
+        // Back-to-top FAB appears once the user has scrolled down a screenful.
+        // Tap → smooth-scroll to top. Hidden when near the top so it doesn't
+        // overlap the buy-now bar at rest.
+        floatingActionButton: _scrollPosition > 400
+            ? Padding(
+                padding: const EdgeInsets.only(bottom: 60),
+                child: FloatingActionButton.small(
+                  heroTag: "backToTop",
+                  backgroundColor: MyTheme.accent_color,
+                  foregroundColor: MyTheme.white,
+                  onPressed: () => _mainScrollController.animateTo(
+                    0,
+                    duration: const Duration(milliseconds: 400),
+                    curve: Curves.easeOut,
+                  ),
+                  child: const Icon(Icons.arrow_upward),
+                ),
+              )
+            : null,
         body: RefreshIndicator(
           color: MyTheme.accent_color,
           backgroundColor: MyTheme.white,

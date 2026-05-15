@@ -10,7 +10,6 @@ import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/other_config.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/auth_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/profile_repository.dart';
-import 'package:active_ecommerce_cms_demo_app/screens/home.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/privacy_policy_screen.dart';
 import 'package:active_ecommerce_cms_demo_app/ui_elements/auth_ui.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -338,23 +337,15 @@ WebView Page resource error:
       if (!mounted) return;
       if ((mail_verification_status.$ && _registerBy == "email") ||
           _registerBy == "phone") {
+        // Push OTP on top — it's a follow-up step in the same flow.
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (context) {
-              return Otp();
-            },
-          ),
+          MaterialPageRoute(builder: (context) => Otp()),
         );
       } else {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return Home();
-            },
-          ),
-        );
+        // Replace the registration screen with the home page so the user
+        // can't swipe back to the form (matches the login flow's behavior).
+        context.go("/");
       }
     }
   }
