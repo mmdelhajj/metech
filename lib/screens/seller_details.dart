@@ -576,10 +576,7 @@ class _SellerDetailsState extends State<SellerDetails> {
             initialPage: 0,
             enableInfiniteScroll: true,
             reverse: false,
-            autoPlay: true,
-            autoPlayInterval: Duration(seconds: 5),
-            autoPlayAnimationDuration: Duration(milliseconds: 1000),
-            autoPlayCurve: Curves.easeInExpo,
+            autoPlay: false,
             enlargeCenterPage: false,
             scrollDirection: Axis.horizontal,
             onPageChanged: (index, reason) {

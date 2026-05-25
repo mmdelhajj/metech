@@ -11,6 +11,7 @@ import 'package:active_ecommerce_cms_demo_app/l10n/app_localizations.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/repositories/flash_deal_repository.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/flash_deal/flash_deal_products.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/index.dart';
 
@@ -384,14 +385,29 @@ class _FlashDealListState extends State<FlashDealList> {
   }
 
   SizedBox buildFlashDealBanner(flashDealResponse, index) {
+    final String? bannerUrl = flashDealResponse.flashDeals[index].banner;
     return SizedBox(
-      child: FadeInImage.assetNetwork(
-        placeholder: 'assets/placeholder_rectangle.png',
-        image: flashDealResponse.flashDeals[index].banner,
-        fit: BoxFit.cover,
-        width: DeviceInfo(context).width,
-        height: 180,
-      ),
+      width: DeviceInfo(context).width,
+      height: 180,
+      child: (bannerUrl == null || bannerUrl.isEmpty)
+          ? Image.asset(
+              'assets/placeholder_rectangle.png',
+              fit: BoxFit.cover,
+            )
+          : CachedNetworkImage(
+              imageUrl: bannerUrl,
+              fit: BoxFit.cover,
+              width: DeviceInfo(context).width,
+              height: 180,
+              memCacheHeight: 360,
+              fadeInDuration: const Duration(milliseconds: 120),
+              placeholder: (context, url) =>
+                  Container(color: const Color(0xFFEFEFEF)),
+              errorWidget: (context, url, error) => Image.asset(
+                'assets/placeholder_rectangle.png',
+                fit: BoxFit.cover,
+              ),
+            ),
     );
   }
 

@@ -1,6 +1,8 @@
 import 'package:active_ecommerce_cms_demo_app/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/presenter/home_presenter.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/category_list_n_product/category_products.dart';
+import 'package:active_ecommerce_cms_demo_app/screens/category_list_n_product/sub_category_list_screen.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../my_theme.dart';
@@ -41,12 +43,26 @@ class FeaturedCategoriesWidget extends StatelessWidget {
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
+              final category = homeData.featuredCategoryList[index];
+              // Two-level navigation: if this category has children, show the
+              // sub-category list; otherwise fall through to its products.
+              final hasChildren = (category.numberOfChildren ?? 0) > 0;
+              if (hasChildren) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        SubCategoryListScreen(parent: category),
+                  ),
+                );
+                return;
+              }
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) {
                     return CategoryProducts(
-                      slug: homeData.featuredCategoryList[index].slug??homeData.featuredCategoryList[index].id.toString(),
+                      slug: category.slug ?? category.id.toString(),
                     );
                   },
                 ),
@@ -74,18 +90,31 @@ class FeaturedCategoriesWidget extends StatelessWidget {
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10.r),
-                        child: FadeInImage.assetNetwork(
-                          placeholder: 'assets/placeholder.png',
-                          image:
-                              homeData.featuredCategoryList[index].coverImage!,
-                          fit: BoxFit.cover,
-                          imageErrorBuilder: (context, error, stackTrace) {
-                            return Image.asset(
-                              'assets/placeholder.png',
-                              fit: BoxFit.cover,
-                            );
-                          },
-                        ),
+                        child: (homeData.featuredCategoryList[index]
+                                        .coverImage ==
+                                    null ||
+                                homeData.featuredCategoryList[index]
+                                    .coverImage!.isEmpty)
+                            ? Image.asset(
+                                'assets/placeholder.png',
+                                fit: BoxFit.cover,
+                              )
+                            : CachedNetworkImage(
+                                imageUrl: homeData
+                                    .featuredCategoryList[index].coverImage!,
+                                fit: BoxFit.cover,
+                                memCacheWidth: 320,
+                                fadeInDuration:
+                                    const Duration(milliseconds: 120),
+                                placeholder: (context, url) => Container(
+                                  color: const Color(0xFFEFEFEF),
+                                ),
+                                errorWidget: (context, url, error) =>
+                                    Image.asset(
+                                  'assets/placeholder.png',
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
                       ),
                     ),
                   ),
@@ -115,15 +144,8 @@ class FeaturedCategoriesWidget extends StatelessWidget {
       );
     } else if (!homeData.isCategoryInitial &&
         homeData.featuredCategoryList.isEmpty) {
-      return SizedBox(
-        height: 100.h,
-        child: Center(
-          child: Text(
-            "No category found",
-            style: TextStyle(color: MyTheme.font_grey, fontSize: 12.sp),
-          ),
-        ),
-      );
+      // Hide section when admin hasn't marked any categories as featured.
+      return const SizedBox.shrink();
     } else {
       return SizedBox(height: 100.h);
     }

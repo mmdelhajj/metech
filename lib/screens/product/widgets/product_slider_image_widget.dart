@@ -33,10 +33,7 @@ class _ProductSliderImageWidgetState extends State<ProductSliderImageWidget> {
           aspectRatio: 355 / 375,
           viewportFraction: 1,
           initialPage: 0,
-          autoPlay: true,
-          autoPlayInterval: Duration(seconds: 5),
-          autoPlayAnimationDuration: Duration(milliseconds: 1000),
-          autoPlayCurve: Curves.easeInExpo,
+          autoPlay: false,
           enlargeCenterPage: false,
           scrollDirection: Axis.horizontal,
           onPageChanged: (index, reason) {

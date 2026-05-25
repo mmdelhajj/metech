@@ -3,6 +3,8 @@ import 'package:active_ecommerce_cms_demo_app/helpers/system_config.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/auction/auction_products_details.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/product/product_details/product_details.dart';
+import 'package:active_ecommerce_cms_demo_app/ui_elements/discount_badge.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -69,11 +71,25 @@ class _ProductCardBlackState extends State<ProductCardBlack> {
                   child: ClipRRect(
                     clipBehavior: Clip.hardEdge,
                     borderRadius: BorderRadius.circular(10.r),
-                    child: FadeInImage.assetNetwork(
-                      placeholder: 'assets/placeholder.png',
-                      image: widget.image ?? 'assets/placeholder.png',
-                      fit: BoxFit.cover,
-                    ),
+                    child: (widget.image == null || widget.image!.isEmpty)
+                        ? Image.asset(
+                            'assets/placeholder.png',
+                            fit: BoxFit.cover,
+                          )
+                        : CachedNetworkImage(
+                            imageUrl: widget.image!,
+                            fit: BoxFit.cover,
+                            memCacheWidth: 480,
+                            fadeInDuration:
+                                const Duration(milliseconds: 120),
+                            placeholder: (context, url) => Container(
+                              color: const Color(0xFFEFEFEF),
+                            ),
+                            errorWidget: (context, url, error) => Image.asset(
+                              'assets/placeholder.png',
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                   ),
                 ),
               ),
@@ -181,37 +197,14 @@ class _ProductCardBlackState extends State<ProductCardBlack> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if (widget.hasDiscount)
-                    Container(
-                      height: 20.h,
-                      width: 48.w,
-                      margin: EdgeInsets.only(
-                        top: 8.h,
-                        left: 8.w,
-                        bottom: 15.h,
+                  if (_hasRealDiscount())
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: 6,
+                        left: 6,
+                        bottom: 6,
                       ),
-                      decoration: BoxDecoration(
-                        color: MyTheme.accent_color,
-                        borderRadius: BorderRadius.circular(10.r),
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color(0x14000000),
-                            offset: Offset(1, 1), // optional (mirror feel)
-                            blurRadius: 1.r,
-                          ),
-                        ],
-                      ),
-                      child: Center(
-                        child: Text(
-                          widget.discount ?? '',
-                          style: TextStyle(
-                            fontSize: 10.sp,
-                            color: MyTheme.white,
-                            fontWeight: FontWeight.w700,
-                          ),
-                          softWrap: false,
-                        ),
-                      ),
+                      child: DiscountBadge(label: _discountLabel()),
                     ),
                   if (whole_sale_addon_installed.$ && widget.isWholesale!)
                     Container(
@@ -251,5 +244,29 @@ class _ProductCardBlackState extends State<ProductCardBlack> {
         ],
       ),
     );
+  }
+
+  bool _hasRealDiscount() {
+    final discountStr = widget.discount?.toString().trim() ?? '';
+    final digits = RegExp(r'\d+\.?\d*').firstMatch(discountStr)?.group(0);
+    final discountValue = double.tryParse(digits ?? '') ?? 0;
+    if (discountValue > 0) return true;
+    if (widget.hasDiscount &&
+        widget.strokedPrice != null &&
+        widget.mainPrice != null &&
+        widget.strokedPrice!.trim().isNotEmpty &&
+        widget.strokedPrice != widget.mainPrice) {
+      return true;
+    }
+    return false;
+  }
+
+  String _discountLabel() {
+    final discountStr = widget.discount?.toString().trim() ?? '';
+    final digits = RegExp(r'\d+\.?\d*').firstMatch(discountStr)?.group(0);
+    if (digits != null && digits.isNotEmpty) {
+      return '$digits% OFF';
+    }
+    return 'SALE';
   }
 }

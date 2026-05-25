@@ -1,8 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../data_model/category_response.dart';
 import '../my_theme.dart';
 import '../screens/category_list_n_product/category_products.dart';
+import '../screens/category_list_n_product/sub_category_list_screen.dart';
 
 import 'device_info.dart';
 
@@ -19,16 +21,16 @@ class CategoryItemCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var itemWidth = ((DeviceInfo(context).width! - 48) / 3);
+    final category = categoryResponse.categories![index];
+    final hasChildren = (category.numberOfChildren ?? 0) > 0;
     return InkWell(
       onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) {
-              return CategoryProducts(
-                slug: categoryResponse.categories![index].slug ?? "",
-              );
-            },
+            builder: (context) => hasChildren
+                ? SubCategoryListScreen(parent: category)
+                : CategoryProducts(slug: category.slug ?? ""),
           ),
         );
       },
@@ -44,11 +46,25 @@ class CategoryItemCardWidget extends StatelessWidget {
             height: itemWidth,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8.0),
-              child: FadeInImage.assetNetwork(
-                placeholder: 'assets/placeholder.png',
-                image: categoryResponse.categories![index].coverImage ?? '',
-                fit: BoxFit.cover,
-              ),
+              child: (category.coverImage == null ||
+                      category.coverImage!.isEmpty)
+                  ? Image.asset(
+                      'assets/placeholder.png',
+                      fit: BoxFit.cover,
+                    )
+                  : CachedNetworkImage(
+                      imageUrl: category.coverImage!,
+                      fit: BoxFit.cover,
+                      memCacheWidth: 300,
+                      fadeInDuration: const Duration(milliseconds: 120),
+                      placeholder: (context, url) => Container(
+                        color: const Color(0xFFEFEFEF),
+                      ),
+                      errorWidget: (context, url, error) => Image.asset(
+                        'assets/placeholder.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
             ),
           ),
           const SizedBox(height: 8),
@@ -56,7 +72,7 @@ class CategoryItemCardWidget extends StatelessWidget {
             width: itemWidth,
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Text(
-              categoryResponse.categories![index].name!,
+              category.name ?? '',
               textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,
               maxLines: 2,

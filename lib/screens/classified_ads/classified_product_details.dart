@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:active_ecommerce_cms_demo_app/app_config.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/box_decorations.dart';
+import 'package:active_ecommerce_cms_demo_app/custom/smart_html_description.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/text_styles.dart';
@@ -14,12 +15,10 @@ import 'package:active_ecommerce_cms_demo_app/screens/brand_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/common_webview_screen.dart';
 import 'package:active_ecommerce_cms_demo_app/ui_elements/classified_product_mini_card.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:expandable/expandable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:active_ecommerce_cms_demo_app/l10n/app_localizations.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -907,47 +906,10 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
         : Container();
   }
 
-  ExpandableNotifier buildExpandableDescription() {
-    return ExpandableNotifier(
-      child: ScrollOnExpand(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Expandable(
-              collapsed: SizedBox(
-                height: 50,
-                child: Html(data: _productDetails!.description),
-              ),
-              expanded: Html(data: _productDetails!.description),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                Builder(
-                  builder: (context) {
-                    var controller = ExpandableController.of(context)!;
-                    return Btn.basic(
-                      child: Text(
-                        !controller.expanded
-                            ? AppLocalizations.of(context)!.view_more
-                            : AppLocalizations.of(context)!.show_less_ucf,
-                        style: TextStyle(
-                          color: MyTheme.font_grey,
-                          fontSize: 11,
-                        ),
-                      ),
-                      onPressed: () {
-                        controller.toggle();
-                      },
-                    );
-                  },
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
+  Widget buildExpandableDescription() {
+    // See SmartHtmlDescription for the three-way behaviour rule
+    // (no desc → hidden, short → full, long → capped at 50% viewport).
+    return SmartHtmlDescription(html: _productDetails?.description);
   }
 
   Widget buildProductsMayLikeList() {
@@ -1189,10 +1151,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
           aspectRatio: 355 / 375,
           viewportFraction: 1,
           initialPage: 0,
-          autoPlay: true,
-          autoPlayInterval: Duration(seconds: 5),
-          autoPlayAnimationDuration: Duration(milliseconds: 1000),
-          autoPlayCurve: Curves.easeInExpo,
+          autoPlay: false,
           enlargeCenterPage: false,
           scrollDirection: Axis.horizontal,
           onPageChanged: (index, reason) {

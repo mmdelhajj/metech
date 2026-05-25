@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../my_theme.dart';
@@ -87,25 +88,31 @@ class MyWidget {
         child: url != null && url.isNotEmpty
             ? ClipRRect(
                 borderRadius: radius,
-                child: FadeInImage.assetNetwork(
-                  placeholder: "assets/placeholder.png",
-                  image: url,
-                  height: height,
-                  imageErrorBuilder: (context, object, stackTrace) {
-                    return Container(
-                      height: height,
-                      width: width,
-                      decoration: BoxDecoration(
-                        borderRadius: radius,
-                        image: const DecorationImage(
-                          image: AssetImage("assets/placeholder.png"),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    );
-                  },
-                  width: width,
+                child: CachedNetworkImage(
+                  imageUrl: url,
+                  height: height > 0 ? height : null,
+                  width: width is double && width > 0 ? width : null,
                   fit: fit,
+                  memCacheWidth: width is double && width > 0
+                      ? (width * 2).toInt()
+                      : (height > 0 ? (height * 2).toInt() : 400),
+                  fadeInDuration: const Duration(milliseconds: 120),
+                  placeholder: (context, _) => Container(
+                    height: height > 0 ? height : null,
+                    width: width is double && width > 0 ? width : null,
+                    color: const Color(0xFFEFEFEF),
+                  ),
+                  errorWidget: (context, _, __) => Container(
+                    height: height,
+                    width: width,
+                    decoration: BoxDecoration(
+                      borderRadius: radius,
+                      image: const DecorationImage(
+                        image: AssetImage("assets/placeholder.png"),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
                 ),
               )
             : Container(

@@ -73,6 +73,9 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
     ..enableZoom(false);
   double webViewHeight = 50.0;
+  // Natural rendered height of the description HTML (set once
+  // onPageFinished returns a real `document.body.scrollHeight`).
+  double? _descNaturalHeight;
 
   final CarouselSliderController _carouselController =
       CarouselSliderController();
@@ -105,6 +108,30 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
   void initState() {
     quantityText.text = "${_quantity ?? 0}";
     controller;
+
+    // Description WebView sizing — smart-cap behaviour (v91).
+    //   no desc → buildExpandableDescription returns SizedBox.shrink()
+    //   short  → natural height, no toggle
+    //   long   → start clamped at 50% screen + View-more toggle
+    controller.setNavigationDelegate(
+      NavigationDelegate(
+        onPageFinished: (_) async {
+          try {
+            final result = await controller.runJavaScriptReturningResult(
+              "document.body.scrollHeight",
+            );
+            final h = double.tryParse(result.toString());
+            if (h != null && h > 0 && mounted) {
+              setState(() {
+                _descNaturalHeight = h;
+                final cap = MediaQuery.of(context).size.height * 0.5;
+                webViewHeight = h > cap ? cap : h;
+              });
+            }
+          } catch (_) {/* swallow — initial render only */}
+        },
+      ),
+    );
 
     _mainScrollController.addListener(() {
       _scrollPosition = _mainScrollController.position.pixels;
@@ -2231,6 +2258,14 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
   }
 
   buildExpandableDescription() {
+    final desc = _productDetails?.description?.trim() ?? '';
+    if (desc.isEmpty) return const SizedBox.shrink();
+
+    final cap = MediaQuery.of(context).size.height * 0.5;
+    final natural = _descNaturalHeight;
+    final overflows = natural != null && natural > cap;
+    final isCollapsed = overflows && webViewHeight <= cap + 1;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
@@ -2239,26 +2274,20 @@ class _DigitalProductDetailsState extends State<DigitalProductDetails>
           height: webViewHeight,
           child: WebViewWidget(controller: controller),
         ),
-        Btn.basic(
-          onPressed: () async {
-            if (webViewHeight == 50) {
-              webViewHeight = double.parse(
-                (await controller.runJavaScriptReturningResult(
-                  "document.getElementById('scaled-frame').clientHeight",
-                )).toString(),
-              );
-            } else {
-              webViewHeight = 50;
-            }
-            setState(() {});
-          },
-          child: Text(
-            webViewHeight == 50
-                ? LangText(context).local.view_more
-                : LangText(context).local.less,
-            style: TextStyle(color: Color(0xff0077B6)),
+        if (overflows)
+          Btn.basic(
+            onPressed: () {
+              setState(() {
+                webViewHeight = isCollapsed ? natural : cap;
+              });
+            },
+            child: Text(
+              isCollapsed
+                  ? LangText(context).local.view_more
+                  : LangText(context).local.less,
+              style: TextStyle(color: Color(0xff0077B6)),
+            ),
           ),
-        ),
       ],
     );
   }

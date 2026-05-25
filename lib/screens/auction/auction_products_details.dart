@@ -4,6 +4,7 @@ import 'package:active_ecommerce_cms_demo_app/screens/auth/otp.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/auth/phone_otp.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/profile_edit.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/box_decorations.dart';
+import 'package:active_ecommerce_cms_demo_app/custom/smart_html_description.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/device_info.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/text_styles.dart';
@@ -19,14 +20,12 @@ import 'package:active_ecommerce_cms_demo_app/screens/common_webview_screen.dart
 import 'package:active_ecommerce_cms_demo_app/screens/seller_details.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/video_description_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:expandable/expandable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_countdown_timer/index.dart';
 import 'package:active_ecommerce_cms_demo_app/l10n/app_localizations.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -1514,47 +1513,14 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
         : Container();
   }
 
-  ExpandableNotifier buildExpandableDescription() {
-    return ExpandableNotifier(
-      child: ScrollOnExpand(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Expandable(
-              collapsed: SizedBox(
-                height: 50,
-                child: Html(data: _auctionproductDetails.description),
-              ),
-              expanded: Html(data: _auctionproductDetails.description),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                Builder(
-                  builder: (context) {
-                    var controller = ExpandableController.of(context)!;
-                    return Btn.basic(
-                      child: Text(
-                        !controller.expanded
-                            ? AppLocalizations.of(context)!.view_more
-                            : AppLocalizations.of(context)!.show_less_ucf,
-                        style: TextStyle(
-                          color: MyTheme.font_grey,
-                          fontSize: 11,
-                        ),
-                      ),
-                      onPressed: () {
-                        controller.toggle();
-                      },
-                    );
-                  },
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
+  Widget buildExpandableDescription() {
+    // Smart-description behaviour (Muhammad, 2026-05-20):
+    //   - no description → renders nothing (hides "Description" heading
+    //     should also be done by the caller wrapping us in a visibility
+    //     check; we still bail out here as a defensive second layer)
+    //   - short description → full content, no toggle
+    //   - long description → capped at ~50% viewport with View-more toggle
+    return SmartHtmlDescription(html: _auctionproductDetails?.description);
   }
 
   openPhotoDialog(BuildContext context, path) => showDialog(
@@ -1732,10 +1698,7 @@ class _AuctionProductsDetailsState extends State<AuctionProductsDetails>
           aspectRatio: 355 / 375,
           viewportFraction: 1,
           initialPage: 0,
-          autoPlay: true,
-          autoPlayInterval: Duration(seconds: 5),
-          autoPlayAnimationDuration: Duration(milliseconds: 1000),
-          autoPlayCurve: Curves.easeInExpo,
+          autoPlay: false,
           enlargeCenterPage: false,
           scrollDirection: Axis.horizontal,
           onPageChanged: (index, reason) {

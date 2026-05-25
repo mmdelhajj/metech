@@ -17,6 +17,8 @@ import '../custom/home_all_products_2.dart';
 import '../custom/home_banner_one.dart';
 import '../custom/home_carousel_slider.dart';
 import '../custom/home_search_box.dart';
+import 'home_sections/app_footer.dart';
+import 'home_sections/recently_viewed_row.dart';
 import '../custom/pirated_widget.dart';
 import '../data_model/flash_deal_response.dart';
 import '../single_banner/sincle_banner_page.dart';
@@ -124,6 +126,14 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           if (AppConfig.purchase_code == "")
                             PiratedWidget(homeData: homeData),
                           const SizedBox(height: 0),
+                          // Note: CategoryChipBar was removed in v92 — Muhammad
+                          // (Otto-app reference) found the cramped pill row
+                          // took an "app column's worth" of horizontal space
+                          // while leaving the right half visually empty. The
+                          // proper two-level category navigation (parent grid
+                          // → child list) already lives one tap deeper, and
+                          // the carousel below gives the same shortcut energy
+                          // with bigger artwork.
                           ListenableBuilder(
                             listenable: homeData,
                             builder: (context, child) => HomeCarouselSlider(
@@ -131,6 +141,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                               context: context,
                             ),
                           ),
+                          // Recently viewed products — self-hides when the
+                          // user has no history yet, so first-time users
+                          // don't see an empty section.
+                          const RecentlyViewedRow(),
                           SizedBox(height: 8.h),
                         ]),
                       ),
@@ -205,6 +219,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         builder: (context, child) =>
                             _buildAllProductsSection(context, homeData),
                       ),
+                      // Legal footer — required for German market (AGB,
+                      // Impressum, Datenschutz, Widerrufsrecht, Kontakt).
+                      const SliverToBoxAdapter(child: AppFooter()),
                     ],
                   ),
                 ),
@@ -228,6 +245,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     BuildContext context,
     HomePresenter homeData,
   ) {
+    // Hide the whole section (title + grid) when no categories are featured.
+    if (!homeData.isCategoryInitial && homeData.featuredCategoryList.isEmpty) {
+      return const SliverToBoxAdapter(child: SizedBox.shrink());
+    }
     return SliverToBoxAdapter(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

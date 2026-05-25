@@ -1,5 +1,4 @@
 import 'package:active_ecommerce_cms_demo_app/custom/btn.dart';
-import 'package:active_ecommerce_cms_demo_app/custom/input_decorations.dart';
 import 'package:active_ecommerce_cms_demo_app/custom/toast_component.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/auth_helper.dart';
 import 'package:active_ecommerce_cms_demo_app/helpers/shared_value_helper.dart';
@@ -82,149 +81,149 @@ class _OtpState extends State<Otp> {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
     return Directionality(
       textDirection: app_language_rtl.$!
           ? TextDirection.rtl
           : TextDirection.ltr,
       child: Scaffold(
         backgroundColor: MyTheme.white,
-        body: Stack(
-          children: [
-            Container(
-              color: Colors.red,
-              width: screenWidth,
-              height: 200,
-              child: Image.asset(
-                "assets/splash_login_registration_background_image.png",
-              ),
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    if (widget.title != null)
-                      Text(
-                        widget.title!,
-                        style: TextStyle(
-                          fontSize: 25,
-                          color: MyTheme.font_grey,
-                        ),
-                      ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 40.0, bottom: 15),
-                      child: SizedBox(
-                        width: 75,
-                        height: 75,
-                        child: Image.asset(
-                          'assets/login_registration_form_logo.png',
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: screenWidth * (3 / 4),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                SizedBox(
-                                  height: 36,
-                                  child: TextField(
-                                    controller: _verificationCodeController,
-                                    autofocus: false,
-                                    decoration:
-                                        InputDecorations.buildInputDecoration_1(
-                                          hintText: "A X B 4 J H",
-                                        ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 40.0),
-                            child: Container(
-                              height: 45,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: MyTheme.textfield_grey,
-                                  width: 1,
-                                ),
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(12.0),
-                                ),
-                              ),
-                              child: Btn.basic(
-                                minWidth: MediaQuery.of(context).size.width,
-                                color: MyTheme.accent_color,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: const BorderRadius.all(
-                                    Radius.circular(12.0),
-                                  ),
-                                ),
-                                child: Text(
-                                  AppLocalizations.of(context)!.confirm_ucf,
-                                  style: TextStyle(
-                                    color: MyTheme.white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                                onPressed: () {
-                                  onPressConfirm();
-                                },
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 60),
-                      child: InkWell(
-                        onTap: () {
-                          onTapResend();
-                        },
-                        child: Text(
-                          AppLocalizations.of(context)!.resend_code_ucf,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: MyTheme.accent_color,
-                            decoration: TextDecoration.underline,
-                            fontSize: 13,
-                          ),
-                        ),
-                      ),
-                    ),
-                    // SizedBox(height: 15,),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 40),
-                      child: InkWell(
-                        onTap: () {
-                          onTapLogout(context);
-                        },
-                        child: Text(
-                          AppLocalizations.of(context)!.logout_ucf,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: MyTheme.accent_color,
-                            decoration: TextDecoration.underline,
-                            fontSize: 13,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+        body: SafeArea(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const SizedBox(height: 24),
+                // Logo — single image, no coloured backplate.
+                Center(
+                  child: Image.asset(
+                    'assets/login_registration_form_logo.png',
+                    height: 80,
+                    width: 80,
+                  ),
                 ),
-              ),
+                const SizedBox(height: 32),
+                // Title
+                Text(
+                  AppLocalizations.of(context)!.confirm_ucf,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w700,
+                    color: Color(0xFF1F2937),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                // Subtitle / instructions
+                Text(
+                  AppLocalizations.of(
+                    context,
+                  )!.enter_verification_code,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: Color(0xFF6B7280),
+                    height: 1.4,
+                  ),
+                ),
+                const SizedBox(height: 32),
+                // Big centered code field — letter-spaced so it reads like
+                // separate boxes without needing an extra package.
+                TextField(
+                  controller: _verificationCodeController,
+                  autofocus: true,
+                  textAlign: TextAlign.center,
+                  textCapitalization: TextCapitalization.characters,
+                  inputFormatters: [
+                    LengthLimitingTextInputFormatter(8),
+                  ],
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 8,
+                    color: Color(0xFF111827),
+                  ),
+                  decoration: InputDecoration(
+                    hintText: '••••••',
+                    hintStyle: const TextStyle(
+                      color: Color(0xFFD1D5DB),
+                      letterSpacing: 8,
+                    ),
+                    filled: true,
+                    fillColor: const Color(0xFFF9FAFB),
+                    contentPadding: const EdgeInsets.symmetric(
+                      vertical: 18,
+                      horizontal: 12,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(color: Color(0xFFE5E7EB)),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(color: Color(0xFFE5E7EB)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(
+                        color: MyTheme.accent_color,
+                        width: 1.5,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 24),
+                // Primary confirm button — full width, no double-bordered look.
+                SizedBox(
+                  height: 52,
+                  child: Btn.basic(
+                    color: MyTheme.accent_color,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    onPressed: onPressConfirm,
+                    child: Text(
+                      AppLocalizations.of(context)!.confirm_ucf,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 24),
+                // Resend prompt — softer styling, no underline.
+                Center(
+                  child: TextButton(
+                    onPressed: onTapResend,
+                    child: Text(
+                      AppLocalizations.of(context)!.resend_code_ucf,
+                      style: TextStyle(
+                        color: MyTheme.accent_color,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                // Logout — secondary, muted.
+                Center(
+                  child: TextButton(
+                    onPressed: () => onTapLogout(context),
+                    child: Text(
+                      AppLocalizations.of(context)!.logout_ucf,
+                      style: const TextStyle(
+                        color: Color(0xFF9CA3AF),
+                        fontSize: 13,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

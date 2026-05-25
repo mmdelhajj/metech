@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously, prefer_typing_uninitialized_variables
 
 import 'dart:async';
+import 'package:active_ecommerce_cms_demo_app/screens/product/product_details/widget_for_product_details/details_module.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/product/product_details/widget_for_product_details/product_media.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/product/product_details/widget_for_product_details/product_media_slider.dart';
 import 'package:badges/badges.dart' as badges;
@@ -28,6 +29,7 @@ import '../../../custom/quantity_input.dart';
 import '../../../custom/toast_component.dart';
 import '../../../helpers/color_helper.dart';
 import '../../../helpers/main_helpers.dart';
+import '../../../helpers/recently_viewed_history.dart';
 import '../../../helpers/shared_value_helper.dart';
 import '../../../helpers/shimmer_helper.dart';
 import '../../../helpers/system_config.dart';
@@ -74,6 +76,10 @@ class _ProductDetailsState extends State<ProductDetails>
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
     ..enableZoom(false);
   double webViewHeight = 50.0.h;
+  // Natural rendered height of the description HTML (set once
+  // `document.body.scrollHeight` returns a real value). `null` while we're
+  // still waiting for the page to load.
+  double? _descNaturalHeight;
 
   final CarouselSliderController _carouselController =
       CarouselSliderController();
@@ -119,13 +125,15 @@ class _ProductDetailsState extends State<ProductDetails>
 
   @override
   void initState() {
+    RecentlyViewedHistory.push(widget.slug);
     quantityText.text = "${_quantity ?? 0}";
     controller;
 
-    // Auto-expand the description WebView once its HTML has rendered.
-    // Customer asked for the description module to span the full content
-    // height by default instead of starting collapsed at 50.h. We still
-    // keep the manual toggle so very long descriptions can be collapsed.
+    // Description WebView sizing — smart-cap behaviour (Muhammad 2026-05-20).
+    // Read the natural rendered height once after HTML loads, then in
+    // buildExpandableDescription:
+    //   short content (< 50% screen) → render at natural height, no button
+    //   long content (>= 50% screen) → start clamped at 50% screen + toggle
     controller.setNavigationDelegate(
       NavigationDelegate(
         onPageFinished: (_) async {
@@ -134,8 +142,14 @@ class _ProductDetailsState extends State<ProductDetails>
               "document.body.scrollHeight",
             );
             final h = double.tryParse(result.toString());
-            if (h != null && h > webViewHeight && mounted) {
-              setState(() => webViewHeight = h);
+            if (h != null && h > 0 && mounted) {
+              setState(() {
+                _descNaturalHeight = h;
+                // Default visible height — collapsed for long, natural for
+                // short. Caller can still toggle via the View-more button.
+                final cap = MediaQuery.of(context).size.height * 0.5;
+                webViewHeight = h > cap ? cap : h;
+              });
             }
           } catch (_) {/* swallow — initial render only */}
         },
@@ -1211,6 +1225,13 @@ class _ProductDetailsState extends State<ProductDetails>
                         ],
                       ),
                     ),
+                    // Otto-style structured Details module: FARBE & MATERIAL /
+                    // TECHNISCHE DATEN / Wichtige Informationen. Sits directly
+                    // under the auto-expanding description WebView so the
+                    // structured attributes follow naturally from the long
+                    // marketing copy.
+                    if (_productDetails != null)
+                      DetailsModule(product: _productDetails!),
                     if (_productDetails?.downloads != null)
                       Column(
                         children: [
@@ -2286,6 +2307,14 @@ class _ProductDetailsState extends State<ProductDetails>
   }
 
   buildExpandableDescription() {
+    final desc = _productDetails?.description?.trim() ?? '';
+    if (desc.isEmpty) return const SizedBox.shrink();
+
+    final cap = MediaQuery.of(context).size.height * 0.5;
+    final natural = _descNaturalHeight;
+    final overflows = natural != null && natural > cap;
+    final isCollapsed = overflows && webViewHeight <= cap + 1;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
@@ -2294,36 +2323,20 @@ class _ProductDetailsState extends State<ProductDetails>
           height: webViewHeight,
           child: WebViewWidget(controller: controller),
         ),
-        Btn.basic(
-          onPressed: () async {
-            if (webViewHeight == 50.h) {
-              try {
-                var result = await controller.runJavaScriptReturningResult(
-                  "document.body.scrollHeight",
-                );
-                double? newHeight = double.tryParse(result.toString());
-                if (newHeight != null && newHeight > 50) {
-                  webViewHeight = newHeight;
-                }
-              } catch (e) {
-                if (kDebugMode) {
-                  print("Error getting webview content height: $e");
-                }
-              }
-            } else {
-              webViewHeight = 50.h;
-            }
-            if (mounted) {
-              setState(() {});
-            }
-          },
-          child: Text(
-            webViewHeight == 50.h
-                ? LangText(context).local.view_more
-                : LangText(context).local.less,
-            style: TextStyle(color: Color(0xff0077B6)),
+        if (overflows)
+          Btn.basic(
+            onPressed: () {
+              setState(() {
+                webViewHeight = isCollapsed ? natural : cap;
+              });
+            },
+            child: Text(
+              isCollapsed
+                  ? LangText(context).local.view_more
+                  : LangText(context).local.less,
+              style: TextStyle(color: Color(0xff0077B6)),
+            ),
           ),
-        ),
       ],
     );
   }

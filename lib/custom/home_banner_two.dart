@@ -1,6 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:active_ecommerce_cms_demo_app/l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
 import '../app_config.dart';
@@ -81,15 +80,9 @@ class HomeBannerTwo extends StatelessWidget {
       );
     } else if (!homeData!.isBannerTwoInitial &&
         homeData!.bannerTwoImageList.isEmpty) {
-      return SizedBox(
-        height: 100,
-        child: Center(
-          child: Text(
-            AppLocalizations.of(context)!.no_carousel_image_found,
-            style: TextStyle(color: MyTheme.font_grey),
-          ),
-        ),
-      );
+      // Empty merchandising slot — hide rather than showing an error
+      // string. See home_banner_one.dart for the matching change.
+      return const SizedBox.shrink();
     } else {
       return Container(height: 100);
     }

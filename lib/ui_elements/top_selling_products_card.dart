@@ -1,6 +1,7 @@
 import 'package:active_ecommerce_cms_demo_app/helpers/system_config.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/product/product_details/product_details.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -66,11 +67,26 @@ class _TopSellingProductsCardState extends State<TopSellingProductsCard> {
                   left: Radius.circular(6),
                   right: Radius.zero,
                 ),
-                child: FadeInImage.assetNetwork(
-                  placeholder: 'assets/placeholder.png',
-                  image: widget.image!,
-                  fit: BoxFit.cover,
-                ),
+                child: (widget.image == null || widget.image!.isEmpty)
+                    ? Image.asset(
+                        'assets/placeholder.png',
+                        fit: BoxFit.cover,
+                      )
+                    : CachedNetworkImage(
+                        imageUrl: widget.image!,
+                        fit: BoxFit.cover,
+                        memCacheWidth: 180,
+                        memCacheHeight: 180,
+                        fadeInDuration:
+                            const Duration(milliseconds: 120),
+                        placeholder: (context, url) => Container(
+                          color: const Color(0xFFEFEFEF),
+                        ),
+                        errorWidget: (context, url, error) => Image.asset(
+                          'assets/placeholder.png',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
               ),
             ),
             Flexible(

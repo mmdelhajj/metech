@@ -148,68 +148,74 @@ class _MainState extends State<Main> with WidgetsBindingObserver {
             color: MyTheme.white.withValues(alpha: 0.95),
             child: SafeArea(
               child: SizedBox(
-                height: 70.h,
+                height: 78.h,
                 child: BottomNavigationBar(
                   type: BottomNavigationBarType.fixed,
                   currentIndex: _currentIndex,
                   onTap: _onTapped,
                   backgroundColor: Colors.transparent,
                   elevation: 0,
-                  unselectedItemColor: const Color.fromRGBO(168, 175, 179, 1),
+                  showSelectedLabels: true,
+                  showUnselectedLabels: true,
+                  iconSize: 22,
+                  unselectedItemColor: const Color(0xFF6B7280),
                   selectedItemColor: MyTheme.accent_color,
                   selectedLabelStyle: TextStyle(
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.w500,
                     color: MyTheme.accent_color,
-                    fontSize: 12.sp,
+                    fontSize: 11.sp,
                   ),
                   unselectedLabelStyle: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    color: const Color.fromRGBO(168, 175, 179, 1),
-                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w500,
+                    color: const Color(0xFF6B7280),
+                    fontSize: 11.sp,
                   ),
                   items: [
                     BottomNavigationBarItem(
                       icon: Padding(
-                        padding: EdgeInsets.only(bottom: 8.h),
+                        padding: EdgeInsets.only(bottom: 4.h),
                         child: Image.asset(
                           "assets/home.png",
-                          height: 16.h,
+                          height: 22,
+                          width: 22,
                           color: _currentIndex == 0
                               ? MyTheme.accent_color
-                              : const Color.fromRGBO(153, 153, 153, 1),
+                              : const Color(0xFF6B7280),
                         ),
                       ),
                       label: AppLocalizations.of(context)!.home_ucf,
                     ),
                     BottomNavigationBarItem(
                       icon: Padding(
-                        padding: EdgeInsets.only(bottom: 8.h),
+                        padding: EdgeInsets.only(bottom: 4.h),
                         child: Image.asset(
                           "assets/auction.png",
-                          height: 16.h,
+                          height: 22,
+                          width: 22,
                           color: _currentIndex == 1
                               ? MyTheme.accent_color
-                              : const Color.fromRGBO(153, 153, 153, 1),
+                              : const Color(0xFF6B7280),
                         ),
                       ),
                       label: "Auction",
                     ),
                     BottomNavigationBarItem(
                       icon: Padding(
-                        padding: EdgeInsets.only(bottom: 8.h),
+                        padding: EdgeInsets.only(bottom: 4.h),
                         child: Image.asset(
                           "assets/categories.png",
-                          height: 16.h,
+                          height: 22,
+                          width: 22,
                           color: _currentIndex == 2
                               ? MyTheme.accent_color
-                              : const Color.fromRGBO(153, 153, 153, 1),
+                              : const Color(0xFF6B7280),
                         ),
                       ),
                       label: AppLocalizations.of(context)!.categories_ucf,
                     ),
                     BottomNavigationBarItem(
                       icon: Padding(
-                        padding: EdgeInsets.only(bottom: 8.h),
+                        padding: EdgeInsets.only(bottom: 4.h),
                         child: badges.Badge(
                           badgeStyle: badges.BadgeStyle(
                             shape: badges.BadgeShape.circle,
@@ -233,10 +239,11 @@ class _MainState extends State<Main> with WidgetsBindingObserver {
                           ),
                           child: Image.asset(
                             "assets/cart.png",
-                            height: 16.h,
+                            height: 22,
+                            width: 22,
                             color: _currentIndex == 3
                                 ? MyTheme.accent_color
-                                : const Color.fromRGBO(153, 153, 153, 1),
+                                : const Color(0xFF6B7280),
                           ),
                         ),
                       ),
@@ -244,13 +251,14 @@ class _MainState extends State<Main> with WidgetsBindingObserver {
                     ),
                     BottomNavigationBarItem(
                       icon: Padding(
-                        padding: EdgeInsets.only(bottom: 8.h),
+                        padding: EdgeInsets.only(bottom: 4.h),
                         child: Image.asset(
                           "assets/profile.png",
-                          height: 16.h,
+                          height: 22,
+                          width: 22,
                           color: _currentIndex == 4
                               ? MyTheme.accent_color
-                              : const Color.fromRGBO(153, 153, 153, 1),
+                              : const Color(0xFF6B7280),
                         ),
                       ),
                       label: AppLocalizations.of(context)!.profile_ucf,

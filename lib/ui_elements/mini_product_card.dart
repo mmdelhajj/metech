@@ -1,6 +1,8 @@
 import 'package:active_ecommerce_cms_demo_app/helpers/system_config.dart';
 import 'package:active_ecommerce_cms_demo_app/my_theme.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/product/product_details/product_details.dart';
+import 'package:active_ecommerce_cms_demo_app/ui_elements/discount_badge.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -56,16 +58,41 @@ class _MiniProductCardState extends State<MiniProductCard> {
               children: <Widget>[
                 AspectRatio(
                   aspectRatio: 1,
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10.r),
-                      child: FadeInImage.assetNetwork(
-                        placeholder: 'assets/placeholder.png',
-                        image: widget.image!,
-                        fit: BoxFit.cover,
+                  child: Stack(
+                    children: [
+                      SizedBox(
+                        width: double.infinity,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10.r),
+                          child: (widget.image == null || widget.image!.isEmpty)
+                              ? Image.asset(
+                                  'assets/placeholder.png',
+                                  fit: BoxFit.cover,
+                                )
+                              : CachedNetworkImage(
+                                  imageUrl: widget.image!,
+                                  fit: BoxFit.cover,
+                                  memCacheWidth: 360,
+                                  fadeInDuration:
+                                      const Duration(milliseconds: 120),
+                                  placeholder: (context, url) => Container(
+                                    color: const Color(0xFFEFEFEF),
+                                  ),
+                                  errorWidget: (context, url, error) =>
+                                      Image.asset(
+                                    'assets/placeholder.png',
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                        ),
                       ),
-                    ),
+                      if (_hasRealDiscount())
+                        Positioned(
+                          top: 6,
+                          left: 6,
+                          child: DiscountBadge(label: _discountLabel()),
+                        ),
+                    ],
                   ),
                 ),
                 Padding(
@@ -96,5 +123,29 @@ class _MiniProductCardState extends State<MiniProductCard> {
         ),
       ),
     );
+  }
+
+  bool _hasRealDiscount() {
+    final discountStr = widget.discount?.toString().trim() ?? '';
+    final digits = RegExp(r'\d+\.?\d*').firstMatch(discountStr)?.group(0);
+    final discountValue = double.tryParse(digits ?? '') ?? 0;
+    if (discountValue > 0) return true;
+    if (widget.hasDiscount == true &&
+        widget.strokedPrice != null &&
+        widget.mainPrice != null &&
+        widget.strokedPrice!.trim().isNotEmpty &&
+        widget.strokedPrice != widget.mainPrice) {
+      return true;
+    }
+    return false;
+  }
+
+  String _discountLabel() {
+    final discountStr = widget.discount?.toString().trim() ?? '';
+    final digits = RegExp(r'\d+\.?\d*').firstMatch(discountStr)?.group(0);
+    if (digits != null && digits.isNotEmpty) {
+      return '$digits% OFF';
+    }
+    return 'SALE';
   }
 }

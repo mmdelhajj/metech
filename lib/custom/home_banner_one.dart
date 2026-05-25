@@ -1,7 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart'; // Import ScreenUtil
-import 'package:active_ecommerce_cms_demo_app/l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
 import '../helpers/shimmer_helper.dart';
@@ -117,15 +116,11 @@ class HomeBannerOne extends StatelessWidget {
       );
     } else if (!homeData!.isBannerOneInitial &&
         homeData!.bannerOneImageList.isEmpty) {
-      return SizedBox(
-        height: 100.h,
-        child: Center(
-          child: Text(
-            AppLocalizations.of(context)!.no_carousel_image_found,
-            style: TextStyle(color: MyTheme.font_grey, fontSize: 12.sp),
-          ),
-        ),
-      );
+      // Empty banner = hide the section entirely. The previous "No
+      // carousel image found" placeholder showed up as a visible error
+      // on the home page even though it's just an empty merchandising
+      // slot; Muhammad flagged it in the 2026-05-20 feedback.
+      return const SizedBox.shrink();
     } else {
       return Container(height: 100.h);
     }

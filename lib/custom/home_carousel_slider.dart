@@ -1,6 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:active_ecommerce_cms_demo_app/l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import '../app_config.dart';
 import '../helpers/shimmer_helper.dart';
@@ -69,15 +68,9 @@ class HomeCarouselSlider extends StatelessWidget {
       );
     } else if (!homeData!.isCarouselInitial &&
         homeData!.carouselImageList.isEmpty) {
-      return SizedBox(
-        height: 100,
-        child: Center(
-          child: Text(
-            AppLocalizations.of(context)!.no_carousel_image_found,
-            style: TextStyle(color: MyTheme.font_grey),
-          ),
-        ),
-      );
+      // No banners configured in admin — hide the section entirely
+      // instead of showing a "No carousel image found" empty state.
+      return const SizedBox.shrink();
     } else {
       return Container(height: 100);
     }

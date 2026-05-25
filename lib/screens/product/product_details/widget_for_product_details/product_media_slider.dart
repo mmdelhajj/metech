@@ -40,10 +40,8 @@ class _ProductMediaSliderState extends State<ProductMediaSlider> {
               viewportFraction: 1,
               initialPage: 0,
               enableInfiniteScroll: widget.mediaList.length > 1,
-              autoPlay: true,
-              autoPlayInterval: const Duration(seconds: 5),
-              autoPlayAnimationDuration: const Duration(milliseconds: 1000),
-              autoPlayCurve: Curves.easeInExpo,
+              // Manual swipe — customer wants no auto-rotation anywhere.
+              autoPlay: false,
               enlargeCenterPage: false,
               scrollDirection: Axis.horizontal,
               onPageChanged: (index, reason) {
