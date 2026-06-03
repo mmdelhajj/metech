@@ -805,6 +805,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get price_high_to_low => 'Preço alto para baixo';
 
   @override
+  String get discount_high_to_low => 'Desconto do maior para o menor';
+
+  @override
   String get price_low_to_high => 'Preço baixo a alto';
 
   @override

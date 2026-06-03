@@ -149,11 +149,13 @@ class CustomSplashScreen extends StatefulWidget {
     this.onClick,
     this.navigateAfterSeconds,
     this.title = const Text(''),
-    this.backgroundColor = MyTheme.white,
+    // MyTheme.white/blackColour are non-const (dark-mode swappable), so they
+    // can't be used as const default values here — use literal const colors.
+    this.backgroundColor = Colors.white,
     this.styleTextUnderTheLoader = const TextStyle(
       fontSize: 18.0,
       fontWeight: FontWeight.bold,
-      color: MyTheme.blackColour,
+      color: Colors.black,
     ),
     this.image,
     this.backgroundImage,

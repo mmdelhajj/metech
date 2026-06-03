@@ -802,6 +802,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get price_high_to_low => 'Fiyat yüksekten düşüğe';
 
   @override
+  String get discount_high_to_low => 'İndirim yüksekten düşüğe';
+
+  @override
   String get price_low_to_high => 'Fiyat düşükten yükseğe';
 
   @override

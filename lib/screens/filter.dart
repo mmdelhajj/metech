@@ -585,6 +585,14 @@ class _FilterState extends State<Filter> {
 
                                       _radioItem(
                                         context,
+                                        value: "discount_high_to_low",
+                                        text: AppLocalizations.of(
+                                          context,
+                                        )!.discount_high_to_low,
+                                      ),
+
+                                      _radioItem(
+                                        context,
                                         value: "new_arrival",
                                         text: AppLocalizations.of(
                                           context,

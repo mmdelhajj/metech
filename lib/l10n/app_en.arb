@@ -274,6 +274,7 @@
   "filter_ucf" : "Filter",
   "sort_products_by_ucf" : "Sort Products By",
   "price_high_to_low" : "Price high to low",
+  "discount_high_to_low" : "Discount high to low",
   "price_low_to_high" : "Price low to high",
   "new_arrival_ucf" : "New Arrival",
   "popularity_ucf" : "Popularity",

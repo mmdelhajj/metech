@@ -801,6 +801,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get price_high_to_low => 'السعر مرتفع إلى منخفض';
 
   @override
+  String get discount_high_to_low => 'الخصم من الأعلى إلى الأدنى';
+
+  @override
   String get price_low_to_high => 'السعر منخفض إلى مرتفع';
 
   @override

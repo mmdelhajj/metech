@@ -803,6 +803,9 @@ class AppLocalizationsHi extends AppLocalizations {
   String get price_high_to_low => 'कीमत ऊंची से नीची';
 
   @override
+  String get discount_high_to_low => 'छूट अधिक से कम';
+
+  @override
   String get price_low_to_high => 'कीमतों का उतार - चढ़ाव';
 
   @override

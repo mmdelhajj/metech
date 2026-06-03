@@ -258,6 +258,7 @@
   "filter_ucf": "Filtro",
   "sort_products_by_ucf": "Classificar produtos por",
   "price_high_to_low": "Preço alto para baixo",
+  "discount_high_to_low": "Desconto do maior para o menor",
   "price_low_to_high": "Preço baixo a alto",
   "new_arrival_ucf": "Novidades",
   "popularity_ucf": "Popularidade",

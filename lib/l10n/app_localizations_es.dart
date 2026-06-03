@@ -805,6 +805,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get price_high_to_low => 'Precio de mayor a menor';
 
   @override
+  String get discount_high_to_low => 'Descuento de mayor a menor';
+
+  @override
   String get price_low_to_high => 'Precio de menor a mayor';
 
   @override

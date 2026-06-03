@@ -803,6 +803,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get price_high_to_low => 'Цена от высокой до низкой';
 
   @override
+  String get discount_high_to_low => 'Скидка от большей к меньшей';
+
+  @override
   String get price_low_to_high => 'Цена от низкой к высокой';
 
   @override

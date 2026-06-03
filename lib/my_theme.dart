@@ -7,8 +7,13 @@ ThemeData lightMode = ThemeData();
 
 class MyTheme {
   /*configurable colors stars*/
-  static Color mainColor = const Color(0xffF2F1F6);
+  // App-wide scaffold background — Muhammad (2026-06-02): "#000000 7%",
+  // i.e. black at 7% opacity over white = #EDEDED (opaque equivalent).
+  static Color mainColor = const Color(0xffEDEDED);
   static const Color accent_color = Color(0xff2196F3);
+  // Exact MeTech logo blue, sampled from assets/app_logo.png (2026-06-02).
+  // Muhammad asked CTAs / flash-deal blocks to match the logo blue.
+  static const Color logo_blue = Color(0xff0293E2);
   static const Color accent_color_shadow = Color.fromRGBO(
     229,
     65,
@@ -60,7 +65,7 @@ class MyTheme {
       // Splash always brand blue (branding moment), regardless of mode.
       splash_screen_color = const Color(0xff2196F3);
     } else {
-      mainColor = const Color(0xffF2F1F6);
+      mainColor = const Color(0xffEDEDED); // black 7% on white (Muhammad)
       white = const Color.fromRGBO(255, 255, 255, 1);
       light_grey = const Color.fromRGBO(239, 239, 239, 1);
       dark_grey = const Color.fromRGBO(107, 115, 119, 1);

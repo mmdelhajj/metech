@@ -789,6 +789,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get price_high_to_low => '价格从高到低';
 
   @override
+  String get discount_high_to_low => '折扣从高到低';
+
+  @override
   String get price_low_to_high => '价格从低到高';
 
   @override

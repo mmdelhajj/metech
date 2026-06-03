@@ -1672,6 +1672,12 @@ abstract class AppLocalizations {
   /// **'Price high to low'**
   String get price_high_to_low;
 
+  /// No description provided for @discount_high_to_low.
+  ///
+  /// In en, this message translates to:
+  /// **'Discount high to low'**
+  String get discount_high_to_low;
+
   /// No description provided for @price_low_to_high.
   ///
   /// In en, this message translates to:

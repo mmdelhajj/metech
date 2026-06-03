@@ -20,7 +20,7 @@ class InfoDialog {
           padding: EdgeInsets.only(left: 24, top: 8, bottom: 8),
           child: Text(
             title,
-            style: const TextStyle(
+            style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
                 color: MyTheme.white),

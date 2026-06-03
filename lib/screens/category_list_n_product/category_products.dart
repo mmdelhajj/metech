@@ -139,25 +139,18 @@ class _CategoryProductsState extends State<CategoryProducts> {
   }
 
   AppBar buildAppBar(BuildContext context) {
+    // Sibling-category chip row removed in v95 — Muhammad asked for a
+    // cleaner category-products screen (just back arrow + title + grid).
+    // The chip nav was the same 3 parents repeated on every category
+    // page, taking vertical space without adding utility.
     return AppBar(
       automaticallyImplyLeading: false,
-      toolbarHeight: _subCategoryList.isEmpty
-          ? DeviceInfo(context).height! / 10
-          : DeviceInfo(context).height! / 6.5,
+      toolbarHeight: DeviceInfo(context).height! / 10,
       flexibleSpace: Container(
         height: DeviceInfo(context).height! / 4,
         width: DeviceInfo(context).width,
         color: MyTheme.mainColor,
         alignment: Alignment.topRight,
-      ),
-      bottom: PreferredSize(
-        preferredSize: Size.fromHeight(-35),
-        child: AnimatedContainer(
-          color: MyTheme.mainColor,
-          height: _subCategoryList.isEmpty ? 0 : 40,
-          duration: Duration(milliseconds: 500),
-          child: !_isInitial ? buildSubCategory() : buildSubCategory(),
-        ),
       ),
       title: buildAppBarTitle(context),
       elevation: 0.0,

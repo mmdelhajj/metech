@@ -43,6 +43,8 @@ class FlashDealResponseDatum {
     this.isFeatured,
     this.date,
     this.banner,
+    this.backgroundColor,
+    this.textColor,
     this.products,
   });
 
@@ -53,6 +55,11 @@ class FlashDealResponseDatum {
   String? title;
   int? date;
   String? banner;
+  // Admin-managed colors (Active eCommerce flash_deals.background_color /
+  // text_color). Null when the admin left them blank — the UI falls back to
+  // the logo blue. Added 2026-06-02 (Muhammad's flash-deal redesign).
+  String? backgroundColor;
+  String? textColor;
   Products? products;
 
   factory FlashDealResponseDatum.fromJson(Map<String, dynamic> json) =>
@@ -66,6 +73,8 @@ class FlashDealResponseDatum {
         title: json["title"],
         date: json["date"],
         banner: json["banner"],
+        backgroundColor: json["background_color"],
+        textColor: json["text_color"],
         products: json["products"] != null
             ? Products.fromJson(json["products"])
             : null,
@@ -78,6 +87,8 @@ class FlashDealResponseDatum {
     "title": title,
     "date": date,
     "banner": banner,
+    "background_color": backgroundColor,
+    "text_color": textColor,
     "products": products?.toJson(),
   };
 }
@@ -101,12 +112,24 @@ class Products {
 }
 
 class Product {
-  Product({this.id, this.name, this.price, this.image, this.links});
+  Product({
+    this.id,
+    this.name,
+    this.price,
+    this.image,
+    this.discount,
+    this.discountType,
+    this.links,
+  });
 
   var id;
   String? name;
   String? price;
   String? image;
+  // Per-product flash-deal discount from the pivot (backend exposes these as
+  // of 2026-06-03). Drives the blue % badge on the home flash-deal card.
+  num? discount;
+  String? discountType; // "percent" | "amount"
   Links? links;
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
@@ -114,6 +137,10 @@ class Product {
     name: json["name"],
     price: json["price"],
     image: json["image"],
+    discount: json["discount"] is num
+        ? json["discount"]
+        : num.tryParse(json["discount"]?.toString() ?? ''),
+    discountType: json["discount_type"]?.toString(),
     links: json["links"] != null ? Links.fromJson(json["links"]) : null,
   );
 
@@ -122,6 +149,8 @@ class Product {
     "name": name,
     "price": price,
     "image": image,
+    "discount": discount,
+    "discount_type": discountType,
     "links": links?.toJson(),
   };
 }

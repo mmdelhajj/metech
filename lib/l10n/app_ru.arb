@@ -258,6 +258,7 @@
   "filter_ucf": "Фильтр",
   "sort_products_by_ucf": "Сортировать товары по",
   "price_high_to_low": "Цена от высокой до низкой",
+  "discount_high_to_low": "Скидка от большей к меньшей",
   "price_low_to_high": "Цена от низкой к высокой",
   "new_arrival_ucf": "Новое поступление",
   "popularity_ucf": "Популярность",

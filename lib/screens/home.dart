@@ -11,10 +11,10 @@ import 'package:active_ecommerce_cms_demo_app/screens/product/todays_deal_produc
 import 'package:active_ecommerce_cms_demo_app/screens/product/top_selling_products.dart';
 import 'package:active_ecommerce_cms_demo_app/screens/top_sellers.dart';
 import 'package:flutter/material.dart';
-import '../custom/feature_categories_widget.dart';
 import '../custom/featured_product_horizontal_list_widget.dart';
+import '../custom/hero_action_banner.dart';
+import '../custom/hero_category_slider.dart';
 import '../custom/home_all_products_2.dart';
-import '../custom/home_banner_one.dart';
 import '../custom/home_carousel_slider.dart';
 import '../custom/home_search_box.dart';
 import 'home_sections/app_footer.dart';
@@ -125,15 +125,27 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         delegate: SliverChildListDelegate([
                           if (AppConfig.purchase_code == "")
                             PiratedWidget(homeData: homeData),
-                          const SizedBox(height: 0),
-                          // Note: CategoryChipBar was removed in v92 — Muhammad
-                          // (Otto-app reference) found the cramped pill row
-                          // took an "app column's worth" of horizontal space
-                          // while leaving the right half visually empty. The
-                          // proper two-level category navigation (parent grid
-                          // → child list) already lives one tap deeper, and
-                          // the carousel below gives the same shortcut energy
-                          // with bigger artwork.
+
+                          // v94 home redesign per Muhammad's wireframe:
+                          //   1. search (above, in the SliverAppBar)
+                          //   2. full-bleed hero action banner — replaces the
+                          //      cramped 0.43-viewportFraction HomeBannerOne
+                          //      so each promo gets the whole row
+                          //   3. swipeable hero category slider — replaces
+                          //      the 4-up _buildFeaturedCategoriesSection
+                          //      thumbnails so categories read as the
+                          //      primary navigation, not an afterthought
+                          ListenableBuilder(
+                            listenable: homeData,
+                            builder: (context, child) =>
+                                HeroActionBanner(homeData: homeData),
+                          ),
+                          ListenableBuilder(
+                            listenable: homeData,
+                            builder: (context, child) =>
+                                HeroCategorySlider(homeData: homeData),
+                          ),
+
                           ListenableBuilder(
                             listenable: homeData,
                             builder: (context, child) => HomeCarouselSlider(
@@ -159,38 +171,23 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           );
                         },
                       ),
-                      //Slider banner
-                      SliverList(
-                        delegate: SliverChildListDelegate([
-                          SizedBox(height: 5.h),
-                          ListenableBuilder(
-                            listenable: homeData,
-                            builder: (context, child) => HomeBannerOne(
-                              context: context,
-                              homeData: homeData,
-                            ),
-                          ),
-                        ]),
-                      ),
-
-                      //Featured Categories
-                      ListenableBuilder(
-                        listenable: homeData,
-                        builder: (context, child) =>
-                            _buildFeaturedCategoriesSection(context, homeData),
-                      ),
 
                       //Flash Deal
                       ListenableBuilder(
                         listenable: homeData,
                         builder: (context, child) {
-                          final featuredDeal = homeData.getFeaturedFlashDeal();
-                          final bool hasActiveFlashDeal =
-                              featuredDeal != null &&
-                              featuredDeal.date != null &&
-                              DateTime.fromMillisecondsSinceEpoch(
-                                featuredDeal.date! * 1000,
-                              ).isAfter(DateTime.now());
+                          // Show the section whenever ANY flash deal is still
+                          // running — the redesigned banner is a carousel of
+                          // all active deals, not just the featured one.
+                          final now = DateTime.now();
+                          final bool hasActiveFlashDeal = homeData.flashDealList
+                              .any(
+                                (d) =>
+                                    d.date != null &&
+                                    DateTime.fromMillisecondsSinceEpoch(
+                                      d.date! * 1000,
+                                    ).isAfter(now),
+                              );
 
                           if (!hasActiveFlashDeal) {
                             return const SliverToBoxAdapter(
@@ -241,48 +238,24 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     );
   }
 
-  SliverToBoxAdapter _buildFeaturedCategoriesSection(
-    BuildContext context,
-    HomePresenter homeData,
-  ) {
-    // Hide the whole section (title + grid) when no categories are featured.
-    if (!homeData.isCategoryInitial && homeData.featuredCategoryList.isEmpty) {
-      return const SliverToBoxAdapter(child: SizedBox.shrink());
-    }
-    return SliverToBoxAdapter(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.fromLTRB(20.w, 8.h, 18.w, 0.0),
-            child: Text(
-              AppLocalizations.of(context)!.featured_categories_ucf,
-              style: MyTheme.homeText_heding(),
-            ),
-          ),
-          SizedBox(
-            height: 175.h,
-            child: FeaturedCategoriesWidget(homeData: homeData),
-          ),
-        ],
-      ),
-    );
-  }
+  // _buildFeaturedCategoriesSection (4-up thumbnail grid) was retired in
+  // v94 — superseded by HeroCategorySlider per Muhammad's wireframe brief.
+  // Kept the import of FeaturedCategoriesWidget out of this file (the
+  // widget itself stays available for any future home variation that wants
+  // the dense grid look back).
 
   SliverList _buildFlashDealSection(
     BuildContext context,
     HomePresenter homeData,
   ) {
-    var featuredDeal = homeData.getFeaturedFlashDeal();
-
-    String sectionTitle = (featuredDeal != null && featuredDeal.title != null)
-        ? featuredDeal.title!
-        : AppLocalizations.of(context)!.flash_deal_ucf;
+    // Generic section header — individual deal titles now live on each card.
+    String sectionTitle = AppLocalizations.of(context)!.flash_deal_ucf;
 
     return SliverList(
       delegate: SliverChildListDelegate([
         Container(
-          color: Colors.blue.shade50,
+          // Sits on the app's #EDEDED background — no tinted block (Otto look).
+          color: Colors.transparent,
           child: Column(
             children: [
               Padding(

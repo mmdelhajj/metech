@@ -807,6 +807,9 @@ class AppLocalizationsUr extends AppLocalizations {
   String get price_high_to_low => 'قیمت زیادہ سے کم';
 
   @override
+  String get discount_high_to_low => 'رعایت زیادہ سے کم';
+
+  @override
   String get price_low_to_high => 'کم سے زیادہ قیمت';
 
   @override

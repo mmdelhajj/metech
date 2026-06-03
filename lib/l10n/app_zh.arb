@@ -258,6 +258,7 @@
   "filter_ucf": "筛选",
   "sort_products_by_ucf": "产品排序依据",
   "price_high_to_low": "价格从高到低",
+  "discount_high_to_low": "折扣从高到低",
   "price_low_to_high": "价格从低到高",
   "new_arrival_ucf": "新品上市",
   "popularity_ucf": "人气",
