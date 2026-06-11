@@ -140,23 +140,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                             builder: (context, child) =>
                                 HeroActionBanner(homeData: homeData),
                           ),
-                          ListenableBuilder(
-                            listenable: homeData,
-                            builder: (context, child) =>
-                                HeroCategorySlider(homeData: homeData),
-                          ),
-
-                          ListenableBuilder(
-                            listenable: homeData,
-                            builder: (context, child) => HomeCarouselSlider(
-                              homeData: homeData,
-                              context: context,
-                            ),
-                          ),
-                          // Recently viewed products — self-hides when the
-                          // user has no history yet, so first-time users
-                          // don't see an empty section.
-                          const RecentlyViewedRow(),
                           SizedBox(height: 8.h),
                         ]),
                       ),
@@ -197,6 +180,29 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
                           return _buildFlashDealSection(context, homeData);
                         },
+                      ),
+
+                      // Shop By Category + carousel + recently-viewed — moved
+                      // BELOW Flash Deal so the flash sale sits at the top
+                      // (Muhammad 2026-06-05: "flash deals on the top, like pic").
+                      SliverList(
+                        delegate: SliverChildListDelegate([
+                          ListenableBuilder(
+                            listenable: homeData,
+                            builder: (context, child) =>
+                                HeroCategorySlider(homeData: homeData),
+                          ),
+                          ListenableBuilder(
+                            listenable: homeData,
+                            builder: (context, child) => HomeCarouselSlider(
+                              homeData: homeData,
+                              context: context,
+                            ),
+                          ),
+                          // Recently viewed — self-hides when no history yet.
+                          const RecentlyViewedRow(),
+                          SizedBox(height: 8.h),
+                        ]),
                       ),
                       //Single Banner
                       const SliverList(
@@ -499,7 +505,7 @@ class _HomeMenu extends StatelessWidget {
           ),
         },
       {
-        "title": 'Top selling',
+        "title": AppLocalizations.of(context)!.top_selling_ucf,
         "image": "assets/products.png",
         "onTap": () => Navigator.push(
           context,

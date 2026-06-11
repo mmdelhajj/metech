@@ -47,12 +47,10 @@ class HeroCategorySlider extends StatelessWidget {
           Padding(
             padding: EdgeInsets.fromLTRB(16.w, 0, 16.w, 8.h),
             child: Text(
-              'Shop by category',
-              style: TextStyle(
-                fontSize: 15.sp,
-                fontWeight: FontWeight.bold,
-                color: MyTheme.dark_font_grey,
-              ),
+              // Title Case + shared header style to match Flash Deal /
+              // Featured Products (Muhammad 2026-06-05: unify size/color/caps).
+              'Shop By Category',
+              style: MyTheme.homeText_heding(),
             ),
           ),
           CarouselSlider(

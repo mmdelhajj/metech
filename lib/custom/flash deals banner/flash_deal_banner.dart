@@ -42,7 +42,9 @@ class FlashDealBanner extends StatelessWidget {
                 d.date! * 1000,
               ).isAfter(now),
         )
-        .toList();
+        .toList()
+        // Soonest-ending deal first (Muhammad 2026-06-05: order flash deals).
+        ..sort((a, b) => (a.date ?? 0).compareTo(b.date ?? 0));
 
     if (deals.isEmpty) {
       // Still loading the first payload → shimmer; otherwise hide silently.
