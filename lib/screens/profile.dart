@@ -87,32 +87,6 @@ class _ProfileState extends State<Profile> {
     super.dispose();
   }
 
-  Future<bool> _showPermissionDialog(
-    BuildContext context,
-    String purpose,
-  ) async {
-    bool? userAgreed = await showDialog<bool>(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext dialogContext) => AlertDialog(
-        backgroundColor: MyTheme.white,
-        title: const Text("Permission Required"),
-        content: Text(purpose, textAlign: TextAlign.center),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () => Navigator.of(dialogContext).pop(false),
-            child: Text(AppLocalizations.of(context)!.deny_ucf),
-          ),
-          TextButton(
-            onPressed: () => Navigator.of(dialogContext).pop(true),
-            child: const Text("Agree"),
-          ),
-        ],
-      ),
-    );
-    return userAgreed ?? false;
-  }
-
   Future<void> _onPageRefresh() async {
     reset();
     fetchAll();

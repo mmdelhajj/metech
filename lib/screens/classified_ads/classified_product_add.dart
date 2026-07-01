@@ -77,25 +77,10 @@ class _ClassifiedProductAddState extends State<ClassifiedProductAdd> {
 
   // Reusable Dialog Function
   Future<bool> _showDisclosureDialog(String purpose) async {
-    bool? userAgreed = await showDialog<bool>(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        backgroundColor: MyTheme.white,
-        title: const Text("Permission Required"),
-        content: Text(purpose, textAlign: TextAlign.center),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: Text(AppLocalizations.of(context)!.deny_ucf),
-          ),
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(true),
-            child: const Text("Agree"),
-          ),
-        ],
-      ),
-    );
-    return userAgreed ?? false;
+    // Apple 5.1.1(iv): no custom pre-permission dialog with Agree/Deny.
+    // Proceed straight to the picker so iOS shows its own permission prompt
+    // (reason from Info.plist NSPhotoLibraryUsageDescription).
+    return true;
   }
 
   void setConstDropdownValues() {

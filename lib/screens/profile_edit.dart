@@ -46,30 +46,9 @@ class _ProfileEditState extends State<ProfileEdit> {
   final ImagePicker _picker = ImagePicker();
   XFile? _file;
   chooseAndUploadImage(context) async {
-    bool? userAgreed = await showDialog<bool>(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: Text(AppLocalizations.of(context)!.photo_permission_ucf),
-        // This is the most important part for Google's policy.
-        content: Text(
-          "To set your profile picture, this app needs to collect your image from the gallery.",
-        ),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: Text(AppLocalizations.of(context)!.deny_ucf),
-          ),
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(true),
-            child: const Text("Agree"),
-          ),
-        ],
-      ),
-    );
-    if (userAgreed == null || !userAgreed) {
-      ToastComponent.showDialog("Permission denied to access photos.");
-      return;
-    }
+    // Apple 5.1.1(iv): no custom pre-permission dialog with Agree/Deny buttons.
+    // Go straight to the picker; iOS shows its own permission prompt using the
+    // Info.plist NSPhotoLibraryUsageDescription reason.
     _file = await _picker.pickImage(source: ImageSource.gallery);
 
     if (_file == null) {
