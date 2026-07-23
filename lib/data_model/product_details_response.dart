@@ -68,6 +68,9 @@ class DetailedProduct {
     this.videos,
     this.link,
     this.brand,
+    this.oeNumber,
+    this.condition,
+    this.articleFeatures,
     this.wholesale,
     this.estShippingTime,
   });
@@ -103,6 +106,9 @@ class DetailedProduct {
   List<Video>? videos;
   String? link;
   Brand? brand;
+  String? oeNumber;
+  String? condition;
+  String? articleFeatures;
   List<Wholesale>? wholesale;
   int? estShippingTime;
 
@@ -151,6 +157,9 @@ class DetailedProduct {
       currencySymbol: json["currency_symbol"],
       currentStock: json["current_stock"],
       unit: json["unit"],
+      oeNumber: json["oe_number"],
+      condition: json["condition"],
+      articleFeatures: json["article_features"],
       rating: json["rating"] == null ? 0 : json["rating"].toInt(),
       ratingCount: json["rating_count"],
       earnPoint: json["earn_point"] == null ? 0 : json["earn_point"].toInt(),
@@ -200,6 +209,9 @@ class DetailedProduct {
     "currency_symbol": currencySymbol,
     "current_stock": currentStock,
     "unit": unit,
+    "oe_number": oeNumber,
+    "condition": condition,
+    "article_features": articleFeatures,
     "rating": rating,
     "rating_count": ratingCount,
     "earn_point": earnPoint,

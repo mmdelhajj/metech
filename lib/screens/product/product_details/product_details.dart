@@ -876,10 +876,16 @@ class _ProductDetailsState extends State<ProductDetails>
                   child: IgnorePointer(
                     ignoring: _scrollPosition <= 250,
                     child: Container(
-                      padding: EdgeInsets.only(left: 8.w),
-                      width: DeviceInfo(context).width! / 2,
+                      padding: EdgeInsets.only(left: 8.w, right: 8.w),
+                      // Customer (Zilin, 2026-07-19): the pinned title was cut to
+                      // one line ("Mercedes-Benz W204 C-C...") because it was clamped
+                      // to half the screen width with no maxLines. Widen it and allow
+                      // up to two lines so the full product name shows when collapsed.
+                      width: DeviceInfo(context).width! * 0.8,
                       child: Text(
                         "${_productDetails != null ? _productDetails!.name : ''}",
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           color: MyTheme.dark_font_grey,
                           fontSize: 13.sp,

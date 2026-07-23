@@ -74,7 +74,7 @@ class DetailsModule extends StatelessWidget {
 
     final colors = _colorValues();
     if (colors.isNotEmpty) {
-      rows.add(_KV('Farbe', colors.join(', ')));
+      rows.add(_KV('Color', colors.join(', ')));
     }
 
     final matched = _choiceOptionsMatching(_farbeMaterialNeedles);
@@ -89,18 +89,38 @@ class DetailsModule extends StatelessWidget {
   }
 
   List<_KV> _technischeDatenRows(List<ChoiceOption> alreadyConsumed) {
+    // Field order requested by customer Zilin (2026-07-20):
+    //   1. Article Features  2. Brand  3. Unit  4. OE/OEM Reference No.  5. Condition
     final rows = <_KV>[];
 
-    final brandName = product.brand?.name;
-    if (brandName != null && brandName.trim().isNotEmpty) {
-      rows.add(_KV('Marke', brandName.trim()));
+    // 1. Article Features
+    final features = product.articleFeatures;
+    if (features != null && features.trim().isNotEmpty) {
+      rows.add(_KV('Article Features', features.trim()));
     }
 
-    // Unit comes from the existing model. Useful technical context (e.g. "pcs",
-    // "Stk.") - only show if present.
+    // 2. Brand
+    final brandName = product.brand?.name;
+    if (brandName != null && brandName.trim().isNotEmpty) {
+      rows.add(_KV('Brand', brandName.trim()));
+    }
+
+    // 3. Unit
     final unit = product.unit;
     if (unit != null && unit.trim().isNotEmpty) {
-      rows.add(_KV('Einheit', unit.trim()));
+      rows.add(_KV('Unit', unit.trim()));
+    }
+
+    // 4. OE / OEM reference number(s) — backed by products.oe_number.
+    final oe = product.oeNumber;
+    if (oe != null && oe.trim().isNotEmpty) {
+      rows.add(_KV('OE/OEM Reference Number(s)', oe.trim()));
+    }
+
+    // 5. Condition
+    final condition = product.condition;
+    if (condition != null && condition.trim().isNotEmpty) {
+      rows.add(_KV('Condition', condition.trim()));
     }
 
     // Any remaining choice options that weren't colour/material.
@@ -110,10 +130,6 @@ class DetailsModule extends StatelessWidget {
         rows.add(_KV(opt.title ?? '', value));
       }
     }
-
-    // OE-Nummer / WEEE-Reg.-Nr. will be appended once the Phase 2 backend
-    // migration is deployed and the model exposes them. For now we leave
-    // them out so empty rows don't show up.
 
     return rows;
   }
@@ -137,14 +153,14 @@ class DetailsModule extends StatelessWidget {
 
     final sections = <Widget>[];
     if (farbeMaterial.isNotEmpty) {
-      sections.add(_buildSection(context, 'FARBE & MATERIAL', farbeMaterial));
+      sections.add(_buildSection(context, 'Color & Material', farbeMaterial));
     }
     if (technische.isNotEmpty) {
-      sections.add(_buildSection(context, 'TECHNISCHE DATEN', technische));
+      sections.add(_buildSection(context, 'Product Specifications', technische));
     }
     if (wichtige.isNotEmpty) {
       sections.add(
-        _buildSection(context, 'Wichtige Informationen', wichtige),
+        _buildSection(context, 'Important Information', wichtige),
       );
     }
 
