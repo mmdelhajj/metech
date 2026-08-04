@@ -71,7 +71,9 @@ dependencies {
     // Updated Firebase dependencies
     implementation(platform("com.google.firebase:firebase-bom:33.6.0"))
     implementation("com.google.firebase:firebase-messaging-ktx")
-    implementation("com.google.firebase:firebase-auth-ktx")
+    // NOTE: firebase-auth removed — the app does not use Firebase Auth (0 Dart imports). Its
+    // GenericIdpActivity/RecaptchaActivity register a `firebase.auth` host that Play Console reports
+    // as a failing App Links domain and breaks metech.com.lb verification on Android 11 and older.
     implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("com.google.firebase:firebase-firestore-ktx")
 
